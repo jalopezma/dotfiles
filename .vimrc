@@ -22,6 +22,9 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 " The nerd commenter
 Plugin 'scrooloose/nerdcommenter'
 
+" Ctrl+p => <C-p> Easy and fast way to open a file
+Plugin 'kien/ctrlp.vim'
+
 " Cool status bar
 Plugin 'bling/vim-airline'
 
