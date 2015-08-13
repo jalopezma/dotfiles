@@ -83,7 +83,7 @@ colorscheme solarized
 " --- THE NERD COMMENTER ---
 filetype plugin on
 
-" Set INDENTATION
+" --- INDENTATION ---
 " size of a hard tabstop
 set tabstop=4
 "size of an 'indent'
