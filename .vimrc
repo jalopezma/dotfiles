@@ -31,6 +31,9 @@ Plugin 'bling/vim-airline'
 " Colors solarized
 Plugin 'altercation/vim-colors-solarized'
 
+" twig syntax
+Plugin 'evidens/vim-twig'
+
 " plugin from http://vim-scripts.org/vim/scripts.html
 "Plugin 'L9'
 " Git plugin not hosted on GitHub
