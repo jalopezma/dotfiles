@@ -33,6 +33,8 @@ Plugin 'altercation/vim-colors-solarized'
 
 " twig syntax
 Plugin 'evidens/vim-twig'
+" volt syntax
+Plugin 'etaoins/vim-volt-syntax'
 
 " plugin from http://vim-scripts.org/vim/scripts.html
 "Plugin 'L9'
