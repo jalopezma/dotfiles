@@ -36,6 +36,9 @@ Plugin 'evidens/vim-twig'
 " volt syntax
 Plugin 'etaoins/vim-volt-syntax'
 
+" Javascript syntax
+Plugin 'pangloss/vim-javascript'"
+
 " plugin from http://vim-scripts.org/vim/scripts.html
 "Plugin 'L9'
 " Git plugin not hosted on GitHub
