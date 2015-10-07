@@ -38,7 +38,7 @@ fi
 
 while :
 do
-    out=$(inotifywait -e modify -r ./ 2>/dev/null)
+    out=$(inotifywait -e modify,moved_to,move,moved_from,create,delete -r ./ 2>/dev/null)
     path=$(getPathFile $(echo $out | awk '{print $1}'))
     file=$(echo $out | awk '{print $3}')
     localPath="$path$file"
@@ -50,6 +50,6 @@ do
     then
         echo "$localPath -> $remotePath"
         #echo "rsync -az --exclude-from=.gitignore -e 'ssh' $localPath $remotePath"
-        rsync -az --exclude-from=.gitignore -e 'ssh' $localPath pronofoot-dev:$remotePath
+        rsync -az --exclude-from=.gitignore -e 'ssh' $localPath $remotePath
     fi
 done
