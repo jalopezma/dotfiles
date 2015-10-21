@@ -37,7 +37,13 @@ Plugin 'evidens/vim-twig'
 Plugin 'etaoins/vim-volt-syntax'
 
 " Javascript syntax
-Plugin 'pangloss/vim-javascript'"
+Plugin 'pangloss/vim-javascript'
+
+" Autocomplete
+Plugin 'Valloric/YouCompleteMe'
+
+" Snippets
+Plugin 'honza/vim-snippets'
 
 " plugin from http://vim-scripts.org/vim/scripts.html
 "Plugin 'L9'
@@ -103,3 +109,5 @@ set softtabstop=4
 set smarttab
 " always uses spaces instead of tab characters
 set expandtab
+" set number lines
+set number
