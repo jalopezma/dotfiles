@@ -35,6 +35,8 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'evidens/vim-twig'
 " volt syntax
 Plugin 'etaoins/vim-volt-syntax'
+" volt syntax
+Plugin 'groenewege/vim-less'
 
 " Javascript syntax
 Plugin 'pangloss/vim-javascript'
