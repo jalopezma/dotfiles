@@ -113,3 +113,9 @@ set smarttab
 set expandtab
 " set number lines
 set number
+
+" set dir for swap, backup and undo files. Do before:
+" mkdir -p ~/.vim/{backup_files,swap_files,undo_files}
+set backupdir=~/.vim/backup_files//
+set directory=~/.vim/swap_files//
+set undodir=~/.vim/undo_files//
