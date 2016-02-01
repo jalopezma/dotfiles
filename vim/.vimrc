@@ -29,7 +29,7 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'bling/vim-airline'
 
 " Colors solarized
-Plugin 'altercation/vim-colors-solarized'
+"Plugin 'altercation/vim-colors-solarized'
 
 " twig syntax
 Plugin 'evidens/vim-twig'
@@ -94,9 +94,13 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 set t_Co=256
 
 " --- COLORS SOLARIZED ---
-syntax enable
-set background=dark
-colorscheme solarized
+"syntax enable
+"set background=dark
+"colorscheme solarized
+
+" --- COLORS SOLARIZED ---
+syntax on
+colorscheme wombat
 
 " --- THE NERD COMMENTER ---
 filetype plugin on
