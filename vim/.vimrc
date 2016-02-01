@@ -26,7 +26,11 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'kien/ctrlp.vim'
 
 " Cool status bar
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
+" Cool status bar themes
+Plugin 'vim-airline/vim-airline-themes'
+" Buffer on status bar
+Plugin 'bling/vim-bufferline'
 
 " Colors solarized
 "Plugin 'altercation/vim-colors-solarized'
@@ -125,3 +129,39 @@ set number
 set backupdir=~/.vim/backup_files//
 set directory=~/.vim/swap_files//
 set undodir=~/.vim/undo_files//
+
+" vim-airline => Fix symbols on airline
+" Install https://github.com/powerline/fonts ./install.sh
+" Select dejavu font on terimnal
+let g:airline_powerline_fonts = 1
+
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+
+" unicode symbols
+let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.whitespace = 'Ξ'
+
+" airline symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''
+
+" airline not showing
+set laststatus=2
+set ttimeoutlen=50
