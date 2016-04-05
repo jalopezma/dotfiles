@@ -166,3 +166,15 @@ let g:airline_symbols.readonly = ''
 set laststatus=2
 set ttimeoutlen=50
 let g:airline_symbols.linenr = ''
+
+" Php.vim hightlight phpdoctags
+function! PhpSyntaxOverride()
+    hi! def link phpDocTags  phpDefine
+    hi! def link phpDocParam phpType
+endfunction
+
+augroup phpSyntaxOverride
+    autocmd!
+    autocmd FileType php call PhpSyntaxOverride()
+augroup END
+
