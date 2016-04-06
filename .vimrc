@@ -43,6 +43,10 @@ Plugin 'etaoins/vim-volt-syntax'
 Plugin 'groenewege/vim-less'
 " typescript syntax
 Plugin 'leafgarland/typescript-vim'
+Plugin 'Quramy/tsuquyomi'
+
+" need for quramy/tsuquyomi
+Plugin 'Shougo/vimproc.vim'
 
 " Javascript syntax
 Plugin 'pangloss/vim-javascript'
