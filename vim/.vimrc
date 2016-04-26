@@ -23,7 +23,7 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'scrooloose/nerdcommenter'
 
 " Ctrl+p => <C-p> Easy and fast way to open a file
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 
 " Cool status bar
 Plugin 'vim-airline/vim-airline'
@@ -34,6 +34,8 @@ Plugin 'bling/vim-bufferline'
 
 " Colors solarized
 "Plugin 'altercation/vim-colors-solarized'
+"Plugin 'vim-scripts/Wombat'
+Plugin 'tpope/vim-vividchalk'
 
 " twig syntax
 Plugin 'evidens/vim-twig'
@@ -43,9 +45,16 @@ Plugin 'etaoins/vim-volt-syntax'
 Plugin 'groenewege/vim-less'
 " typescript syntax
 Plugin 'leafgarland/typescript-vim'
+Plugin 'Quramy/tsuquyomi'
+
+" need for quramy/tsuquyomi
+Plugin 'Shougo/vimproc.vim'
 
 " Javascript syntax
 Plugin 'pangloss/vim-javascript'
+
+" Php
+Plugin 'StanAngeloff/php.vim'
 
 " Autocomplete
 Plugin 'Valloric/YouCompleteMe'
@@ -101,10 +110,11 @@ set t_Co=256
 "syntax enable
 "set background=dark
 "colorscheme solarized
+colorscheme vividchalk
 
 " --- COLORS SOLARIZED ---
 syntax on
-colorscheme wombat
+"colorscheme wombat
 
 " --- THE NERD COMMENTER ---
 filetype plugin on
@@ -130,6 +140,7 @@ set backupdir=~/.vim/backup_files//
 set directory=~/.vim/swap_files//
 set undodir=~/.vim/undo_files//
 
+" vim-airline
 " vim-airline => Fix symbols on airline
 " Install https://github.com/powerline/fonts ./install.sh
 " Select dejavu font on terimnal
@@ -165,3 +176,18 @@ let g:airline_symbols.linenr = ''
 " airline not showing
 set laststatus=2
 set ttimeoutlen=50
+let g:airline_symbols.linenr = ''
+
+" Php.vim hightlight phpdoctags
+function! PhpSyntaxOverride()
+    hi! def link phpDocTags  phpDefine
+    hi! def link phpDocParam phpType
+endfunction
+
+augroup phpSyntaxOverride
+    autocmd!
+    autocmd FileType php call PhpSyntaxOverride()
+augroup END
+
+" Ctrlp ignore files in .gitignore
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
