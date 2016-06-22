@@ -192,8 +192,8 @@ let g:syntastic_check_on_wq = 0
 " Ctrlp ignore files in .gitignore
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
-" Remap ESCAPE to jj for insert
-inoremap jj <ESC>
+" Remap ESCAPE to jk for insert
+inoremap jk <ESC>
 " Remap ESCAPE to v for visual
 vno v <ESC>
 
