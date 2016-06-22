@@ -12,6 +12,7 @@ Plugin 'VundleVim/Vundle.vim'
 
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
+"
 " plugin on GitHub repo
 Plugin 'tpope/vim-fugitive'
 
@@ -23,7 +24,7 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'scrooloose/nerdcommenter'
 
 " Ctrl+p => <C-p> Easy and fast way to open a file
-Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'kien/ctrlp.vim'
 
 " Cool status bar
 Plugin 'vim-airline/vim-airline'
@@ -34,8 +35,6 @@ Plugin 'bling/vim-bufferline'
 
 " Colors solarized
 "Plugin 'altercation/vim-colors-solarized'
-"Plugin 'vim-scripts/Wombat'
-Plugin 'tpope/vim-vividchalk'
 
 " twig syntax
 Plugin 'evidens/vim-twig'
@@ -45,10 +44,6 @@ Plugin 'etaoins/vim-volt-syntax'
 Plugin 'groenewege/vim-less'
 " typescript syntax
 Plugin 'leafgarland/typescript-vim'
-Plugin 'Quramy/tsuquyomi'
-
-" need for quramy/tsuquyomi
-Plugin 'Shougo/vimproc.vim'
 
 " Javascript syntax
 Plugin 'pangloss/vim-javascript'
@@ -62,17 +57,8 @@ Plugin 'Valloric/YouCompleteMe'
 " Snippets
 Plugin 'honza/vim-snippets'
 
-" plugin from http://vim-scripts.org/vim/scripts.html
-"Plugin 'L9'
-" Git plugin not hosted on GitHub
-"Plugin 'git://git.wincent.com/command-t.git'
-" git repos on your local machine (i.e. when working on your own plugin)
-"Plugin 'file:///home/gmarik/path/to/plugin'
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-"Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-" Avoid a name conflict with L9
-"Plugin 'user/L9', {'name': 'newL9'}
+" provides meaningful feedback about warnings and errors
+Plugin 'scrooloose/syntastic'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -110,11 +96,10 @@ set t_Co=256
 "syntax enable
 "set background=dark
 "colorscheme solarized
-colorscheme vividchalk
 
 " --- COLORS SOLARIZED ---
 syntax on
-"colorscheme wombat
+colorscheme wombat
 
 " --- THE NERD COMMENTER ---
 filetype plugin on
@@ -194,6 +179,15 @@ if !exists("g:ycm_semantic_triggers")
   let g:ycm_semantic_triggers = {}
 endif
 let g:ycm_semantic_triggers['typescript'] = ['.']
+
+" scrooloose/syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 " Ctrlp ignore files in .gitignore
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
