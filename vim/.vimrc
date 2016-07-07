@@ -119,6 +119,12 @@ set expandtab
 " set number lines
 set number
 
+" Use relative numbers instead number of the line (you still have it on the
+" status bar
+set relativenumber
+" Creates <FILENAME>.un~ so you can undo actions done even when you exit vim
+set undofile
+
 " set dir for swap, backup and undo files. Do before:
 " mkdir -p ~/.vim/{backup_files,swap_files,undo_files}
 set backupdir=~/.vim/backup_files//
