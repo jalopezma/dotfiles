@@ -202,4 +202,14 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standar
 inoremap jk <ESC>
 " Remap ESCAPE to v for visual
 vno v <ESC>
+" One very useful feature of Vim is that you can set it to visually wrap long
+" lines. Many users, including me, remap j/k to gj/gk to make j/k move by
+" virtual lines instead of physical lines. This remapping, however, breaks the
+" counting functionality described above. To remedy this, use the following
+" mapping instead.
+" This makes gj/gk move by virtual lines when used without a count, and by
+" physical lines when used with a count. This is perfect in tandem with
+" relative numbers.
+noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
+noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 
