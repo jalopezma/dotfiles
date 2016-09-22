@@ -60,6 +60,9 @@ Plugin 'honza/vim-snippets'
 " provides meaningful feedback about warnings and errors
 Plugin 'scrooloose/syntastic'
 
+" Go
+Plugin 'fatih/vim-go'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
