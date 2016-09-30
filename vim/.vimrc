@@ -15,6 +15,8 @@ Plugin 'VundleVim/Vundle.vim'
 "
 " plugin on GitHub repo
 Plugin 'tpope/vim-fugitive'
+" plubing for git -> see if column has been changed
+Plugin 'airblade/vim-gitgutter'
 
 " The nerd tree
 Plugin 'scrooloose/nerdtree'
@@ -62,6 +64,12 @@ Plugin 'scrooloose/syntastic'
 
 " Go
 Plugin 'fatih/vim-go'
+
+" Pug/Jade syntax (Pug is the new name/jade old one)
+Plugin 'digitaltoad/vim-pug'
+
+" Stylus syntax
+Plugin 'wavded/vim-stylus'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -200,6 +208,22 @@ let g:syntastic_check_on_wq = 0
 
 " Ctrlp ignore files in .gitignore
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+
+" vim-go
+" #Enable syntax-hightlighting for Functions, Methods and Structs
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_types = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+" #Enable goimports to automatically insert import paths instead of gofmt:
+let g:go_fmt_command = "goimports"
+" #Map :GoDef to 'gd' secuence
+au FileType go nmap gd <Plug>(go-def)
+
+" Add icon to breakline
+set showbreak=↪
 
 " Remap ESCAPE to jk for insert
 inoremap jk <ESC>
