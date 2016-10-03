@@ -241,5 +241,8 @@ vno v <ESC>
 noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
 noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 
+" --- OTHER PROJECTS WITH DIFFERENT SETTINGS ---
+au BufRead,BufNewFile ~/repos/stratabet/* setl sw=2 et
+
 " Executes GoInstallBinaries at the begining
 autocmd VimEnter * GoInstallBinaries
