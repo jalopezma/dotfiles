@@ -221,6 +221,7 @@ let g:go_highlight_build_constraints = 1
 let g:go_fmt_command = "goimports"
 " #Map :GoDef to 'gd' secuence
 au FileType go nmap gd <Plug>(go-def)
+au FileType go nmap ld :GoDecls<ENTER>
 
 " Add icon to breakline
 set showbreak=↪
