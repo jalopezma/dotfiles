@@ -71,6 +71,26 @@ Plugin 'digitaltoad/vim-pug'
 " Stylus syntax
 Plugin 'wavded/vim-stylus'
 
+" Javascrypt
+Plugin 'othree/javascript-libraries-syntax.vim'
+
+" Angular
+Plugin 'burnettk/vim-angular'
+
+" Bookmarks
+" Add/remove bookmark at current line           mm  :BookmarkToggle
+" Add/edit/remove annotation at current line    mi  :BookmarkAnnotate <TEXT>
+" Jump to next bookmark in buffer               mn  :BookmarkNext
+" Jump to previous bookmark in buffer           mp  :BookmarkPrev
+" Show all bookmarks (toggle)                   ma  :BookmarkShowAll
+" Clear bookmarks in current buffer only        mc  :BookmarkClear
+" Clear bookmarks in all buffers                mx  :BookmarkClearAll
+" Move up bookmark at current line              mkk :BookmarkMoveUp
+" Move down bookmark at current line            mjj :BookmarkMoveDown
+" Save all bookmarks to a file                      :BookmarkSave <FILE_PATH>
+" Load bookmarks from a file                        :BookmarkLoad <FILE_PATH>
+Plugin 'MattesGroeger/vim-bookmarks'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -192,10 +212,30 @@ augroup phpSyntaxOverride
 augroup END
 
 " YouCompleteMe Typescript
-if !exists("g:ycm_semantic_triggers")
-  let g:ycm_semantic_triggers = {}
-endif
-let g:ycm_semantic_triggers['typescript'] = ['.']
+"if !exists("g:ycm_semantic_triggers")
+"  let g:ycm_semantic_triggers = {}
+"endif
+"let g:ycm_semantic_triggers['typescript'] = ['.']
+
+" --- othree/javascript-libraries-syntax ---
+let g:used_javascript_libs = 'jquery,angularjs'
+
+" --- burnettk/vim-angular ---
+"  Map gd as go declaration. Used for go too
+"au FileType js nmap gd <Plug>(angular-gf)
+au FileType js nmap gd <Plug>(angular_gf)
+
+" --- pangloss/vim-javascript ---
+let g:javascript_conceal_function       = "ƒ"
+let g:javascript_conceal_null           = "ø"
+let g:javascript_conceal_this           = "@"
+let g:javascript_conceal_return         = "⇚"
+let g:javascript_conceal_undefined      = "¿"
+let g:javascript_conceal_NaN            = "ℕ"
+let g:javascript_conceal_prototype      = "¶"
+let g:javascript_conceal_static         = "•"
+let g:javascript_conceal_super          = "Ω"
+let g:javascript_conceal_arrow_function = "⇒"
 
 " scrooloose/syntastic
 set statusline+=%#warningmsg#
