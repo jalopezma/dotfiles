@@ -216,6 +216,8 @@ augroup END
 "  let g:ycm_semantic_triggers = {}
 "endif
 "let g:ycm_semantic_triggers['typescript'] = ['.']
+" Hide preview window
+set completeopt-=preview
 
 " --- othree/javascript-libraries-syntax ---
 let g:used_javascript_libs = 'jquery,angularjs'
