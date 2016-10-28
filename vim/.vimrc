@@ -29,11 +29,15 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'kien/ctrlp.vim'
 
 " Cool status bar
-Plugin 'vim-airline/vim-airline'
+"Plugin 'vim-airline/vim-airline'
 " Cool status bar themes
-Plugin 'vim-airline/vim-airline-themes'
+"Plugin 'vim-airline/vim-airline-themes'
 " Buffer on status bar
-Plugin 'bling/vim-bufferline'
+"Plugin 'bling/vim-bufferline'
+
+" testing
+Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+
 
 " Colors solarized
 "Plugin 'altercation/vim-colors-solarized'
@@ -91,6 +95,12 @@ Plugin 'burnettk/vim-angular'
 " Load bookmarks from a file                        :BookmarkLoad <FILE_PATH>
 Plugin 'MattesGroeger/vim-bookmarks'
 
+" Python auto-indentation
+Plugin 'vim-scripts/indentpython.vim'
+
+" EP8 checking
+Plugin 'nvie/vim-flake8'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -116,6 +126,8 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 map <C-n> :NERDTreeToggle<CR>
 " Close VIM if the only left window open it's NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+" Hide .pyc files
+let NERDTreeIgnore=['\.pyc$', '\~$']
 
 " --- VIM-AIRLANE ---
 " let g:airline_section_b = '%{strftime("%c")}'
@@ -288,3 +300,30 @@ au BufRead,BufNewFile ~/repos/stratabet/* setl sw=2 et
 
 " Executes GoInstallBinaries at the begining
 autocmd VimEnter * GoInstallBinaries
+
+" Pyhton
+" ------
+" This will give you the standard four spaces when you hit tab, ensure your
+" line length doesn’t go beyond 80 characters, and store the file in a unix
+" format so you don’t get a bunch of conversion issues when checking into
+" GitHub and/or sharing with other users.
+au BufNewFile,BufRead *.py
+    \ set tabstop=4 |
+    \ set softtabstop=4 |
+    \ set shiftwidth=4 |
+    \ set textwidth=79 |
+    \ set expandtab |
+    \ set autoindent |
+    \ set fileformat=unix
+
+"define BadWhitespace before using in a match
+highlight BadWhitespace ctermbg=red guibg=darkred
+" Flagging unnecessary whitespace
+au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+
+let python_highlight_all=1
+
+" Vim usually has its own clipboard and ignores the system keyboards, but sometimes
+" you might want to cut, copy, and/or paste to/from other applications outside of VIM.
+" On OSX, you can access your system clipboard with this line:
+set clipboard=unnamed
