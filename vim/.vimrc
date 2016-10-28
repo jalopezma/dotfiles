@@ -29,14 +29,14 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'kien/ctrlp.vim'
 
 " Cool status bar
-"Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline'
 " Cool status bar themes
-"Plugin 'vim-airline/vim-airline-themes'
+Plugin 'vim-airline/vim-airline-themes'
 " Buffer on status bar
 "Plugin 'bling/vim-bufferline'
 
 " testing
-Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+"Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 
 
 " Colors solarized
