@@ -229,7 +229,9 @@ augroup END
 "endif
 "let g:ycm_semantic_triggers['typescript'] = ['.']
 " Hide preview window
-set completeopt-=preview
+"set completeopt-=preview
+let g:ycm_autoclose_preview_window_after_completion=1
+map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 " --- othree/javascript-libraries-syntax ---
 let g:used_javascript_libs = 'jquery,angularjs'
