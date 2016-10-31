@@ -129,52 +129,23 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 " Hide .pyc files
 let NERDTreeIgnore=['\.pyc$', '\~$']
 
+" --- THE NERD COMMENTER ---
+filetype plugin on
+
+" --- COLORS SCHEMA ---
+" $ cp dotfiles/colors/* ~/.vim/colors/
+syntax on
+colorscheme wombat
+" solarized
+"set background=dark
+"colorscheme solarized
+
 " --- VIM-AIRLANE ---
 " let g:airline_section_b = '%{strftime("%c")}'
 " let g:airline_section_y = 'BN: %{bufnr("%")}'
 " Fix for no color on the status bar
 set t_Co=256
 
-" --- COLORS SOLARIZED ---
-"syntax enable
-"set background=dark
-"colorscheme solarized
-
-" --- COLORS SOLARIZED ---
-syntax on
-colorscheme wombat
-
-" --- THE NERD COMMENTER ---
-filetype plugin on
-
-" --- INDENTATION ---
-" size of a hard tabstop
-set tabstop=4
-"size of an 'indent'
-set shiftwidth=4
-" a combination of spaces and tabas are used to simulate tab stops at a width
-" other than the (hard)tabstop
-set softtabstop=4
-" make 'tab' insert indents instead of tabs at the beinning fo a line
-set smarttab
-" always uses spaces instead of tab characters
-set expandtab
-" set number lines
-set number
-
-" Use relative numbers instead number of the line (you still have it on the
-" status bar
-set relativenumber
-" Creates <FILENAME>.un~ so you can undo actions done even when you exit vim
-set undofile
-
-" set dir for swap, backup and undo files. Do before:
-" mkdir -p ~/.vim/{backup_files,swap_files,undo_files}
-set backupdir=~/.vim/backup_files//
-set directory=~/.vim/swap_files//
-set undodir=~/.vim/undo_files//
-
-" vim-airline
 " vim-airline => Fix symbols on airline
 " Install https://github.com/powerline/fonts ./install.sh
 " Select dejavu font on terimnal
@@ -223,11 +194,7 @@ augroup phpSyntaxOverride
     autocmd FileType php call PhpSyntaxOverride()
 augroup END
 
-" YouCompleteMe Typescript
-"if !exists("g:ycm_semantic_triggers")
-"  let g:ycm_semantic_triggers = {}
-"endif
-"let g:ycm_semantic_triggers['typescript'] = ['.']
+" --- YOUCOMPLETEME ---
 " Hide preview window
 "set completeopt-=preview
 let g:ycm_autoclose_preview_window_after_completion=1
@@ -253,7 +220,7 @@ let g:javascript_conceal_static         = "•"
 let g:javascript_conceal_super          = "Ω"
 let g:javascript_conceal_arrow_function = "⇒"
 
-" scrooloose/syntastic
+" --- scrooloose/syntastic ---
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
@@ -262,10 +229,11 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
-" Ctrlp ignore files in .gitignore
+" --- Ctrlp ---
+" ignore files in .gitignore
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
-" vim-go
+" --- vim-go ---
 " #Enable syntax-hightlighting for Functions, Methods and Structs
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
@@ -278,12 +246,46 @@ let g:go_fmt_command = "goimports"
 " #Map :GoDef to 'gd' secuence
 au FileType go nmap gd <Plug>(go-def)
 au FileType go nmap ld :GoDecls<ENTER>
+" Executes GoInstallBinaries at the begining
+autocmd VimEnter * GoInstallBinaries
+
+" --- VIM OPTIONS ---
+" Vim usually has its own clipboard and ignores the system keyboards, but sometimes
+" you might want to cut, copy, and/or paste to/from other applications outside of VIM.
+" On OSX, you can access your system clipboard with this line:
+set clipboard=unnamed
+" size of a hard tabstop
+set tabstop=4
+"size of an 'indent'
+set shiftwidth=4
+" a combination of spaces and tabas are used to simulate tab stops at a width
+" other than the (hard)tabstop
+set softtabstop=4
+" make 'tab' insert indents instead of tabs at the beinning fo a line
+set smarttab
+" always uses spaces instead of tab characters
+set expandtab
+" set number lines
+set number
+
+" Use relative numbers instead number of the line (you still have it on the
+" status bar
+set relativenumber
+" Creates <FILENAME>.un~ so you can undo actions done even when you exit vim
+set undofile
+
+" set dir for swap, backup and undo files. Do before:
+" mkdir -p ~/.vim/{backup_files,swap_files,undo_files}
+set backupdir=~/.vim/backup_files//
+set directory=~/.vim/swap_files//
+set undodir=~/.vim/undo_files//
 
 " Add icon to breakline
 set showbreak=↪
 
 " Remap ESCAPE to jk for insert
 inoremap jk <ESC>
+inoremap JK <ESC>
 " Remap ESCAPE to v for visual
 vno v <ESC>
 " One very useful feature of Vim is that you can set it to visually wrap long
@@ -299,9 +301,6 @@ noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 
 " --- OTHER PROJECTS WITH DIFFERENT SETTINGS ---
 au BufRead,BufNewFile ~/repos/stratabet/* setl sw=2 et
-
-" Executes GoInstallBinaries at the begining
-autocmd VimEnter * GoInstallBinaries
 
 " Pyhton
 " ------
@@ -325,7 +324,3 @@ au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 
 let python_highlight_all=1
 
-" Vim usually has its own clipboard and ignores the system keyboards, but sometimes
-" you might want to cut, copy, and/or paste to/from other applications outside of VIM.
-" On OSX, you can access your system clipboard with this line:
-set clipboard=unnamed
