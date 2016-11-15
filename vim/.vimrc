@@ -101,6 +101,9 @@ Plugin 'vim-scripts/indentpython.vim'
 " EP8 checking
 Plugin 'nvie/vim-flake8'
 
+" Debug for python & php
+Plugin 'jaredly/vim-debug'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -115,6 +118,9 @@ filetype plugin indent on    " required
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
+
+
+let mapleader = "\<Space>"
 
 " --- THE NERD TREE ---
 " If not opening a file, it adds the tree
@@ -250,10 +256,6 @@ au FileType go nmap ld :GoDecls<ENTER>
 autocmd VimEnter * GoInstallBinaries
 
 " --- VIM OPTIONS ---
-" Vim usually has its own clipboard and ignores the system keyboards, but sometimes
-" you might want to cut, copy, and/or paste to/from other applications outside of VIM.
-" On OSX, you can access your system clipboard with this line:
-set clipboard=unnamed
 " size of a hard tabstop
 set tabstop=4
 "size of an 'indent'
@@ -300,6 +302,7 @@ noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
 noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 
 " --- OTHER PROJECTS WITH DIFFERENT SETTINGS ---
+" Stratabet AngularJS. Indentation two spaces
 au BufRead,BufNewFile ~/repos/stratabet/* setl sw=2 et
 
 " Pyhton
@@ -324,3 +327,5 @@ au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 
 let python_highlight_all=1
 
+" :FormatJSON to use it. Requires python installed
+com! FormatJSON %!python -m json.tool
