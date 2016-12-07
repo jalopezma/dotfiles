@@ -301,6 +301,11 @@ vno v <ESC>
 noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
 noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 
+" Set highlighting ON
+set hlsearch
+" Allow toogle it with <F4>
+noremap <F4> :set hlsearch! hlsearch?<CR>
+
 " --- OTHER PROJECTS WITH DIFFERENT SETTINGS ---
 " Stratabet AngularJS. Indentation two spaces
 au BufRead,BufNewFile ~/repos/stratabet/* setl sw=2 et
