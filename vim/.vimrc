@@ -24,6 +24,8 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 " The nerd commenter
 Plugin 'scrooloose/nerdcommenter'
+" nerd ignore different for projects
+Plugin 'dsimidzija/vim-nerdtree-ignore'
 
 " Ctrl+p => <C-p> Easy and fast way to open a file
 Plugin 'kien/ctrlp.vim'
@@ -104,6 +106,9 @@ Plugin 'nvie/vim-flake8'
 " Debug for python & php
 Plugin 'jaredly/vim-debug'
 
+" EditorConfig
+Plugin 'editorconfig/editorconfig-vim'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -134,6 +139,7 @@ map <C-n> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 " Hide .pyc files
 let NERDTreeIgnore=['\.pyc$', '\~$']
+let NERDTreeShowHidden=1
 
 " --- THE NERD COMMENTER ---
 filetype plugin on
