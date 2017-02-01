@@ -261,6 +261,9 @@ au FileType go nmap ld :GoDecls<ENTER>
 " Executes GoInstallBinaries at the begining
 autocmd VimEnter * GoInstallBinaries
 
+" --- editor config ---
+let g:EditorConfig_exclude_patterns = ['fugitive://.*']
+
 " --- VIM OPTIONS ---
 " size of a hard tabstop
 set tabstop=4
