@@ -109,6 +109,9 @@ Plugin 'jaredly/vim-debug'
 " EditorConfig
 Plugin 'editorconfig/editorconfig-vim'
 
+" Clang Format (for typescript)
+Plugin 'primitivorm/vim-clang-format'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -263,6 +266,10 @@ autocmd VimEnter * GoInstallBinaries
 
 " --- editor config ---
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
+
+" --- vim-clang-format ---
+" Format on save TypeScript files
+autocmd BufWritePost *.ts ClangFormat
 
 " --- VIM OPTIONS ---
 " size of a hard tabstop
