@@ -112,6 +112,9 @@ Plugin 'editorconfig/editorconfig-vim'
 " Clang Format (for typescript)
 Plugin 'primitivorm/vim-clang-format'
 
+" Adds background with the color for hexa, name and rgb colors
+Plugin 'ap/vim-css-color'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
