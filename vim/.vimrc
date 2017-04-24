@@ -272,7 +272,7 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
 " --- vim-clang-format ---
 " Format on save TypeScript files
-autocmd BufWritePost *.ts ClangFormat
+"autocmd BufWritePost *.ts ClangFormat
 
 " --- VIM OPTIONS ---
 " size of a hard tabstop
@@ -328,6 +328,9 @@ noremap <F4> :set hlsearch! hlsearch?<CR>
 " --- OTHER PROJECTS WITH DIFFERENT SETTINGS ---
 " Stratabet AngularJS. Indentation two spaces
 au BufRead,BufNewFile ~/repos/stratabet/* setl sw=2 et
+
+" Stratagem Platforms: Angular, Sass & html. Indentation two spaces
+au BufRead,BufNewFile ~/repos/stratagem-platforms/src/* setl sw=2 et
 
 " Pyhton
 " ------
