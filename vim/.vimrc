@@ -10,9 +10,6 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-"
 " plugin on GitHub repo
 Plugin 'tpope/vim-fugitive'
 " plubing for git -> see if column has been changed
@@ -35,14 +32,7 @@ Plugin 'vim-airline/vim-airline'
 " Cool status bar themes
 Plugin 'vim-airline/vim-airline-themes'
 " Buffer on status bar
-"Plugin 'bling/vim-bufferline'
-
-" testing
-"Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
-
-
-" Colors solarized
-"Plugin 'altercation/vim-colors-solarized'
+Plugin 'bling/vim-bufferline'
 
 " twig syntax
 Plugin 'evidens/vim-twig'
@@ -57,7 +47,7 @@ Plugin 'leafgarland/typescript-vim'
 Plugin 'pangloss/vim-javascript'
 
 " Php
-Plugin 'StanAngeloff/php.vim'
+"Plugin 'StanAngeloff/php.vim'
 
 " Autocomplete
 Plugin 'Valloric/YouCompleteMe'
@@ -81,7 +71,7 @@ Plugin 'wavded/vim-stylus'
 Plugin 'othree/javascript-libraries-syntax.vim'
 
 " Angular
-Plugin 'burnettk/vim-angular'
+"Plugin 'burnettk/vim-angular'
 
 " Bookmarks
 " Add/remove bookmark at current line           mm  :BookmarkToggle
@@ -104,7 +94,7 @@ Plugin 'vim-scripts/indentpython.vim'
 Plugin 'nvie/vim-flake8'
 
 " Debug for python & php
-Plugin 'jaredly/vim-debug'
+"Plugin 'jaredly/vim-debug'
 
 " EditorConfig
 Plugin 'editorconfig/editorconfig-vim'
@@ -135,8 +125,8 @@ let mapleader = "\<Space>"
 
 " --- THE NERD TREE ---
 " If not opening a file, it adds the tree
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+"autocmd StdinReadPre * let s:std_in=1
+"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 " Always add the tree
 " autocmd vimenter * NERDTree
 " CTRL+N to toggle the tree
@@ -159,8 +149,8 @@ colorscheme wombat
 "colorscheme solarized
 
 " --- VIM-AIRLANE ---
-" let g:airline_section_b = '%{strftime("%c")}'
-" let g:airline_section_y = 'BN: %{bufnr("%")}'
+ let g:airline_section_b = '%{strftime("%c")}'
+ let g:airline_section_y = 'BN: %{bufnr("%")}'
 " Fix for no color on the status bar
 set t_Co=256
 
@@ -169,52 +159,24 @@ set t_Co=256
 " Select dejavu font on terimnal
 let g:airline_powerline_fonts = 1
 
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
-
-" unicode symbols
-let g:airline_left_sep = '»'
-let g:airline_left_sep = '▶'
-let g:airline_right_sep = '«'
-let g:airline_right_sep = '◀'
-let g:airline_symbols.linenr = '␊'
-let g:airline_symbols.linenr = '␤'
-let g:airline_symbols.linenr = '¶'
-let g:airline_symbols.branch = '⎇'
-let g:airline_symbols.paste = 'ρ'
-let g:airline_symbols.paste = 'Þ'
-let g:airline_symbols.paste = '∥'
-let g:airline_symbols.whitespace = 'Ξ'
-
-" airline symbols
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
-let g:airline_symbols.branch = ''
-let g:airline_symbols.readonly = ''
-let g:airline_symbols.linenr = ''
-
 " airline not showing
 set laststatus=2
 set ttimeoutlen=50
-let g:airline_symbols.linenr = ''
 
 " Php.vim hightlight phpdoctags
-function! PhpSyntaxOverride()
-    hi! def link phpDocTags  phpDefine
-    hi! def link phpDocParam phpType
-endfunction
+"function! PhpSyntaxOverride()
+    "hi! def link phpDocTags  phpDefine
+    "hi! def link phpDocParam phpType
+"endfunction
 
-augroup phpSyntaxOverride
-    autocmd!
-    autocmd FileType php call PhpSyntaxOverride()
-augroup END
+"augroup phpSyntaxOverride
+    "autocmd!
+    "autocmd FileType php call PhpSyntaxOverride()
+"augroup END
 
 " --- YOUCOMPLETEME ---
 " Hide preview window
-"set completeopt-=preview
+set completeopt-=preview
 let g:ycm_autoclose_preview_window_after_completion=1
 map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
@@ -223,7 +185,7 @@ let g:used_javascript_libs = 'jquery,angularjs'
 
 " --- burnettk/vim-angular ---
 "  Map gd as go declaration. Used for go too
-"au FileType js nmap gd <Plug>(angular-gf)
+au FileType js nmap gd <Plug>(angular-gf)
 au FileType js nmap gd <Plug>(angular_gf)
 
 " --- pangloss/vim-javascript ---
@@ -259,7 +221,7 @@ let g:go_highlight_fields = 1
 let g:go_highlight_types = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
-" #Enable goimports to automatically insert import paths instead of gofmt:
+" Enable goimports to automatically insert import paths instead of gofmt:
 let g:go_fmt_command = "goimports"
 " #Map :GoDef to 'gd' secuence
 au FileType go nmap gd <Plug>(go-def)
@@ -272,7 +234,7 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
 " --- vim-clang-format ---
 " Format on save TypeScript files
-autocmd BufWritePost *.ts ClangFormat
+"autocmd BufWritePost *.ts ClangFormat
 
 " --- VIM OPTIONS ---
 " size of a hard tabstop
@@ -344,7 +306,7 @@ au BufNewFile,BufRead *.py
     \ set autoindent |
     \ set fileformat=unix
 
-"define BadWhitespace before using in a match
+" define BadWhitespace before using in a match
 highlight BadWhitespace ctermbg=red guibg=darkred
 " Flagging unnecessary whitespace
 au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
