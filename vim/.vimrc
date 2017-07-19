@@ -56,6 +56,8 @@ Plugin 'honza/vim-snippets'
 Plugin 'vim-syntastic/syntastic'
 " tsc checker removed from syntastic, get it from here
 Plugin 'Quramy/tsuquyomi'
+" required by Quramy/tsuquyomi
+Plugin 'Shougo/vimproc.vim'
 
 " Go
 Plugin 'fatih/vim-go'
