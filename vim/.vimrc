@@ -32,7 +32,7 @@ Plugin 'vim-airline/vim-airline'
 " Cool status bar themes
 Plugin 'vim-airline/vim-airline-themes'
 " Buffer on status bar
-Plugin 'bling/vim-bufferline'
+"Plugin 'bling/vim-bufferline'
 
 " twig syntax
 Plugin 'evidens/vim-twig'
@@ -46,9 +46,6 @@ Plugin 'leafgarland/typescript-vim'
 " Javascript syntax
 Plugin 'pangloss/vim-javascript'
 
-" Php
-"Plugin 'StanAngeloff/php.vim'
-
 " Autocomplete
 Plugin 'Valloric/YouCompleteMe'
 
@@ -56,7 +53,9 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'honza/vim-snippets'
 
 " provides meaningful feedback about warnings and errors
-Plugin 'scrooloose/syntastic'
+Plugin 'vim-syntastic/syntastic'
+" tsc checker removed from syntastic, get it from here
+Plugin 'Quramy/tsuquyomi'
 
 " Go
 Plugin 'fatih/vim-go'
@@ -71,7 +70,7 @@ Plugin 'wavded/vim-stylus'
 Plugin 'othree/javascript-libraries-syntax.vim'
 
 " Angular
-"Plugin 'burnettk/vim-angular'
+Plugin 'burnettk/vim-angular'
 
 " Bookmarks
 " Add/remove bookmark at current line           mm  :BookmarkToggle
@@ -92,9 +91,6 @@ Plugin 'vim-scripts/indentpython.vim'
 
 " EP8 checking
 Plugin 'nvie/vim-flake8'
-
-" Debug for python & php
-"Plugin 'jaredly/vim-debug'
 
 " EditorConfig
 Plugin 'editorconfig/editorconfig-vim'
@@ -149,8 +145,8 @@ colorscheme wombat
 "colorscheme solarized
 
 " --- VIM-AIRLANE ---
- let g:airline_section_b = '%{strftime("%c")}'
- let g:airline_section_y = 'BN: %{bufnr("%")}'
+let g:airline_section_b = '%{strftime("%c")}'
+"let g:airline_section_y = 'BN: %{bufnr("%")}'
 " Fix for no color on the status bar
 set t_Co=256
 
@@ -158,25 +154,13 @@ set t_Co=256
 " Install https://github.com/powerline/fonts ./install.sh
 " Select dejavu font on terimnal
 let g:airline_powerline_fonts = 1
-
 " airline not showing
 set laststatus=2
 set ttimeoutlen=50
 
-" Php.vim hightlight phpdoctags
-"function! PhpSyntaxOverride()
-    "hi! def link phpDocTags  phpDefine
-    "hi! def link phpDocParam phpType
-"endfunction
-
-"augroup phpSyntaxOverride
-    "autocmd!
-    "autocmd FileType php call PhpSyntaxOverride()
-"augroup END
-
 " --- YOUCOMPLETEME ---
 " Hide preview window
-set completeopt-=preview
+"set completeopt-=preview
 let g:ycm_autoclose_preview_window_after_completion=1
 map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
@@ -200,7 +184,7 @@ let g:javascript_conceal_static         = "•"
 let g:javascript_conceal_super          = "Ω"
 let g:javascript_conceal_arrow_function = "⇒"
 
-" --- scrooloose/syntastic ---
+" --- vim-syntastic/syntastic ---
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
@@ -208,6 +192,10 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let g:syntastic_typescript_checkers = ['tsc', 'tslint']
+" This aggregates the errors from different checkers at once
+let g:syntastic_aggregate_errors = 1
+let g:syntastic_typescript_tslint_args = '--config ~/repos/stratagem-platforms/tslint.json --project ~/repos/stratagem-platforms/src/tsconfig.json'
 
 " --- Ctrlp ---
 " ignore files in .gitignore
@@ -292,7 +280,7 @@ noremap <F4> :set hlsearch! hlsearch?<CR>
 au BufRead,BufNewFile ~/repos/stratabet/* setl sw=2 et
 
 " Stratagem Platforms: Angular, Sass & html. Indentation two spaces
-au BufRead,BufNewFile ~/repos/stratagem-platforms/src/* setl sw=2 et
+"au BufRead,BufNewFile ~/repos/stratagem-platforms/src/* setl sw=2 et
 
 " Pyhton
 " ------
