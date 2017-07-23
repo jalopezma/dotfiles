@@ -147,7 +147,7 @@ colorscheme wombat
 "colorscheme solarized
 
 " --- VIM-AIRLANE ---
-let g:airline_section_b = '%{strftime("%c")}'
+"let g:airline_section_b = '%{strftime("%c")}'
 "let g:airline_section_y = 'BN: %{bufnr("%")}'
 " Fix for no color on the status bar
 set t_Co=256
