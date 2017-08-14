@@ -103,6 +103,9 @@ Plugin 'primitivorm/vim-clang-format'
 " Adds background with the color for hexa, name and rgb colors
 Plugin 'ap/vim-css-color'
 
+" Surrounding braces, quotes and other things
+Plugin 'tpope/vim-surround'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -147,7 +150,8 @@ colorscheme wombat
 "colorscheme solarized
 
 " --- VIM-AIRLANE ---
-let g:airline_section_b = '%{strftime("%c")}'
+" substitutes the git branch by date. I prefer the actual branch
+"let g:airline_section_b = '%{strftime("%c")}' 
 "let g:airline_section_y = 'BN: %{bufnr("%")}'
 " Fix for no color on the status bar
 set t_Co=256
