@@ -25,7 +25,7 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'dsimidzija/vim-nerdtree-ignore'
 
 " Ctrl+p => <C-p> Easy and fast way to open a file
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 
 " Cool status bar
 Plugin 'vim-airline/vim-airline'
@@ -108,6 +108,9 @@ Plugin 'tpope/vim-surround'
 
 " Right tag bar. Structure of the file
 Plugin 'majutsushi/tagbar'
+
+" Vim dev icons
+Plugin 'ryanoasis/vim-devicons'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -204,7 +207,7 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_typescript_checkers = ['tsc', 'tslint']
 " This aggregates the errors from different checkers at once
 let g:syntastic_aggregate_errors = 1
-let g:syntastic_typescript_tslint_args = '--config ~/repos/stratagem-platforms/tslint.json --project ~/repos/stratagem-platforms/src/tsconfig.json'
+let g:syntastic_typescript_tslint_args = '--config ~/repos/stratagem-platforms/tslint.json --project ~/repos/stratagem-platforms/src/tsconfig.app.json'
 
 " --- Ctrlp ---
 " ignore files in .gitignore
@@ -362,6 +365,11 @@ let g:tagbar_type_go = {
     \ 'ctagsbin'  : 'gotags',
     \ 'ctagsargs' : '-sort -silent'
 \ }
+
+" vimdevicons
+set encoding=utf8
+set guifont=UbuntuMono\ Nerd\ Font\ 10
+let g:airline_powerline_fonts = 1
 
 " :FormatJSON to use it. Requires python installed
 com! FormatJSON %!python -m json.tool
