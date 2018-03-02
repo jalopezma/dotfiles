@@ -53,7 +53,7 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'honza/vim-snippets'
 
 " provides meaningful feedback about warnings and errors
-Plugin 'vim-syntastic/syntastic'
+" Plugin 'vim-syntastic/syntastic'
 " tsc checker removed from syntastic, get it from here
 Plugin 'Quramy/tsuquyomi'
 " required by Quramy/tsuquyomi
@@ -112,6 +112,9 @@ Plugin 'majutsushi/tagbar'
 " Vim dev icons
 Plugin 'ryanoasis/vim-devicons'
 
+" Asynchronous Lint Engine
+Plugin 'w0rp/ale'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -151,6 +154,7 @@ filetype plugin on
 " $ cp dotfiles/colors/* ~/.vim/colors/
 syntax on
 colorscheme wombat
+
 " solarized
 "set background=dark
 "colorscheme solarized
@@ -197,17 +201,18 @@ let g:javascript_conceal_super          = "Ω"
 let g:javascript_conceal_arrow_function = "⇒"
 
 " --- vim-syntastic/syntastic ---
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_typescript_checkers = ['tsc', 'tslint']
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
+" let g:syntastic_typescript_checkers = ['tsc', 'tslint']
 " This aggregates the errors from different checkers at once
-let g:syntastic_aggregate_errors = 1
-let g:syntastic_typescript_tslint_args = '--config ~/repos/stratagem-platforms/tslint.json --project ~/repos/stratagem-platforms/src/tsconfig.app.json'
+"let g:syntastic_aggregate_errors = 1
+" let g:syntastic_typescript_tslint_args = '--config ~/repos/stratagem-platforms/tslint.json --project ~/repos/stratagem-platforms/src/tsconfig.app.json'
+" let g:loaded_syntastic_go_govet_checker = 1
 
 " --- Ctrlp ---
 " ignore files in .gitignore
@@ -235,6 +240,10 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 " --- vim-clang-format ---
 " Format on save TypeScript files
 "autocmd BufWritePost *.ts ClangFormat
+
+" --- w0rp/ale --- | Asynchronous Lint Engine
+let g:ale_open_list = 1
+let g:ale_list_window_size = 5
 
 " --- VIM OPTIONS ---
 " size of a hard tabstop
@@ -373,3 +382,4 @@ let g:airline_powerline_fonts = 1
 
 " :FormatJSON to use it. Requires python installed
 com! FormatJSON %!python -m json.tool
+
