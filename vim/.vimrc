@@ -5,7 +5,7 @@ filetype off                  " required
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+" call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
@@ -23,9 +23,6 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'scrooloose/nerdcommenter'
 " nerd ignore different for projects
 Plugin 'dsimidzija/vim-nerdtree-ignore'
-
-" Ctrl+p => <C-p> Easy and fast way to open a file
-Plugin 'ctrlpvim/ctrlp.vim'
 
 " Cool status bar
 Plugin 'vim-airline/vim-airline'
@@ -67,9 +64,6 @@ Plugin 'digitaltoad/vim-pug'
 
 " Stylus syntax
 Plugin 'wavded/vim-stylus'
-
-" Javascrypt
-Plugin 'othree/javascript-libraries-syntax.vim'
 
 " Angular
 Plugin 'burnettk/vim-angular'
@@ -115,6 +109,13 @@ Plugin 'ryanoasis/vim-devicons'
 " Asynchronous Lint Engine
 Plugin 'w0rp/ale'
 
+" Auto pairs for [({
+Plugin 'jiangmiao/auto-pairs'
+
+" fzf for vin
+Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plugin 'junegunn/fzf.vim'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -149,6 +150,12 @@ let NERDTreeShowHidden=1
 
 " --- THE NERD COMMENTER ---
 filetype plugin on
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
 
 " --- COLORS SCHEMA ---
 " $ cp dotfiles/colors/* ~/.vim/colors/
@@ -178,10 +185,7 @@ set ttimeoutlen=50
 " Hide preview window
 "set completeopt-=preview
 let g:ycm_autoclose_preview_window_after_completion=1
-map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
-
-" --- othree/javascript-libraries-syntax ---
-let g:used_javascript_libs = 'jquery,angularjs'
+" map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 " --- burnettk/vim-angular ---
 "  Map gd as go declaration. Used for go too
@@ -214,10 +218,6 @@ let g:javascript_conceal_arrow_function = "⇒"
 " let g:syntastic_typescript_tslint_args = '--config ~/repos/stratagem-platforms/tslint.json --project ~/repos/stratagem-platforms/src/tsconfig.app.json'
 " let g:loaded_syntastic_go_govet_checker = 1
 
-" --- Ctrlp ---
-" ignore files in .gitignore
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
-
 " --- vim-go ---
 " #Enable syntax-hightlighting for Functions, Methods and Structs
 let g:go_highlight_functions = 1
@@ -242,8 +242,49 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 "autocmd BufWritePost *.ts ClangFormat
 
 " --- w0rp/ale --- | Asynchronous Lint Engine
-let g:ale_open_list = 1
-let g:ale_list_window_size = 5
+" Opens the local list window with the errors
+"let g:ale_open_list = 1
+"let g:ale_list_window_size = 5
+" Shows the left gutter always so text is being pushed and pulled
+let g:ale_sign_column_always = 1
+" Show errors count on airline
+let g:airline#extensions#ale#enabled = 1
+" Run lint on changes only for normal mode (undo, redo)
+let g:ale_lint_on_text_changed = 'normal'
+" Run lint on leave insert, save and enter file. Last two are 1 by default
+let g:ale_lint_on_insert_leave = 1
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_enter = 1
+
+" --- fzf.vim --- https://jesseleite.com/posts/2/its-dangerous-to-vim-alone-take-faa
+" *File finder
+" Search for git tracked files
+nmap <Leader>f :GFiles<CR>
+" Search all files
+nmap <Leader>F :Files<CR>
+" Search for open buffers
+nmap <Leader>b :Buffers<CR>
+" Search in history
+nmap <Leader>h :History<CR>
+
+" *Tag finder
+" Search for tags in the open buffers
+nmap <Leader>t :BTags<CR>
+" Search for global tags
+nmap <Leader>T :Tags<CR>
+
+" *Line finder 
+" on current buffer
+nmap <Leader>l :BLines<CR>
+" loaded buffers
+nmap <Leader>L :Lines<CR>
+" marked lines
+nmap <Leader>' :Marks<CR>
+
+" *Project finder
+" Requires to install https://github.com/ggreer/the_silver_searcher manually.
+" Allows to search on the project
+nmap <Leader>a :Ag<Space>
 
 " --- VIM OPTIONS ---
 " size of a hard tabstop
