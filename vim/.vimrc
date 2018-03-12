@@ -266,6 +266,8 @@ nmap <Leader>F :Files<CR>
 nmap <Leader>b :Buffers<CR>
 " Search in history
 nmap <Leader>h :History<CR>
+" Goes to selected window
+nmap <Leader>w :Windows<CR>
 
 " *Tag finder
 " Search for tags in the open buffers
