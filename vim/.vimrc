@@ -116,6 +116,13 @@ Plugin 'jiangmiao/auto-pairs'
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
 
+" xolox/vim-easytags, xolox/vim-misc - Creates tags on save
+Plugin 'xolox/vim-easytags'
+Plugin 'xolox/vim-misc'
+
+" Uses the same key bidings that tmux to move through splits
+" Plugin 'christoomey/vim-tmux-navigator'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
