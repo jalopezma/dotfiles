@@ -28,18 +28,11 @@ Plugin 'dsimidzija/vim-nerdtree-ignore'
 Plugin 'vim-airline/vim-airline'
 " Cool status bar themes
 Plugin 'vim-airline/vim-airline-themes'
-" Buffer on status bar
-"Plugin 'bling/vim-bufferline'
 
-" twig syntax
-Plugin 'evidens/vim-twig'
-" volt syntax
-Plugin 'etaoins/vim-volt-syntax'
 " less syntax
 Plugin 'groenewege/vim-less'
 " typescript syntax
 Plugin 'leafgarland/typescript-vim'
-
 " Javascript syntax
 Plugin 'pangloss/vim-javascript'
 
@@ -58,9 +51,6 @@ Plugin 'Shougo/vimproc.vim'
 
 " Go
 Plugin 'fatih/vim-go'
-
-" Pug/Jade syntax (Pug is the new name/jade old one)
-Plugin 'digitaltoad/vim-pug'
 
 " Stylus syntax
 Plugin 'wavded/vim-stylus'
@@ -81,12 +71,6 @@ Plugin 'burnettk/vim-angular'
 " Save all bookmarks to a file                      :BookmarkSave <FILE_PATH>
 " Load bookmarks from a file                        :BookmarkLoad <FILE_PATH>
 Plugin 'MattesGroeger/vim-bookmarks'
-
-" Python auto-indentation
-Plugin 'vim-scripts/indentpython.vim'
-
-" EP8 checking
-Plugin 'nvie/vim-flake8'
 
 " EditorConfig
 Plugin 'editorconfig/editorconfig-vim'
@@ -187,11 +171,6 @@ set ttimeoutlen=50
 let g:ycm_autoclose_preview_window_after_completion=1
 " map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
-" --- burnettk/vim-angular ---
-"  Map gd as go declaration. Used for go too
-au FileType js nmap gd <Plug>(angular-gf)
-au FileType js nmap gd <Plug>(angular_gf)
-
 " --- pangloss/vim-javascript ---
 let g:javascript_conceal_function       = "ƒ"
 let g:javascript_conceal_null           = "ø"
@@ -236,10 +215,6 @@ autocmd VimEnter * GoInstallBinaries
 
 " --- editor config ---
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
-
-" --- vim-clang-format ---
-" Format on save TypeScript files
-"autocmd BufWritePost *.ts ClangFormat
 
 " --- w0rp/ale --- | Asynchronous Lint Engine
 " Opens the local list window with the errors
