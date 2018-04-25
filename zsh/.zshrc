@@ -1,10 +1,3 @@
-# Tyny care terminal
-if [ -f ~/.tiny.env ]; then
-    source ~/.tiny.env
-else
-    print "404: ~/.tiny.env not found."
-fi
-
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -25,12 +18,12 @@ export GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOBIN
 
 # Add scripts path
-export PATH=$PATH:/home/jose/scripts
+export PATH=$PATH:/home/jalopezma/scripts
 # Add /usr/local/lib
 export PATH=$PATH:/usr/local/lib
 
 # Python path
-#export PYTHONPATH=/home/jose/repos/stratagem-dataprocessing/stratagemdataprocessing
+#export PYTHONPATH=/home/jalopezma/repos/stratagem-dataprocessing/stratagemdataprocessing
 
 # NPM Global without sudo
 NPM_PACKAGES="${HOME}/.npm-packages"
@@ -40,7 +33,7 @@ unset MANPATH # delete if you already modified MANPATH elsewhere in your config
 export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
 
 # Path to your oh-my-zsh installation.
-export ZSH=/home/jose/.oh-my-zsh
+export ZSH=/home/jalopezma/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -241,4 +234,4 @@ fi
 export PATH="$PATH:$HOME/.rvm/bin"
 
 # tmuxinator
-source ~/tmuxinator.zsh
+# source ~/tmuxinator.zsh
