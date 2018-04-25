@@ -1,2 +1,12 @@
 to use 
 https://github.com/so-fancy/diff-so-fancy
+
+to use vundle
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+
+install zsh
+to do symlinks to dotfiles
+colors for vim
+backup folders for vim
+
+install go
