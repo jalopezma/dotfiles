@@ -89,6 +89,7 @@ Plugin 'majutsushi/tagbar'
 
 " Vim dev icons
 " Needs https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/UbuntuMono/Regular/complete/Ubuntu%20Mono%20Nerd%20Font%20Complete.ttf
+" make ~/.fonts and move the font there
 Plugin 'ryanoasis/vim-devicons'
 
 " Asynchronous Lint Engine
