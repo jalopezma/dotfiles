@@ -88,6 +88,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'majutsushi/tagbar'
 
 " Vim dev icons
+" Needs https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/UbuntuMono/Regular/complete/Ubuntu%20Mono%20Nerd%20Font%20Complete.ttf
 Plugin 'ryanoasis/vim-devicons'
 
 " Asynchronous Lint Engine
@@ -165,8 +166,7 @@ colorscheme wombat
 set t_Co=256
 
 " vim-airline => Fix symbols on airline
-" Install https://github.com/powerline/fonts ./install.sh
-" Select dejavu font on terimnal
+" Use font from vimdevicons patched
 let g:airline_powerline_fonts = 1
 " airline not showing
 set laststatus=2
