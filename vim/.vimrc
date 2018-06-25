@@ -31,6 +31,7 @@ Plugin 'vim-airline/vim-airline-themes'
 
 " less syntax
 Plugin 'groenewege/vim-less'
+
 " typescript syntax
 Plugin 'leafgarland/typescript-vim'
 " Javascript syntax
@@ -108,6 +109,9 @@ Plugin 'xolox/vim-misc'
 
 " Uses the same key bidings that tmux to move through splits
 " Plugin 'christoomey/vim-tmux-navigator'
+
+" Highlights comments
+" Plugin 'jbgutierrez/vim-better-comments'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required

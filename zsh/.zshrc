@@ -18,22 +18,22 @@ export GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOBIN
 
 # Add scripts path
-export PATH=$PATH:/home/jalopezma/scripts
+export PATH=$PATH:$HOME/scripts
 # Add /usr/local/lib
 export PATH=$PATH:/usr/local/lib
 
-# Python path
-#export PYTHONPATH=/home/jalopezma/repos/stratagem-dataprocessing/stratagemdataprocessing
+# For stack (haskell) add ~/.local/bin
+export PATH=$PATH:$HOME/.local/bin
 
 # NPM Global without sudo
-NPM_PACKAGES="${HOME}/.npm-packages"
+NPM_PACKAGES="$HOME/.npm-packages"
 export PATH="$NPM_PACKAGES/bin:$PATH"
 # Unset manpath so we can inherit from /etc/manpath via the `manpath` command
 unset MANPATH # delete if you already modified MANPATH elsewhere in your config
 export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
 
 # Path to your oh-my-zsh installation.
-export ZSH=/home/jalopezma/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -233,5 +233,5 @@ fi
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
 
-# tmuxinator
-# source ~/tmuxinator.zsh
+fpath=(~/.zsh/completion $fpath)
+autoload -Uz compinit && compinit -i
