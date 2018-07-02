@@ -287,11 +287,10 @@ set softtabstop=4
 set smarttab
 " always uses spaces instead of tab characters
 set expandtab
-" set number lines
+" set number lines show the col with the numbers. set relativenumbers show the
+" number of lines from your current line. Both togeter show the relative lines
+" numbers and the number line where you are.
 set number
-
-" Use relative numbers instead number of the line (you still have it on the
-" status bar
 set relativenumber
 " Creates <FILENAME>.un~ so you can undo actions done even when you exit vim
 set undofile
