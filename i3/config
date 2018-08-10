@@ -13,7 +13,9 @@ set $mod Mod1
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:monospace 8
+# Default font:
+# font pango:monospace 8
+font ubuntu mono derivative powerline 8
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -36,17 +38,42 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+# bindsym $mod+d exec dmenu_run
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+#
+# Use rofi instead:
+
+set $rofi-bg-color #2f343f
+set $rofi-text-color #f3f4f5
+
+# window switcher
+bindsym $mod+Tab exec rofi -show window 
+bindsym $mod+d exec rofi -show run -lines 3 -eh 2 -width 100 -padding 200 -fullscreen -opacity "85" -bw 0 -bc "$rofi-bg-color" -bg "$rofi-bg-color" -fg "$rofi-text-color" -hlbg "$rofi-bg-color" -hlfg "#9575cd"
+
+# compton for opacity and transitions on change workspaces
+exec compton -f
+
+# Gaps
+gaps inner 10
+gaps outer 10
+
+# Hide title bar
+for_window [class="^.*"] border pixel 1
+new_window 1pixel
+
+set $left h
+set $down j
+set $up k
+set $right l
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -55,10 +82,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -66,11 +93,8 @@ bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
-# split in horizontal orientation
-bindsym $mod+h split h
-
-# split in vertical orientation
-bindsym $mod+v split v
+# split toggle in vertical/horizontal orientation
+bindsym $mod+v split toggle
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -94,15 +118,13 @@ bindsym $mod+a focus parent
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-#
-# We are going to use only 4 workspaces for now
 
 #####################
 # Workspace variables
 #####################
 # Names
-set $ws1name "1"
-set $ws2name "2"
+set $ws1name "1: Chrome  "
+set $ws2name "2: Terminal  "
 set $ws3name "3"
 set $ws4name "4"
 
@@ -124,12 +146,25 @@ bindsym $mod+Shift+$ws2key move container to workspace $ws2name
 bindsym $mod+Shift+$ws3key move container to workspace $ws3name
 bindsym $mod+Shift+$ws4key move container to workspace $ws4name
 
+#########################
+# Workspace programs init
+#########################
+# assign [class="^Google-chrome$"] $ws1name
+exec google-chrome
+
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+########################
+# Background 
+# ----------------------
+# $ sudo apt install feh
+########################
+exec_always feh --bg-scale ~/wallpaper.jpg
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
