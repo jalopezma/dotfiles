@@ -14,8 +14,10 @@ set $mod Mod1
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 # Default font:
-# font pango:monospace 8
-font ubuntu mono derivative powerline 8
+font pango:monospace 8
+# this gives the following error:
+# [libi3] ERROR: Could not open font ubuntu mono derivative powerline 8 (X error 15). Trying fallback to 'fixed'.
+# font ubuntu mono derivative powerline 8
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -59,6 +61,10 @@ exec compton -f
 # Gaps
 gaps inner 10
 gaps outer 10
+
+#bindsym $mod+Shift+g gaps inner current set 0; gaps outer current set 0
+#bindsym $mod+g gaps inner current set 10; gaps outer current set 10
+bindsym $mod+g exec sh ~/scripts/toggle_gaps.sh toggle
 
 # Hide title bar
 for_window [class="^.*"] border pixel 1
