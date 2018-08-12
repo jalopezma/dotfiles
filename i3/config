@@ -53,7 +53,8 @@ set $rofi-text-color #f3f4f5
 
 # window switcher
 bindsym $mod+Tab exec rofi -show window 
-bindsym $mod+d exec rofi -show run -lines 3 -eh 2 -width 100 -padding 200 -fullscreen -opacity "85" -bw 0 -bc "$rofi-bg-color" -bg "$rofi-bg-color" -fg "$rofi-text-color" -hlbg "$rofi-bg-color" -hlfg "#9575cd"
+bindsym $mod+d exec rofi -show drun 
+#-lines 3 -eh 2 -width 100 -padding 200 -fullscreen -opacity "85" -bw 0 -bc "$rofi-bg-color" -bg "$rofi-bg-color" -fg "$rofi-text-color" -hlbg "$rofi-bg-color" -hlfg "#9575cd"
 
 # compton for opacity and transitions on change workspaces
 exec compton -f
@@ -205,4 +206,7 @@ bar {
         status_command i3status
 }
 
-bindsym $mod+x exec i3lock
+# sleep
+bindsym $mod+Control+s exec betterlockscreen -s
+# lock
+bindsym $mod+Control+l exec betterlockscreen -l

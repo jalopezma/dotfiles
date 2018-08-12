@@ -26,6 +26,15 @@ to change audio settings
 to run 
 `$ pavucontrol`
 
+for lock user:
+https://github.com/pavanjadhaw/betterlockscreen
+
+needs to install i3lock-colors manually from github and create a symbolic link:
+`ln -s ~/repos/i3lock-color/x86_64-pc-linux-gnu/i3lock /usr/bin/i3lock`
+
+list to install:
+`sudo apt install libxcb-xinerama0-dev libxcb-xkb-dev libxcb-image0-dev libxcb-util-dev libxkbcommon-x11-dev libjpeg-turbo8-dev libpam0g-dev`
+
 To do:
 - map resize
 - colors of borders
