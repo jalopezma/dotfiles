@@ -13,6 +13,7 @@ mv ~/Downloads/FontAwesome/webfonts/fa-regular-400.ttf ~/.fonts/
 
 Background:
 `$ sudo apt install feh`
+https://faq.i3wm.org/question/6247/assigning-individual-wallpaper-to-monitors.1.html
 
 change dmenu by rofi
 `$ sudo apt install rofi`
