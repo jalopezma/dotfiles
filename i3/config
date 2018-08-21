@@ -210,3 +210,12 @@ bar {
 bindsym $mod+Control+s exec betterlockscreen -s
 # lock
 bindsym $mod+Control+l exec betterlockscreen -l
+
+# To remember the passphrase
+# Also you need to add this to: ~/.profile
+# 
+#   if [ "$0" = "/usr/sbin/lightdm-session" -a "$DESKTOP_SESSION" = "i3" ]; then
+#       export $(gnome-keyring-daemon -s)
+#   fi
+#
+exec --no-startup-id /usr/lib/gnome-settings-daemon/gnome-settings-daemon
