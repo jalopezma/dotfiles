@@ -68,8 +68,8 @@ gaps outer 10
 bindsym $mod+g exec sh ~/scripts/toggle_gaps.sh toggle
 
 # Hide title bar
-for_window [class="^.*"] border pixel 1
-new_window 1pixel
+# for_window [class="^.*"] border pixel 1
+# new_window 1pixel
 
 set $left h
 set $down j
@@ -207,9 +207,10 @@ bar {
 }
 
 # sleep
-bindsym $mod+Control+s exec betterlockscreen -s
+# bindsym $mod+Control+s exec betterlockscreen -s
 # lock
-bindsym $mod+Control+l exec betterlockscreen -l
+# bindsym $mod+Control+l exec betterlockscreen -l
+bindsym $mod+Control+l exec i3lock
 
 # To remember the passphrase
 # Also you need to add this to: ~/.profile
@@ -219,3 +220,17 @@ bindsym $mod+Control+l exec betterlockscreen -l
 #   fi
 #
 exec --no-startup-id /usr/lib/gnome-settings-daemon/gnome-settings-daemon
+
+# Increase border
+default_border pixel 5
+# Hide borders when only one window
+hide_edge_borders smart
+
+# set $focused_color "#42adf4"
+set $focused_color "#42f4ee"
+
+# Change border color for focus window 
+#
+# class                 border          backgr. text    indicator child_border
+client.focused          focused_color   #285577 #ffffff #2e9ef4   #285577
+
