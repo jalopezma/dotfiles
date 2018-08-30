@@ -51,7 +51,7 @@ Plugin 'Quramy/tsuquyomi'
 Plugin 'Shougo/vimproc.vim'
 
 " Go
-Plugin 'fatih/vim-go'
+" Plugin 'fatih/vim-go'
 
 " Stylus syntax
 Plugin 'wavded/vim-stylus'
@@ -223,7 +223,7 @@ let g:go_fmt_command = "goimports"
 au FileType go nmap gd <Plug>(go-def)
 au FileType go nmap ld :GoDecls<ENTER>
 " Executes GoInstallBinaries at the begining
-autocmd VimEnter * GoInstallBinaries
+" autocmd VimEnter * GoInstallBinaries
 
 " --- editor config ---
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
@@ -242,6 +242,8 @@ let g:ale_lint_on_text_changed = 'normal'
 let g:ale_lint_on_insert_leave = 1
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_enter = 1
+" fix https://github.com/w0rp/ale/issues/1334
+let g:ale_echo_cursor = 0
 
 " --- fzf.vim --- https://jesseleite.com/posts/2/its-dangerous-to-vim-alone-take-faa
 " *File finder
@@ -277,12 +279,12 @@ nmap <Leader>a :Ag<Space>
 
 " --- VIM OPTIONS ---
 " size of a hard tabstop
-set tabstop=4
+set tabstop=2
 "size of an 'indent'
-set shiftwidth=4
+set shiftwidth=2
 " a combination of spaces and tabas are used to simulate tab stops at a width
 " other than the (hard)tabstop
-set softtabstop=4
+set softtabstop=2
 " make 'tab' insert indents instead of tabs at the beinning fo a line
 set smarttab
 " always uses spaces instead of tab characters
