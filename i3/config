@@ -221,6 +221,11 @@ bindsym $mod+Control+l exec i3lock
 #
 exec --no-startup-id /usr/lib/gnome-settings-daemon/gnome-settings-daemon
 
+# 
+# Starts the network manager applet
+#
+exec --no-startup-id nm-applet
+
 # Increase border
 default_border pixel 5
 # Hide borders when only one window
