@@ -235,3 +235,10 @@ export PATH="$PATH:$HOME/.rvm/bin"
 
 fpath=(~/.zsh/completion $fpath)
 autoload -Uz compinit && compinit -i
+
+# start nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
+# export npm token
+export NPM_TOKEN=$(cat ~/.npmrc | sed -e 's/^.*authToken=//')
