@@ -34,7 +34,7 @@ font pango:monospace 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec i3-sensible-terminal --working-directory="$(cat /tmp/.last_dir_$UID || echo $HOME)"
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -130,10 +130,10 @@ bindsym $mod+a focus parent
 # Workspace variables
 #####################
 # Names
-set $ws1name "1: Chrome  "
-set $ws2name "2: Terminal  "
+set $ws1name ""
+set $ws2name ""
 set $ws3name "3"
-set $ws4name "4"
+set $ws4name ""
 
 # Key bindings
 set $ws1key m
@@ -157,7 +157,7 @@ bindsym $mod+Shift+$ws4key move container to workspace $ws4name
 # Workspace programs init
 #########################
 # assign [class="^Google-chrome$"] $ws1name
-exec google-chrome
+# exec google-chrome
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -165,6 +165,7 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+Control+w exec "i3-msg exit"
 
 ########################
 # Background 
@@ -181,16 +182,21 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
+        bindsym h resize shrink width 1 px or 1 ppt
+        bindsym j resize grow height 1 px or 1 ppt
+        bindsym k resize shrink height 1 px or 1 ppt
+        bindsym l resize grow width 1 px or 1 ppt
+
+        bindsym h+Shift resize shrink width 5 px or 5 ppt
+        bindsym j+Shift resize grow height 5 px or 5 ppt
+        bindsym k+Shift resize shrink height 5 px or 5 ppt
+        bindsym l+Shift resize grow width 5 px or 5 ppt
 
         # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+        bindsym Left resize shrink width 1 px or 1 ppt
+        bindsym Down resize grow height 1 px or 1 ppt
+        bindsym Up resize shrink height 1 px or 1 ppt
+        bindsym Right resize grow width 1 px or 1 ppt
 
         # back to normal: Enter or Escape or $mod+r
         bindsym Return mode "default"
@@ -231,6 +237,10 @@ default_border pixel 5
 # Hide borders when only one window
 hide_edge_borders smart
 
+# Set min and max size for floating windows (i.e: chrome saving/opening files)
+floating_minimum_size 2500 x 1500
+floating_maximum_size 2500 x 1500
+
 # set $focused_color "#42adf4"
 set $focused_color "#42f4ee"
 
@@ -239,3 +249,6 @@ set $focused_color "#42f4ee"
 # class                 border          backgr. text    indicator child_border
 client.focused          focused_color   #285577 #ffffff #2e9ef4   #285577
 
+# Tabs movement
+bindsym $mod+y focus parent; focus left
+bindsym $mod+o focus parent; focus right
