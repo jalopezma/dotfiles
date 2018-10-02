@@ -107,6 +107,9 @@ Plugin 'junegunn/fzf.vim'
 Plugin 'xolox/vim-easytags'
 Plugin 'xolox/vim-misc'
 
+" <leader>gh to open the link to current line at github (Also support Bitbucket and self deployed gitlab)
+Plugin 'ruanyl/vim-gh-line'
+
 " Uses the same key bidings that tmux to move through splits
 " Plugin 'christoomey/vim-tmux-navigator'
 
@@ -220,7 +223,7 @@ let g:go_highlight_build_constraints = 1
 " Enable goimports to automatically insert import paths instead of gofmt:
 let g:go_fmt_command = "goimports"
 " #Map :GoDef to 'gd' secuence
-au FileType go nmap gd <Plug>(go-def)
+" au FileType go nmap gd <Plug>(go-def)
 au FileType go nmap ld :GoDecls<ENTER>
 " Executes GoInstallBinaries at the begining
 " autocmd VimEnter * GoInstallBinaries
@@ -244,6 +247,9 @@ let g:ale_lint_on_save = 1
 let g:ale_lint_on_enter = 1
 " fix https://github.com/w0rp/ale/issues/1334
 let g:ale_echo_cursor = 0
+nmap gd :ALEGoToDefinition<ENTER>
+nmap gD :ALEGoToDefinitionInTab<ENTER>
+nmap gr :ALEFindReferences<ENTER>
 
 " --- fzf.vim --- https://jesseleite.com/posts/2/its-dangerous-to-vim-alone-take-faa
 " *File finder
@@ -276,6 +282,9 @@ nmap <Leader>' :Marks<CR>
 " Requires to install https://github.com/ggreer/the_silver_searcher manually.
 " Allows to search on the project
 nmap <Leader>a :Ag<Space>
+
+" ruanyl/vim-gh-line - Go to github url
+let g:gh_line_map = '<Leader>gh'
 
 " --- VIM OPTIONS ---
 " size of a hard tabstop
