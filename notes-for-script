@@ -10,3 +10,10 @@ colors for vim
 backup folders for vim
 
 install go
+
+1. to create a script that listens for display changes and reruns the monitors/backgrounds script to;
+- set displays (external or only internal) (give the posibility of clone?)
+- set backgrounds right
+- move workspaces where they belong
+
+2. scripts to dotfiles repo

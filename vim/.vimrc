@@ -246,9 +246,11 @@ let g:ale_lint_on_insert_leave = 1
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_enter = 1
 " fix https://github.com/w0rp/ale/issues/1334
-let g:ale_echo_cursor = 0
+" let g:ale_echo_cursor = 0
 nmap gd :ALEGoToDefinition<ENTER>
 nmap gD :ALEGoToDefinitionInTab<ENTER>
+" Open same file at right split, go there and go to the definition
+nmap gds :vsplit<ENTER><C-w><Right>:ALEGoToDefinition<ENTER>
 nmap gr :ALEFindReferences<ENTER>
 
 " --- fzf.vim --- https://jesseleite.com/posts/2/its-dangerous-to-vim-alone-take-faa
@@ -414,6 +416,15 @@ let g:tagbar_type_go = {
     \ 'ctagsbin'  : 'gotags',
     \ 'ctagsargs' : '-sort -silent'
 \ }
+
+" Quramy/tsuquyomi
+" ----------------
+" Tooltip
+" Tsuquyomi can display tooltip window about symbol under the mouse cursor. If you want to use this feature, configure .vimrc as follows:
+" The ballonexpr option is not available in terminal Vim. So, Tsuquyomi also provides a tooltip function tsuquyomi#hint().
+" set ballooneval
+" autocmd FileType typescript setlocal balloonexpr=tsuquyomi#balloonexpr()
+" autocmd FileType typescript nmap <buffer> <Leader>t : <C-u>echo tsuquyomi#hint()<CR>
 
 " vimdevicons
 set encoding=utf8
