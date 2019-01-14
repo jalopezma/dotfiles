@@ -36,6 +36,8 @@ needs to install i3lock-colors manually from github and create a symbolic link:
 list to install:
 `sudo apt install libxcb-xinerama0-dev libxcb-xkb-dev libxcb-image0-dev libxcb-util-dev libxkbcommon-x11-dev libjpeg-turbo8-dev libpam0g-dev`
 
+Bluetooth applet: `sudo apt install blueman` and then run `blueman-applet`
+
 To do:
 - map resize
 - colors of borders
