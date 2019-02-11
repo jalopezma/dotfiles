@@ -139,24 +139,28 @@ set $ws1name ""
 set $ws2name ""
 set $ws3name "3"
 set $ws4name ""
+set $ws5name ""
 
 # Key bindings
 set $ws1key m
 set $ws2key comma
 set $ws3key period
 set $ws4key slash
+set $ws5key u
 
 # switch to workspace
 bindsym $mod+$ws1key workspace $ws1name
 bindsym $mod+$ws2key workspace $ws2name
 bindsym $mod+$ws3key workspace $ws3name
 bindsym $mod+$ws4key workspace $ws4name
+bindsym $mod+$ws5key workspace $ws5name
 
 # move focused container to workspace
 bindsym $mod+Shift+$ws1key move container to workspace $ws1name
 bindsym $mod+Shift+$ws2key move container to workspace $ws2name
 bindsym $mod+Shift+$ws3key move container to workspace $ws3name
 bindsym $mod+Shift+$ws4key move container to workspace $ws4name
+bindsym $mod+Shift+$ws5key move container to workspace $ws5name
 
 #########################
 # Workspace programs init
@@ -281,5 +285,5 @@ set $focused_color "#42f4ee"
 client.focused          focused_color   #285577 #ffffff #2e9ef4   #285577
 
 # Tabs movement
-bindsym $mod+y focus parent; focus left
-bindsym $mod+o focus parent; focus right
+# bindsym $mod+y focus parent; focus left
+# bindsym $mod+o focus parent; focus right
