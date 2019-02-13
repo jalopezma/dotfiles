@@ -99,7 +99,7 @@ Plugin 'w0rp/ale'
 " Auto pairs for [({
 Plugin 'jiangmiao/auto-pairs'
 
-" fzf for vin
+" fzf for vim
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
 
