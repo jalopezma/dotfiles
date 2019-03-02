@@ -167,6 +167,7 @@ bindsym $mod+Shift+$ws5key move container to workspace $ws5name
 #########################
 # assign [class="^Google-chrome$"] $ws1name
 # exec google-chrome
+# exec google-chrome --password-store=gnome
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -266,6 +267,7 @@ exec --no-startup-id /usr/lib/gnome-settings-daemon/gnome-settings-daemon
 exec --no-startup-id nm-applet
 # Bluetooth
 exec --no-startup-id blueman-applet
+exec indicator-sound-switcher
 
 # Increase border
 default_border pixel 5
