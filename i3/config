@@ -257,7 +257,8 @@ bindsym $mod+Control+l exec betterlockscreen -l
 #   if [ "$0" = "/usr/sbin/lightdm-session" -a "$DESKTOP_SESSION" = "i3" ]; then
 #       export $(gnome-keyring-daemon -s)
 #   fi
-#
+# and run
+# $ ssh-add
 exec --no-startup-id /usr/lib/gnome-settings-daemon/gnome-settings-daemon
 
 # 
