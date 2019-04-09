@@ -8,3 +8,5 @@
 [user]
 	email = joseadrian.lopezmartin@gmail.com
 	name = Jose Lopez
+[diff "sopsdiffer"]
+	textconv = sops -d
