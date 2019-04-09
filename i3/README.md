@@ -34,7 +34,39 @@ needs to install i3lock-colors manually from github and create a symbolic link:
 `ln -s ~/repos/i3lock-color/x86_64-pc-linux-gnu/i3lock /usr/bin/i3lock`
 
 list to install:
-`sudo apt install libxcb-xinerama0-dev libxcb-xkb-dev libxcb-image0-dev libxcb-util-dev libxkbcommon-x11-dev libjpeg-turbo8-dev libpam0g-dev`
+`sudo apt install libev-dev \
+      libxcb-composite0 \
+      libxcb-composite0-dev \
+      libxcb-xinerama0 \
+      libxcb-randr0 \
+      libxcb-xinerama0-dev \
+      libxcb-xkb-dev \
+      libxcb-image0-dev \
+      libxcb-util-dev \
+      libxkbcommon-x11-dev \
+      libjpeg-turbo8-dev \
+      libpam0g-dev \
+      pkg-config \
+      xcb-proto \
+      libxcb-xrm-dev \
+      libxcb-randr0-dev \
+      libxkbcommon-dev \
+      libcairo2-dev \
+      libxcb1-dev \
+      libxcb-dpms0-dev \
+      libxcb-image0-dev \
+      libxcb-util0-dev \
+      libev-dev \
+      libxcb-xinerama0-dev \
+      libxcb-xkb-dev`
+
+# Add swithcer on tray system
+https://github.com/yktoo/indicator-sound-switchersound
+
+I need to add `exec indicator-sound-switcher` to i3status or polybar
+
+If any inputs don't appear, run `$ pulseaudio -k`
+
 
 Bluetooth applet: `sudo apt install blueman` and then run `blueman-applet`
 

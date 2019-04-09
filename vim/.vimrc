@@ -91,7 +91,7 @@ Plugin 'w0rp/ale'
 " Auto pairs for [({
 Plugin 'jiangmiao/auto-pairs'
 
-" fzf for vin
+" fzf for vim
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
 
@@ -429,3 +429,23 @@ let g:airline_powerline_fonts = 1
 
 " :FormatJSON to use it. Requires python installed
 com! FormatJSON %!python -m json.tool
+
+" Allow to yank to clipboard
+" not entirly working. works with the selected (mousewheel clipboard but not
+" ctrl + v)
+" link: https://www.reddit.com/r/vim/comments/ac9eyh/talk_i_gave_on_going_mouseless_with_vim_tmux/ed6kl67/
+function! Osc52Yank()
+    let buffer=system('base64 -w0', @0)
+    let buffer=substitute(buffer, "\n$", "", "")
+    let buffer='\e]52;c;'.buffer.'\x07'
+    silent exe "!echo -ne ".shellescape(buffer)." > ".shellescape("/dev/tty")
+endfunction
+
+nnoremap <leader>y :call Osc52Yank()<CR>
+
+" command! Osc52CopyYank call Osc52Yank()
+" augroup Example
+"     autocmd!
+"     autocmd TextYankPost * if v:event.operator ==# 'y' | call Osc52Yank() | endif
+" augroup END
+"
