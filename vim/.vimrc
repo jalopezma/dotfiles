@@ -10,6 +10,9 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
+" Monokai color scheme
+Plugin 'crusoexia/vim-monokai'
+
 " plugin on GitHub repo
 Plugin 'tpope/vim-fugitive'
 " plubing for git -> see if column has been changed
@@ -40,24 +43,13 @@ Plugin 'pangloss/vim-javascript'
 " Autocomplete
 Plugin 'Valloric/YouCompleteMe'
 
-" Snippets
-Plugin 'honza/vim-snippets'
-
-" provides meaningful feedback about warnings and errors
-" Plugin 'vim-syntastic/syntastic'
 " tsc checker removed from syntastic, get it from here
 Plugin 'Quramy/tsuquyomi'
 " required by Quramy/tsuquyomi
 Plugin 'Shougo/vimproc.vim'
 
 " Go
-" Plugin 'fatih/vim-go'
-
-" Stylus syntax
-Plugin 'wavded/vim-stylus'
-
-" Angular
-Plugin 'burnettk/vim-angular'
+Plugin 'fatih/vim-go'
 
 " Bookmarks
 " Add/remove bookmark at current line           mm  :BookmarkToggle
@@ -110,6 +102,16 @@ Plugin 'xolox/vim-misc'
 " <leader>gh to open the link to current line at github (Also support Bitbucket and self deployed gitlab)
 Plugin 'ruanyl/vim-gh-line'
 
+" This plugin highlights patterns and ranges for Ex commands in Command-line mode.
+Plugin 'markonm/traces.vim'
+
+" Haskell devtools
+Plugin 'bitc/vim-hdevtools'
+
+" Material theme
+""Plugin 'hzchirs/vim-material'
+Plugin 'kaicataldo/material.vim'
+
 " Uses the same key bidings that tmux to move through splits
 " Plugin 'christoomey/vim-tmux-navigator'
 
@@ -130,7 +132,6 @@ filetype plugin indent on    " required
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
-
 
 let mapleader = "\<Space>"
 
@@ -160,19 +161,37 @@ let g:NERDTrimTrailingWhitespace = 1
 " --- COLORS SCHEMA ---
 " $ cp dotfiles/colors/* ~/.vim/colors/
 syntax on
-colorscheme wombat
-
-" solarized
-"set background=dark
-"colorscheme solarized
-
-" --- VIM-AIRLANE ---
-" substitutes the git branch by date. I prefer the actual branch
-"let g:airline_section_b = '%{strftime("%c")}' 
-"let g:airline_section_y = 'BN: %{bufnr("%")}'
-" Fix for no color on the status bar
+set termguicolors
 set t_Co=256
 
+" colorscheme monokai
+" colorscheme dank-neon
+" colorscheme wombat
+" colorscheme atom-one-dark
+
+set background=dark
+" colorscheme kuroi
+
+" Material - Palenight
+" Needs urxvt to work properly I think
+" set background=dark
+" let g:material_style='oceanic'
+" colorscheme vim-material
+
+
+" Another material
+" kaicataldo/material.vim
+colorscheme material 
+" let g:material_theme_style = 'default' | 'palenight' | 'dark'
+let g:material_theme_style = 'dark'
+let g:airline_theme = 'material'
+
+" solarized
+" set background=dark
+" colorscheme solarized
+
+" --- VIM-AIRLANE ---
+" Fix for no color on the status bar
 " vim-airline => Fix symbols on airline
 " Use font from vimdevicons patched
 let g:airline_powerline_fonts = 1
@@ -180,7 +199,16 @@ let g:airline_powerline_fonts = 1
 set laststatus=2
 set ttimeoutlen=50
 
-" --- YOUCOMPLETEME ---
+" --- bitc/vim-hdevtools ---
+" Make use stack
+let g:hdevtools_stack = 1
+" Haskell expressions can be typechecked even if type errors elsewhere in the project 
+let g:hdevtools_options = '-g-fdefer-type-errors'
+au FileType haskell nnoremap <buffer> <F1> :HdevtoolsType<CR>
+au FileType haskell nnoremap <buffer> <silent> <F2> :HdevtoolsInfo<CR>
+au FileType haskell nnoremap <buffer> <silent> <F3> :HdevtoolsClear<CR>
+
+" --- Valloric/YouCompleteMe ---
 " Hide preview window
 "set completeopt-=preview
 let g:ycm_autoclose_preview_window_after_completion=1
@@ -198,20 +226,6 @@ let g:javascript_conceal_static         = "•"
 let g:javascript_conceal_super          = "Ω"
 let g:javascript_conceal_arrow_function = "⇒"
 
-" --- vim-syntastic/syntastic ---
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 1
-"let g:syntastic_check_on_wq = 0
-" let g:syntastic_typescript_checkers = ['tsc', 'tslint']
-" This aggregates the errors from different checkers at once
-"let g:syntastic_aggregate_errors = 1
-" let g:syntastic_typescript_tslint_args = '--config ~/repos/stratagem-platforms/tslint.json --project ~/repos/stratagem-platforms/src/tsconfig.app.json'
-" let g:loaded_syntastic_go_govet_checker = 1
-
 " --- vim-go ---
 " #Enable syntax-hightlighting for Functions, Methods and Structs
 let g:go_highlight_functions = 1
@@ -223,10 +237,10 @@ let g:go_highlight_build_constraints = 1
 " Enable goimports to automatically insert import paths instead of gofmt:
 let g:go_fmt_command = "goimports"
 " #Map :GoDef to 'gd' secuence
-" au FileType go nmap gd <Plug>(go-def)
+au FileType go nmap gd <Plug>(go-def)
 au FileType go nmap ld :GoDecls<ENTER>
 " Executes GoInstallBinaries at the begining
-" autocmd VimEnter * GoInstallBinaries
+autocmd VimEnter * GoInstallBinaries
 
 " --- editor config ---
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
@@ -245,8 +259,6 @@ let g:ale_lint_on_text_changed = 'normal'
 let g:ale_lint_on_insert_leave = 1
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_enter = 1
-" fix https://github.com/w0rp/ale/issues/1334
-" let g:ale_echo_cursor = 0
 nmap gd :ALEGoToDefinition<ENTER>
 nmap gD :ALEGoToDefinitionInTab<ENTER>
 " Open same file at right split, go there and go to the definition
@@ -338,13 +350,6 @@ set hlsearch
 " Allow toogle it with <F4>
 noremap <F4> :set hlsearch! hlsearch?<CR>
 
-" --- OTHER PROJECTS WITH DIFFERENT SETTINGS ---
-" Stratabet AngularJS. Indentation two spaces
-au BufRead,BufNewFile ~/repos/stratabet/* setl sw=2 et
-
-" Stratagem Platforms: Angular, Sass & html. Indentation two spaces
-"au BufRead,BufNewFile ~/repos/stratagem-platforms/src/* setl sw=2 et
-
 " Pyhton
 " ------
 " This will give you the standard four spaces when you hit tab, ensure your
@@ -417,15 +422,6 @@ let g:tagbar_type_go = {
     \ 'ctagsargs' : '-sort -silent'
 \ }
 
-" Quramy/tsuquyomi
-" ----------------
-" Tooltip
-" Tsuquyomi can display tooltip window about symbol under the mouse cursor. If you want to use this feature, configure .vimrc as follows:
-" The ballonexpr option is not available in terminal Vim. So, Tsuquyomi also provides a tooltip function tsuquyomi#hint().
-" set ballooneval
-" autocmd FileType typescript setlocal balloonexpr=tsuquyomi#balloonexpr()
-" autocmd FileType typescript nmap <buffer> <Leader>t : <C-u>echo tsuquyomi#hint()<CR>
-
 " vimdevicons
 set encoding=utf8
 set guifont=UbuntuMono\ Nerd\ Font\ 10
@@ -433,4 +429,3 @@ let g:airline_powerline_fonts = 1
 
 " :FormatJSON to use it. Requires python installed
 com! FormatJSON %!python -m json.tool
-
