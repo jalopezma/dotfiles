@@ -112,6 +112,10 @@ Plugin 'bitc/vim-hdevtools'
 ""Plugin 'hzchirs/vim-material'
 Plugin 'kaicataldo/material.vim'
 
+" Moving shortcuts/motions
+" <Leader><Leader>s{char} -> {target-chars}
+Plugin 'easymotion/vim-easymotion'
+
 " Uses the same key bidings that tmux to move through splits
 " Plugin 'christoomey/vim-tmux-navigator'
 
@@ -183,7 +187,7 @@ set background=dark
 " kaicataldo/material.vim
 colorscheme material 
 " let g:material_theme_style = 'default' | 'palenight' | 'dark'
-let g:material_theme_style = 'dark'
+let g:material_theme_style = 'palenight'
 let g:airline_theme = 'material'
 
 " solarized
