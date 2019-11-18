@@ -109,7 +109,7 @@ Plugin 'markonm/traces.vim'
 Plugin 'bitc/vim-hdevtools'
 
 " Material theme
-""Plugin 'hzchirs/vim-material'
+Plugin 'hzchirs/vim-material'
 Plugin 'kaicataldo/material.vim'
 
 " Moving shortcuts/motions
@@ -168,26 +168,14 @@ syntax on
 set termguicolors
 set t_Co=256
 
-" colorscheme monokai
-" colorscheme dank-neon
-" colorscheme wombat
-" colorscheme atom-one-dark
-
-set background=dark
-" colorscheme kuroi
-
-" Material - Palenight
-" Needs urxvt to work properly I think
-" set background=dark
-" let g:material_style='oceanic'
-" colorscheme vim-material
-
-
 " Another material
 " kaicataldo/material.vim
 colorscheme material 
+set background=dark
 " let g:material_theme_style = 'default' | 'palenight' | 'dark'
 let g:material_theme_style = 'palenight'
+
+"Thanks to Plugin 'hzchirs/vim-material'
 let g:airline_theme = 'material'
 
 " solarized
