@@ -39,6 +39,8 @@ Plugin 'groenewege/vim-less'
 Plugin 'leafgarland/typescript-vim'
 " Javascript syntax
 Plugin 'pangloss/vim-javascript'
+" Tsx syntax
+Plugin 'ianks/vim-tsx'
 
 " Autocomplete
 Plugin 'Valloric/YouCompleteMe'
@@ -311,6 +313,8 @@ set number
 set relativenumber
 " Creates <FILENAME>.un~ so you can undo actions done even when you exit vim
 set undofile
+" Sets the a line in the char column 100
+set colorcolumn=100
 
 " set dir for swap, backup and undo files. Do before:
 " mkdir -p ~/.vim/{backup_files,swap_files,undo_files}
@@ -441,3 +445,6 @@ nnoremap <leader>y :call Osc52Yank()<CR>
 "     autocmd TextYankPost * if v:event.operator ==# 'y' | call Osc52Yank() | endif
 " augroup END
 "
+
+" Sets the + (unnamedplus) and * (unnamed) registers to be used as ctrl+v/c
+set clipboard^=unnamedplus

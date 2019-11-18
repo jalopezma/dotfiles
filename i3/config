@@ -68,6 +68,9 @@ gaps outer 10
 #bindsym $mod+g gaps inner current set 10; gaps outer current set 10
 bindsym $mod+g exec sh ~/scripts/toggle_gaps.sh toggle
 
+# Toogle touchpad
+bindsym $mod+t exec sh ~/scripts/toggletouchpad.sh
+
 # Hide title bar
 # for_window [class="^.*"] border pixel 1
 # new_window 1pixel
@@ -140,6 +143,7 @@ set $ws2name ""
 set $ws3name "3"
 set $ws4name ""
 set $ws5name ""
+set $ws6name ""
 
 # Key bindings
 set $ws1key m
@@ -147,6 +151,7 @@ set $ws2key comma
 set $ws3key period
 set $ws4key slash
 set $ws5key u
+set $ws6key i
 
 # switch to workspace
 bindsym $mod+$ws1key workspace $ws1name
@@ -154,6 +159,7 @@ bindsym $mod+$ws2key workspace $ws2name
 bindsym $mod+$ws3key workspace $ws3name
 bindsym $mod+$ws4key workspace $ws4name
 bindsym $mod+$ws5key workspace $ws5name
+bindsym $mod+$ws6key workspace $ws6name
 
 # move focused container to workspace
 bindsym $mod+Shift+$ws1key move container to workspace $ws1name
@@ -161,6 +167,7 @@ bindsym $mod+Shift+$ws2key move container to workspace $ws2name
 bindsym $mod+Shift+$ws3key move container to workspace $ws3name
 bindsym $mod+Shift+$ws4key move container to workspace $ws4name
 bindsym $mod+Shift+$ws5key move container to workspace $ws5name
+bindsym $mod+Shift+$ws6key move container to workspace $ws6name
 
 #########################
 # Workspace programs init
@@ -229,6 +236,7 @@ bindsym $mod+r mode "resize"
 #
 # Set external monitor to the left
 bindsym $mod+Control+d exec xrandr --output DP-1 --auto --left-of eDP-1
+# bindsym $mod+Control+d exec xrandr --output DP-1 --auto --above eDP-1
 # Remove external monitor
 bindsym $mod+Control+Shift+d exec xrandr --output DP-1 --off
 
@@ -296,3 +304,28 @@ client.focused          focused_color   #285577 #ffffff #2e9ef4   #285577
 # Tabs movement
 # bindsym $mod+y focus parent; focus left
 # bindsym $mod+o focus parent; focus right
+
+# Install playerctl
+# $ wget http://ftp.nl.debian.org/debian/pool/main/p/playerctl/libplayerctl2_2.0.1-1_amd64.deb
+# $ wget http://ftp.nl.debian.org/debian/pool/main/p/playerctl/playerctl_2.0.1-1_amd64.deb
+# $ sudo dpkg -i libplayerctl2_2.0.1-1_amd64.deb playerctl_2.0.1-1_amd64.deb
+#
+# Media keys
+# Pulse Audio controls
+bindsym XF86AudioRaiseVolume exec --no-startup-id ~/scripts/audio.sh volume +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id ~/scripts/audio.sh volume -5% #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id ~/scripts/audio.sh mute # mute sound
+
+# Sreen brightness controls
+bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
+
+# Touchpad controls
+bindsym XF86TouchpadToggle exec ~/scripts/toggletouchpad.sh
+
+# Media player controls
+bindsym XF86AudioPlay  exec playerctl play-pause
+bindsym XF86AudioStop exec playerctl stop
+bindsym XF86AudioPause exec playerctl pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
