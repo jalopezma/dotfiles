@@ -23,6 +23,7 @@ export PATH=$PATH:$HOME/scripts
 export PATH=$PATH:/usr/local/lib
 
 # For stack (haskell) add ~/.local/bin
+# Add betterlockscreen to PATH:
 export PATH=$PATH:$HOME/.local/bin
 
 # NPM Global without sudo
@@ -176,20 +177,6 @@ function cd() {
   chmod 600 /tmp/.last_dir_$UID
 }
 
-# browserstack
-export EXEC_REMOTE=false
-export BS_USER=joselopez47
-export BS_ACCKEY=eM3sYRp1Q9Cr4ND72g3L
-
-# EXEC_REMOTE=true \ BS_USER=joselopez47 \ BS_ACCKEY=eM3sYRp1Q9Cr4ND72g3L npm test
-
-# tabtab source for serverless package
-# uninstall by removing these lines or running `tabtab uninstall serverless`
-[[ -f /home/joselopez/repos/YieldifyLabs/khaleesi-tag-delivery/node_modules/tabtab/.completions/serverless.zsh ]] && . /home/joselopez/repos/YieldifyLabs/khaleesi-tag-delivery/node_modules/tabtab/.completions/serverless.zsh
-# tabtab source for sls package
-# uninstall by removing these lines or running `tabtab uninstall sls`
-[[ -f /home/joselopez/repos/YieldifyLabs/khaleesi-tag-delivery/node_modules/tabtab/.completions/sls.zsh ]] && . /home/joselopez/repos/YieldifyLabs/khaleesi-tag-delivery/node_modules/tabtab/.completions/sls.zsh
-
 # Auto-switch node version based on the project's package lock version 
 autoload -U add-zsh-hook
 load-nvmrc() {
@@ -202,10 +189,3 @@ load-nvmrc() {
 }
 add-zsh-hook chpwd load-nvmrc
 load-nvmrc
-
-# Load faceless (yieldify command)
-eval $(_facelesscmd env init)
-
-# tabtab source for slss package
-# uninstall by removing these lines or running `tabtab uninstall slss`
-[[ -f /home/joselopez/repos/YieldifyLabs/khaleesi-tag-delivery/node_modules/tabtab/.completions/slss.zsh ]] && . /home/joselopez/repos/YieldifyLabs/khaleesi-tag-delivery/node_modules/tabtab/.completions/slss.zsh
