@@ -27,14 +27,40 @@ to change audio settings
 to run 
 `$ pavucontrol`
 
+# betterlockscreen
 for lock user:
 https://github.com/pavanjadhaw/betterlockscreen
 
-needs to install i3lock-colors manually from github and create a symbolic link:
-`ln -s ~/repos/i3lock-color/x86_64-pc-linux-gnu/i3lock /usr/bin/i3lock`
+needs to install i3lock-colors
+
+## i3lock-colors
+
+```
+$ cd ~/repos
+$ g clone https://github.com/PandorasFox/i3lock-color
+$ cd i3lock-color
+
+$ autoreconf --force --install
+
+$ rm -rf build/
+$ mkdir -p build && cd build/
+
+$ ../configure \
+  --prefix=/usr \
+  --sysconfdir=/etc \
+  --disable-sanitizers
+
+$ make
+
+# Probably you will need to rename i3lock
+$ sudo mv /usr/bin/i3lock /usr/bin/i3lock-original
+$ sudo ln -s ~/repos/i3lock-color/build/i3lock /usr/bin/i3lock
+```
 
 list to install:
-`sudo apt install libev-dev \
+
+```
+sudo apt install libev-dev \
       libxcb-composite0 \
       libxcb-composite0-dev \
       libxcb-xinerama0 \
@@ -58,7 +84,8 @@ list to install:
       libxcb-util0-dev \
       libev-dev \
       libxcb-xinerama0-dev \
-      libxcb-xkb-dev`
+      libxcb-xkb-dev
+```
 
 # Add swithcer on tray system
 https://github.com/yktoo/indicator-sound-switchersound
