@@ -93,6 +93,7 @@ SPACESHIP_DOCKER_SHOW="false"
 plugins=(git)
 # https://github.com/zsh-users/zsh-autosuggestions
 plugins=(zsh-autosuggestions)
+# plugins=(zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -124,9 +125,23 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# Git
 alias g="git"
+# was called `g plum` by Ovi so now it's called mario
+alias mario="g pull upstream master"
+alias gcm="g checkout master"
+alias gs="g status"
+alias gc.="g checkout ."
+alias update-all="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y"
+
 alias l="exa --long --git"
 alias la="exa --long --all --git"
+alias cp="cp -i"
+alias rm='echo "rm is disabled, use remove or trash or /bin/rm instead."'
+alias stranger-tunnel-dev="ssh -4 -N -L 6379:stranger.kckpzs.0001.euw1.cache.amazonaws.com:6379 -p 2222 jose.lopez@bastion.yieldify-dev.com 1>&2"
+alias stranger-tunnel-staging="ssh -4 -N -L 6379:stranger.pipwu6.0001.euw1.cache.amazonaws.com:6379 -p 2222 jose.lopez@bastion.yieldify-staging.com 1>&2"
+alias stranger-tunnel-production="ssh -4 -N -L 6379:stranger.tueblu.0001.euw1.cache.amazonaws.com:6379 -p 2222 jose.lopez@bastion.yieldify-production.com 1>&2"
 
 # start vim mode for zsh ###
 #bindkey -v
@@ -209,3 +224,7 @@ eval $(_facelesscmd env init)
 # tabtab source for slss package
 # uninstall by removing these lines or running `tabtab uninstall slss`
 [[ -f /home/joselopez/repos/YieldifyLabs/khaleesi-tag-delivery/node_modules/tabtab/.completions/slss.zsh ]] && . /home/joselopez/repos/YieldifyLabs/khaleesi-tag-delivery/node_modules/tabtab/.completions/slss.zsh
+
+export AWS_SDK_LOAD_CONFIG=1
+export AWS_SHARED_CREDENTIALS_FILE=$HOME/.aws/credentials
+export AWS_CONFIG_FILE=$HOME/.aws/config
