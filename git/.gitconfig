@@ -8,5 +8,10 @@
 [user]
 	email = joseadrian.lopezmartin@gmail.com
 	name = Jose Lopez
+	signingkey = 9F5C2278D8B5EAD3
 [diff "sopsdiffer"]
 	textconv = sops -d
+[commit]
+	gpgsign = true
+[gpg]
+	program = gpg2
