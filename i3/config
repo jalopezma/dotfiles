@@ -182,7 +182,8 @@ bindsym $mod+Shift+Control+w exec "i3-msg exit"
 # ----------------------
 # $ sudo apt install feh
 #######################
-exec_always feh --bg-scale ~/wallpapers/wallpagper4k_1.png --bg-scale ~/wallpapers/wallpagper4k_2.png
+# exec_always feh --bg-scale ~/wallpapers/wallpagper4k_1.png --bg-scale ~/wallpapers/wallpagper4k_2.png
+exec_always feh --bg-scale ~/wallpapers/earth-moon-4k.jpg
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -247,6 +248,8 @@ bar {
 
 # sleep
 # bindsym $mod+Control+s exec betterlockscreen -s
+# do fisrt:
+# betterlockscreen -u ~/wallpapers/earth-moon-4k.jpg
 bindsym $mod+Control+s exec betterlockscreen -s blur
 # lock
 bindsym $mod+Control+l exec betterlockscreen -l
@@ -269,6 +272,9 @@ exec --no-startup-id nm-applet
 # Bluetooth
 exec --no-startup-id blueman-applet
 exec indicator-sound-switcher
+
+# start keyring so chrome has can remember the passwords?
+exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=secrets
 
 # Increase border
 default_border pixel 5
