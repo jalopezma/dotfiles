@@ -84,7 +84,9 @@ Plugin 'majutsushi/tagbar'
 
 " Vim dev icons
 " Needs https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/UbuntuMono/Regular/complete/Ubuntu%20Mono%20Nerd%20Font%20Complete.ttf
-" make ~/.fonts and move the font there
+" $ mkdir ~/.fonts
+" ln -s ~/repos/dotfiles/vim/Ubuntu\ Mono\ Nerd\ Font\ Complete.ttf ~/.fonts/Ubuntu\ Mono\ Nerd\ Font\ Complete.ttf
+" Then, set the font in the terminal options
 Plugin 'ryanoasis/vim-devicons'
 
 " Asynchronous Lint Engine
