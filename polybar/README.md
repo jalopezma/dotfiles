@@ -10,14 +10,22 @@ cd poybar
 $ install -Dm644 /usr/local/share/doc/polybar/config $HOME/.config/polybar/config
 $ polybar example
 
-Now get some themes
+Theme from https://github.com/adi1090x/polybar-themes.git
+
+
+`$ ln -s ~/repos/dotfiles/polybar ~/.config/polybar`
+
+Not sure if I have to run this:
 ```
-$ g clone https://github.com/adi1090x/polybar-themes.git
-$ ln -s ~/repos/polybar-themes/launch.sh ~/.config/polybar/launch.sh
 $ chmod +x $HOME/.config/polybar/launch.sh
 ```
 
 This needs to go to i3 config file (it should be there already)
 `exec_always --no-startup-id $HOME/.config/polybar/launch.sh`
 
-`$ ln -s ~/repos/polybar-themes/polybar-1/dark/config.light-blue ~/.config/polybar/config`
+To debug with font issues you can use
+
+```
+$ fc-list | grep <name>
+$ fc-match <name that you found>
+```
