@@ -32,3 +32,6 @@ Section "InputClass"
         Option "NaturalScrolling" "True"
 EndSection
 
+
+# Walpapers
+`ln -s ~/walpapers ~/repos/dotfiles/walpapers`
