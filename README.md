@@ -33,5 +33,5 @@ Section "InputClass"
 EndSection
 
 
-# Walpapers
-`ln -s ~/walpapers ~/repos/dotfiles/walpapers`
+# Wallpapers
+`ln -s ~/repos/dotfiles/wallpapers ~/wallpapers`
