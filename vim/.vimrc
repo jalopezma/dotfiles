@@ -11,7 +11,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 " Monokai color scheme
-Plugin 'crusoexia/vim-monokai'
+" Plugin 'crusoexia/vim-monokai'
 
 " plugin on GitHub repo
 Plugin 'tpope/vim-fugitive'
