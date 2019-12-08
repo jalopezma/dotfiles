@@ -9,13 +9,10 @@ colors/wombat.vim => ~/.vim/colors
 
 # i3
 
-# urxvt
-
 # scripts
 ```
 mkdir ~/scripts
-cp ~/repos/dotfiles/scripts/* ~/scripts
-chmod +x ~/scripts/*.sh
+ln -s ~/repos/dotfiles/scripts ~/scripts
 ```
 
 # dell touchpad

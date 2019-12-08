@@ -1,5 +1,5 @@
 Path: ~/.config/i3/config
-`ln -s ~/repos/dotfiles/i3/config ~/.config/i3/config`
+`ln -s ~/repos/dotfiles/i3 ~/.config/i3`
 
 Download awesomefonts web version
 https://github.com/FortAwesome/Font-Awesome/releases
