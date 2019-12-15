@@ -1,4 +1,4 @@
-set $mod Mod1
+set $mod Mod1 
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -20,12 +20,9 @@ bindsym $mod+Shift+q kill
 #
 # Use rofi instead:
 
-set $rofi-bg-color #2f343f
-set $rofi-text-color #f3f4f5
-
 # window switcher
-bindsym $mod+Tab exec rofi -show window 
-bindsym $mod+d exec rofi -show drun 
+bindsym $mod+Tab exec rofi -show window
+bindsym $mod+d exec rofi -show drun
 #-lines 3 -eh 2 -width 100 -padding 200 -fullscreen -opacity "85" -bw 0 -bc "$rofi-bg-color" -bg "$rofi-bg-color" -fg "$rofi-text-color" -hlbg "$rofi-bg-color" -hlfg "#9575cd"
 
 bindsym $mod+g exec sh ~/scripts/toggle_gaps.sh toggle
