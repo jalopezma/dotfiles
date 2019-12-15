@@ -425,6 +425,9 @@ set encoding=utf8
 set guifont=UbuntuMono\ Nerd\ Font\ 10
 let g:airline_powerline_fonts = 1
 
+" Enable .rasi syntax highlight
+au BufNewFile,BufRead /*.rasi setf css
+
 " :FormatJSON to use it. Requires python installed
 com! FormatJSON %!python -m json.tool
 
