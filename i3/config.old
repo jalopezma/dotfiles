@@ -33,10 +33,7 @@ font pango:monospace 8
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-# start a terminal
-# bindsym $mod+Return exec i3-sensible-terminal --working-directory="$(cat /tmp/.last_dir_$UID || echo $HOME)"
-bindsym $mod+Return exec "termite --directory=\\"$(cat /tmp/.last_dir_$UID || echo $HOME)\\""
-# bindsym $mod+Return exec "termite -d=\\"$(cat /tmp/.last_dir_$UID || echo $HOME)\\""
+bindsym $mod+Return exec $HOME/scripts/terminal.sh
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -250,7 +247,8 @@ bindsym $mod+r mode "resize"
 #  DP-1    external monitor
 #
 # Set external monitor to the left
-bindsym $mod+Control+d exec xrandr --output DP-1 --auto --left-of eDP-1
+bindsym $mod+Control+d exec xrandr --output DP-1 --auto --right-of eDP-1
+# bindsym $mod+Control+d exec xrandr --output DP-1 --auto --left-of eDP-1
 # bindsym $mod+Control+d exec xrandr --output DP-1 --auto --above eDP-1
 # Remove external monitor
 bindsym $mod+Control+Shift+d exec xrandr --output DP-1 --off

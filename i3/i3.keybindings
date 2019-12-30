@@ -4,9 +4,7 @@ set $mod Mod1
 floating_modifier $mod
 
 # start a terminal
-# bindsym $mod+Return exec i3-sensible-terminal --working-directory="$(cat /tmp/.last_dir_$UID || echo $HOME)"
-bindsym $mod+Return exec "termite --directory=\\"$(cat /tmp/.last_dir_$UID || echo $HOME)\\""
-# bindsym $mod+Return exec "termite -d=\\"$(cat /tmp/.last_dir_$UID || echo $HOME)\\""
+bindsym $mod+Return exec $HOME/scripts/terminal.sh
 
 # kill focused window
 bindsym $mod+Shift+q kill
