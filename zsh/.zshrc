@@ -205,6 +205,22 @@ load-nvmrc() {
 add-zsh-hook chpwd load-nvmrc
 load-nvmrc
 
+# browserstack
+export EXEC_REMOTE=false
+export BS_USER=joselopez47
+export BS_ACCKEY=eM3sYRp1Q9Cr4ND72g3L
+
+# EXEC_REMOTE=true \ BS_USER=joselopez47 \ BS_ACCKEY=eM3sYRp1Q9Cr4ND72g3L npm test
+
+# to add a check for the machine here and run only if its the laptop
+#
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+# [[ -f /home/joselopez/repos/YieldifyLabs/khaleesi-tag-delivery/node_modules/tabtab/.completions/serverless.zsh ]] && . /home/joselopez/repos/YieldifyLabs/khaleesi-tag-delivery/node_modules/tabtab/.completions/serverless.zsh
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+# [[ -f /home/joselopez/repos/YieldifyLabs/khaleesi-tag-delivery/node_modules/tabtab/.completions/sls.zsh ]] && . /home/joselopez/repos/YieldifyLabs/khaleesi-tag-delivery/node_modules/tabtab/.completions/sls.zsh
+
 # Load faceless (yieldify command)
 # eval $(_facelesscmd env init)
 
