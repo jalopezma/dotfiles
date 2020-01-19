@@ -179,7 +179,9 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
 # export npm token
-export NPM_TOKEN=$(cat ~/.npmrc | sed -e 's/^.*authToken=//')
+if [[ -f .npmrc && -r .npmrc ]]; then
+  export NPM_TOKEN=$(cat ~/.npmrc | sed -e 's/^.*authToken=//')
+fi
 
 # Store the last directory cd'd into so that we can start new shells in the
 # same directory.
