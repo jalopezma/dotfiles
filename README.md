@@ -4,6 +4,8 @@
 .vimrc => ~/.vimrc
 colors/wombat.vim => ~/.vim/colors
 
+#[NeoVim](nvim/README.md)
+
 # GIT
 .gitconfig => ~/.gitconfig
 
