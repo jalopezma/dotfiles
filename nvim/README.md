@@ -18,3 +18,23 @@ Use nvm 10.
 npm install -g neovim typescript-language-server
 
 Run `:checkhealth` to see if everything is ok
+
+// still to check
+https://github.com/neoclide/coc.nvim
+https://www.freecodecamp.org/news/a-guide-to-modern-web-development-with-neo-vim-333f7efbf8e2/
+https://facebook.github.io/watchman/docs/install.html
+https://medium.com/better-programming/setting-up-neovim-for-web-development-in-2020-d800de3efacd
+https://github.com/neoclide/coc-lists
+
+Still to add:
+- nerdtree?
+- commenter
+- bookmarks?
+- fzf?
+
+// After installing :PlugInstall
+cp ~/.config/nvim/space.vim ~/.config/nvim/plugged/vim-airline-themes/autoload/airline/themes/space.vim
+
+
+Crash nvim sometimes (khaleesi-tag folder) because of airline and fugitive
+let g:airline_powerline_fonts = 1
