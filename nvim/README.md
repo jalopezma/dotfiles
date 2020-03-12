@@ -27,10 +27,9 @@ https://medium.com/better-programming/setting-up-neovim-for-web-development-in-2
 https://github.com/neoclide/coc-lists
 
 Still to add:
-- nerdtree?
-- commenter
-- bookmarks?
-- fzf?
+- change deonite for fzf?
+- put backup, undo and swap in new neovim file
+- change colorscheme so it's not that white the normal text in neovim
 
 // After installing :PlugInstall
 cp ~/.config/nvim/space.vim ~/.config/nvim/plugged/vim-airline-themes/autoload/airline/themes/space.vim
@@ -38,3 +37,8 @@ cp ~/.config/nvim/space.vim ~/.config/nvim/plugged/vim-airline-themes/autoload/a
 
 Crash nvim sometimes (khaleesi-tag folder) because of airline and fugitive
 let g:airline_powerline_fonts = 1
+
+go to definition open split
+go to definition open tab
+
+`➜ nvim +PlugInstall +PlugUpdate +PlugUpgrade`

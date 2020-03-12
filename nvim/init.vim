@@ -22,6 +22,10 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 " Icons
 Plug 'ryanoasis/vim-devicons'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+" Fzf and search
+Plug 'Shougo/denite.nvim'
+" whitespaces
+Plug 'ntpeters/vim-better-whitespace'
 call plug#end()
 
 let g:mapleader = "\<Space>"
@@ -33,7 +37,7 @@ endif
 
 set t_Co=256
 set background=dark
-colorscheme material 
+colorscheme material
 " Options: 'default' | 'palenight' | 'ocean' | 'lighter' | 'darker'
 let g:material_theme_style = 'default'
 let g:airline_theme = 'space'
@@ -57,6 +61,7 @@ set softtabstop=2
 set smarttab                " make 'tab' insert indents instead of tabs at the beinning fo a line
 set expandtab               " always uses spaces instead of tab characters
 set undofile                " Creates <FILENAME>.un~ so you can undo actions done even when you exit vim
+set winbl=10                " Set floating window to be slightly transparent
 
 " set dir for swap, backup and undo files. Do before:
 " mkdir -p ~/.vim/{backup_files,swap_files,undo_files}
@@ -66,6 +71,9 @@ set undodir=~/.vim/undo_files//
 
 " Add icon to breakline
 set showbreak=↪
+
+" Enable spellcheck for markdown files
+autocmd BufRead,BufNewFile *.md setlocal spell
 
 " Remap ESCAPE to jk for insert
 inoremap jk <ESC>
@@ -102,12 +110,6 @@ set hlsearch
 " Allow toogle it with <F4>
 noremap <F4> :set hlsearch! hlsearch?<CR>
 
-" define BadWhitespace before using in a match
-highlight BadWhitespace ctermbg=red guibg=darkred
-" Flagging unnecessary whitespace
-au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
-let python_highlight_all=1
-
 " :FormatJSON to use it. Requires python installed
 com! FormatJSON %!python -m json.tool
 
@@ -134,10 +136,6 @@ autocmd FileType json syntax match Comment +\/\/.\+$+
 " coc-yank - :CocCommand yank.clean - to clean
 nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
 
-" --- peitalin/vim-jsx-typescript ---
-" set filetypes as typescript.tsx
-autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx
-
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
@@ -151,6 +149,9 @@ function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
+
+"Close preview window when completion is done.
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
@@ -176,7 +177,6 @@ nmap <silent> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
-
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
@@ -185,19 +185,14 @@ function! s:show_documentation()
   endif
 endfunction
 
+" Show all diagnostics (errors).
+nnoremap <silent> <space>e  :<C-u>CocList diagnostics<cr>
+
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
-
-augroup mygroup
-  autocmd!
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder.
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-augroup end
 
 function! StatusDiagnostic() abort
   let info = get(b:, 'coc_diagnostic_info', {})
@@ -212,15 +207,21 @@ function! StatusDiagnostic() abort
   return join(msgs, ' ') . ' ' . get(g:, 'coc_status', '')
 endfunction
 
+" --- peitalin/vim-jsx-typescript ---
+" set filetypes as typescript.tsx
+autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx
+
+" --- vim-airline/vim-airline ---
 " Add (Neo)Vim's native statusline support.
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline.
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}%{StatusDiagnostic()}
+" Custom setup that removes filetype/whitespace from default vim airline bar
+" -> remove c?
+let g:airline#extensions#default#layout = [['a', 'b', 'c'], ['x', 'z', 'warning', 'error']]
+" let g:airline_extensions = ['branch', 'hunks', 'coc']
 
-" Show all diagnostics (errors).
-nnoremap <silent> <space>e  :<C-u>CocList diagnostics<cr>  
-
-" Nerdtree
+" --- Nerdtree ---
 let g:NERDTreeShowHidden = 1
 let g:NERDTreeMinimalUI = 1
 let g:NERDTreeIgnore = []
@@ -229,10 +230,211 @@ let g:NERDTreeIgnore = ['\.git.*$[[dir]]']
 " Automaticaly close nvim if NERDTree is only thing left open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 " Toggle
-nnoremap <silent> <C-b> :NERDTreeToggle<CR>
-" Nerdtree highlight
+nnoremap <silent> <C-n> :NERDTreeToggle<CR>
+" --- Nerdtree highlight ---
 let g:NERDTreeFileExtensionHighlightFullName = 1
 let g:NERDTreeExactMatchHighlightFullName = 1
 let g:NERDTreePatternMatchHighlightFullName = 1
 let g:NERDTreeHighlightFolders = 1 " enables folder icon highlighting using exact match
 let g:NERDTreeHighlightFoldersFullName = 1 " highlights the folder name
+
+" --- ntpeters/vim-better-whitespace ---
+let g:better_whitespace_enabled=1
+let g:strip_whitespace_on_save=1
+let g:strip_max_file_size = 1000
+let g:show_spaces_that_precede_tabs=1
+
+" --- Denite ---
+" Disable statusline for denite
+call denite#custom#option('_', 'statusline', v:false)
+
+"  Does need ripgrep https://github.com/BurntSushi/ripgrep#installation
+" Use ripgrep for searching current directory for files
+" By default, ripgrep will respect rules in .gitignore
+"   --files: Print each file that would be searched (but don't search)
+"   --glob:  Include or exclues files for searching that match the given glob
+"            (aka ignore .git files)
+"
+call denite#custom#var('file/rec', 'command', ['rg', '--files', '--glob', '!.git'])
+
+" Use ripgrep in place of "grep"
+call denite#custom#var('grep', 'command', ['rg'])
+
+" Custom options for ripgrep
+"   --vimgrep:  Show results with every match on it's own line
+"   --hidden:   Search hidden directories and files
+"   --heading:  Show the file name above clusters of matches from each file
+"   --S:        Search case insensitively if the pattern is all lowercase
+call denite#custom#var('grep', 'default_opts', ['--hidden', '--vimgrep', '--heading', '-S'])
+
+" Recommended defaults for ripgrep via Denite docs
+call denite#custom#var('grep', 'recursive_opts', [])
+call denite#custom#var('grep', 'pattern_opt', ['--regexp'])
+call denite#custom#var('grep', 'separator', ['--'])
+call denite#custom#var('grep', 'final_opts', [])
+
+" Remove date from buffer list
+call denite#custom#var('buffer', 'date_format', '')
+
+" Custom options for Denite
+"   auto_resize             - Auto resize the Denite window height automatically.
+"   prompt                  - Customize denite prompt
+"   direction               - Specify Denite window direction as directly below current pane
+"   winminheight            - Specify min height for Denite window
+"   highlight_mode_insert   - Specify h1-CursorLine in insert mode
+"   prompt_highlight        - Specify color of prompt
+"   highlight_matched_char  - Matched characters highlight
+"   highlight_matched_range - matched range highlight
+let s:denite_options = {'default' : {
+\ 'auto_resize': 1,
+\ 'prompt': 'λ ',
+\ 'split': 'horizontal',
+\ 'start_filter': 1,
+\ 'source_names': 'short',
+\ 'highlight_mode_insert': 'Visual',
+\ 'highlight_mode_normal': 'Visual',
+\ 'highlight_matched_char': 'Function',
+\ 'highlight_matched_range': 'Normal',
+\ 'prompt_highlight': 'Function',
+\ 'highlight_window_background': 'Visual',
+\ 'highlight_filter_background': 'DiffAdd',
+\ 'winrow': 1,
+\ 'winminheight': '10',
+\ 'vertical_preview': 1,
+\ }}
+
+" Loop through denite options and enable them
+function! s:profile(opts) abort
+  for l:fname in keys(a:opts)
+    for l:dopt in keys(a:opts[l:fname])
+      call denite#custom#option(l:fname, l:dopt, a:opts[l:fname][l:dopt])
+    endfor
+  endfor
+endfunction
+
+call s:profile(s:denite_options)
+" === Denite shorcuts === "
+"   ;         - Browser currently open buffers
+"   <leader>t - Browse list of files in current directory
+"   <leader>g - Search current directory for occurences of given term and close window if no results
+"   <leader>j - Search current directory for occurences of word under cursor
+nmap <leader>w :Denite buffer<CR>
+nmap <leader>f :DeniteProjectDir file/rec<CR>
+nnoremap <leader>g :<C-u>Denite grep:. -no-empty<CR>
+nnoremap <leader>j :<C-u>DeniteCursorWord grep:.<CR>
+
+" Define mappings while in 'filter' mode
+"   <C-o>         - Switch to normal mode inside of search results
+"   <Esc>         - Exit denite window in any mode
+"   <CR>          - Open currently selected file in any mode
+"   <C-t>         - Open currently selected file in a new tab
+"   <C-v>         - Open currently selected file a vertical split
+"   <C-h>         - Open currently selected file in a horizontal split
+autocmd FileType denite-filter call s:denite_filter_my_settings()
+function! s:denite_filter_my_settings() abort
+  imap <silent><buffer> <Tab>
+  \ <Plug>(denite_filter_quit)
+  inoremap <silent><buffer><expr> <Esc>
+  \ denite#do_map('quit')
+  nnoremap <silent><buffer><expr> <Esc>
+  \ denite#do_map('quit')
+  inoremap <silent><buffer><expr> <CR>
+  \ denite#do_map('do_action')
+  inoremap <silent><buffer><expr> <C-t>
+  \ denite#do_map('do_action', 'tabopen')
+  inoremap <silent><buffer><expr> <C-v>
+  \ denite#do_map('do_action', 'vsplit')
+  inoremap <silent><buffer><expr> <C-h>
+  \ denite#do_map('do_action', 'split')
+endfunction
+
+" Define mappings while in denite window
+"   <CR>        - Opens currently selected file
+"   q or <Esc>  - Quit Denite window
+"   d           - Delete currenly selected file
+"   p           - Preview currently selected file
+"   <C-o> or i  - Switch to insert mode inside of filter prompt
+"   <C-t>       - Open currently selected file in a new tab
+"   <C-v>       - Open currently selected file a vertical split
+"   <C-h>       - Open currently selected file in a horizontal split
+autocmd FileType denite call s:denite_my_settings()
+function! s:denite_my_settings() abort
+  nnoremap <silent><buffer><expr> <CR>
+  \ denite#do_map('do_action')
+  nnoremap <silent><buffer><expr> q
+  \ denite#do_map('quit')
+  nnoremap <silent><buffer><expr> <Esc>
+  \ denite#do_map('quit')
+  nnoremap <silent><buffer><expr> d
+  \ denite#do_map('do_action', 'delete')
+  nnoremap <silent><buffer><expr> p
+  \ denite#do_map('do_action', 'preview')
+  nnoremap <silent><buffer><expr> i
+  \ denite#do_map('open_filter_buffer')
+  nnoremap <silent><buffer><expr> <Tab>
+  \ denite#do_map('open_filter_buffer')
+  nnoremap <silent><buffer><expr> <C-t>
+  \ denite#do_map('do_action', 'tabopen')
+  nnoremap <silent><buffer><expr> <C-v>
+  \ denite#do_map('do_action', 'vsplit')
+  nnoremap <silent><buffer><expr> <C-h>
+  \ denite#do_map('do_action', 'split')
+endfunction
+
+" Custom styles
+" Add custom highlights in method that is executed every time a colorscheme is sourced
+" See https://gist.github.com/romainl/379904f91fa40533175dfaec4c833f2f for details
+function! TrailingSpaceHighlights() abort
+  " Hightlight trailing whitespace
+  highlight Trail ctermbg=red guibg=red
+  call matchadd('Trail', '\s\+$', 100)
+endfunction
+
+function! s:custom_jarvis_colors()
+  echo 'yes'
+  " coc.nvim color changes
+  hi link CocErrorSign WarningMsg
+  hi link CocWarningSign Number
+  hi link CocInfoSign Type
+
+  " Make background transparent for many things
+  hi Normal ctermbg=NONE guibg=NONE
+  hi NonText ctermbg=NONE guibg=NONE
+  hi LineNr ctermfg=NONE guibg=NONE
+  hi SignColumn ctermfg=NONE guibg=NONE
+  hi StatusLine guifg=#16252b guibg=#6699CC
+  hi StatusLineNC guifg=#16252b guibg=#16252b
+
+  " Try to hide vertical spit and end of buffer symbol
+  hi VertSplit gui=NONE guifg=#17252c guibg=#17252c
+  hi EndOfBuffer ctermbg=NONE ctermfg=NONE guibg=#17252c guifg=#17252c
+
+  " Customize NERDTree directory
+  hi NERDTreeCWD guifg=#99c794
+
+  " Make background color transparent for git changes
+  hi SignifySignAdd guibg=NONE
+  hi SignifySignDelete guibg=NONE
+  hi SignifySignChange guibg=NONE
+
+  " Highlight git change signs
+  hi SignifySignAdd guifg=#99c794
+  hi SignifySignDelete guifg=#ec5f67
+  hi SignifySignChange guifg=#c594c5
+endfunction
+
+autocmd! ColorScheme * call TrailingSpaceHighlights()
+autocmd! ColorScheme material call s:custom_jarvis_colors()
+
+" Call method on window enter
+augroup WindowManagement
+  autocmd!
+  autocmd WinEnter * call Handle_Win_Enter()
+augroup END
+
+" Change highlight group of preview window when open
+function! Handle_Win_Enter()
+  if &previewwindow
+    setlocal winhighlight=Normal:MarkdownError
+  endif
+endfunction
