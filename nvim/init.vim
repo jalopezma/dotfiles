@@ -26,6 +26,7 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'Shougo/denite.nvim'
 " whitespaces
 Plug 'ntpeters/vim-better-whitespace'
+Plug 'jiangmiao/auto-pairs'
 call plug#end()
 
 let g:mapleader = "\<Space>"
@@ -391,7 +392,6 @@ function! TrailingSpaceHighlights() abort
 endfunction
 
 function! s:custom_jarvis_colors()
-  echo 'yes'
   " coc.nvim color changes
   hi link CocErrorSign WarningMsg
   hi link CocWarningSign Number
