@@ -35,6 +35,9 @@ export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
+export XDG_CONFIG_HOME=~/.config
+#export VIMINIT="$XDG_CONFIG_HOME/nvim/init.vim"
+
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
@@ -44,7 +47,7 @@ export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="spaceship"
 
 # Don't show tracball battery
-SPACESHIP_BATTERY_SHOW="false" 
+SPACESHIP_BATTERY_SHOW="false"
 SPACESHIP_KUBECONTEXT_SHOW="false"
 SPACESHIP_DOCKER_SHOW="false"
 
@@ -90,11 +93,9 @@ SPACESHIP_DOCKER_SHOW="false"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git zsh-autosuggestions history-search-multi-word z)
 # https://github.com/zsh-users/zsh-autosuggestions
-plugins=(zsh-autosuggestions)
 # plugins=(zsh-syntax-highlighting)
-
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -126,6 +127,8 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+alias n="nvim"
+alias vi="nvim"
 # Git
 alias g="git"
 # was called `g plum` by Ovi so now it's called mario
@@ -133,6 +136,8 @@ alias mario="g pull upstream master"
 alias gcm="g checkout master"
 alias gs="g status"
 alias gc.="g checkout ."
+alias gd="g dsf"
+
 alias update-all="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y"
 
 alias l="exa --long --git"
@@ -145,6 +150,11 @@ alias stranger-tunnel-production="ssh -4 -N -L 6379:stranger.tueblu.0001.euw1.ca
 alias kx="kubectx"
 alias kn="kubens"
 alias kc="kubectl"
+
+alias tag="cd ~/repos/YieldifyLabs/khaleesi-tag"
+alias builder="cd ~/repos/YieldifyLabs/khaleesi-tag-delivery"
+alias iron="cd ~/repos/YieldifyLabs/ironbank"
+alias gendry="cd ~/repos/YieldifyLabs/gendry/packages"
 
 # start vim mode for zsh ###
 #bindkey -v
@@ -208,7 +218,7 @@ export BS_ACCKEY=eM3sYRp1Q9Cr4ND72g3L
 # uninstall by removing these lines or running `tabtab uninstall sls`
 [[ -f /home/joselopez/repos/YieldifyLabs/khaleesi-tag-delivery/node_modules/tabtab/.completions/sls.zsh ]] && . /home/joselopez/repos/YieldifyLabs/khaleesi-tag-delivery/node_modules/tabtab/.completions/sls.zsh
 
-# Auto-switch node version based on the project's package lock version 
+# Auto-switch node version based on the project's package lock version
 autoload -U add-zsh-hook
 load-nvmrc() {
   if [[ -f .nvmrc && -r .nvmrc ]]; then
