@@ -31,6 +31,7 @@ bindsym $mod+$ws6key workspace $ws6name
 bindsym $mod+$ws7key workspace $ws7name
 bindsym $mod+$ws8key workspace $ws8name
 
+
 # move focused container to workspace
 bindsym $mod+Shift+$ws1key move container to workspace $ws1name
 bindsym $mod+Shift+$ws2key move container to workspace $ws2name
@@ -38,3 +39,5 @@ bindsym $mod+Shift+$ws3key move container to workspace $ws3name
 bindsym $mod+Shift+$ws4key move container to workspace $ws4name
 bindsym $mod+Shift+$ws5key move container to workspace $ws5name
 bindsym $mod+Shift+$ws6key move container to workspace $ws6name
+bindsym $mod+Shift+$ws7key move container to workspace $ws7name
+bindsym $mod+Shift+$ws8key move container to workspace $ws8name

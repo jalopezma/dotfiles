@@ -240,21 +240,13 @@ export BS_USER=joselopez47
 export BS_ACCKEY=eM3sYRp1Q9Cr4ND72g3L
 
 # to add a check for the machine here and run only if its the laptop
-#
-# tabtab source for serverless package
-# uninstall by removing these lines or running `tabtab uninstall serverless`
-# [[ -f /home/joselopez/repos/YieldifyLabs/khaleesi-tag-delivery/node_modules/tabtab/.completions/serverless.zsh ]] && . /home/joselopez/repos/YieldifyLabs/khaleesi-tag-delivery/node_modules/tabtab/.completions/serverless.zsh
-# tabtab source for sls package
-# uninstall by removing these lines or running `tabtab uninstall sls`
-# [[ -f /home/joselopez/repos/YieldifyLabs/khaleesi-tag-delivery/node_modules/tabtab/.completions/sls.zsh ]] && . /home/joselopez/repos/YieldifyLabs/khaleesi-tag-delivery/node_modules/tabtab/.completions/sls.zsh
-
 # Load faceless (yieldify command)
-# eval $(_facelesscmd env init)
+eval $(_facelesscmd env init)
 
 # tabtab source for slss package
 # uninstall by removing these lines or running `tabtab uninstall slss`
-# [[ -f /home/joselopez/repos/YieldifyLabs/khaleesi-tag-delivery/node_modules/tabtab/.completions/slss.zsh ]] && . /home/joselopez/repos/YieldifyLabs/khaleesi-tag-delivery/node_modules/tabtab/.completions/slss.zsh
+[[ -f /home/joselopez/repos/YieldifyLabs/khaleesi-tag-delivery/node_modules/tabtab/.completions/slss.zsh ]] && . /home/joselopez/repos/YieldifyLabs/khaleesi-tag-delivery/node_modules/tabtab/.completions/slss.zsh
 
-# export AWS_SDK_LOAD_CONFIG=1
-# export AWS_SHARED_CREDENTIALS_FILE=$HOME/.aws/credentials
-# export AWS_CONFIG_FILE=$HOME/.aws/config
+export AWS_SDK_LOAD_CONFIG=1
+export AWS_SHARED_CREDENTIALS_FILE=$HOME/.aws/credentials
+export AWS_CONFIG_FILE=$HOME/.aws/config

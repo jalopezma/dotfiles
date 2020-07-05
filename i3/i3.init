@@ -1,8 +1,10 @@
 # compton for opacity and transitions on change workspaces
 exec compton -f
+# exec xrandr --output eDP-1 --mode 2560x1440
+# exec xrandr --output eDP-1 --mode 3840x2160
 
 ########################
-# Background 
+# Background
 # ----------------------
 # $ sudo apt install feh
 #######################
@@ -15,7 +17,7 @@ exec_always feh --bg-scale ~/wallpapers/yiker.png
 # bar {
   # status_command i3status
   # status_command sh -c 'i3status | i3status-netusage --interface=em1'
-        
+
   # status_command    python ~/repos/dotfiles/i3/i3pystatus.py
   # workspace_buttons yes
   # position          top
@@ -28,7 +30,7 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 # To remember the passphrase
 # Also you need to add this to: ~/.profile
-# 
+#
 #   if [ "$0" = "/usr/sbin/lightdm-session" -a "$DESKTOP_SESSION" = "i3" ]; then
 #       export $(gnome-keyring-daemon -s)
 #   fi
@@ -36,7 +38,7 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 # $ ssh-add
 exec --no-startup-id /usr/lib/gnome-settings-daemon/gnome-settings-daemon
 
-# 
+#
 # Starts the network manager applet
 #
 exec --no-startup-id nm-applet
