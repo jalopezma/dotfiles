@@ -1,9 +1,11 @@
 {
   // I might need to update this frequently
   "tsserver.npm": "/home/joselopez/.nvm/versions/node/v10.15.0/bin/npm",
-  "eslint.filetypes": ["javascript", "typescript", "typescriptreact", "javascriptreact", "typescript.tsx"],
+  // "eslint.filetypes": ["javascript", "typescript", "typescriptreact", "javascriptreact", "typescript.tsx"],
   "diagnostic.virtualText": true,
   "suggest.maxCompleteItemCount": 20,
+  "coc-actions.hideCursor": false,
+  "coc.preferences.formatOnSaveFiletypes": ["typescript", "javascript"],
   // autocompletition for languages
   "languageserver": {
     "haskell": {
