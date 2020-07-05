@@ -1,0 +1,29 @@
+{
+  // I might need to update this frequently
+  "tsserver.npm": "/home/joselopez/.nvm/versions/node/v10.15.0/bin/npm",
+  "eslint.filetypes": ["javascript", "typescript", "typescriptreact", "javascriptreact", "typescript.tsx"],
+  "diagnostic.virtualText": true,
+  "suggest.maxCompleteItemCount": 20,
+  // autocompletition for languages
+  "languageserver": {
+    "haskell": {
+      "command": "hie-wrapper",
+      "args": ["--lsp"],
+      "rootPatterns": [
+        "stack.yaml",
+        "cabal.config",
+        "package.yaml"
+      ],
+      "filetypes": [
+        "hs",
+        "lhs",
+        "haskell"
+      ],
+      "initializationOptions": {
+        "languageServerHaskell": {
+          "hlintOn": true
+        }
+      }
+    }
+  }
+}

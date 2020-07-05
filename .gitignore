@@ -1,3 +1,4 @@
 *.pyc
 __pycache__
 i3/config
+nvim/plugged
