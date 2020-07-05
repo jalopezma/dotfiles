@@ -1,0 +1,40 @@
+#####################
+# Workspace variables
+#####################
+# Names
+set $ws1name "1"
+set $ws2name "2"
+set $ws3name "3"
+set $ws4name "4"
+set $ws5name "5"
+set $ws6name "6"
+set $ws7name "7"
+set $ws8name "8"
+
+# Key bindings
+set $ws1key m
+set $ws2key comma
+set $ws3key period
+set $ws4key slash
+set $ws5key u
+set $ws6key i
+set $ws7key o
+set $ws8key p
+
+# switch to workspace
+bindsym $mod+$ws1key workspace $ws1name
+bindsym $mod+$ws2key workspace $ws2name
+bindsym $mod+$ws3key workspace $ws3name
+bindsym $mod+$ws4key workspace $ws4name
+bindsym $mod+$ws5key workspace $ws5name
+bindsym $mod+$ws6key workspace $ws6name
+bindsym $mod+$ws7key workspace $ws7name
+bindsym $mod+$ws8key workspace $ws8name
+
+# move focused container to workspace
+bindsym $mod+Shift+$ws1key move container to workspace $ws1name
+bindsym $mod+Shift+$ws2key move container to workspace $ws2name
+bindsym $mod+Shift+$ws3key move container to workspace $ws3name
+bindsym $mod+Shift+$ws4key move container to workspace $ws4name
+bindsym $mod+Shift+$ws5key move container to workspace $ws5name
+bindsym $mod+Shift+$ws6key move container to workspace $ws6name

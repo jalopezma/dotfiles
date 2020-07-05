@@ -23,6 +23,7 @@ export PATH=$PATH:$HOME/scripts
 export PATH=$PATH:/usr/local/lib
 
 # For stack (haskell) add ~/.local/bin
+# Add betterlockscreen to PATH:
 export PATH=$PATH:$HOME/.local/bin
 
 # NPM Global without sudo
@@ -143,7 +144,7 @@ alias update-all="sudo apt update && sudo apt upgrade -y && sudo apt autoremove 
 alias l="exa --long --git"
 alias la="exa --long --all --git"
 alias cp="cp -i"
-alias rm='echo "rm is disabled, use remove or trash or /bin/rm instead."'
+#alias rm='echo "rm is disabled, use remove or trash or /bin/rm instead."'
 alias stranger-tunnel-dev="ssh -4 -N -L 6379:stranger.kckpzs.0001.euw1.cache.amazonaws.com:6379 -p 2222 jose.lopez@bastion.yieldify-dev.com 1>&2"
 alias stranger-tunnel-staging="ssh -4 -N -L 6379:stranger.pipwu6.0001.euw1.cache.amazonaws.com:6379 -p 2222 jose.lopez@bastion.yieldify-staging.com 1>&2"
 alias stranger-tunnel-production="ssh -4 -N -L 6379:stranger.tueblu.0001.euw1.cache.amazonaws.com:6379 -p 2222 jose.lopez@bastion.yieldify-production.com 1>&2"
@@ -191,7 +192,9 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
 # export npm token
-export NPM_TOKEN=$(cat ~/.npmrc | sed -e 's/^.*authToken=//')
+if [[ -f .npmrc && -r .npmrc ]]; then
+  export NPM_TOKEN=$(cat ~/.npmrc | sed -e 's/^.*authToken=//')
+fi
 
 # Store the last directory cd'd into so that we can start new shells in the
 # same directory.
@@ -231,13 +234,27 @@ load-nvmrc() {
 add-zsh-hook chpwd load-nvmrc
 load-nvmrc
 
+# browserstack
+export EXEC_REMOTE=false
+export BS_USER=joselopez47
+export BS_ACCKEY=eM3sYRp1Q9Cr4ND72g3L
+
+# to add a check for the machine here and run only if its the laptop
+#
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+# [[ -f /home/joselopez/repos/YieldifyLabs/khaleesi-tag-delivery/node_modules/tabtab/.completions/serverless.zsh ]] && . /home/joselopez/repos/YieldifyLabs/khaleesi-tag-delivery/node_modules/tabtab/.completions/serverless.zsh
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+# [[ -f /home/joselopez/repos/YieldifyLabs/khaleesi-tag-delivery/node_modules/tabtab/.completions/sls.zsh ]] && . /home/joselopez/repos/YieldifyLabs/khaleesi-tag-delivery/node_modules/tabtab/.completions/sls.zsh
+
 # Load faceless (yieldify command)
-eval $(_facelesscmd env init)
+# eval $(_facelesscmd env init)
 
 # tabtab source for slss package
 # uninstall by removing these lines or running `tabtab uninstall slss`
-[[ -f /home/joselopez/repos/YieldifyLabs/khaleesi-tag-delivery/node_modules/tabtab/.completions/slss.zsh ]] && . /home/joselopez/repos/YieldifyLabs/khaleesi-tag-delivery/node_modules/tabtab/.completions/slss.zsh
+# [[ -f /home/joselopez/repos/YieldifyLabs/khaleesi-tag-delivery/node_modules/tabtab/.completions/slss.zsh ]] && . /home/joselopez/repos/YieldifyLabs/khaleesi-tag-delivery/node_modules/tabtab/.completions/slss.zsh
 
-export AWS_SDK_LOAD_CONFIG=1
-export AWS_SHARED_CREDENTIALS_FILE=$HOME/.aws/credentials
-export AWS_CONFIG_FILE=$HOME/.aws/config
+# export AWS_SDK_LOAD_CONFIG=1
+# export AWS_SHARED_CREDENTIALS_FILE=$HOME/.aws/credentials
+# export AWS_CONFIG_FILE=$HOME/.aws/config

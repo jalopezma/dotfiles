@@ -1,6 +1,16 @@
 Install neovim and python
 `sudo apt-get install neovim python-neovim python3-neovim`
 
+You might want to install the latest neovim version that is still not in the ubuntu package manager. [github releases](https://github.com/neovim/neovim/releases/)
+Follow the steps there but you will probably need to do the following (if you installed nvim from the ubuntu package manager before)
+
+  ```
+  ➜ cd ~/Downloads
+  ➜ chmod u+x nvim.appimage
+  ➜ sudo mv /usr/bin/nvim /usr/bin/nvim_0.3.8
+  ➜ sudo mv ./nvim.appimage /usr/bin/nvim
+  ```
+
 Folder `~/.config/nvim`
 Config `~/.config/nvim/init.vim`
 `ln -s ~/repos/dotfiles/nvim ~/.config/nvim`

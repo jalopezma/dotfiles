@@ -11,7 +11,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 " Monokai color scheme
-Plugin 'crusoexia/vim-monokai'
+" Plugin 'crusoexia/vim-monokai'
 
 " plugin on GitHub repo
 Plugin 'tpope/vim-fugitive'
@@ -84,7 +84,9 @@ Plugin 'majutsushi/tagbar'
 
 " Vim dev icons
 " Needs https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/UbuntuMono/Regular/complete/Ubuntu%20Mono%20Nerd%20Font%20Complete.ttf
-" make ~/.fonts and move the font there
+" $ mkdir ~/.fonts
+" ln -s ~/repos/dotfiles/vim/Ubuntu\ Mono\ Nerd\ Font\ Complete.ttf ~/.fonts/Ubuntu\ Mono\ Nerd\ Font\ Complete.ttf
+" Then, set the font in the terminal options
 Plugin 'ryanoasis/vim-devicons'
 
 " Asynchronous Lint Engine
@@ -111,7 +113,7 @@ Plugin 'markonm/traces.vim'
 Plugin 'bitc/vim-hdevtools'
 
 " Material theme
-""Plugin 'hzchirs/vim-material'
+Plugin 'hzchirs/vim-material'
 Plugin 'kaicataldo/material.vim'
 
 " Moving shortcuts/motions
@@ -170,26 +172,14 @@ syntax on
 set termguicolors
 set t_Co=256
 
-" colorscheme monokai
-" colorscheme dank-neon
-" colorscheme wombat
-" colorscheme atom-one-dark
-
-set background=dark
-" colorscheme kuroi
-
-" Material - Palenight
-" Needs urxvt to work properly I think
-" set background=dark
-" let g:material_style='oceanic'
-" colorscheme vim-material
-
-
 " Another material
 " kaicataldo/material.vim
 colorscheme material 
+set background=dark
 " let g:material_theme_style = 'default' | 'palenight' | 'dark'
 let g:material_theme_style = 'palenight'
+
+"Thanks to Plugin 'hzchirs/vim-material'
 let g:airline_theme = 'material'
 
 " solarized
@@ -434,6 +424,9 @@ let g:tagbar_type_go = {
 set encoding=utf8
 set guifont=UbuntuMono\ Nerd\ Font\ 10
 let g:airline_powerline_fonts = 1
+
+" Enable .rasi syntax highlight
+au BufNewFile,BufRead /*.rasi setf css
 
 " :FormatJSON to use it. Requires python installed
 com! FormatJSON %!python -m json.tool

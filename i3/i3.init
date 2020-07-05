@@ -1,0 +1,49 @@
+# compton for opacity and transitions on change workspaces
+exec compton -f
+
+########################
+# Background 
+# ----------------------
+# $ sudo apt install feh
+#######################
+# exec_always feh --bg-scale ~/wallpapers/wallpagper4k_1.png --bg-scale ~/wallpapers/wallpagper4k_2.png
+# exec_always feh --bg-scale ~/wallpapers/earth-moon-4k.jpg
+exec_always feh --bg-scale ~/wallpapers/yiker.png
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+# bar {
+  # status_command i3status
+  # status_command sh -c 'i3status | i3status-netusage --interface=em1'
+        
+  # status_command    python ~/repos/dotfiles/i3/i3pystatus.py
+  # workspace_buttons yes
+  # position          top
+
+  # Set applets on the primary screen
+  #tray_output primary
+#}
+
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+
+# To remember the passphrase
+# Also you need to add this to: ~/.profile
+# 
+#   if [ "$0" = "/usr/sbin/lightdm-session" -a "$DESKTOP_SESSION" = "i3" ]; then
+#       export $(gnome-keyring-daemon -s)
+#   fi
+# and run
+# $ ssh-add
+exec --no-startup-id /usr/lib/gnome-settings-daemon/gnome-settings-daemon
+
+# 
+# Starts the network manager applet
+#
+exec --no-startup-id nm-applet
+# Bluetooth
+exec --no-startup-id blueman-applet
+exec indicator-sound-switcher
+
+# start keyring so chrome has can remember the passwords?
+exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=secrets
+
