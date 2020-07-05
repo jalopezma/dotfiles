@@ -30,6 +30,10 @@ Plug 'jiangmiao/auto-pairs'
 call plug#end()
 
 let g:mapleader = "\<Space>"
+" Opens init.vim
+nnoremap <leader>v :tabnew ~/.config/nvim/init.vim<CR>
+" Sources init.vim
+nnoremap <leader>s :source ~/.config/nvim/init.vim<CR>
 
 " --- COLORS SCHEMA ---
 if (has('termguicolors'))
@@ -129,7 +133,7 @@ set encoding=utf8
 " npm install -g typescript-language-server
 
 " Set extensions
-let g:coc_global_extensions = ['coc-css', 'coc-html', 'coc-json', 'coc-tsserver', 'coc-python', 'coc-eslint', 'coc-git', 'coc-yank', 'coc-pairs', 'coc-highlight']
+let g:coc_global_extensions = ['coc-css', 'coc-html', 'coc-json', 'coc-tsserver', 'coc-python', 'coc-git', 'coc-yank', 'coc-pairs', 'coc-highlight', 'coc-tslint', 'coc-actions', 'coc-java']
 " config file uses jsonc
 autocmd FileType json syntax match Comment +\/\/.\+$+
 
@@ -167,14 +171,31 @@ else
 endif
 
 " Use `[g` and `]g` to navigate diagnostics
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap <silent> <leader>p <Plug>(coc-diagnostic-prev)
+nmap <silent> <leader>n <Plug>(coc-diagnostic-next)
+
+" Remap keys for applying codeAction to the current line.
+nmap <leader>ac  <Plug>(coc-codeaction)
+
+" Apply AutoFix to problem on the current line.
+nmap <leader>q  <Plug>(coc-fix-current)
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+nmap <leader>rf <Plug>(coc-rename)
 
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
+nmap gds :vsplit<ENTER><C-w><Right><Plug>(coc-definition)
+nmap gD :tabnew %<ENTER><C-w><Right><Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+
+" Set Prettier command to be able to do :Prettier
+" command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
+" Run :Prettier on leave insert mode. On save is done by CocSettings
+" autocmd InsertLeave *.ts,*.tsx Prettier
 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -192,9 +213,6 @@ nnoremap <silent> <space>e  :<C-u>CocList diagnostics<cr>
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
-" Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
-
 function! StatusDiagnostic() abort
   let info = get(b:, 'coc_diagnostic_info', {})
   if empty(info) | return '' | endif
@@ -207,6 +225,18 @@ function! StatusDiagnostic() abort
   endif
   return join(msgs, ' ') . ' ' . get(g:, 'coc_status', '')
 endfunction
+
+" coc-actions: Remap for do codeAction of selected region
+function! s:cocActionsOpenFromSelected(type) abort
+  execute 'CocCommand actions.open ' . a:type
+endfunction
+xmap <silent> <leader>a :<C-u>execute 'CocCommand actions.open ' . visualmode()<CR>
+nmap <silent> <leader>a :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@
+" <leader>a for the current selected range
+" <leader>aw for the current word
+" <leader>aas for the current sentence
+" <leader>aap for the current paragraph
+" :h text-objects to see more detail
 
 " --- peitalin/vim-jsx-typescript ---
 " set filetypes as typescript.tsx
