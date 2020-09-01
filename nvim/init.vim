@@ -16,12 +16,8 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 " Moving shortcuts/motions: <Leader><Leader>s{char} -> {target-chars}
 Plug 'easymotion/vim-easymotion'
-" Nerdtree - side tree explorer
-Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
 " Icons
 Plug 'ryanoasis/vim-devicons'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 " Fzf and search
 Plug 'Shougo/denite.nvim'
 " whitespaces
@@ -133,13 +129,13 @@ set encoding=utf8
 " npm install -g typescript-language-server
 
 " Set extensions
-let g:coc_global_extensions = ['coc-css', 'coc-html', 'coc-json', 'coc-tsserver', 'coc-python', 'coc-git', 'coc-yank', 'coc-pairs', 'coc-highlight', 'coc-tslint', 'coc-actions', 'coc-java']
+let g:coc_global_extensions = ['coc-css', 'coc-html', 'coc-json', 'coc-tsserver', 'coc-python', 'coc-git', 'coc-yank', 'coc-pairs', 'coc-highlight', 'coc-eslint', 'coc-actions', 'coc-java', 'coc-explorer']
 " config file uses jsonc
 autocmd FileType json syntax match Comment +\/\/.\+$+
 
 " --- coc.nvim extensions ---
 " coc-yank - :CocCommand yank.clean - to clean
-nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
+nnoremap <silent> <leader>y  :<C-u>CocList -A --normal yank<cr>
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
@@ -192,6 +188,10 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
+" coc-explorer
+:nmap <C-n> :CocCommand explorer<CR>
+autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | endif
+
 " Set Prettier command to be able to do :Prettier
 " command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
 " Run :Prettier on leave insert mode. On save is done by CocSettings
@@ -208,7 +208,7 @@ function! s:show_documentation()
 endfunction
 
 " Show all diagnostics (errors).
-nnoremap <silent> <space>e  :<C-u>CocList diagnostics<cr>
+nnoremap <silent> <leader>e  :<C-u>CocList diagnostics<cr>
 
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
@@ -251,23 +251,6 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}%{StatusDiagn
 " -> remove c?
 let g:airline#extensions#default#layout = [['a', 'b', 'c'], ['x', 'z', 'warning', 'error']]
 " let g:airline_extensions = ['branch', 'hunks', 'coc']
-
-" --- Nerdtree ---
-let g:NERDTreeShowHidden = 1
-let g:NERDTreeMinimalUI = 1
-let g:NERDTreeIgnore = []
-let g:NERDTreeStatusline = ''
-let g:NERDTreeIgnore = ['\.git.*$[[dir]]']
-" Automaticaly close nvim if NERDTree is only thing left open
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-" Toggle
-nnoremap <silent> <C-n> :NERDTreeToggle<CR>
-" --- Nerdtree highlight ---
-let g:NERDTreeFileExtensionHighlightFullName = 1
-let g:NERDTreeExactMatchHighlightFullName = 1
-let g:NERDTreePatternMatchHighlightFullName = 1
-let g:NERDTreeHighlightFolders = 1 " enables folder icon highlighting using exact match
-let g:NERDTreeHighlightFoldersFullName = 1 " highlights the folder name
 
 " --- ntpeters/vim-better-whitespace ---
 let g:better_whitespace_enabled=1
@@ -438,9 +421,6 @@ function! s:custom_jarvis_colors()
   " Try to hide vertical spit and end of buffer symbol
   hi VertSplit gui=NONE guifg=#17252c guibg=#17252c
   hi EndOfBuffer ctermbg=NONE ctermfg=NONE guibg=#17252c guifg=#17252c
-
-  " Customize NERDTree directory
-  hi NERDTreeCWD guifg=#99c794
 
   " Make background color transparent for git changes
   hi SignifySignAdd guibg=NONE
