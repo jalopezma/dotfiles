@@ -156,6 +156,7 @@ alias tag="cd ~/repos/YieldifyLabs/khaleesi-tag"
 alias builder="cd ~/repos/YieldifyLabs/khaleesi-tag-delivery"
 alias iron="cd ~/repos/YieldifyLabs/ironbank"
 alias gendry="cd ~/repos/YieldifyLabs/gendry/packages"
+alias dot="cd ~/repos/dotfiles"
 
 # start vim mode for zsh ###
 #bindkey -v
@@ -207,19 +208,16 @@ function cd() {
   chmod 600 /tmp/.last_dir_$UID
 }
 
-# browserstack
-export EXEC_REMOTE=false
-export BS_USER=joselopez47
-export BS_ACCKEY=eM3sYRp1Q9Cr4ND72g3L
-
-# EXEC_REMOTE=true \ BS_USER=joselopez47 \ BS_ACCKEY=eM3sYRp1Q9Cr4ND72g3L npm test
-
 # tabtab source for serverless package
 # uninstall by removing these lines or running `tabtab uninstall serverless`
 [[ -f /home/joselopez/repos/YieldifyLabs/khaleesi-tag-delivery/node_modules/tabtab/.completions/serverless.zsh ]] && . /home/joselopez/repos/YieldifyLabs/khaleesi-tag-delivery/node_modules/tabtab/.completions/serverless.zsh
 # tabtab source for sls package
 # uninstall by removing these lines or running `tabtab uninstall sls`
 [[ -f /home/joselopez/repos/YieldifyLabs/khaleesi-tag-delivery/node_modules/tabtab/.completions/sls.zsh ]] && . /home/joselopez/repos/YieldifyLabs/khaleesi-tag-delivery/node_modules/tabtab/.completions/sls.zsh
+
+# to add a check for the machine here and run only if its the laptop
+# Load faceless (yieldify command)
+eval $(_facelesscmd env init)
 
 # Auto-switch node version based on the project's package lock version
 autoload -U add-zsh-hook
@@ -238,14 +236,6 @@ load-nvmrc
 export EXEC_REMOTE=false
 export BS_USER=joselopez47
 export BS_ACCKEY=eM3sYRp1Q9Cr4ND72g3L
-
-# to add a check for the machine here and run only if its the laptop
-# Load faceless (yieldify command)
-eval $(_facelesscmd env init)
-
-# tabtab source for slss package
-# uninstall by removing these lines or running `tabtab uninstall slss`
-[[ -f /home/joselopez/repos/YieldifyLabs/khaleesi-tag-delivery/node_modules/tabtab/.completions/slss.zsh ]] && . /home/joselopez/repos/YieldifyLabs/khaleesi-tag-delivery/node_modules/tabtab/.completions/slss.zsh
 
 export AWS_SDK_LOAD_CONFIG=1
 export AWS_SHARED_CREDENTIALS_FILE=$HOME/.aws/credentials
