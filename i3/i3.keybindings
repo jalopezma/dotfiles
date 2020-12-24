@@ -137,10 +137,10 @@ bindsym $mod+r mode "resize"
 #  DP-1    external monitor
 #
 # Set external monitor to the left
-bindsym $mod+Control+d exec xrandr --output DP-1 --auto --left-of eDP-1
+bindsym $mod+Control+d exec xrandr --output DP-2 --auto --right-of eDP-1
 # bindsym $mod+Control+d exec xrandr --output DP-1 --auto --above eDP-1
 # Remove external monitor
-bindsym $mod+Control+Shift+d exec xrandr --output DP-1 --off
+bindsym $mod+Control+Shift+d exec xrandr --output DP-2 --off
 
 # sleep
 # bindsym $mod+Control+s exec betterlockscreen -s

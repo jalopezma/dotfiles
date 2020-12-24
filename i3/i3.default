@@ -44,7 +44,7 @@ floating_maximum_size 2500 x 1500
 # set $focused_color "#42adf4"
 set $focused_color "#42f4ee"
 
-# Change border color for focus window 
+# Change border color for focus window
 #
 # class                 border          backgr. text    indicator child_border
 client.focused          focused_color   #285577 #ffffff #2e9ef4   #285577
