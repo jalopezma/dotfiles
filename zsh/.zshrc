@@ -137,7 +137,8 @@ alias mario="g pull upstream master"
 alias gcm="g checkout master"
 alias gs="g status"
 alias gc.="g checkout ."
-alias gd="g dsf"
+# Using delta as default git diff https://github.com/dandavison/delta
+alias gd="g diff"
 
 alias update-all="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y"
 
@@ -193,7 +194,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
 # export npm token
-if [[ -f .npmrc && -r .npmrc ]]; then
+if [[ -f ~/.npmrc && -r ~/.npmrc ]]; then
   export NPM_TOKEN=$(cat ~/.npmrc | sed -e 's/^.*authToken=//')
 fi
 
