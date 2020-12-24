@@ -5,7 +5,7 @@
   "diagnostic.virtualText": true,
   "suggest.maxCompleteItemCount": 20,
   "coc-actions.hideCursor": false,
-  // "coc.preferences.formatOnSaveFiletypes": ["typescript", "javascript"],
+  "coc.preferences.formatOnSaveFiletypes": ["typescript"],
   // autocompletition for languages
   "languageserver": {
     "haskell": {
@@ -34,7 +34,7 @@
   "explorer.icon.enableNerdfont": true,
   "explorer.previewAction.onHover": false,
   "explorer.icon.enableVimDevicons": false,
-  "explorer.keyMappings": {
+  "explorer.keyMappings.global": {
     "<cr>": ["expandable?", "expand", "open"],
     "v": "open:vsplit"
   }
