@@ -23,6 +23,9 @@ Plug 'Shougo/denite.nvim'
 " whitespaces
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'jiangmiao/auto-pairs'
+" fzf and fzf-preview. Also used to do gdiff with delta
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
 call plug#end()
 
 let g:mapleader = "\<Space>"
@@ -53,7 +56,7 @@ set autoindent              " indent a new line the same amount as the line just
 set number                  " add line numbers column
 set relativenumber          " realtive number line instead actual line
 set wildmode=longest,list   " get bash-like tab completions
-set cc=100                  " set an 80 column border for good coding style
+" set cc=100                  " set an 100 column border for good coding style
 filetype plugin indent on   " allows auto-indenting depending on file type
 syntax on                   " syntax highlighting
 set tabstop=2               " size of an 'indent'
@@ -129,7 +132,7 @@ set encoding=utf8
 " npm install -g typescript-language-server
 
 " Set extensions
-let g:coc_global_extensions = ['coc-css', 'coc-html', 'coc-json', 'coc-tsserver', 'coc-python', 'coc-git', 'coc-yank', 'coc-pairs', 'coc-highlight', 'coc-eslint', 'coc-actions', 'coc-java', 'coc-explorer']
+let g:coc_global_extensions = ['coc-css', 'coc-html', 'coc-json', 'coc-tsserver', 'coc-python', 'coc-git', 'coc-yank', 'coc-pairs', 'coc-highlight', 'coc-eslint', 'coc-actions', 'coc-java', 'coc-explorer', 'coc-fzf-preview']
 " config file uses jsonc
 autocmd FileType json syntax match Comment +\/\/.\+$+
 
@@ -193,7 +196,7 @@ nmap <silent> gr <Plug>(coc-references)
 autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | endif
 
 " Set Prettier command to be able to do :Prettier
-" command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
+command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
 " Run :Prettier on leave insert mode. On save is done by CocSettings
 " autocmd InsertLeave *.ts,*.tsx Prettier
 
@@ -448,3 +451,9 @@ function! Handle_Win_Enter()
     setlocal winhighlight=Normal:MarkdownError
   endif
 endfunction
+
+" g diff?
+" let g:fzf_preview_git_status_preview_command =
+"    \ "[[ $(git diff --cached -- {-1}) != \"\" ]] && git diff --cached --color=always -- {-1} | delta || " .
+"    \ "[[ $(git diff -- {-1}) != \"\" ]] && git diff --color=always -- {-1} | delta || " .
+"    \ g:fzf_preview_command
