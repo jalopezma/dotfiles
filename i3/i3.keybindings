@@ -80,7 +80,7 @@ bindsym $mod+e layout toggle split
 bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+# bindsym $mod+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
@@ -151,6 +151,9 @@ bindsym $mod+Control+s exec betterlockscreen -s blur
 bindsym $mod+Control+l exec betterlockscreen -l
 # bindsym $mod+Control+l exec i3lock
 
+# Keyboard layout
+bindsym $mod+space exec ~/scripts/keyboard-layout
+
 # Install playerctl
 # $ wget http://ftp.nl.debian.org/debian/pool/main/p/playerctl/libplayerctl2_2.0.1-1_amd64.deb
 # $ wget http://ftp.nl.debian.org/debian/pool/main/p/playerctl/playerctl_2.0.1-1_amd64.deb
@@ -170,7 +173,7 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightne
 bindsym XF86TouchpadToggle exec ~/scripts/toggletouchpad.sh
 
 # Media player controls
-bindsym XF86AudioPlay  exec playerctl play-pause
+bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioStop exec playerctl stop
 bindsym XF86AudioPause exec playerctl pause
 bindsym XF86AudioNext exec playerctl next
