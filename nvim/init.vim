@@ -23,9 +23,11 @@ Plug 'Shougo/denite.nvim'
 " whitespaces
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'jiangmiao/auto-pairs'
+" Improving highlighting syntax - Requires nvim nightly 5.0
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 " fzf and fzf-preview. Also used to do gdiff with delta
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
+" Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+" Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
 call plug#end()
 
 let g:mapleader = "\<Space>"
@@ -170,7 +172,7 @@ else
 endif
 
 " Use `[g` and `]g` to navigate diagnostics
-nmap <silent> <leader>p <Plug>(coc-diagnostic-prev)
+" nmap <silent> <leader>p <Plug>(coc-diagnostic-prev)
 nmap <silent> <leader>n <Plug>(coc-diagnostic-next)
 
 " Remap keys for applying codeAction to the current line.
@@ -457,3 +459,30 @@ endfunction
 "    \ "[[ $(git diff --cached -- {-1}) != \"\" ]] && git diff --cached --color=always -- {-1} | delta || " .
 "    \ "[[ $(git diff -- {-1}) != \"\" ]] && git diff --color=always -- {-1} | delta || " .
 "    \ g:fzf_preview_command
+
+" https://github.com/nvim-treesitter/nvim-treesitter
+" Configuration to enable modules
+" - highlighting
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  highlight = {
+    enable = true,
+    custom_captures = {
+      -- Highlight the @foo.bar capture group with the "Identifier" highlight group.
+      ["foo.bar"] = "Identifier",
+    },
+  },
+  incremental_selection = {
+    enable = true,
+    keymaps = {
+      init_selection = "gnn",
+      node_incremental = "grn",
+      scope_incremental = "grc",
+      node_decremental = "grm",
+    },
+  },
+  indent = {
+    enable = true
+  }
+}
+EOF

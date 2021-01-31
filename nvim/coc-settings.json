@@ -6,6 +6,8 @@
   "suggest.maxCompleteItemCount": 20,
   "coc-actions.hideCursor": false,
   "coc.preferences.formatOnSaveFiletypes": ["typescript"],
+  "prettier.onlyUseLocalVersion": true,
+  "prettier.requireConfig": true,
   // autocompletition for languages
   "languageserver": {
     "haskell": {
