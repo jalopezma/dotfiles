@@ -24,7 +24,11 @@ Plug 'Shougo/denite.nvim'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'jiangmiao/auto-pairs'
 " Improving highlighting syntax - Requires nvim nightly 5.0
+" You need to run :TSInstall all
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+
+Plug 'p00f/nvim-ts-rainbow'
+
 " fzf and fzf-preview. Also used to do gdiff with delta
 " Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 " Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
@@ -482,6 +486,9 @@ require'nvim-treesitter.configs'.setup {
     },
   },
   indent = {
+    enable = true
+  },
+  rainbow = {
     enable = true
   }
 }
