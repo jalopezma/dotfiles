@@ -1,11 +1,13 @@
 {
   // I might need to update this frequently
-  "tsserver.npm": "/home/joselopez/.nvm/versions/node/v10.15.0/bin/npm",
+  "tsserver.npm": "/home/joselopez/.nvm/versions/node/v12.9.1/bin/npm",
   // "eslint.filetypes": ["javascript", "typescript", "typescriptreact", "javascriptreact", "typescript.tsx"],
   "diagnostic.virtualText": true,
   "suggest.maxCompleteItemCount": 20,
   "coc-actions.hideCursor": false,
-  "coc.preferences.formatOnSaveFiletypes": ["typescript"],
+  // "coc.preferences.formatOnSaveFiletypes": ["typescript"],
+  "coc.preferences.formatOnSaveFiletypes": ["scala"],
+  "json.enable": true,
   "prettier.onlyUseLocalVersion": true,
   "prettier.requireConfig": true,
   // autocompletition for languages
@@ -39,5 +41,9 @@
   "explorer.keyMappings.global": {
     "<cr>": ["expandable?", "expand", "open"],
     "v": "open:vsplit"
-  }
+  },
+  // scala
+  // code lens not enable for now
+  "codeLens.enable": false,
+  "metals.statusBarEnabled": true
 }

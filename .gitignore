@@ -3,3 +3,6 @@ __pycache__
 i3/config
 nvim/plugged
 nvim/.net*
+
+# Scala coc-metals plugin
+.metals

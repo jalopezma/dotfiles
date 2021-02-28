@@ -1,7 +1,8 @@
 " VimPlug
 call plug#begin()
-" Material theme
+" Colorscheme
 Plug 'kaicataldo/material.vim'
+
 " Full LanguageServerProtocol
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " TS TSX and JSX suuport
@@ -23,10 +24,15 @@ Plug 'Shougo/denite.nvim'
 " whitespaces
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'jiangmiao/auto-pairs'
+
+" Nearley JS parser syntax
+Plug 'tjvr/vim-nearley'
+
 " Improving highlighting syntax - Requires nvim nightly 5.0
 " You need to run :TSInstall all
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 
+" Rainbow parenthesis
 Plug 'p00f/nvim-ts-rainbow'
 
 " fzf and fzf-preview. Also used to do gdiff with delta
@@ -44,9 +50,8 @@ nnoremap <leader>s :source ~/.config/nvim/init.vim<CR>
 if (has('termguicolors'))
   set termguicolors
 endif
+syntax enable
 
-set t_Co=256
-set background=dark
 colorscheme material
 " Options: 'default' | 'palenight' | 'ocean' | 'lighter' | 'darker'
 let g:material_theme_style = 'default'
@@ -101,6 +106,8 @@ vno v <ESC>
 noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
 noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 
+" For Scala (only?) if hidden is not set, TextEdit might fail.
+set hidden
 " Set space for displaying messages.
 set cmdheight=1
 
@@ -126,6 +133,14 @@ com! FormatJSON %!python -m json.tool
 " Sets the + (unnamedplus) and * (unnamed) registers to be used as ctrl+v/c
 set clipboard^=unnamedplus
 
+" --- Scala ----
+" Help Vim recognize *.sbt and *.sc as Scala files
+au BufRead,BufNewFile *.sbt,*.sc set filetype=scala
+
+" Trigger for code actions
+" Make sure `"codeLens.enable": true` is set in your coc config
+nnoremap <leader>cl :<C-u>call CocActionAsync('codeLensAction')<CR>
+
 " --- VIMDEVICONS ---
 " vimdevicons
 set encoding=utf8
@@ -138,8 +153,9 @@ set encoding=utf8
 " npm install -g typescript-language-server
 
 " Set extensions
-let g:coc_global_extensions = ['coc-css', 'coc-html', 'coc-json', 'coc-tsserver', 'coc-python', 'coc-git', 'coc-yank', 'coc-pairs', 'coc-highlight', 'coc-eslint', 'coc-actions', 'coc-java', 'coc-explorer', 'coc-fzf-preview']
-" config file uses jsonc
+let g:coc_global_extensions = ['coc-css', 'coc-html', 'coc-json', 'coc-tsserver', 'coc-python', 'coc-git', 'coc-yank', 'coc-pairs', 'coc-highlight', 'coc-eslint', 'coc-actions', 'coc-java', 'coc-explorer', 'coc-fzf-preview', 'coc-metals']
+" coc.nvim uses jsonc as a configuration file format. It's basically json with comment support.
+" In order to get comment highlighting:
 autocmd FileType json syntax match Comment +\/\/.\+$+
 
 " --- coc.nvim extensions ---
@@ -458,38 +474,26 @@ function! Handle_Win_Enter()
   endif
 endfunction
 
-" g diff?
-" let g:fzf_preview_git_status_preview_command =
-"    \ "[[ $(git diff --cached -- {-1}) != \"\" ]] && git diff --cached --color=always -- {-1} | delta || " .
-"    \ "[[ $(git diff -- {-1}) != \"\" ]] && git diff --color=always -- {-1} | delta || " .
-"    \ g:fzf_preview_command
-
 " https://github.com/nvim-treesitter/nvim-treesitter
 " Configuration to enable modules
 " - highlighting
+"  rainbow = {
+"    enable = true
+"  },
+"  highlight = {
+"    enable = true,
+"    custom_captures = {
+"      -- Highlight the @foo.bar capture group with the "Identifier" highlight group.
+"      ["foo.bar"] = "Identifier",
+"    },
+"  },
+
+
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
   highlight = {
     enable = true,
-    custom_captures = {
-      -- Highlight the @foo.bar capture group with the "Identifier" highlight group.
-      ["foo.bar"] = "Identifier",
-    },
-  },
-  incremental_selection = {
-    enable = true,
-    keymaps = {
-      init_selection = "gnn",
-      node_incremental = "grn",
-      scope_incremental = "grc",
-      node_decremental = "grm",
-    },
-  },
-  indent = {
-    enable = true
-  },
-  rainbow = {
-    enable = true
   }
 }
+
 EOF
