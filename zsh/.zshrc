@@ -204,6 +204,10 @@ alias iron="cd ~/repos/YieldifyLabs/ironbank"
 alias gendry="cd ~/repos/YieldifyLabs/gendry/packages"
 alias dot="cd ~/repos/dotfiles"
 
+# openvpn
+alias yvpn="openvpn3 session-start --config ~/linux_desktop_jose_lopez@yieldify_com@_\[London\].ovpn"
+alias yvpn-d="openvpn3 session-manage --config ~/linux_desktop_jose_lopez@yieldify_com@_\[London\].ovpn --disconnect"
+
 # start vim mode for zsh ###
 #bindkey -v
 
