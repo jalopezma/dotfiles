@@ -10,6 +10,8 @@ Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 " Git
 Plug 'tpope/vim-fugitive'
+" To be able to run :GBrowse and open the file in git
+Plug 'tpope/vim-rhubarb'
 " Git, add column with status if line has been changed
 Plug 'mhinz/vim-signify'
 " Status bar
@@ -52,7 +54,8 @@ if (has('termguicolors'))
 endif
 syntax enable
 
-colorscheme material
+" colorscheme material
+colorscheme base16-onedark
 " Options: 'default' | 'palenight' | 'ocean' | 'lighter' | 'darker'
 let g:material_theme_style = 'default'
 let g:airline_theme = 'space'
