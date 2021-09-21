@@ -34,6 +34,8 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend upda
 
 " Rainbow parenthesis
 Plug 'p00f/nvim-ts-rainbow'
+" VCL Fastly
+Plug 'fgsch/vim-varnish'
 
 " fzf and fzf-preview. Also used to do gdiff with delta
 " Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -45,6 +47,8 @@ let g:mapleader = "\<Space>"
 nnoremap <leader>v :tabnew ~/.config/nvim/init.vim<CR>
 " Sources init.vim
 nnoremap <leader>s :source ~/.config/nvim/init.vim<CR>
+" Source Vim configuration file and install plugins
+nnoremap <silent><leader>1 :source ~/.config/nvim/init.vim \| :PlugInstall<CR>
 
 " --- COLORS SCHEMA ---
 if (has('termguicolors'))
@@ -152,6 +156,7 @@ set encoding=utf8
 " Typescript autocompletition
 " npm install -g typescript-language-server
 
+let g:coc_node_path = '/home/joselopez/.nvm/versions/node/v15.14.0/bin/node'
 " Set extensions
 let g:coc_global_extensions = ['coc-css', 'coc-html', 'coc-json', 'coc-tsserver', 'coc-python', 'coc-git', 'coc-yank', 'coc-pairs', 'coc-highlight', 'coc-eslint', 'coc-actions', 'coc-java', 'coc-explorer', 'coc-fzf-preview', 'coc-metals']
 " coc.nvim uses jsonc as a configuration file format. It's basically json with comment support.
