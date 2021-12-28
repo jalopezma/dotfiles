@@ -1,9 +1,34 @@
+#
+# ZPLUG
+#
+source ~/.zplug/init.zsh
+
+# Can manage local plugins
+# zplug "~/.zsh", from:local
+
+# Load theme file
+# zplug 'dracula/zsh', as:theme
+
+# https://github.com/jeffreytse/zsh-vi-mode
+# zplug "effreytse/zsh-vi-mode"
+
+# Install plugins if there are plugins that have not been installed
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
+#
+# ZPLUG
+#
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # tmux
 # export TERM=xterm-256color
-export EDITOR=vim
+export EDITOR=nvim
 
 # Add go binary to path
 export PATH=$PATH:/usr/local/go/bin
@@ -94,9 +119,17 @@ SPACESHIP_DOCKER_SHOW="false"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions history-search-multi-word z)
+plugins=(git zsh-autosuggestions history-search-multi-word z zsh-completions)
+
+# https://github.com/jeffreytse/zsh-vi-mode
+# plugins+=(zsh-vi-mode)
+
+# For zsh-completions
+autoload -U compinit && compinit
+
 # https://github.com/zsh-users/zsh-autosuggestions
 # plugins=(zsh-syntax-highlighting)
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -140,6 +173,9 @@ alias gc.="g checkout ."
 # Using delta as default git diff https://github.com/dandavison/delta
 alias gd="g diff"
 
+# nvm
+alias nvmd="nvm use default"
+
 alias update-all="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y"
 
 alias l="exa --long --git"
@@ -158,6 +194,10 @@ alias builder="cd ~/repos/YieldifyLabs/khaleesi-tag-delivery"
 alias iron="cd ~/repos/YieldifyLabs/ironbank"
 alias gendry="cd ~/repos/YieldifyLabs/gendry/packages"
 alias dot="cd ~/repos/dotfiles"
+
+# openvpn
+alias yvpn="openvpn3 session-start --config '/home/joselopez/yieldify_laptop_jose_lopez@yieldify_com@_[London].ovpn' joselopez"
+alias yvpn-d="openvpn3 session-manage --config '/home/joselopez/yieldify_laptop_jose_lopez@yieldify_com@_[London].ovpn' joselopez --disconnect"
 
 # start vim mode for zsh ###
 #bindkey -v
@@ -185,9 +225,6 @@ alias dot="cd ~/repos/dotfiles"
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
-
-fpath=(~/.zsh/completion $fpath)
-autoload -Uz compinit && compinit -i
 
 # start nvm
 export NVM_DIR="$HOME/.nvm"
@@ -241,3 +278,7 @@ export BS_ACCKEY=eM3sYRp1Q9Cr4ND72g3L
 export AWS_SDK_LOAD_CONFIG=1
 export AWS_SHARED_CREDENTIALS_FILE=$HOME/.aws/credentials
 export AWS_CONFIG_FILE=$HOME/.aws/config
+
+# https://github.com/zdharma/history-search-multi-word
+# zstyle ":history-search-multi-word" page-size "8"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
