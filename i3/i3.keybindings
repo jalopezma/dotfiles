@@ -1,4 +1,5 @@
 set $mod Mod1
+set $reloadConfig ~/repos/dotfiles/i3/generate-config.sh
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -89,7 +90,7 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r exec ~/repos/dotfiles/i3/generate-config.sh
+bindsym $mod+Shift+r exec $reloadConfig
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 bindsym $mod+Shift+Control+w exec "i3-msg exit"
@@ -138,11 +139,11 @@ bindsym $mod+r mode "resize"
 #
 # Set external monitor to the left
 # bindsym $mod+Control+d exec xrandr --output eDP-1 --mode 1920x1080 && xrandr --output DP-1 --mode 2560x1440 --right-of eDP-1
-bindsym $mod+Control+d exec $screen2
+bindsym $mod+Control+d exec $screen2 && $reloadConfig
 
 # bindsym $mod+Control+d exec xrandr --output DP-1 --auto --above eDP-1
 # Remove external monitor
-bindsym $mod+Control+Shift+d exec xrandr --output DP-1 --off
+bindsym $mod+Control+Shift+d exec xrandr --output DP-1 --off && $reloadConfig
 
 # sleep
 # bindsym $mod+Control+s exec betterlockscreen -s
