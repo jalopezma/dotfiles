@@ -1,6 +1,6 @@
 #!/bin/bash
 CONFIG_FILE='/home/joselopez/yieldify_laptop_jose_lopez@yieldify_com@_[London].ovpn'
-USERNAME='joselopez'
+USERNAME=$(whoami)
 
 sessions=$(openvpn3 sessions-list)
 echo "$sessions"

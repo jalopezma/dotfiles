@@ -6,7 +6,7 @@
 killall -q polybar
 
 # Wait until the processes have been shut down
-while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
+while pgrep -u $(id -u) -x polybar >/dev/null; do sleep 0.2; done
 
 # Launch the same bar for each monitor
 for m in $(polybar --list-monitors | cut -d":" -f1); do

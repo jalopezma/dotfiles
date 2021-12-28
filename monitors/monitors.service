@@ -1,0 +1,8 @@
+[Unit]
+Description=Updates screen resolution on monitor changes
+
+[Service]
+Type=oneshot
+User=joselopez
+RemainAfterExit=true
+ExecStart=/home/joselopez/scripts/monitors.sh change
