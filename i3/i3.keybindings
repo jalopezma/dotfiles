@@ -138,21 +138,17 @@ bindsym $mod+r mode "resize"
 #  DP-1    external monitor
 #
 # Set external monitor to the left
-# bindsym $mod+Control+d exec xrandr --output eDP-1 --mode 1920x1080 && xrandr --output DP-1 --mode 2560x1440 --right-of eDP-1
-bindsym $mod+Control+d exec $screen2 && $reloadConfig
+bindsym $mod+Control+d exec ~/scripts/monitors.sh add
 
-# bindsym $mod+Control+d exec xrandr --output DP-1 --auto --above eDP-1
 # Remove external monitor
-bindsym $mod+Control+Shift+d exec xrandr --output DP-1 --off && $reloadConfig
+bindsym $mod+Control+Shift+d exec ~/scripts/monitors.sh off
 
 # sleep
-# bindsym $mod+Control+s exec betterlockscreen -s
 # do fisrt:
 # betterlockscreen -u ~/wallpapers/earth-moon-4k.jpg
 bindsym $mod+Control+s exec betterlockscreen -s blur
 # lock
 bindsym $mod+Control+l exec betterlockscreen -l blur
-# bindsym $mod+Control+l exec i3lock
 
 # Keyboard layout
 bindsym $mod+space exec ~/scripts/keyboard-layout

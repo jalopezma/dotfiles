@@ -64,6 +64,14 @@ export ZSH=$HOME/.oh-my-zsh
 export XDG_CONFIG_HOME=~/.config
 #export VIMINIT="$XDG_CONFIG_HOME/nvim/init.vim"
 
+# We define a computer to differentiate config
+HOSTNAME=$(hostname)
+if [[ $HOSTNAME == 'Y-LD-WIN1123' ]]; then
+  export COMPUTER='LAPTOP'
+else
+  export COMPUTER='DESKTOP'
+fi
+
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes

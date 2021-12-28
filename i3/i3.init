@@ -1,19 +1,6 @@
-set $screen1 xrandr --output DP-1 --mode 1920x1080
-set $screen2 xrandr --output DP-1 --mode 1920x1080 --right-of eDP-1
 # compton for opacity and transitions on change workspaces
 exec compton -f
-# exec xrandr --output eDP-1 --mode 1920x1080
-# Madrid monitor
-# exec xrandr --output DP-1 --mode 1920x1080
-# exec xrandr --output DP-1 --mode 2560x1440
-# exec xrandr --output DP-1 --auto --right-of eDP-1
-# exec xrandr --output eDP-1 --mode 2560x1440
-# exec xrandr --output eDP-1 --mode 3840x2160
-# exec xrandr --output eDP-1 --mode 3840x2160
-# exec xrandr --output DP-2 --mode 3840x2160 --right-of eDP-1
-exec $screen1
-# exec xrandr --output DP-1 --mode 2560x1440 --right-of eDP-1
-exec $screen2
+exec ~/scripts/monitors.sh
 
 ########################
 # Background
