@@ -1,5 +1,4 @@
 # compton for opacity and transitions on change workspaces
-exec compton -f
 exec ~/scripts/monitors.sh
 
 ########################
@@ -9,6 +8,7 @@ exec ~/scripts/monitors.sh
 #######################
 # exec_always feh --bg-scale ~/wallpapers/wallpagper4k_1.png --bg-scale ~/wallpapers/wallpagper4k_2.png
 # exec_always feh --bg-scale ~/wallpapers/earth-moon-4k.jpg
+exec compton -f
 exec_always feh --bg-scale ~/wallpapers/rIgX9wA.jpeg
 
 # Start i3bar to display a workspace bar (plus the system information i3status
