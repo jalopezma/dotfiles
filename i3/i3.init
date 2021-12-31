@@ -25,7 +25,7 @@ exec_always feh --bg-scale ~/wallpapers/rIgX9wA.jpeg
   #tray_output primary
 #}
 
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+exec_always --no-startup-id ~/.config/polybar/launch.sh
 
 # To remember the passphrase
 # Also you need to add this to: ~/.profile

@@ -49,10 +49,6 @@ export PATH=$PATH:~/bin
 
 # Add go binary to path
 export PATH=$PATH:/usr/local/go/bin
-# Add robomongo
-# export PATH=$PATH:/opt/robomongo-0.9.0-rc10-linux-x86_64-33c89ea/bin/robomongo
-# Add mongodb
-# export PATH=$PATH:/usr/bin/mongo
 export PATH=$PATH:/opt/spark/bin/
 
 # Add go workspace path
@@ -80,7 +76,6 @@ export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
 export ZSH=$HOME/.oh-my-zsh
 
 export XDG_CONFIG_HOME=~/.config
-#export VIMINIT="$XDG_CONFIG_HOME/nvim/init.vim"
 
 # We define a computer to differentiate config
 HOSTNAME=$(hostname)
@@ -96,11 +91,10 @@ echo $COMPUTER > /tmp/computer
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 #
 # previous one
-#ZSH_THEME="robbyrussell"
 ZSH_THEME="spaceship"
 
 # Don't show tracball battery
-SPACESHIP_BATTERY_SHOW="false"
+SPACESHIP_BATTERY_SHOW="true"
 SPACESHIP_KUBECONTEXT_SHOW="false"
 SPACESHIP_DOCKER_SHOW="false"
 
@@ -146,6 +140,7 @@ SPACESHIP_DOCKER_SHOW="false"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
+plugins=(git zsh-autosuggestions history-search-multi-word z zsh-completions docker dotenv)
 
 # https://github.com/jeffreytse/zsh-vi-mode
 # plugins+=(zsh-vi-mode)
@@ -153,7 +148,6 @@ SPACESHIP_DOCKER_SHOW="false"
 # For zsh-completions
 autoload -U compinit && compinit
 
-plugins=(git zsh-autosuggestions history-search-multi-word z zsh-completions dotenv)
 # https://github.com/zsh-users/zsh-autosuggestions
 # plugins=(zsh-syntax-highlighting)
 
@@ -282,10 +276,10 @@ function cd() {
 
 # tabtab source for serverless package
 # uninstall by removing these lines or running `tabtab uninstall serverless`
-[[ -f /home/joselopez/repos/YieldifyLabs/khaleesi-tag-delivery/node_modules/tabtab/.completions/serverless.zsh ]] && . /home/joselopez/repos/YieldifyLabs/khaleesi-tag-delivery/node_modules/tabtab/.completions/serverless.zsh
+[[ -f ~/repos/YieldifyLabs/khaleesi-tag-delivery/node_modules/tabtab/.completions/serverless.zsh ]] && . ~/repos/YieldifyLabs/khaleesi-tag-delivery/node_modules/tabtab/.completions/serverless.zsh
 # tabtab source for sls package
 # uninstall by removing these lines or running `tabtab uninstall sls`
-[[ -f /home/joselopez/repos/YieldifyLabs/khaleesi-tag-delivery/node_modules/tabtab/.completions/sls.zsh ]] && . /home/joselopez/repos/YieldifyLabs/khaleesi-tag-delivery/node_modules/tabtab/.completions/sls.zsh
+[[ -f ~/repos/YieldifyLabs/khaleesi-tag-delivery/node_modules/tabtab/.completions/sls.zsh ]] && . ~z/repos/YieldifyLabs/khaleesi-tag-delivery/node_modules/tabtab/.completions/sls.zsh
 
 # to add a check for the machine here and run only if its the laptop
 # Load faceless (yieldify command)

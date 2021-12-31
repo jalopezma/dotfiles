@@ -88,7 +88,7 @@ sudo apt install libev-dev \
 ```
 
 # Add swithcer on tray system
-https://github.com/yktoo/indicator-sound-switchersound
+https://github.com/yktoo/indicator-sound-switcher
 
 I need to add `exec indicator-sound-switcher` to i3status or polybar
 

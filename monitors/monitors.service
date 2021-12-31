@@ -3,6 +3,6 @@ Description=Updates screen resolution on monitor changes
 
 [Service]
 Type=oneshot
-User=joselopez
+User=<user>
 RemainAfterExit=true
-ExecStart=/home/joselopez/scripts/monitors.sh change
+ExecStart=/home/<user>/scripts/monitors.sh change
