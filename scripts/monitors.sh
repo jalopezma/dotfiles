@@ -80,9 +80,9 @@ function change() {
   local _visible2=$5
 
   if [ -z "$_secondary" ]; then
-    off $_primary $_focused
+    off $"_primary" $_focused
   else
-    add $_primary $_secondary $_focused $_visible1 $_visible2
+    add "$_primary" "$_secondary" $_focused "$_visible1" "$_visible2"
   fi
 }
 
@@ -103,19 +103,17 @@ function main() {
   visible2=$(i3-msg -t get_workspaces | jq '.[] | select(.visible==true).name')
 
   if [ $_option = "add" ]; then
-    add $primary $secondary $focused $visible1 $visible2
-    echo ""
+    add "$primary" "$secondary" $focused "$visible1" "$visible2"
   elif [ $_option = "off" ]; then
-    off $primary $focused
-    echo ""
+    off "$primary" $focused
   elif [ $_option = "change" ]; then
-    change $primary $secondary $focused $visible1 $visible2
+    change "$primary" "$secondary" $focused "$visible1" "$visible2"
   else
     echo "[monitors.sh] - Unknown option \"$_option\"" >> $logFile
   fi
 
   # Re-launch the status bars
-  /home/joselopez/.config/polybar/launch.sh
+  ~/.config/polybar/launch.sh
 }
 
 echo "[monitors.sh] --------------------------- $(date)" >> $logFile

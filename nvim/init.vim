@@ -156,9 +156,9 @@ set encoding=utf8
 " Typescript autocompletition
 " npm install -g typescript-language-server
 
-let g:coc_node_path = '/home/joselopez/.nvm/versions/node/v15.14.0/bin/node'
+let g:coc_node_path = '~/.nvm/versions/node/v16.13.1/bin/node'
 " Set extensions
-let g:coc_global_extensions = ['coc-css', 'coc-html', 'coc-json', 'coc-tsserver', 'coc-python', 'coc-git', 'coc-yank', 'coc-pairs', 'coc-highlight', 'coc-eslint', 'coc-actions', 'coc-java', 'coc-explorer', 'coc-fzf-preview', 'coc-metals']
+let g:coc_global_extensions = ['coc-css', 'coc-html', 'coc-json', 'coc-tsserver', 'coc-python', 'coc-git', 'coc-yank', 'coc-pairs', 'coc-highlight', 'coc-eslint', 'coc-actions', 'coc-java', 'coc-explorer', 'coc-fzf-preview', 'coc-metals', 'coc-go']
 " coc.nvim uses jsonc as a configuration file format. It's basically json with comment support.
 " In order to get comment highlighting:
 autocmd FileType json syntax match Comment +\/\/.\+$+
