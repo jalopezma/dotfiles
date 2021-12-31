@@ -85,10 +85,10 @@ set undofile                " Creates <FILENAME>.un~ so you can undo actions don
 set winbl=10                " Set floating window to be slightly transparent
 
 " set dir for swap, backup and undo files. Do before:
-" mkdir -p ~/.vim/{backup_files,swap_files,undo_files}
-set backupdir=~/.vim/backup_files//
-set directory=~/.vim/swap_files//
-set undodir=~/.vim/undo_files//
+" mkdir -p ~/.config/nvim/{backup_files,swap_files,undo_files}
+set backupdir=~/.config/nvim/backup_files//
+set directory=~/.config/nvim/swap_files//
+set undodir=~/.config/nvim/undo_files//
 
 " Add icon to breakline
 set showbreak=↪
