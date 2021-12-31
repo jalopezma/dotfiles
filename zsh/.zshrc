@@ -3,6 +3,13 @@
 #
 source ~/.zplug/init.zsh
 
+# Export nvm completion settings for zsh-nvm plugin
+export NVM_COMPLETION=true
+# Lazy loading is around 70x faster (874ms down to 12ms for me), however the first time
+# you run nvm, npm, node or a global module you'll get a slight delay while nvm loads first.
+# You'll only get this delay once per session.
+export NVM_LAZY_LOAD=true
+
 # Can manage local plugins
 # zplug "~/.zsh", from:local
 
@@ -12,6 +19,10 @@ source ~/.zplug/init.zsh
 # https://github.com/jeffreytse/zsh-vi-mode
 # zplug "effreytse/zsh-vi-mode"
 
+# nvm zsh pluging allow us to `nvm upgrade`
+# https://github.com/lukechilds/zsh-nvm
+zplug "lukechilds/zsh-nvm"
+
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
     printf "Install? [y/N]: "
@@ -19,6 +30,10 @@ if ! zplug check --verbose; then
         echo; zplug install
     fi
 fi
+
+# zplug load --verbose to debug
+zplug load
+
 #
 # ZPLUG
 #
@@ -245,7 +260,9 @@ export PATH="$PATH:$HOME/.rvm/bin"
 
 # start nvm
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+# If set, the zsh-nvm plugin doesn't work
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # export npm token
 if [[ -f ~/.npmrc && -r ~/.npmrc ]]; then
@@ -298,4 +315,4 @@ export AWS_CONFIG_FILE=$HOME/.aws/config
 
 # https://github.com/zdharma/history-search-multi-word
 # zstyle ":history-search-multi-word" page-size "8"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
