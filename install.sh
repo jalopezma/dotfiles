@@ -126,16 +126,16 @@ createSymlink ~/repos/dotfiles/scripts ~/scripts
 print "[wallpapaers] Link wallpapers"
 createSymlink ~/repos/dotfiles/wallpapers ~/wallpapers
 
-sh ./git/install.sh "$verbose"
-sh ./zsh/install.sh "$verbose"
-sh ./nvm/install.sh "$verbose"
-sh ./nvim/install.sh "$verbose"
+bash ./git/install.sh "$verbose"
+bash ./zsh/install.sh "$verbose"
+bash ./nvm/install.sh "$verbose"
+bash ./nvim/install.sh "$verbose"
 
-sh ./rofi/install.sh "$verbose"
-sh ./monitors/install.sh "$verbose"
-sh ./i3/install.sh "$verbose"
-sh ./polybar/install.sh "$verbose"
-sh ./alacritty/install.sh "$verbose"
+bash ./rofi/install.sh "$verbose"
+bash ./monitors/install.sh "$verbose"
+bash ./i3/install.sh "$verbose"
+bash ./polybar/install.sh "$verbose"
+bash ./alacritty/install.sh "$verbose"
 
 # i3
 # polibyar

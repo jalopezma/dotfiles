@@ -54,7 +54,7 @@ print "[zsh] Plugin zsh-autosuggestions"
 run "$(git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions 2>&1)"
 
 print "[zsh] Plugin history-search-multi-word"
-run "$(git clone git@github.com:zdharma/history-search-multi-word.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/history-search-multi-word 2>&1)"
+run "$(git clone https://github.com/zdharma/history-search-multi-word.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/history-search-multi-word 2>&1)"
 
 print "[zsh] Plugin zsh-completions"
 run "$(git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom/plugins}/zsh-completions 2>&1)"

@@ -3,9 +3,9 @@
 Run to install it
 TODO: Update with right URL
 ```
-sh -c "$(wget -q -O- https://raw.githubusercontent.com/jalopezma/dotfiles/add-install-script/install.sh)"
-sh -c "$(wget -q -O- https://raw.githubusercontent.com/jalopezma/dotfiles/add-install-script/install.sh)" "" -v
-sh -c "$(wget -q -O- )" --attr
+bash -c "$(wget -q -O- https://raw.githubusercontent.com/jalopezma/dotfiles/add-install-script/install.sh)"
+bash -c "$(wget -q -O- https://raw.githubusercontent.com/jalopezma/dotfiles/add-install-script/install.sh)" "" -v
+bash -c "$(wget -q -O- )" --attr
 ```
 
 ## VIM
