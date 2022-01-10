@@ -5,12 +5,15 @@
 # export TERM=xterm-256color
 export EDITOR=vim
 
+export PATH=$PATH:~/bin
+
 # Add go binary to path
 export PATH=$PATH:/usr/local/go/bin
 # Add robomongo
-export PATH=$PATH:/opt/robomongo-0.9.0-rc10-linux-x86_64-33c89ea/bin/robomongo
+# export PATH=$PATH:/opt/robomongo-0.9.0-rc10-linux-x86_64-33c89ea/bin/robomongo
 # Add mongodb
-export PATH=$PATH:/usr/bin/mongo
+# export PATH=$PATH:/usr/bin/mongo
+export PATH=$PATH:/opt/spark/bin/
 
 # Add go workspace path
 export GOPATH=$HOME/repos/go
@@ -94,7 +97,7 @@ SPACESHIP_DOCKER_SHOW="false"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions history-search-multi-word z)
+plugins=(git zsh-autosuggestions history-search-multi-word z dotenv)
 # https://github.com/zsh-users/zsh-autosuggestions
 # plugins=(zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
@@ -129,6 +132,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias n="nvim"
+alias nt="nvim +terminal"
 alias vi="nvim"
 # Git
 alias g="git"
@@ -161,7 +165,18 @@ alias dot="cd ~/repos/dotfiles"
 
 # openvpn
 alias yvpn="openvpn3 session-start --config ~/linux_desktop_jose_lopez@yieldify_com@_\[London\].ovpn"
-alias yvpn-d="openvpn3 session-manage --config ~/linux_desktop_jose_lopez@yieldify_com@_\[London\].ovpn --disconnect"
+alias ypvn="yvpn"
+alias yvpn-d="openvpn3 session-manage --config ~/linux_desktop_jose_lopez@yieldify_com@_\[London\].ovpn --disconnect && openvpn3 sessions-list"
+alias ypnn-d="yvpn-d"
+alias yvpn-l="openvpn3 sessions-list"
+
+# python alias create alias
+alias c-venv="python -m venv .venv"
+alias a-venv="source .venv/bin/activate"
+
+# kill bluetooth
+alias killbluetooth="ps -aux | grep blue | grep -v 'grep' | tr -s ' ' | cut -d ' ' -f 2 | xargs sudo kill -9"
+alias snowcli="snowsql -a rx74934.eu-west-1 -u jose_lopez -d YIELDIFY_EVENT_PRODUCTION -s PUBLIC -w COMPUTE_WH"
 
 # start vim mode for zsh ###
 #bindkey -v

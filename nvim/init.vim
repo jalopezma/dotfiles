@@ -113,6 +113,10 @@ vno v <ESC>
 noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
 noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 
+" Neovim terminal remap escape to go normal mode
+:tnoremap <Esc> <C-\><C-n>
+:tnoremap jk <C-\><C-n>
+
 " For Scala (only?) if hidden is not set, TextEdit might fail.
 set hidden
 " Set space for displaying messages.
@@ -139,6 +143,8 @@ com! FormatJSON %!python -m json.tool
 
 " Sets the + (unnamedplus) and * (unnamed) registers to be used as ctrl+v/c
 set clipboard^=unnamedplus
+" --- Python ---
+let g:python3_host_prog = '/usr/bin/python3'
 
 " --- Scala ----
 " Help Vim recognize *.sbt and *.sc as Scala files
@@ -161,7 +167,8 @@ set encoding=utf8
 
 let g:coc_node_path = '~/.nvm/versions/node/v15.14.0/bin/node'
 " Set extensions
-let g:coc_global_extensions = ['coc-css', 'coc-html', 'coc-json', 'coc-tsserver', 'coc-python', 'coc-git', 'coc-yank', 'coc-pairs', 'coc-highlight', 'coc-eslint', 'coc-actions', 'coc-java', 'coc-explorer', 'coc-fzf-preview', 'coc-metals']
+let g:coc_global_extensions = ['coc-css', 'coc-html', 'coc-json', 'coc-tsserver', 'coc-git', 'coc-yank', 'coc-pairs', 'coc-highlight', 'coc-eslint', 'coc-actions', 'coc-java', 'coc-explorer', 'coc-fzf-preview', 'coc-metals', 'coc-pyright']
+
 " coc.nvim uses jsonc as a configuration file format. It's basically json with comment support.
 " In order to get comment highlighting:
 autocmd FileType json syntax match Comment +\/\/.\+$+
@@ -222,7 +229,7 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 " coc-explorer
-:nmap <C-n> :CocCommand explorer<CR>
+:nmap <C-n> :CocCommand explorer --width=50<CR>
 autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | endif
 
 " Set Prettier command to be able to do :Prettier
@@ -284,6 +291,8 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}%{StatusDiagn
 " -> remove c?
 let g:airline#extensions#default#layout = [['a', 'b', 'c'], ['x', 'z', 'warning', 'error']]
 " let g:airline_extensions = ['branch', 'hunks', 'coc']
+" let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#buffer_nr_show = 1
 
 " --- ntpeters/vim-better-whitespace ---
 let g:better_whitespace_enabled=1
