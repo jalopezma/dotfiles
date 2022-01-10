@@ -34,8 +34,9 @@
   },
 
   // explorer
-  "explorer.width": 30,
+  // "explorer.width": 30,
   "explorer.icon.enableNerdfont": true,
+  "explorer.file.showHiddenFiles": true,
   "explorer.previewAction.onHover": false,
   "explorer.keyMappings.global": {
     "<cr>": ["expandable?", "expand", "open"],
