@@ -30,12 +30,15 @@ fi
 # export TERM=xterm-256color
 export EDITOR=nvim
 
+export PATH=$PATH:~/bin
+
 # Add go binary to path
 export PATH=$PATH:/usr/local/go/bin
 # Add robomongo
-export PATH=$PATH:/opt/robomongo-0.9.0-rc10-linux-x86_64-33c89ea/bin/robomongo
+# export PATH=$PATH:/opt/robomongo-0.9.0-rc10-linux-x86_64-33c89ea/bin/robomongo
 # Add mongodb
-export PATH=$PATH:/usr/bin/mongo
+# export PATH=$PATH:/usr/bin/mongo
+export PATH=$PATH:/opt/spark/bin/
 
 # Add go workspace path
 export GOPATH=$HOME/repos/go
@@ -128,7 +131,6 @@ SPACESHIP_DOCKER_SHOW="false"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions history-search-multi-word z zsh-completions)
 
 # https://github.com/jeffreytse/zsh-vi-mode
 # plugins+=(zsh-vi-mode)
@@ -136,6 +138,7 @@ plugins=(git zsh-autosuggestions history-search-multi-word z zsh-completions)
 # For zsh-completions
 autoload -U compinit && compinit
 
+plugins=(git zsh-autosuggestions history-search-multi-word z zsh-completions dotenv)
 # https://github.com/zsh-users/zsh-autosuggestions
 # plugins=(zsh-syntax-highlighting)
 
@@ -171,6 +174,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias n="nvim"
+alias nt="nvim +terminal"
 alias vi="nvim"
 # Git
 alias g="git"
@@ -203,6 +207,14 @@ alias builder="cd ~/repos/YieldifyLabs/khaleesi-tag-delivery"
 alias iron="cd ~/repos/YieldifyLabs/ironbank"
 alias gendry="cd ~/repos/YieldifyLabs/gendry/packages"
 alias dot="cd ~/repos/dotfiles"
+
+# python alias create alias
+alias c-venv="python -m venv .venv"
+alias a-venv="source .venv/bin/activate"
+
+# kill bluetooth
+alias killbluetooth="ps -aux | grep blue | grep -v 'grep' | tr -s ' ' | cut -d ' ' -f 2 | xargs sudo kill -9"
+alias snowcli="snowsql -a rx74934.eu-west-1 -u jose_lopez -d YIELDIFY_EVENT_PRODUCTION -s PUBLIC -w COMPUTE_WH"
 
 # start vim mode for zsh ###
 #bindkey -v

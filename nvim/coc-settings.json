@@ -1,6 +1,6 @@
 {
   // I might need to update this frequently
-  "tsserver.npm": "/home/joselopez/.nvm/versions/node/v15.14.0/bin/npm",
+  "tsserver.npm": "~/.nvm/versions/node/v15.14.0/bin/npm",
   // "eslint.filetypes": ["javascript", "typescript", "typescriptreact", "javascriptreact", "typescript.tsx"],
   "diagnostic.virtualText": true,
   "suggest.maxCompleteItemCount": 20,
@@ -34,10 +34,10 @@
   },
 
   // explorer
-  "explorer.width": 30,
+  // "explorer.width": 30,
   "explorer.icon.enableNerdfont": true,
+  "explorer.file.showHiddenFiles": true,
   "explorer.previewAction.onHover": false,
-  "explorer.icon.enableVimDevicons": false,
   "explorer.keyMappings.global": {
     "<cr>": ["expandable?", "expand", "open"],
     "v": "open:vsplit"
