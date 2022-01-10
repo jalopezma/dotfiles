@@ -1,9 +1,9 @@
 # compton for opacity and transitions on change workspaces
 exec compton -f
-exec xrandr --output eDP-1 --mode 1920x1080
-# Madrid monitor
-exec xrandr --output DP-2 --mode 1920x1080
-exec xrandr --output DP-2 --auto --right-of eDP-1
+# exec xrandr --output eDP-1 --mode 1920x1080
+# Mallorca monitor
+# exec xrandr --output HDMI-0 --mode 1920x1080
+exec xrandr --output DVI-D-0 --auto --right-of HDMI-0
 # exec xrandr --output eDP-1 --mode 2560x1440
 # exec xrandr --output eDP-1 --mode 3840x2160
 
