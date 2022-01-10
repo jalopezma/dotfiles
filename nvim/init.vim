@@ -58,8 +58,8 @@ if (has('termguicolors'))
 endif
 syntax enable
 
-" colorscheme material
-colorscheme base16-onedark
+colorscheme material
+" colorscheme base16-onedark
 " Options: 'default' | 'palenight' | 'ocean' | 'lighter' | 'darker'
 let g:material_theme_style = 'default'
 let g:airline_theme = 'space'

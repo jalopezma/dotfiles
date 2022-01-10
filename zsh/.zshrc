@@ -208,13 +208,6 @@ alias iron="cd ~/repos/YieldifyLabs/ironbank"
 alias gendry="cd ~/repos/YieldifyLabs/gendry/packages"
 alias dot="cd ~/repos/dotfiles"
 
-# openvpn
-alias yvpn="openvpn3 session-start --config ~/linux_desktop_jose_lopez@yieldify_com@_\[London\].ovpn"
-alias ypvn="yvpn"
-alias yvpn-d="openvpn3 session-manage --config ~/linux_desktop_jose_lopez@yieldify_com@_\[London\].ovpn --disconnect && openvpn3 sessions-list"
-alias ypnn-d="yvpn-d"
-alias yvpn-l="openvpn3 sessions-list"
-
 # python alias create alias
 alias c-venv="python -m venv .venv"
 alias a-venv="source .venv/bin/activate"
