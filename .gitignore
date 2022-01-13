@@ -6,3 +6,8 @@ nvim/.net*
 
 # Scala coc-metals plugin
 .metals
+
+# Neovim
+nvim/backup_files
+nvim/swap_files
+nvim/undo_files
