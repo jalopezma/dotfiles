@@ -31,6 +31,14 @@ function add() {
     exit 1
   fi
 
+  # On desktop the primary monitor it's on the right
+  if [ $computer = "DESKTOP" ]; then
+    local _tmp=$_primary
+    _primary=$_secondary
+    _secondary=$_tmp
+    echo "[monitors.sh] - add: \"$computer\" we switch primary and secondary" >> $logFile
+  fi
+
   xrandr --output "$_secondary" --mode 1920x1080 --right-of "$_primary"
 
   # Select the workspace and move it to the right monitor
@@ -54,9 +62,14 @@ function add() {
 
 function off() {
   local _primary=$1
-  local _focused=$2
+  local _focused=$3
 
-  xrandr --output DP-1 --off
+  # Disable all monitors that are disconnected and have a resolution (meaning they are not disbled)
+  while IFS= read -r monitor; do
+      echo "[monitors.sh] - off: Disable \"$monitor\"" >> $logFile
+      $(xrandr --output "$monitor" --off)
+  done < <( xrandr | grep 'disconnected [0-9]' | awk '{print $1}' )
+
   # I need to move workspaces from the other screen back
   i3-msg workspace "2"
   i3-msg move workspace to "$_primary"
@@ -69,7 +82,7 @@ function off() {
 
   # Focus the ws that was focused before
   i3-msg workspace "$_focused"
-  echo "[monitors.sh] - off: Secondary monitor removed" >> /tmp/scripts.log
+  echo "[monitors.sh] - off: Secondary monitor removed" >> $logFile
 }
 
 function change() {
@@ -92,6 +105,7 @@ function main() {
   primary=$(xrandr | grep primary | awk '{ print $1 }')
   # We only get the first connected monitor
   secondary=$( xrandr | grep -v primary | grep  ' connected' | awk '{ print $1 }' | head -n 1)
+  secondary=${secondary:-""}
 
   echo "[monitors.sh] - primary \"$primary\" secondary \"$secondary\"" >> $logFile
 
@@ -104,10 +118,8 @@ function main() {
 
   if [ $_option = "add" ]; then
     add $primary $secondary $focused $visible1 $visible2
-    echo ""
   elif [ $_option = "off" ]; then
     off $primary $focused
-    echo ""
   elif [ $_option = "change" ]; then
     change $primary $secondary $focused $visible1 $visible2
   else
@@ -115,7 +127,7 @@ function main() {
   fi
 
   # Re-launch the status bars
-  /home/joselopez/.config/polybar/launch.sh
+  ~/.config/polybar/launch.sh
 }
 
 echo "[monitors.sh] --------------------------- $(date)" >> $logFile
