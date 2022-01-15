@@ -5,43 +5,49 @@ Plug 'kaicataldo/material.vim'
 
 " Full LanguageServerProtocol
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
 " TS TSX and JSX suuport
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
+
 " Git
 Plug 'tpope/vim-fugitive'
 " To be able to run :GBrowse and open the file in git
 Plug 'tpope/vim-rhubarb'
 " Git, add column with status if line has been changed
 Plug 'mhinz/vim-signify'
+
 " Status bar
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'nvim-lualine/lualine.nvim'
+" To have icons in your statusline choose one of these
+Plug 'kyazdani42/nvim-web-devicons'
+
 " Moving shortcuts/motions: <Leader><Leader>s{char} -> {target-chars}
 Plug 'easymotion/vim-easymotion'
+
 " Icons
 Plug 'ryanoasis/vim-devicons'
+
 " Fzf and search
 Plug 'Shougo/denite.nvim'
 " whitespaces
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'jiangmiao/auto-pairs'
 
 " Nearley JS parser syntax
 Plug 'tjvr/vim-nearley'
 
 " Improving highlighting syntax - Requires nvim nightly 5.0
 " You need to run :TSInstall all
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+" We recommend updating the parsers on update
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " Rainbow parenthesis
 Plug 'p00f/nvim-ts-rainbow'
+Plug 'jiangmiao/auto-pairs'
+
 " VCL Fastly
 Plug 'fgsch/vim-varnish'
 
-" fzf and fzf-preview. Also used to do gdiff with delta
-" Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-" Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
 call plug#end()
 
 let g:mapleader = "\<Space>"
@@ -73,7 +79,7 @@ set autoindent              " indent a new line the same amount as the line just
 set number                  " add line numbers column
 set relativenumber          " realtive number line instead actual line
 set wildmode=longest,list   " get bash-like tab completions
-" set cc=100                  " set an 100 column border for good coding style
+" set cc=100                \ set an 100 column border for good coding style
 filetype plugin indent on   " allows auto-indenting depending on file type
 syntax on                   " syntax highlighting
 set tabstop=2               " size of an 'indent'
@@ -158,7 +164,6 @@ nnoremap <leader>cl :<C-u>call CocActionAsync('codeLensAction')<CR>
 set encoding=utf8
 "set guifont=UbuntuMono\ Nerd\ Font\ 10
 " It's failing because of the following line. dunno
-"let g:airline_powerline_fonts = 1
 
 " --- neoclide/coc.nvim ---
 " Typescript autocompletition
@@ -279,18 +284,6 @@ nmap <silent> <leader>a :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<C
 " --- peitalin/vim-jsx-typescript ---
 " set filetypes as typescript.tsx
 autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx
-
-" --- vim-airline/vim-airline ---
-" Add (Neo)Vim's native statusline support.
-" NOTE: Please see `:h coc-status` for integrations with external plugins that
-" provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}%{StatusDiagnostic()}
-" Custom setup that removes filetype/whitespace from default vim airline bar
-" -> remove c?
-let g:airline#extensions#default#layout = [['a', 'b', 'c'], ['x', 'z', 'warning', 'error']]
-" let g:airline_extensions = ['branch', 'hunks', 'coc']
-" let g:airline#extensions#tabline#enabled = 1
-" let g:airline#extensions#tabline#buffer_nr_show = 1
 
 " --- ntpeters/vim-better-whitespace ---
 let g:better_whitespace_enabled=1
@@ -513,3 +506,35 @@ require'nvim-treesitter.configs'.setup {
 }
 
 EOF
+
+" Lualine - status bar configuration
+lua << END
+require('lualine').setup {
+  options = {
+    icons_enabled = true,
+    theme = 'material',
+    component_separators = { left = '', right = ''},
+    section_separators = { left = '', right = ''},
+    disabled_filetypes = {},
+    always_divide_middle = true,
+  },
+  sections = {
+    lualine_a = {'mode'},
+    lualine_b = {'branch', 'diff', 'diagnostics'},
+    lualine_c = {'filename'},
+    lualine_x = {'encoding', 'fileformat', 'filetype'},
+    lualine_y = {'progress'},
+    lualine_z = {'location'}
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {'filename'},
+    lualine_x = {'location'},
+    lualine_y = {},
+    lualine_z = {}
+  },
+  tabline = {},
+  extensions = {}
+}
+END
