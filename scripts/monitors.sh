@@ -93,9 +93,9 @@ function change() {
   local _visible2=$5
 
   if [ -z "$_secondary" ]; then
-    off $_primary $_focused
+    off $"_primary" $_focused
   else
-    add $_primary $_secondary $_focused $_visible1 $_visible2
+    add "$_primary" "$_secondary" $_focused "$_visible1" "$_visible2"
   fi
 }
 
@@ -105,7 +105,6 @@ function main() {
   primary=$(xrandr | grep primary | awk '{ print $1 }')
   # We only get the first connected monitor
   secondary=$( xrandr | grep -v primary | grep  ' connected' | awk '{ print $1 }' | head -n 1)
-  secondary=${secondary:-""}
 
   echo "[monitors.sh] - primary \"$primary\" secondary \"$secondary\"" >> $logFile
 
@@ -117,11 +116,11 @@ function main() {
   visible2=$(i3-msg -t get_workspaces | jq '.[] | select(.visible==true).name')
 
   if [ $_option = "add" ]; then
-    add $primary $secondary $focused $visible1 $visible2
+    add "$primary" "$secondary" $focused "$visible1" "$visible2"
   elif [ $_option = "off" ]; then
-    off $primary $focused
+    off "$primary" $focused
   elif [ $_option = "change" ]; then
-    change $primary $secondary $focused $visible1 $visible2
+    change "$primary" "$secondary" $focused "$visible1" "$visible2"
   else
     echo "[monitors.sh] - Unknown option \"$_option\"" >> $logFile
   fi

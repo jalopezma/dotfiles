@@ -3,6 +3,13 @@
 #
 source ~/.zplug/init.zsh
 
+# Export nvm completion settings for zsh-nvm plugin
+export NVM_COMPLETION=true
+# Lazy loading is around 70x faster (874ms down to 12ms for me), however the first time
+# you run nvm, npm, node or a global module you'll get a slight delay while nvm loads first.
+# You'll only get this delay once per session.
+export NVM_LAZY_LOAD=true
+
 # Can manage local plugins
 # zplug "~/.zsh", from:local
 
@@ -12,6 +19,10 @@ source ~/.zplug/init.zsh
 # https://github.com/jeffreytse/zsh-vi-mode
 # zplug "effreytse/zsh-vi-mode"
 
+# nvm zsh pluging allow us to `nvm upgrade`
+# https://github.com/lukechilds/zsh-nvm
+zplug "lukechilds/zsh-nvm"
+
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
     printf "Install? [y/N]: "
@@ -19,6 +30,10 @@ if ! zplug check --verbose; then
         echo; zplug install
     fi
 fi
+
+# zplug load --verbose to debug
+zplug load
+
 #
 # ZPLUG
 #
@@ -34,10 +49,6 @@ export PATH=$PATH:~/bin
 
 # Add go binary to path
 export PATH=$PATH:/usr/local/go/bin
-# Add robomongo
-# export PATH=$PATH:/opt/robomongo-0.9.0-rc10-linux-x86_64-33c89ea/bin/robomongo
-# Add mongodb
-# export PATH=$PATH:/usr/bin/mongo
 export PATH=$PATH:/opt/spark/bin/
 
 # Add go workspace path
@@ -65,7 +76,6 @@ export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
 export ZSH=$HOME/.oh-my-zsh
 
 export XDG_CONFIG_HOME=~/.config
-#export VIMINIT="$XDG_CONFIG_HOME/nvim/init.vim"
 
 # We define a computer to differentiate config
 HOSTNAME=$(hostname)
@@ -81,11 +91,10 @@ echo $COMPUTER > /tmp/computer
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 #
 # previous one
-#ZSH_THEME="robbyrussell"
 ZSH_THEME="spaceship"
 
 # Don't show tracball battery
-SPACESHIP_BATTERY_SHOW="false"
+SPACESHIP_BATTERY_SHOW="true"
 SPACESHIP_KUBECONTEXT_SHOW="false"
 SPACESHIP_DOCKER_SHOW="false"
 
@@ -131,6 +140,7 @@ SPACESHIP_DOCKER_SHOW="false"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
+plugins=(git zsh-autosuggestions history-search-multi-word z zsh-completions docker dotenv)
 
 # https://github.com/jeffreytse/zsh-vi-mode
 # plugins+=(zsh-vi-mode)
@@ -138,7 +148,6 @@ SPACESHIP_DOCKER_SHOW="false"
 # For zsh-completions
 autoload -U compinit && compinit
 
-plugins=(git zsh-autosuggestions history-search-multi-word z zsh-completions dotenv)
 # https://github.com/zsh-users/zsh-autosuggestions
 # plugins=(zsh-syntax-highlighting)
 
@@ -245,7 +254,9 @@ export PATH="$PATH:$HOME/.rvm/bin"
 
 # start nvm
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+# If set, the zsh-nvm plugin doesn't work
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # export npm token
 if [[ -f ~/.npmrc && -r ~/.npmrc ]]; then
@@ -265,10 +276,10 @@ function cd() {
 
 # tabtab source for serverless package
 # uninstall by removing these lines or running `tabtab uninstall serverless`
-[[ -f /home/joselopez/repos/YieldifyLabs/khaleesi-tag-delivery/node_modules/tabtab/.completions/serverless.zsh ]] && . /home/joselopez/repos/YieldifyLabs/khaleesi-tag-delivery/node_modules/tabtab/.completions/serverless.zsh
+[[ -f ~/repos/YieldifyLabs/khaleesi-tag-delivery/node_modules/tabtab/.completions/serverless.zsh ]] && . ~/repos/YieldifyLabs/khaleesi-tag-delivery/node_modules/tabtab/.completions/serverless.zsh
 # tabtab source for sls package
 # uninstall by removing these lines or running `tabtab uninstall sls`
-[[ -f /home/joselopez/repos/YieldifyLabs/khaleesi-tag-delivery/node_modules/tabtab/.completions/sls.zsh ]] && . /home/joselopez/repos/YieldifyLabs/khaleesi-tag-delivery/node_modules/tabtab/.completions/sls.zsh
+[[ -f ~/repos/YieldifyLabs/khaleesi-tag-delivery/node_modules/tabtab/.completions/sls.zsh ]] && . ~z/repos/YieldifyLabs/khaleesi-tag-delivery/node_modules/tabtab/.completions/sls.zsh
 
 # to add a check for the machine here and run only if its the laptop
 # Load faceless (yieldify command)
@@ -298,4 +309,4 @@ export AWS_CONFIG_FILE=$HOME/.aws/config
 
 # https://github.com/zdharma/history-search-multi-word
 # zstyle ":history-search-multi-word" page-size "8"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+

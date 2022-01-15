@@ -85,10 +85,10 @@ set undofile                " Creates <FILENAME>.un~ so you can undo actions don
 set winbl=10                " Set floating window to be slightly transparent
 
 " set dir for swap, backup and undo files. Do before:
-" mkdir -p ~/.vim/{backup_files,swap_files,undo_files}
-set backupdir=~/.vim/backup_files//
-set directory=~/.vim/swap_files//
-set undodir=~/.vim/undo_files//
+" mkdir -p ~/.config/nvim/{backup_files,swap_files,undo_files}
+set backupdir=~/.config/nvim/backup_files//
+set directory=~/.config/nvim/swap_files//
+set undodir=~/.config/nvim/undo_files//
 
 " Add icon to breakline
 set showbreak=↪
@@ -164,10 +164,9 @@ set encoding=utf8
 " Typescript autocompletition
 " npm install -g typescript-language-server
 
-let g:coc_node_path = '~/.nvm/versions/node/v15.14.0/bin/node'
+let g:coc_node_path = '~/.nvm/versions/node/v16.13.1/bin/node'
 " Set extensions
-let g:coc_global_extensions = ['coc-css', 'coc-html', 'coc-json', 'coc-tsserver', 'coc-git', 'coc-yank', 'coc-pairs', 'coc-highlight', 'coc-eslint', 'coc-actions', 'coc-java', 'coc-explorer', 'coc-fzf-preview', 'coc-metals', 'coc-pyright', 'coc-sh']
-
+let g:coc_global_extensions = ['coc-css', 'coc-html', 'coc-json', 'coc-tsserver', 'coc-git', 'coc-yank', 'coc-pairs', 'coc-highlight', 'coc-eslint', 'coc-actions', 'coc-java', 'coc-explorer', 'coc-fzf-preview', 'coc-metals', 'coc-pyright', 'coc-go', 'coc-sh']
 " coc.nvim uses jsonc as a configuration file format. It's basically json with comment support.
 " In order to get comment highlighting:
 autocmd FileType json syntax match Comment +\/\/.\+$+
