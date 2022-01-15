@@ -7,7 +7,6 @@ function getIndexEnabled() {
   echo $index
 }
 
-# 
 function getArgument() {
   local _arg=$1
   argument=''

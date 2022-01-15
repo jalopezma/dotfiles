@@ -9,7 +9,7 @@ getTouchpadName() {
 
 # property will be:
 # 0 disabled
-# 1 enabled 
+# 1 enabled
 # $1 argument is the device name
 isTouchpadEnable() {
   touchpadStatus=$(xinput --list-props "$1" | grep "Device Enabled" | awk '{print $4}')
