@@ -48,5 +48,9 @@ createSymlink ~/repos/dotfiles/nvim ~/.config/nvim
 print "[nvim] Create ~/.config/nvim/{backup_files,swap_files,undo_files}"
 run "$(mkdir -p ~/.config/nvim/\{backup_files\,swap_files\,undo_files\}/)"
 
+# Dependencies for nvim-telescope/telescope.nvim
+print "[nvim] Install riggrep, fd-find"
+run "$(sudo apt-get install ripgrep fd-find)"
+
 print "[nvim] Install VimPlug and plugins"
 run "$(nvim -es -u ~/.config/nvim/init.vim -i NONE +PlugInstall +PlugUpdate +PlugUpgrade +"TSInstall all" +CocUpdate +qall)"
