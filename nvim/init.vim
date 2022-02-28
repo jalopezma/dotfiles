@@ -48,6 +48,8 @@ Plug 'jiangmiao/auto-pairs'
 " VCL Fastly
 Plug 'fgsch/vim-varnish'
 
+Plug 'ekalinin/Dockerfile.vim'
+
 call plug#end()
 
 let g:mapleader = "\<Space>"
