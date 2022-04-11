@@ -225,9 +225,6 @@ alias a-venv="source .venv/bin/activate"
 alias killbluetooth="ps -aux | grep blue | grep -v 'grep' | tr -s ' ' | cut -d ' ' -f 2 | xargs sudo kill -9"
 alias snowcli="snowsql -a rx74934.eu-west-1 -u jose_lopez -d YIELDIFY_EVENT_PRODUCTION -s PUBLIC -w COMPUTE_WH"
 
-
-bindkey '^e' edit-command-line
-
 # start vim mode for zsh ###
 #bindkey -v
 
@@ -329,3 +326,9 @@ export AWS_CONFIG_FILE=$HOME/.aws/config
 
 # https://github.com/zdharma/history-search-multi-word
 # zstyle ":history-search-multi-word" page-size "8"
+
+# Enable Ctrl-x-e to edit command line
+autoload -U edit-command-line
+
+zle -N edit-command-line
+bindkey '^e' edit-command-line
