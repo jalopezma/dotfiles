@@ -57,7 +57,7 @@ print "[monitors] Reload udev rules"
 run "$(sudo udevadm control --reload-rules)"
 
 print "[monitors] Link monitor service"
-run "$(sed -i "s/<user>/"$(whoami)"/g" ~/repos/dotfiles/monitors/monitors.service)"
-createSymlink ~/repos/dotfiles/monitors/monitors.service /etc/systemd/system/monitors.service true
+run "$(sudo cp ~/repos/dotfiles/monitors/monitors.service /etc/systemd/system/monitors.service)"
+run "$(sudo sed -i "s/<user>/"$(whoami)"/g" /etc/systemd/system/monitors.service)"
 print "[monitors] Reload service daemon"
 run "$(systemctl daemon-reload)"
