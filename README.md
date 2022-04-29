@@ -1,5 +1,6 @@
 # dotfiles
 
+## Install script bash version
 Run to install it
 TODO: Update with right URL
 ```
@@ -8,13 +9,13 @@ bash -c "$(wget -q -O- https://raw.githubusercontent.com/jalopezma/dotfiles/add-
 bash -c "$(wget -q -O- )" --attr
 ```
 
-## [NeoVim](nvim/README.md)
-## Hush version
+## Install script hush version
 ```
 bash -c "$(wget -q -O- https://raw.githubusercontent.com/jalopezma/dotfiles/feat/move-bash-to-hush/install-2.sh)"
 ```
 
 
+## [NeoVim](nvim/README.md)
 
 ## [Git](git/README.md)
 
@@ -96,3 +97,5 @@ Docker image to test the install script
 ```
 ➜ docker build . -t ubuntu-test && docker run --rm -it --user 1000:1000 ubuntu-test
 ```
+
+## [Hush](hush/README.md)

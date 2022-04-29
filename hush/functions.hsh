@@ -1,0 +1,43 @@
+#!/usr/bin/env hush
+
+function getDate()
+  std.trim(${ date }.stdout)
+end
+
+# Prints to stdout and log file
+function print(message)
+  std.print(message)
+  # Trim to remove the new line at the end
+  let date = getDate()
+  ${ echo "[$date] $message" >> $logFile }
+end
+
+function existsFile(filename)
+  let res = ${ test -f $filename }
+  if std.type(res) == "error" then
+    return false
+  end
+  return true
+end
+
+function existsFolder(folder)
+  let res = ${ test -d $folder }
+  if std.type(res) == "error" then
+    return false
+  end
+  return true
+end
+
+function setupLogFolderAndFile(logFolder, logFile)
+  if not existsFolder(logFolder) then
+    { mkdir -p $logFolder }
+    std.print(logFolder ++ " created")
+  end
+
+  if not existsFile(logFile) then
+    { touch $logFile }
+    print(logFile ++ " created")
+  end
+end
+
+setupLogFolderAndFile()
