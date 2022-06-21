@@ -17,7 +17,7 @@ if [ "$sessions" = "No sessions available" ]; then
 else
   while IFS= read -r path; do
       echo "> openvpn3 session-manage --disconnect --path $path 2>&1 >> $LOG_FILE"
-      $(openvpn3 session-manage --disconnect --path "$path" 2>>&1 >> $LOG_FILE &)
+      $(openvpn3 session-manage --disconnect --path "$path" 2>&1 >> $LOG_FILE &)
   done < <( openvpn3 sessions-list | grep 'Path:' | awk '{print $2}' )
   echo "[yvpn] Sessions terminated"
 fi
