@@ -64,13 +64,8 @@ export PATH=$PATH:/usr/local/lib
 # For stack (haskell) add ~/.local/bin
 # Add betterlockscreen to PATH:
 export PATH=$PATH:$HOME/.local/bin
-
-# NPM Global without sudo
-NPM_PACKAGES="$HOME/.npm-packages"
-export PATH="$NPM_PACKAGES/bin:$PATH"
-# Unset manpath so we can inherit from /etc/manpath via the `manpath` command
-unset MANPATH # delete if you already modified MANPATH elsewhere in your config
-export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
+#
+export PATH=$PATH:$HOME/.local/bin
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
@@ -203,7 +198,6 @@ alias update-all="sudo apt update && sudo apt upgrade -y && sudo apt autoremove 
 alias l="exa --long --git"
 alias la="exa --long --all --git"
 alias cp="cp -i"
-#alias rm='echo "rm is disabled, use remove or trash or /bin/rm instead."'
 alias stranger-tunnel-dev="ssh -4 -N -L 6379:stranger.kckpzs.0001.euw1.cache.amazonaws.com:6379 -p 2222 jose.lopez@bastion.yieldify-dev.com 1>&2"
 alias stranger-tunnel-staging="ssh -4 -N -L 6379:stranger.pipwu6.0001.euw1.cache.amazonaws.com:6379 -p 2222 jose.lopez@bastion.yieldify-staging.com 1>&2"
 alias stranger-tunnel-production="ssh -4 -N -L 6379:stranger.tueblu.0001.euw1.cache.amazonaws.com:6379 -p 2222 jose.lopez@bastion.yieldify-production.com 1>&2"
@@ -224,6 +218,14 @@ alias a-venv="source .venv/bin/activate"
 # kill bluetooth
 alias killbluetooth="ps -aux | grep blue | grep -v 'grep' | tr -s ' ' | cut -d ' ' -f 2 | xargs sudo kill -9"
 alias snowcli="snowsql -a rx74934.eu-west-1 -u jose_lopez -d YIELDIFY_EVENT_PRODUCTION -s PUBLIC -w COMPUTE_WH"
+
+# Use trash instead of rm
+# https://github.com/andreafrancia/trash-cli
+alias rm="echo 'rm disabled. run /usr/bin/rm or rm'"
+#alias rm='echo "rm is disabled, use remove or trash or /bin/rm instead."'
+# Sets a crontab to remove files over 30 days
+# crontab -l to show your crontab
+# (crontab -l ; echo "@daily $(which trash-empty) 30") | crontab -
 
 # start vim mode for zsh ###
 #bindkey -v
@@ -315,11 +317,6 @@ load-nvmrc() {
 add-zsh-hook chpwd load-nvmrc
 load-nvmrc
 
-# browserstack
-export EXEC_REMOTE=false
-export BS_USER=joselopez47
-export BS_ACCKEY=eM3sYRp1Q9Cr4ND72g3L
-
 export AWS_SDK_LOAD_CONFIG=1
 export AWS_SHARED_CREDENTIALS_FILE=$HOME/.aws/credentials
 export AWS_CONFIG_FILE=$HOME/.aws/config
@@ -329,6 +326,21 @@ export AWS_CONFIG_FILE=$HOME/.aws/config
 
 # Enable Ctrl-x-e to edit command line
 autoload -U edit-command-line
-
 zle -N edit-command-line
 bindkey '^e' edit-command-line
+
+# Load pyenv automatically by appending
+# the following to ~/.bash_profile if it exists, otherwise ~/.profile (for login shells)
+# and ~/.bashrc (for interactive shells) :
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+# Restart your shell for the changes to take effect.
+# Load pyenv-virtualenv automatically by adding
+# the following to ~/.bashrc:
+# eval "$(pyenv virtualenv-init -)"
+
+[ -s "/home/jose/.jabba/jabba.sh" ] && source "/home/jose/.jabba/jabba.sh"
+
+[[ -s "/home/jose/.gvm/scripts/gvm" ]] && source "/home/jose/.gvm/scripts/gvm"

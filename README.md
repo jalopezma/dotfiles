@@ -8,11 +8,17 @@ bash -c "$(wget -q -O- https://raw.githubusercontent.com/jalopezma/dotfiles/add-
 bash -c "$(wget -q -O- )" --attr
 ```
 
-##[NeoVim](nvim/README.md)
+## [NeoVim](nvim/README.md)
+## Hush version
+```
+bash -c "$(wget -q -O- https://raw.githubusercontent.com/jalopezma/dotfiles/feat/move-bash-to-hush/install-2.sh)"
+```
 
-##[Git](git/README.md)
 
-##[i3](i3/README.md)
+
+## [Git](git/README.md)
+
+## [i3](i3/README.md)
 
 ## scripts
 ```

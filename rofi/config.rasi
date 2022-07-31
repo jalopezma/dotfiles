@@ -1,5 +1,5 @@
 configuration {
-	theme: "material";
+/*	theme: "material";*/
 /*	modi: "window,run,ssh";*/
 /*	width: 50;*/
 /*	lines: 15;*/
@@ -137,3 +137,4 @@ configuration {
 /*	me-accept-entry: "MouseDPrimary";*/
 /*	me-accept-custom: "Control+MouseDPrimary";*/
 }
+@theme "material"
