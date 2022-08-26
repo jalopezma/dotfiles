@@ -15,6 +15,9 @@ computer=${computer:-DESKTOP}
 
 logFile=/tmp/scripts.log
 
+primary=""
+secondary=""
+
 # Set env vars needed for xrandr
 export XAUTHORITY=${XAUTHORITY:-/run/user/$(id -u)/gdm/Xauthority}
 export DISPLAY=${DISPLAY:-:0}
@@ -64,7 +67,7 @@ function off() {
   local _primary=$1
   local _focused=$3
 
-  # Disable all monitors that are disconnected and have a resolution (meaning they are not disbled)
+  # Disable all monitors that are disconnected and have a resolution (meaning they are not disabled)
   while IFS= read -r monitor; do
       echo "[monitors.sh] - off: Disable \"$monitor\"" >> $logFile
       $(xrandr --output "$monitor" --off)
@@ -99,17 +102,38 @@ function change() {
   fi
 }
 
+function setMonitorsVariables() {
+  local _numMonitors=$1
+  if [ "$_numMonitors" -eq "3" ]; then
+    # If we have three monitors it means that we are in the laptop and we don't enable
+    # the laptop screen eDP-1 (we might want to duplicate it?)
+    availableMonitors=$(xrandr | grep " connected" | grep -v "eDP" | awk '{ print $1 }')
+    primary=$(echo "$availableMonitors" | head -n 1)
+    secondary=$(echo "$availableMonitors" | tail -n 1)
+  else
+    # If we have two monitors, we keep the primary one
+    primary=$(xrandr | grep primary | awk '{ print $1 }')
+    secondary=$(xrandr | grep -v primary | grep  ' connected' | awk '{ print $1 }' | head -n 1)
+  fi
+
+}
+
 function main() {
   local _option=$1
 
-  primary=$(xrandr | grep primary | awk '{ print $1 }')
-  # We only get the first connected monitor
-  secondary=$( xrandr | grep -v primary | grep  ' connected' | awk '{ print $1 }' | head -n 1)
+  numMonitors=$(xrandr | grep " connected" | wc -l)
+  echo "[monitors.sh] - number_of_monitors \"$numMonitors\"" >> $logFile
 
+  setMonitorsVariables $numMonitors
   echo "[monitors.sh] - primary \"$primary\" secondary \"$secondary\"" >> $logFile
 
   # Set primary to 1920x1080
   xrandr --output "$primary" --mode 1920x1080
+  if [ $computer = "LAPTOP" ] && [ "$numMonitors" -eq "3" ]; then
+    echo "[monitors.sh] - Laptop and 3 monitors. Duplicate eDP-1 to $primary" > $logFile
+    xrandr --output $primary --same-as "eDP-1"
+  fi
+
   # Save which workspace is focused before setting the monitors
   focused=$(i3-msg -t get_workspaces | jq '.[] | select(.focused==true).name')
   visible1=$(i3-msg -t get_workspaces | jq '.[] | select(.visible==true).name')
