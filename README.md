@@ -14,6 +14,7 @@ bash -c "$(wget -q -O- )" --attr
 bash -c "$(wget -q -O- https://raw.githubusercontent.com/jalopezma/dotfiles/feat/move-bash-to-hush/install-2.sh)"
 ```
 
+## [Hush](hush/README.md)
 
 ## [NeoVim](nvim/README.md)
 
@@ -85,11 +86,12 @@ Was giving
 [ 6799.340756] Bluetooth: hci0: RTL: firmware file rtl_bt/rtl8761b_fw.bin not found
 ```
 
-So I downloaded the firmware https://linuxreviews.org/Realtek_RTL8761B and copied it to the right location
+So I downloaded the firmware [https://linuxreviews.org/Realtek_RTL8761B](https://linuxreviews.org/Realtek_RTL8761B) and copied it to the right location
 
 ```
 ➜ sudo mv rtl8761b_config /lib/firmware/rtl_bt/rtl8761b_config.bin
 ➜ sudo mv rtl8761b_fw /lib/firmware/rtl_bt/rtl8761b_fw.bin
+```
 
 ## Docker
 
@@ -98,4 +100,12 @@ Docker image to test the install script
 ➜ docker build . -t ubuntu-test && docker run --rm -it --user 1000:1000 ubuntu-test
 ```
 
-## [Hush](hush/README.md)
+## List of things to add to auto-install
+
+- [Pyenv](https://github.com/pyenv/pyenv)
+- [Obsidian](https://obsidian.md/)
+- ssh: keys and agent?
+- aws credentials?
+- bluetooth?
+- yvpn
+- gvm (golang virtual manager)

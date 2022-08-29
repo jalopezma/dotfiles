@@ -136,15 +136,24 @@ bash ./monitors/install.sh "$verbose"
 bash ./i3/install.sh "$verbose"
 bash ./polybar/install.sh "$verbose"
 bash ./alacritty/install.sh "$verbose"
+bash ./beekeper-studio/install.sh "$verbose"
 
+# Already installed ✓
+# git
+# zsh
+# nvm
+# nvim
+# rofi
+# monitors - script/service
 # i3
-# polibyar
+# polybar
 # alacritty
-# redo vim?
+# beekeeperstudio
+
 # ssh: keys and agent?
-# aws credentials
+# aws credentials ?
 # programs that I use
-# - beekeper studio
-# - tabplus?
 # - bluetooth?
 # - yvpn
+# - pyenv
+# - gvm (golang virtual manager)
