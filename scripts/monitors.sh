@@ -22,6 +22,31 @@ secondary=""
 export XAUTHORITY=${XAUTHORITY:-/run/user/$(id -u)/gdm/Xauthority}
 export DISPLAY=${DISPLAY:-:0}
 
+function setWorkspacesForTwoScreens() {
+  local _primary=$1
+  local _secondary=$2
+  local _focused=$3
+  local _visible1=$4
+  local _visible2=$5
+
+  # Select the workspace and move it to the right monitor
+  i3-msg workspace "5"
+  i3-msg move workspace to "$_primary"
+  i3-msg workspace "1"
+  i3-msg move workspace to "$_primary"
+  i3-msg workspace "2"
+  i3-msg move workspace to "$_secondary"
+  i3-msg workspace "6"
+  i3-msg move workspace to "$_secondary"
+  i3-msg workspace "4"
+  i3-msg move workspace to "$_secondary"
+
+  # Show the workspaces we had visible and focus the ws that was focused before
+  i3-msg workspace "$_visible1"
+  i3-msg workspace "$_visible2"
+  i3-msg workspace "$_focused"
+}
+
 function add() {
   local _primary=$1
   local _secondary=$2
@@ -43,24 +68,27 @@ function add() {
   fi
 
   xrandr --output "$_secondary" --mode 1920x1080 --right-of "$_primary"
+  setWorkspacesForTwoScreens $_primary $_secondary $_focused $_visible1 $_visible2
 
-  # Select the workspace and move it to the right monitor
-  i3-msg workspace "5"
-  i3-msg move workspace to "$_primary"
-  i3-msg workspace "1"
-  i3-msg move workspace to "$_primary"
-  i3-msg workspace "2"
-  i3-msg move workspace to "$_secondary"
-  i3-msg workspace "6"
-  i3-msg move workspace to "$_secondary"
-  i3-msg workspace "4"
-  i3-msg move workspace to "$_secondary"
-
-  # Show the workspaces we had visible and focus the ws that was focused before
-  i3-msg workspace "$_visible1"
-  i3-msg workspace "$_visible2"
-  i3-msg workspace "$_focused"
   echo "[monitors.sh] - add: Secondary monitor set" >> $logFile
+}
+
+function setWorkspacesForOneScreen() {
+  local _primary=$1
+  local _focused=$2
+
+   # I need to move workspaces from the other screen back
+  i3-msg workspace "2"
+  i3-msg move workspace to "$_primary"
+  i3-msg workspace "6"
+  i3-msg move workspace to "$_primary"
+  i3-msg workspace "4"
+  i3-msg move workspace to "$_primary"
+  i3-msg workspace "3"
+  i3-msg move workspace to "$_primary"
+
+  # Focus the ws that was focused before
+  i3-msg workspace "$_focused"
 }
 
 function off() {
@@ -73,18 +101,8 @@ function off() {
       $(xrandr --output "$monitor" --off)
   done < <( xrandr | grep 'disconnected [0-9]' | awk '{print $1}' )
 
-  # I need to move workspaces from the other screen back
-  i3-msg workspace "2"
-  i3-msg move workspace to "$_primary"
-  i3-msg workspace "6"
-  i3-msg move workspace to "$_primary"
-  i3-msg workspace "4"
-  i3-msg move workspace to "$_primary"
-  i3-msg workspace "3"
-  i3-msg move workspace to "$_primary"
+  setWorkspacesForOneScreen $_primary $_focused
 
-  # Focus the ws that was focused before
-  i3-msg workspace "$_focused"
   echo "[monitors.sh] - off: Secondary monitor removed" >> $logFile
 }
 
