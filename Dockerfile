@@ -12,9 +12,9 @@ RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 USER ubuntu
 WORKDIR /home/ubuntu
 
-# COPY --chown=ubuntu:root install.sh .
+COPY --chown=ubuntu:root install-2.sh .
 # RUN pwd
 # RUN ls -la
-# RUN chmod +x install.sh
+RUN chmod +x install-2.sh
 
 ENTRYPOINT ["/bin/bash"]
