@@ -64,7 +64,7 @@ function add() {
     local _tmp=$_primary
     _primary=$_secondary
     _secondary=$_tmp
-    echo "[monitors.sh] - add: \"$computer\" we switch primary and secondary" >> $logFile
+    echo "[monitors.sh] - add: \"$computer\" we switch primary (now $_primary) and secondary (now $_secondary)" >> $logFile
   fi
 
   xrandr --output "$_secondary" --mode 1920x1080 --right-of "$_primary"
@@ -147,6 +147,7 @@ function main() {
 
   # Set primary to 1920x1080
   xrandr --output "$primary" --mode 1920x1080
+  # Duplicate laptop screen to left monitor when running in the laptop and we have 3 screens
   if [ $computer = "LAPTOP" ] && [ "$numMonitors" -eq "3" ]; then
     echo "[monitors.sh] - Laptop and 3 monitors. Duplicate eDP-1 to $primary" > $logFile
     xrandr --output $primary --same-as "eDP-1"
