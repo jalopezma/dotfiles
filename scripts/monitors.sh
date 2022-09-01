@@ -100,24 +100,26 @@ function add() {
 function setWorkspacesForOneScreen() {
   local _primary=$1
   local _focused=$2
+  local _workspaces=$3
 
-   # I need to move workspaces from the other screen back
-  i3-msg workspace "2"
-  i3-msg move workspace to "$_primary"
-  i3-msg workspace "6"
-  i3-msg move workspace to "$_primary"
-  i3-msg workspace "4"
-  i3-msg move workspace to "$_primary"
-  i3-msg workspace "3"
-  i3-msg move workspace to "$_primary"
+  # Actual primary won't work as is a duplicate of eDP-1
+  if [ $computer = "LAPTOP" ]; then
+      _primary="eDP-1"
+  fi
+
+  # I need to move workspaces from the other screen back
+  for i in {1..8}; do
+    moveWorkspaceToScreen "$i" "$_primary" "$_workspaces"
+  done
 
   # Focus the ws that was focused before
-  i3-msg workspace "$_focused"
+  i3-msg workspace "$_focused" > /dev/null
 }
 
 function off() {
   local _primary=$1
-  local _focused=$3
+  local _focused=$2
+  local _workspaces=$3
 
   # Disable all monitors that are disconnected and have a resolution (meaning they are not disabled)
   while IFS= read -r monitor; do
@@ -125,7 +127,11 @@ function off() {
       $(xrandr --output "$monitor" --off)
   done < <( xrandr | grep 'disconnected [0-9]' | awk '{print $1}' )
 
-  setWorkspacesForOneScreen $_primary $_focused
+  # Actual primary won't work as is a duplicate of eDP-1
+  if [ $computer = "LAPTOP" ]; then
+      _primary="eDP-1"
+  fi
+  setWorkspacesForOneScreen $_primary $_focused $_workspaces
 
   echo "[monitors.sh] - off: Secondary monitor removed" >> $logFile
 }
@@ -173,7 +179,7 @@ function main() {
   xrandr --output "$primary" --mode 1920x1080
   # Duplicate laptop screen to left monitor when running in the laptop and we have 3 screens
   if [ $computer = "LAPTOP" ] && [ "$numMonitors" -eq "3" ]; then
-    echo "[monitors.sh] - Laptop and 3 monitors. Duplicate eDP-1 to $primary" > $logFile
+    echo "[monitors.sh] - Laptop and 3 monitors. Duplicate eDP-1 to $primary" >> $logFile
     xrandr --output $primary --same-as "eDP-1"
   fi
 
@@ -188,11 +194,15 @@ function main() {
   if [ $_option = "add" ]; then
     add "$primary" "$secondary" $focused "$visible1" "$visible2"
   elif [ $_option = "off" ]; then
-    off "$primary" $focused
+    off "$primary" $focused "$workspaces"
   elif [ $_option = "change" ]; then
     change "$primary" "$secondary" $focused "$visible1" "$visible2"
   elif [ $_option = "workspaces" ]; then
-    setWorkspacesForTwoScreens "$primary" "$secondary" $focused "$visible1" "$visible2" "$workspaces" "$computer"
+    if [ "$numMonitors" -ge "2" ]; then
+      setWorkspacesForTwoScreens "$primary" "$secondary" $focused "$visible1" "$visible2" "$workspaces" "$computer"
+    elif
+      setWorkspacesForOneScreen $primary $focused "$workspaces"
+    fi
     return 0 # skipping the polybar restart
   else
     echo "[monitors.sh] - Unknown option \"$_option\"" >> $logFile
