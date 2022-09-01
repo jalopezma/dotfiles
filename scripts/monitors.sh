@@ -7,6 +7,7 @@
 # add: sets two screens
 # off: returns to one screen
 # change: (on init or udev rule change): will figure out which one to call (add or off)
+# workspaces: will relocate worskpaces to set monitors
 option=${1:-change}
 
 # Get the COMPUTER env var or "DESKTOP" if not set
@@ -22,29 +23,52 @@ secondary=""
 export XAUTHORITY=${XAUTHORITY:-/run/user/$(id -u)/gdm/Xauthority}
 export DISPLAY=${DISPLAY:-:0}
 
+function moveWorkspaceToScreen() {
+  local _workspace=$1
+  local _monitor=$2
+  local _workspaces=$3
+
+  workspaceActualOutput=$(echo $_workspaces | jq ".[\"$_workspace\"].output" | tr -d '"')
+  if [ $workspaceActualOutput = "null" ]; then
+    echo "[monitors.sh] - Workspace $_workspace not in use" >> $logFile
+  elif [ $workspaceActualOutput = $_monitor ]; then
+    echo "[monitors.sh] - workspace $_workspace already in $_monitor" >> $logFile
+  else
+    i3-msg workspace "$_workspace" > /dev/null
+    output=$(i3-msg move workspace to output $_monitor) >> $logFile
+    echo "[monitors.sh] - Workspace $_workspace to monitor $_monitor: $output" >> $logFile
+  fi
+}
+
 function setWorkspacesForTwoScreens() {
   local _primary=$1
   local _secondary=$2
   local _focused=$3
   local _visible1=$4
   local _visible2=$5
+  local _workspaces=$6
+  local _computer=$7
+
+  # Actual primary won't work as is a duplicate of eDP-1
+  if [ $computer = "LAPTOP" ]; then
+      _primary="eDP-1"
+  fi
 
   # Select the workspace and move it to the right monitor
-  i3-msg workspace "5"
-  i3-msg move workspace to "$_primary"
-  i3-msg workspace "1"
-  i3-msg move workspace to "$_primary"
-  i3-msg workspace "2"
-  i3-msg move workspace to "$_secondary"
-  i3-msg workspace "6"
-  i3-msg move workspace to "$_secondary"
-  i3-msg workspace "4"
-  i3-msg move workspace to "$_secondary"
+  moveWorkspaceToScreen "1" $_primary "$_workspaces"
+  moveWorkspaceToScreen "5" "$_primary" "$_workspaces"
+
+  moveWorkspaceToScreen "2" "$_secondary" "$_workspaces"
+  moveWorkspaceToScreen "3" "$_secondary" "$_workspaces"
+  moveWorkspaceToScreen "4" "$_secondary" "$_workspaces"
+  moveWorkspaceToScreen "6" "$_secondary" "$_workspaces"
+  moveWorkspaceToScreen "7" "$_secondary" "$_workspaces"
+  moveWorkspaceToScreen "8" "$_secondary" "$_workspaces"
 
   # Show the workspaces we had visible and focus the ws that was focused before
-  i3-msg workspace "$_visible1"
-  i3-msg workspace "$_visible2"
-  i3-msg workspace "$_focused"
+  i3-msg workspace "$_visible1" > /dev/null
+  i3-msg workspace "$_visible2" > /dev/null
+  i3-msg workspace "$_focused" > /dev/null
 }
 
 function add() {
@@ -153,10 +177,13 @@ function main() {
     xrandr --output $primary --same-as "eDP-1"
   fi
 
+  # Get worskpaces, remove not wanted properties and move it to an object {"<workspace_name>": { "name": "<workspace_name>", "output": "<output>", ... }}
+  workspaces=$(i3-msg -t get_workspaces | jq '(map({"name": .name, "output": .output, "focused": .focused, "visible": .visible}) | INDEX(.name))')
+
   # Save which workspace is focused before setting the monitors
-  focused=$(i3-msg -t get_workspaces | jq '.[] | select(.focused==true).name')
-  visible1=$(i3-msg -t get_workspaces | jq '.[] | select(.visible==true).name')
-  visible2=$(i3-msg -t get_workspaces | jq '.[] | select(.visible==true).name')
+  focused=$(echo $workspaces | jq '.[] | select(.focused==true).name')
+  visible1=$(echo $workspaces | jq '.[] | select(.visible==true).name' | head -n 1)
+  visible2=$(echo $workspaces | jq '.[] | select(.visible==true).name' | tail -n 1)
 
   if [ $_option = "add" ]; then
     add "$primary" "$secondary" $focused "$visible1" "$visible2"
@@ -164,6 +191,9 @@ function main() {
     off "$primary" $focused
   elif [ $_option = "change" ]; then
     change "$primary" "$secondary" $focused "$visible1" "$visible2"
+  elif [ $_option = "workspaces" ]; then
+    setWorkspacesForTwoScreens "$primary" "$secondary" $focused "$visible1" "$visible2" "$workspaces" "$computer"
+    return 0 # skipping the polybar restart
   else
     echo "[monitors.sh] - Unknown option \"$_option\"" >> $logFile
   fi
