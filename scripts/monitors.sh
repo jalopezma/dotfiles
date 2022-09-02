@@ -77,6 +77,8 @@ function add() {
   local _focused=$3
   local _visible1=$4
   local _visible2=$5
+  local _workspaces=$6
+  local _computre=$7
 
   if [ -z "$_secondary" ]; then
     echo "[monitors.sh] - add: No secondary monitor found" >> $logFile
@@ -92,7 +94,7 @@ function add() {
   fi
 
   xrandr --output "$_secondary" --mode 1920x1080 --right-of "$_primary"
-  setWorkspacesForTwoScreens $_primary $_secondary $_focused $_visible1 $_visible2
+  setWorkspacesForTwoScreens $_primary $_secondary $_focused $_visible1 $_visible2 "$_workspaces" "$_computer"
 
   echo "[monitors.sh] - add: Secondary monitor set" >> $logFile
 }
@@ -142,11 +144,13 @@ function change() {
   local _focused=$3
   local _visible1=$4
   local _visible2=$5
+  local _workspaces=$6
+  local _computre=$6
 
   if [ -z "$_secondary" ]; then
     off $"_primary" $_focused
   else
-    add "$_primary" "$_secondary" $_focused "$_visible1" "$_visible2"
+    add "$_primary" "$_secondary" $_focused "$_visible1" "$_visible2" "$_workspaces" "$_computer"
   fi
 }
 
@@ -192,15 +196,15 @@ function main() {
   visible2=$(echo $workspaces | jq '.[] | select(.visible==true).name' | tail -n 1)
 
   if [ $_option = "add" ]; then
-    add "$primary" "$secondary" $focused "$visible1" "$visible2"
+    add "$primary" "$secondary" $focused "$visible1" "$visible2" "$workspaces" "$computer"
   elif [ $_option = "off" ]; then
     off "$primary" $focused "$workspaces"
   elif [ $_option = "change" ]; then
-    change "$primary" "$secondary" $focused "$visible1" "$visible2"
+    change "$primary" "$secondary" $focused "$visible1" "$visible2" "$workspaces" "$computer"
   elif [ $_option = "workspaces" ]; then
     if [ "$numMonitors" -ge "2" ]; then
       setWorkspacesForTwoScreens "$primary" "$secondary" $focused "$visible1" "$visible2" "$workspaces" "$computer"
-    elif
+    else
       setWorkspacesForOneScreen $primary $focused "$workspaces"
     fi
     return 0 # skipping the polybar restart
