@@ -156,6 +156,9 @@ alias kc="kubectl"
 alias tag="cd ~/repos/YieldifyLabs/khaleesi-tag"
 alias builder="cd ~/repos/YieldifyLabs/khaleesi-tag-delivery"
 
+# Yieldify faceless command
+alias yieldify-init="eval $(_facelesscmd env init)"
+
 # kill bluetooth
 alias killbluetooth="ps -aux | grep blue | grep -v 'grep' | tr -s ' ' | cut -d ' ' -f 2 | xargs sudo kill -9"
 
@@ -252,9 +255,7 @@ if [[ $COMPUTER == 'LAPTOP' ]]; then
   export AWS_SHARED_CREDENTIALS_FILE=$HOME/.aws/credentials
   export AWS_CONFIG_FILE=$HOME/.aws/config
 
-  # to add a check for the machine here and run only if its the laptop
-  # Load faceless (yieldify command)
-  eval $(_facelesscmd env init)
+  yieldify-init # Load faceless (yieldify command)
 
   # Load pyenv automatically by appending
   # the following to ~/.bash_profile if it exists, otherwise ~/.profile (for login shells)
