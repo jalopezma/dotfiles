@@ -31,6 +31,3 @@ cd ~/.oh-my-zsh/custom/plugins
 git clone git@github.com:zdharma/history-search-multi-word.git
 Add history-search-multi-word to your plugin list
 ```
-
-## zplug
-https://github.com/zplug/zplug

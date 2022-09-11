@@ -45,10 +45,6 @@ ZSH_CUSTOM=$HOME/.oh-my-zsh/custom
 run "$(git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" 2>&1)"
 createSymlink "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
 
-# https://github.com/zplug/zplug
-print "[zsh] Install zplug"
-run "$(curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh)"
-
 # Plugins
 print "[zsh] Plugin zsh-autosuggestions"
 run "$(git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions 2>&1)"
@@ -58,6 +54,12 @@ run "$(git clone https://github.com/zdharma/history-search-multi-word.git ${ZSH_
 
 print "[zsh] Plugin zsh-completions"
 run "$(git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-completions 2>&1)"
+
+print "[zsh] Plugin zsh-nvm"
+run "$(git clone https://github.com/lukechilds/zsh-nvm ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-nvm 2>&1)"
+
+print "[zsh] Plugin zsh-nvm"
+run "$(git clone https://github.com/zsh-users/zsh-syntax-highlighting ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting 2>&1)"
 
 print "[zsh] Set zsh by default"
 chsh -s $(which zsh)
