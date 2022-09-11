@@ -50,6 +50,9 @@ Plug 'fgsch/vim-varnish'
 
 Plug 'ekalinin/Dockerfile.vim'
 
+" https://editorconfig.org/
+Plug 'gpanders/editorconfig.nvim'
+
 call plug#end()
 
 let g:mapleader = "\<Space>"
