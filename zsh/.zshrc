@@ -1,45 +1,9 @@
-#
-# ZPLUG
-#
-source ~/.zplug/init.zsh
-
 # Export nvm completion settings for zsh-nvm plugin
 export NVM_COMPLETION=true
 # Lazy loading is around 70x faster (874ms down to 12ms for me), however the first time
 # you run nvm, npm, node or a global module you'll get a slight delay while nvm loads first.
 # You'll only get this delay once per session.
 export NVM_LAZY_LOAD=true
-
-# Can manage local plugins
-# zplug "~/.zsh", from:local
-
-# Load theme file
-# zplug 'dracula/zsh', as:theme
-
-# https://github.com/jeffreytse/zsh-vi-mode
-# zplug "effreytse/zsh-vi-mode"
-
-# nvm zsh pluging allow us to `nvm upgrade`
-# https://github.com/lukechilds/zsh-nvm
-zplug "lukechilds/zsh-nvm"
-
-# Install plugins if there are plugins that have not been installed
-if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
-    if read -q; then
-        echo; zplug install
-    fi
-fi
-
-# zplug load --verbose to debug
-zplug load
-
-#
-# ZPLUG
-#
-
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # tmux
 # export TERM=xterm-256color
@@ -135,16 +99,14 @@ SPACESHIP_DOCKER_SHOW="false"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions history-search-multi-word z zsh-completions docker dotenv)
+
+# $ git clone https://github.com/lukechilds/zsh-nvm $ZSH/custom/plugins/zsh-nvm
+# $ git clone https://github.com/zsh-users/zsh-syntax-highlighting ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+# $ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+plugins=(git zsh-autosuggestions history-search-multi-word z zsh-completions docker dotenv zsh-nvm zsh-syntax-highlighting)
 
 # https://github.com/jeffreytse/zsh-vi-mode
 # plugins+=(zsh-vi-mode)
-
-# For zsh-completions
-autoload -U compinit && compinit
-
-# https://github.com/zsh-users/zsh-autosuggestions
-# plugins=(zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -251,9 +213,6 @@ alias rm="echo 'rm disabled. run /usr/bin/rm or rm'"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
-
 # start nvm
 export NVM_DIR="$HOME/.nvm"
 # If set, the zsh-nvm plugin doesn't work
@@ -292,13 +251,6 @@ function cd() {
       fi
   fi
 }
-
-# tabtab source for serverless package
-# uninstall by removing these lines or running `tabtab uninstall serverless`
-[[ -f ~/repos/YieldifyLabs/khaleesi-tag-delivery/node_modules/tabtab/.completions/serverless.zsh ]] && . ~/repos/YieldifyLabs/khaleesi-tag-delivery/node_modules/tabtab/.completions/serverless.zsh
-# tabtab source for sls package
-# uninstall by removing these lines or running `tabtab uninstall sls`
-[[ -f ~/repos/YieldifyLabs/khaleesi-tag-delivery/node_modules/tabtab/.completions/sls.zsh ]] && . ~z/repos/YieldifyLabs/khaleesi-tag-delivery/node_modules/tabtab/.completions/sls.zsh
 
 # to add a check for the machine here and run only if its the laptop
 # Load faceless (yieldify command)
@@ -339,8 +291,7 @@ eval "$(pyenv init -)"
 # Restart your shell for the changes to take effect.
 # Load pyenv-virtualenv automatically by adding
 # the following to ~/.bashrc:
-# eval "$(pyenv virtualenv-init -)"
+eval "$(pyenv virtualenv-init -)"
 
 [ -s "/home/jose/.jabba/jabba.sh" ] && source "/home/jose/.jabba/jabba.sh"
-
-[[ -s "/home/jose/.gvm/scripts/gvm" ]] && source "/home/jose/.gvm/scripts/gvm"
+[ -s "/home/jose/.gvm/scripts/gvm" ] && source "/home/jose/.gvm/scripts/gvm"
