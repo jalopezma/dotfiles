@@ -93,6 +93,35 @@ So I downloaded the firmware [https://linuxreviews.org/Realtek_RTL8761B](https:/
 ➜ sudo mv rtl8761b_fw /lib/firmware/rtl_bt/rtl8761b_fw.bin
 ```
 
+## Wakeup laptop with lid closed
+
+In terminal:
+```
+$ grep . /sys/bus/usb/devices/*/power/wakeup
+
+/sys/bus/usb/devices/1-7/power/wakeup:disabled
+...
+```
+
+You can do the following to try to understand which one is which
+```
+$ grep . /sys/bus/usb/devices/*/product     
+```
+
+We need to enable all of them, because in the next step, we will write this in `rc.local` to execute the command after every reboot, and after reboot some linux distros (maybe all) change the usb ports.
+ 
+```
+$ sudo su
+$ echo enabled > /sys/bus/usb/devices/3-1.1.2.2/power/wakeup
+$ echo enabled > /sys/bus/usb/devices/3-1.1.2.3/power/wakeup
+$ echo enabled > /sys/bus/usb/devices/3-1.1.2/power/wakeup
+$ echo enabled > /sys/bus/usb/devices/3-1.1/power/wakeup
+$ echo enabled > /sys/bus/usb/devices/3-1/power/wakeup
+$ echo enabled > /sys/bus/usb/devices/4-1/power/wakeup
+$ echo enabled > /sys/bus/usb/devices/usb3/power/wakeup
+$ echo enabled > /sys/bus/usb/devices/usb4/power/wakeup
+```
+
 ## Docker
 
 Docker image to test the install script

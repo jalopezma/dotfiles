@@ -46,6 +46,7 @@ zplug load
 export EDITOR=nvim
 
 export PATH=$PATH:~/bin
+export PATH=$PATH:~/.local/bin
 
 # Add go binary to path
 export PATH=$PATH:/usr/local/go/bin
