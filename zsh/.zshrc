@@ -7,6 +7,9 @@ export NVM_COMPLETION=true
 # you run nvm, npm, node or a global module you'll get a slight delay while nvm loads first.
 # You'll only get this delay once per session.
 export NVM_LAZY_LOAD=true
+# Loads nvm when neovim is executed
+export NVM_LAZY_LOAD_EXTRA_COMMANDS=('nvim')
+export NVM_AUTO_USE=true
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -64,7 +67,8 @@ SPACESHIP_DOCKER_SHOW="false"
 # $ git clone https://github.com/lukechilds/zsh-nvm $ZSH/custom/plugins/zsh-nvm
 # $ git clone https://github.com/zsh-users/zsh-syntax-highlighting ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 # $ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-plugins=(git zsh-autosuggestions history-search-multi-word z zsh-completions docker dotenv zsh-nvm zsh-syntax-highlighting)
+#plugins=(git zsh-autosuggestions history-search-multi-word z zsh-completions docker dotenv zsh-nvm zsh-syntax-highlighting)
+plugins=(zsh-autosuggestions history-search-multi-word z zsh-completions dotenv zsh-nvm)
 
 # https://github.com/jeffreytse/zsh-vi-mode
 # plugins+=(zsh-vi-mode)
@@ -75,20 +79,15 @@ source $ZSH/oh-my-zsh.sh
 
 export EDITOR=nvim
 
-export PATH=$PATH:~/bin
-# Add go binary to path
-export PATH=$PATH:/usr/local/go/bin
-export PATH=$PATH:/opt/spark/bin/
 # Add go workspace path
+export PATH=$PATH:/usr/local/go/bin
 export GOPATH=$HOME/repos/go
 export GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOBIN
-# Add scripts path
+
+export PATH=$PATH:~/bin
 export PATH=$PATH:$HOME/scripts
-# Add /usr/local/lib
 export PATH=$PATH:/usr/local/lib
-# For stack (haskell) add ~/.local/bin
-# Add betterlockscreen to PATH:
 export PATH=$PATH:$HOME/.local/bin
 
 export XDG_CONFIG_HOME=~/.config
@@ -156,6 +155,8 @@ alias kc="kubectl"
 alias tag="cd ~/repos/YieldifyLabs/khaleesi-tag"
 alias builder="cd ~/repos/YieldifyLabs/khaleesi-tag-delivery"
 
+alias yieldify-init="eval $(_facelesscmd env init)"
+
 # kill bluetooth
 alias killbluetooth="ps -aux | grep blue | grep -v 'grep' | tr -s ' ' | cut -d ' ' -f 2 | xargs sudo kill -9"
 
@@ -187,12 +188,6 @@ alias rm="echo 'rm disabled. run /usr/bin/rm or use trash'"
 #zle -N zle-keymap-select
 #export KEYTIMEOUT=1
 ### end vim mode for zsh ###
-
-
-# start nvm
-export NVM_DIR="$HOME/.nvm"
-# If set, the zsh-nvm plugin doesn't work
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # export npm token
 if [[ -f ~/.npmrc && -r ~/.npmrc ]]; then
@@ -227,18 +222,6 @@ function cd() {
   fi
 }
 
-# Auto-switch node version based on the project's package lock version
-autoload -U add-zsh-hook
-load-nvmrc() {
-  if [[ -f .nvmrc && -r .nvmrc ]]; then
-    nvm use
-  elif [[ $(nvm version) != $(nvm version default) ]]; then
-    echo "Reverting to nvm default version"
-    nvm use default
-  fi
-}
-add-zsh-hook chpwd load-nvmrc
-
 # https://github.com/zdharma/history-search-multi-word
 # zstyle ":history-search-multi-word" page-size "8"
 
@@ -252,9 +235,8 @@ if [[ $COMPUTER == 'LAPTOP' ]]; then
   export AWS_SHARED_CREDENTIALS_FILE=$HOME/.aws/credentials
   export AWS_CONFIG_FILE=$HOME/.aws/config
 
-  # to add a check for the machine here and run only if its the laptop
   # Load faceless (yieldify command)
-  eval $(_facelesscmd env init)
+  # eval $(_facelesscmd env init)
 
   # Load pyenv automatically by appending
   # the following to ~/.bash_profile if it exists, otherwise ~/.profile (for login shells)
@@ -266,10 +248,10 @@ if [[ $COMPUTER == 'LAPTOP' ]]; then
   # Restart your shell for the changes to take effect.
   # Load pyenv-virtualenv automatically by adding
   # the following to ~/.bashrc:
-  eval "$(pyenv virtualenv-init -)"
+  # eval "$(pyenv virtualenv-init -)"
 
   # Golang version manager
-  [ -s "/home/jose/.gvm/scripts/gvm" ] && source "/home/jose/.gvm/scripts/gvm"
+  # [ -s "/home/jose/.gvm/scripts/gvm" ] && source "/home/jose/.gvm/scripts/gvm"
 
   # Java version manager
   # [ -s "/home/jose/.jabba/jabba.sh" ] && source "/home/jose/.jabba/jabba.sh"
