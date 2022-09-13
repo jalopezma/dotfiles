@@ -182,9 +182,15 @@ function main() {
   # Set primary to 1920x1080
   xrandr --output "$primary" --mode 1920x1080
   # Duplicate laptop screen to left monitor when running in the laptop and we have 3 screens
-  if [ $computer = "LAPTOP" ] && [ "$numMonitors" -eq "3" ]; then
-    echo "[monitors.sh] - Laptop and 3 monitors. Duplicate eDP-1 to $primary" >> $logFile
-    xrandr --output $primary --same-as "eDP-1"
+  if [ $computer = "LAPTOP" ]; then
+    # set internal screen to 1920x1080
+    xrandr --output "eDP-1" --mode 1920x1080
+    echo "[monitors.sh] - Laptop eDP-1 set to 1920x1080" >> $logFile
+
+    if [ "$numMonitors" -eq "3" ]; then
+      echo "[monitors.sh] - Laptop and 3 monitors. Duplicate eDP-1 to $primary" >> $logFile
+      xrandr --output $primary --same-as "eDP-1"
+    fi
   fi
 
   # Get worskpaces, remove not wanted properties and move it to an object {"<workspace_name>": { "name": "<workspace_name>", "output": "<output>", ... }}
