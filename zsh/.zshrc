@@ -150,7 +150,7 @@ alias cp="cp -i"
 
 alias kx="kubectx"
 alias kn="kubens"
-alias kc="kubectl"
+alias k="kubectl"
 
 alias tag="cd ~/repos/YieldifyLabs/khaleesi-tag"
 alias builder="cd ~/repos/YieldifyLabs/khaleesi-tag-delivery"
@@ -251,7 +251,7 @@ if [[ $COMPUTER == 'LAPTOP' ]]; then
   # eval "$(pyenv virtualenv-init -)"
 
   # Golang version manager
-  # [ -s "/home/jose/.gvm/scripts/gvm" ] && source "/home/jose/.gvm/scripts/gvm"
+  [ -s "$HOME/.gvm/scripts/gvm" ] && source "$HOME/.gvm/scripts/gvm"
 
   # Java version manager
   # [ -s "/home/jose/.jabba/jabba.sh" ] && source "/home/jose/.jabba/jabba.sh"
