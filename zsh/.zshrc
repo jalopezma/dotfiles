@@ -142,7 +142,8 @@ alias gc.="g checkout ."
 # Using delta as default git diff https://github.com/dandavison/delta
 alias gd="g diff"
 
-alias update-all="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y"
+# Firefox is using snap. We can run them in paralell
+alias update-all="sudo snap refresh & sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y"
 
 alias l="exa --long --git"
 alias la="exa --long --all --git"
