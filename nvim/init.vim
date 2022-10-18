@@ -179,7 +179,7 @@ set encoding=utf8
 " [coc.nvim] Can't find npm or yarn in your $PATH
 let g:coc_node_path = '~/.nvm/versions/node/v16.15.0/bin/node'
 " Set extensions
-let g:coc_global_extensions = ['coc-css', 'coc-html', 'coc-json', 'coc-tsserver', 'coc-git', 'coc-yank', 'coc-pairs', 'coc-highlight', 'coc-eslint', 'coc-actions', 'coc-java', 'coc-explorer', 'coc-fzf-preview', 'coc-metals', 'coc-pyright', 'coc-go', 'coc-sh']
+let g:coc_global_extensions = ['coc-css', 'coc-html', 'coc-json', 'coc-tsserver', 'coc-git', 'coc-yank', 'coc-pairs', 'coc-highlight', 'coc-eslint', 'coc-actions', 'coc-explorer', 'coc-fzf-preview', 'coc-pyright', 'coc-go', 'coc-sh']
 " coc.nvim uses jsonc as a configuration file format. It's basically json with comment support.
 " In order to get comment highlighting:
 autocmd FileType json syntax match Comment +\/\/.\+$+
