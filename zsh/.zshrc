@@ -156,7 +156,20 @@ alias k="kubectl"
 alias tag="cd ~/repos/YieldifyLabs/khaleesi-tag"
 alias builder="cd ~/repos/YieldifyLabs/khaleesi-tag-delivery"
 
-alias yieldify-init="eval $(_facelesscmd env init)"
+# Yieldify aliases
+alias yi="eval $(_facelesscmd env init)"
+function ys() {
+  local env=$1
+
+  yieldify &> /dev/null
+  if [[ $? -ne 0 ]]; then
+    echo "Init faceless"
+    yi
+  fi
+
+  echo "> yieldify aws switch $env"
+  yieldify aws switch $env
+}
 
 # kill bluetooth
 alias killbluetooth="ps -aux | grep blue | grep -v 'grep' | tr -s ' ' | cut -d ' ' -f 2 | xargs sudo kill -9"
