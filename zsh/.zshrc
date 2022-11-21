@@ -142,7 +142,7 @@ alias gc.="g checkout ."
 # Using delta as default git diff https://github.com/dandavison/delta
 alias gd="g diff"
 
-# Firefox is using snap. We can run them in paralell
+# Firefox is using snap
 alias update-all="sudo snap refresh && sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y"
 
 alias l="exa --long --git"
@@ -244,6 +244,16 @@ autoload -U edit-command-line
 zle -N edit-command-line
 bindkey '^e' edit-command-line
 
+# Load gvm (golang version manager)
+[ -s "/home/jose/.gvm/scripts/gvm" ] && source "/home/jose/.gvm/scripts/gvm"
+
+# Load pyenv automatically by appending
+# the following to ~/.bash_profile if it exists, otherwise ~/.profile (for login shells)
+# and ~/.bashrc (for interactive shells) :
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
 if [[ $COMPUTER == 'LAPTOP' ]]; then
   export AWS_SDK_LOAD_CONFIG=1
   export AWS_SHARED_CREDENTIALS_FILE=$HOME/.aws/credentials
@@ -251,13 +261,6 @@ if [[ $COMPUTER == 'LAPTOP' ]]; then
 
   # Load faceless (yieldify command)
   # eval $(_facelesscmd env init)
-
-  # Load pyenv automatically by appending
-  # the following to ~/.bash_profile if it exists, otherwise ~/.profile (for login shells)
-  # and ~/.bashrc (for interactive shells) :
-  export PYENV_ROOT="$HOME/.pyenv"
-  command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-  eval "$(pyenv init -)"
 
   # Restart your shell for the changes to take effect.
   # Load pyenv-virtualenv automatically by adding
