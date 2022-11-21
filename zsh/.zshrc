@@ -143,7 +143,7 @@ alias gc.="g checkout ."
 alias gd="g diff"
 
 # Firefox is using snap. We can run them in paralell
-alias update-all="sudo snap refresh & sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y"
+alias update-all="sudo snap refresh && sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y"
 
 alias l="exa --long --git"
 alias la="exa --long --all --git"
@@ -156,7 +156,20 @@ alias k="kubectl"
 alias tag="cd ~/repos/YieldifyLabs/khaleesi-tag"
 alias builder="cd ~/repos/YieldifyLabs/khaleesi-tag-delivery"
 
-alias yieldify-init="eval $(_facelesscmd env init)"
+# Yieldify aliases
+alias yi="eval $(_facelesscmd env init)"
+function ys() {
+  local env=$1
+
+  yieldify &> /dev/null
+  if [[ $? -ne 0 ]]; then
+    echo "Init faceless"
+    yi
+  fi
+
+  echo "> yieldify aws switch $env"
+  yieldify aws switch $env
+}
 
 # kill bluetooth
 alias killbluetooth="ps -aux | grep blue | grep -v 'grep' | tr -s ' ' | cut -d ' ' -f 2 | xargs sudo kill -9"
