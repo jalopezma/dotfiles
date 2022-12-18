@@ -58,7 +58,7 @@ run "$(git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:-~/.o
 print "[zsh] Plugin zsh-nvm"
 run "$(git clone https://github.com/lukechilds/zsh-nvm ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-nvm 2>&1)"
 
-print "[zsh] Plugin zsh-nvm"
+print "[zsh] Plugin zsh-syntax-highlighting"
 run "$(git clone https://github.com/zsh-users/zsh-syntax-highlighting ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting 2>&1)"
 
 print "[zsh] Set zsh by default"
