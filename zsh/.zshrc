@@ -21,6 +21,14 @@ SPACESHIP_BATTERY_SHOW="true"
 SPACESHIP_KUBECONTEXT_SHOW="false"
 SPACESHIP_DOCKER_SHOW="false"
 
+## History command configuration
+setopt extended_history       # record timestamp of command in HISTFILE
+setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
+setopt hist_ignore_all_dups   # ignore duplicated commands history list
+setopt hist_ignore_space      # ignore commands that start with space
+setopt hist_verify            # show command with history expansion to user before running it
+setopt share_history          # share command history data
+
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
@@ -142,6 +150,9 @@ alias gc.="g checkout ."
 # Using delta as default git diff https://github.com/dandavison/delta
 alias gd="g diff"
 
+# tmux
+alias t=tmux
+
 # Firefox is using snap
 alias update-all="sudo snap refresh && sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y"
 
@@ -171,12 +182,41 @@ function ys() {
   yieldify aws switch $env
 }
 
+# sudo xbacklight -set $1
+# You will need to run `➜ sudo usermod -a -G video $LOGNAME`
+# to no need to run it using sudo
+function bl() {
+  local value=$1
+
+  if ! [[ $value =~ '^[0-9]+$' ]]; then
+    echo "Value must be a number. \"${value}\" not valid"
+    return
+  fi
+
+  if [[ $value -gt 100 ]] || [[ $value -lt 0 ]]; then
+    echo "Set a value between 0 and 100. \"${value}\" not valid"
+    return
+  fi
+
+  xbacklight -set $value
+}
+
 # kill bluetooth
 alias killbluetooth="ps -aux | grep blue | grep -v 'grep' | tr -s ' ' | cut -d ' ' -f 2 | xargs sudo kill -9"
 
+# gvm
+alias gvm-init="source \"$HOME/.gvm/scripts/gvm\""
+
+# Yieldify vpn
+alias yv="yvpn"
+# restart
+alias yvr="yvpn && yvpn"
+# status
+alias yvs="openvpn3 sessions-list"
+
 # Use trash instead of rm
 # https://github.com/andreafrancia/trash-cli
-alias rm="echo 'rm disabled. run /usr/bin/rm or use trash'"
+# alias rm="echo 'rm disabled. run /usr/bin/rm or use trash'"
 
 # Sets a crontab to remove files over 30 days
 # crontab -l to show your crontab
@@ -244,9 +284,6 @@ autoload -U edit-command-line
 zle -N edit-command-line
 bindkey '^e' edit-command-line
 
-# Load gvm (golang version manager)
-[ -s "/home/jose/.gvm/scripts/gvm" ] && source "/home/jose/.gvm/scripts/gvm"
-
 # Load pyenv automatically by appending
 # the following to ~/.bash_profile if it exists, otherwise ~/.profile (for login shells)
 # and ~/.bashrc (for interactive shells) :
@@ -268,8 +305,9 @@ if [[ $COMPUTER == 'LAPTOP' ]]; then
   # eval "$(pyenv virtualenv-init -)"
 
   # Golang version manager
-  [ -s "$HOME/.gvm/scripts/gvm" ] && source "$HOME/.gvm/scripts/gvm"
+  # [ -s "$HOME/.gvm/scripts/gvm" ] && source "$HOME/.gvm/scripts/gvm"
 
   # Java version manager
-  # [ -s "/home/jose/.jabba/jabba.sh" ] && source "/home/jose/.jabba/jabba.sh"
+  export SDKMAN_DIR="$HOME/.sdkman"
+  [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 fi
