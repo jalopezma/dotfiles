@@ -53,6 +53,11 @@ Plug 'ekalinin/Dockerfile.vim'
 " https://editorconfig.org/
 Plug 'gpanders/editorconfig.nvim'
 
+" Scala
+Plug 'scalameta/nvim-metals'
+" Requisite of nvim-metals
+Plug 'nvim-lua/plenary.nvim'
+
 call plug#end()
 
 let g:mapleader = "\<Space>"
