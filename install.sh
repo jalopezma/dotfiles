@@ -130,6 +130,7 @@ bash ./git/install.sh "$verbose"
 bash ./zsh/install.sh "$verbose"
 bash ./nvm/install.sh "$verbose"
 bash ./nvim/install.sh "$verbose"
+bash ./tmux/install.sh "$verbose"
 
 bash ./rofi/install.sh "$verbose"
 bash ./monitors/install.sh "$verbose"
