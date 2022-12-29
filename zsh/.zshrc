@@ -164,6 +164,10 @@ alias kx="kubectx"
 alias kn="kubens"
 alias k="kubectl"
 
+alias kp="k get pods"
+alias kpw="k get pods -w"
+alias kl="k logs -f"
+
 alias tag="cd ~/repos/YieldifyLabs/khaleesi-tag"
 alias builder="cd ~/repos/YieldifyLabs/khaleesi-tag-delivery"
 
