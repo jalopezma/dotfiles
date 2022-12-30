@@ -29,11 +29,11 @@ createSymlink() {
 logFile=$1
 verbose=$2
 
-print "[alacritty] Link alacritty folder to ~/.config"
-createSymlink ~/repos/dotfiles/alacritty ~/.config/alacritty
+print "[alacritty] Create folder ~/.config/alacritty"
+run "$(mkdir -p ~/.config/alacritty)"
 
-print "[alacritty] Add repository"
-run "$(sudo sudo add-apt-repository ppa:mmstick76/alacritty -y)" $verbose
+print "[alacritty] Link alacritty config to ~/.config/alacritty"
+createSymlink ~/repos/dotfiles/alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml
 
 print "[alacritty] install"
 run "$(sudo apt-get update -y && sudo apt-get install alacritty -y)" $verbose

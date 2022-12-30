@@ -144,6 +144,8 @@ bash ./beekeper-studio/install.sh "$verbose"
 # zsh
 # nvm
 # nvim
+# tmux
+#
 # rofi
 # monitors - script/service
 # i3
