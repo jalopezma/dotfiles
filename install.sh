@@ -91,8 +91,8 @@ print "[main] install.sh"
 print "[main] update & upgrade"
 run "$(sudo apt-get update && sudo apt-get upgrade -y)" $verbose
 
-print "[main] Install wget curl git google-chrome-stable"
-run "$(sudo apt-get install wget curl git -y)" $verbose
+print "[main] Install wget curl git firefox flamehsot"
+run "$(sudo apt-get install wget curl git firefox flamehsot -y)" $verbose
 print "[main] $(git --version)"
 
 print "[main] Download Google chrome"
@@ -115,7 +115,6 @@ if [ -d ~/repos/dotfiles ]; then
   mv ~/repos/dotfiles $dotfilesTmp
 fi
 print "[main] Clone jalopezma/dotfiles.git"
-# TODO remove the branch git clone https://github.com/jalopezma/dotfiles.git
 run "$(git clone --branch add-install-script https://github.com/jalopezma/dotfiles.git 2>&1)" $verbose
 cd ~/repos/dotfiles
 print "[main] Change directory to $(pwd)"
