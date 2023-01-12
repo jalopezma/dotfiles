@@ -2,6 +2,7 @@
 call plug#begin()
 " Colorscheme
 Plug 'kaicataldo/material.vim'
+Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 
 " Full LanguageServerProtocol
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -74,7 +75,8 @@ if (has('termguicolors'))
 endif
 syntax enable
 
-colorscheme material
+"colorscheme material
+colorscheme tokyonight-storm
 " colorscheme base16-onedark
 " Options: 'default' | 'palenight' | 'ocean' | 'lighter' | 'darker'
 let g:material_theme_style = 'default'
@@ -102,9 +104,9 @@ set winbl=10                " Set floating window to be slightly transparent
 
 " set dir for swap, backup and undo files. Do before:
 " mkdir -p ~/.config/nvim/{backup_files,swap_files,undo_files}
-set backupdir=~/.config/nvim/backup_files//
-set directory=~/.config/nvim/swap_files//
-set undodir=~/.config/nvim/undo_files//
+set backupdir=~/.config/nvim/backup_files/
+set directory=~/.config/nvim/swap_files/
+set undodir=~/.config/nvim/undo_files/
 
 " Add icon to breakline
 set showbreak=↪
