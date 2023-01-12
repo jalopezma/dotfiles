@@ -142,9 +142,10 @@ alias nt="nvim +terminal"
 alias vi="nvim"
 # Git
 alias g="git"
-# was called `g plum` by Ovi so now it's called mario
-alias mario="g pull upstream master"
-alias gcm="g checkout master"
+alias gcma="g checkout main"
+alias gpma="g pull upstream main"
+alias gcms="g checkout master"
+alias gpms="g pull upstream master"
 alias gs="g status"
 alias gc.="g checkout ."
 # Using delta as default git diff https://github.com/dandavison/delta
@@ -167,11 +168,24 @@ alias k="kubectl"
 alias kp="k get pods"
 alias kpw="k get pods -w"
 alias kl="k logs -f"
+function ke() {
+  local pod_name=$1
+  if [[ -z $pod_name ]]; then
+    echo "Missing pod name. Usage:"
+    echo " ke <pod-name>"
+    echo " k exec -it <pod-name> bash"
+    return
+  fi
+
+  k exec -it $pod_name bash
+}
+
 
 alias tag="cd ~/repos/YieldifyLabs/khaleesi-tag"
 alias builder="cd ~/repos/YieldifyLabs/khaleesi-tag-delivery"
 
 # Yieldify aliases
+alias helm="echo 'Use helm2 (for kops) or helm3 (for eks) binaries'"
 alias yi="eval $(_facelesscmd env init)"
 function ys() {
   local env=$1
