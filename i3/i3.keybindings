@@ -138,7 +138,7 @@ bindsym $mod+r mode "resize"
 #  DP-1    external monitor
 #
 # Set external monitor to the left
-bindsym $mod+Control+d exec ~/scripts/monitors.sh add
+bindsym $mod+Control+d exec ~/scripts/monitors.sh
 
 # Remove external monitor
 bindsym $mod+Control+Shift+d exec ~/scripts/monitors.sh off
