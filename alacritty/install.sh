@@ -35,5 +35,8 @@ run "$(mkdir -p ~/.config/alacritty)"
 print "[alacritty] Link alacritty config to ~/.config/alacritty"
 createSymlink ~/repos/dotfiles/alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml
 
+print "[alacritty] Add repository ppa:aslatter/ppa"
+run "$(sudo add-apt-repository ppa:aslatter/ppa -y)" $verbose
+
 print "[alacritty] install"
 run "$(sudo apt-get update -y && sudo apt-get install alacritty -y)" $verbose
