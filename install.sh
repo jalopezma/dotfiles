@@ -125,6 +125,7 @@ cd ~/repos/dotfiles
 print "[main] Change directory to $(pwd)"
 
 print "[fonts] Copy Ubuntu font"
+mkdir -p ~/.fonts
 run "$(cp fonts/Ubuntu\ Mono\ Nerd\ Font\ Complete.ttf ~/.fonts/)"
 
 print "[scripts] Link scripts"
