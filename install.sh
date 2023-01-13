@@ -91,8 +91,8 @@ print "[main] install.sh"
 print "[main] update & upgrade"
 run "$(sudo apt-get update -y && sudo apt-get upgrade -y && sudo apt-get autoremove -y)" $verbose
 
-print "[main] Install wget curl git firefox flameshot"
-run "$(sudo apt-get install wget curl git firefox flameshot -y)" $verbose
+print "[main] Install wget curl git firefox flameshot snapd"
+run "$(sudo apt-get install wget curl git firefox flameshot snapd -y)" $verbose
 print "[main] $(git --version)"
 
 googleChromeVersion=$(google-chrome --version)
