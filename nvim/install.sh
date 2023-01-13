@@ -18,10 +18,15 @@ print() {
 createSymlink() {
   local from=$1
   local to=$2
+  local sudo=$3
   if [ -f $to ] || [ -d $to ]; then
     echo "[nvim] File $to already exists"
   else
-    run "$(ln -s $from $to)" $verbose
+    if [ $sudo ]; then
+      run "$(sudo ln -s $from $to)" $verbose
+    else
+      run "$(ln -s $from $to)" $verbose
+    fi
   fi
 }
 
@@ -54,3 +59,6 @@ run "$(sudo apt-get install ripgrep fd-find)"
 
 print "[nvim] Install VimPlug and plugins"
 run "$(nvim -es -u ~/.config/nvim/init.vim -i NONE +PlugInstall +PlugUpdate +PlugUpgrade +"TSInstall all" +CocUpdate +qall)"
+
+print "[nvim] Link nvim.desktop file"
+createSymlink ~/repos/dotfiles/nvim/nvim.desktop /usr/share/applications/nvim.desktop true
