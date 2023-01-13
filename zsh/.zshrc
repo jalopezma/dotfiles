@@ -186,7 +186,16 @@ alias builder="cd ~/repos/YieldifyLabs/khaleesi-tag-delivery"
 
 # Yieldify aliases
 alias helm="echo 'Use helm2 (for kops) or helm3 (for eks) binaries'"
-alias yi="eval $(_facelesscmd env init)"
+function yi() {
+  initFacesless=$(_facelesscmd env init 2>/dev/null)
+
+  if [[ $? -ne 0 ]]; then
+    echo "Error: faceless is not installed"
+    return
+  fi
+  eval "$initFacesless"
+}
+
 function ys() {
   local env=$1
 
