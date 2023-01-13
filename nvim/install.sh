@@ -33,8 +33,8 @@ createSymlink() {
 logFile=$1
 verbose=$2
 
-print "[nvim] install python3-neovim"
-run "$(sudo apt-get install python3-neovim -y)"
+print "[nvim] install python3-neovim and libfuse2 (for appimages)"
+run "$(sudo apt-get install python3-neovim libfuse2 -y)"
 print "[nvim] download nvim appimage"
 run "$(curl -sLO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage)"
 run "$(chmod u+x nvim.appimage)"
