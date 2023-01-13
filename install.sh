@@ -45,7 +45,7 @@ showHelp() {
   # To update the link to the script
   echo "
 $ ./install.sh <arguments>
-$ sh -c "\$\(wget -O- https://raw.githubusercontent.com/jalopezma/dotfiles/add-install-script/install.sh\)" "" <arguments>
+$ sh -c "\$\(wget -O- https://raw.githubusercontent.com/jalopezma/dotfiles/master/install.sh\)" "" <arguments>
     -h, --help: Shows this message
     -v, --verbose: Enables a more verbose output
     -d, --debug: Sets the xtrace and verbose mode"
@@ -89,10 +89,10 @@ setLogFile
 
 print "[main] install.sh"
 print "[main] update & upgrade"
-run "$(sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y)" $verbose
+run "$(sudo apt-get update -y && sudo apt-get upgrade -y && sudo apt-get autoremove -y)" $verbose
 
-print "[main] Install wget curl git firefox flamehsot"
-run "$(sudo apt install wget curl git firefox flamehsot -y)" $verbose
+print "[main] Install wget curl git firefox flameshot"
+run "$(sudo apt-get install wget curl git firefox flameshot -y)" $verbose
 print "[main] $(git --version)"
 
 googleChromeVersion=$(google-chrome --version)
@@ -120,7 +120,7 @@ if [ -d ~/repos/dotfiles ]; then
   mv ~/repos/dotfiles $dotfilesTmp
 fi
 print "[main] Clone jalopezma/dotfiles.git"
-run "$(git clone --branch add-install-script https://github.com/jalopezma/dotfiles.git 2>&1)" $verbose
+run "$(git clone https://github.com/jalopezma/dotfiles.git 2>&1)" $verbose
 cd ~/repos/dotfiles
 print "[main] Change directory to $(pwd)"
 
