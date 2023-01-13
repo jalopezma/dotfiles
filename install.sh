@@ -124,6 +124,9 @@ run "$(git clone https://github.com/jalopezma/dotfiles.git 2>&1)" $verbose
 cd ~/repos/dotfiles
 print "[main] Change directory to $(pwd)"
 
+print "[fonts] Copy Ubuntu font"
+run "$(cp fonts/Ubuntu\ Mono\ Nerd\ Font\ Complete.ttf ~/.fonts/)"
+
 print "[scripts] Link scripts"
 createSymlink ~/repos/dotfiles/scripts ~/scripts
 
