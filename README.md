@@ -1,12 +1,15 @@
 # dotfiles
 
 ## Install script bash version
+
 Run to install it
-TODO: Update with right URL
+
 ```bash
+# From master
+bash -c "$(wget -q -O- https://raw.githubusercontent.com/jalopezma/dotfiles/master/install.sh)"
+# From "add-install-script" branch
 bash -c "$(wget -q -O- https://raw.githubusercontent.com/jalopezma/dotfiles/add-install-script/install.sh)"
 bash -c "$(wget -q -O- https://raw.githubusercontent.com/jalopezma/dotfiles/add-install-script/install.sh)" "" -v
-bash -c "$(wget -q -O- )" --attr
 ```
 
 ## Install script hush version

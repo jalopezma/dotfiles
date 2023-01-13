@@ -89,16 +89,21 @@ setLogFile
 
 print "[main] install.sh"
 print "[main] update & upgrade"
-run "$(sudo apt-get update && sudo apt-get upgrade -y)" $verbose
+run "$(sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y)" $verbose
 
 print "[main] Install wget curl git firefox flamehsot"
-run "$(sudo apt-get install wget curl git firefox flamehsot -y)" $verbose
+run "$(sudo apt install wget curl git firefox flamehsot -y)" $verbose
 print "[main] $(git --version)"
 
-print "[main] Download Google chrome"
-run "$(wget -q -P /tmp/ https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb)" $verbose
-print "[main] Install Google chrome"
-run "$(sudo dpkg -i /tmp/google-chrome-stable_current_amd64.deb)" $verbose
+googleChromeVersion=$(google-chrome --version)
+if [[ $? -eq 0 ]]; then
+  print "[main] Google chrome already installed ${googleChromeVersion}"
+else
+  print "[main] Download Google chrome"
+  run "$(wget -q -P /tmp/ https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb)" $verbose
+  print "[main] Install Google chrome"
+  run "$(sudo dpkg -i /tmp/google-chrome-stable_current_amd64.deb)" $verbose
+fi
 
 reposFolder=~/repos
 if [ -d $reposFolder ]; then
