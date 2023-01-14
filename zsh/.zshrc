@@ -102,7 +102,7 @@ export XDG_CONFIG_HOME=~/.config
 
 # We define a computer to differentiate config
 HOSTNAME=$(hostname)
-if [[ $HOSTNAME == 'Y-LD-WIN1123' ]]; then
+if [[ $HOSTNAME == 'Y-1123' ]]; then
   export COMPUTER='LAPTOP'
 else
   export COMPUTER='DESKTOP'
