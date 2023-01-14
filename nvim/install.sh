@@ -15,6 +15,9 @@ echo "[nvim] download nvim appimage"
 curl -sLO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
 chmod u+x nvim.appimage
 
+echo "[nvim] Link nvim.desktop file"
+createSymlink ~/repos/dotfiles/nvim/nvim.desktop /usr/share/applications/nvim.desktop true
+
 echo "[nvim] install vimplug"
 sh -c "curl -sfLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
 
@@ -35,6 +38,3 @@ sudo apt-get install ripgrep fd-find
 
 echo "[nvim] Install VimPlug and plugins"
 nvim -es -u ~/.config/nvim/init.vim -i NONE +PlugInstall +PlugUpdate +PlugUpgrade +"TSInstall all" +CocUpdate +qall
-
-echo "[nvim] Link nvim.desktop file"
-createSymlink ~/repos/dotfiles/nvim/nvim.desktop /usr/share/applications/nvim.desktop true

@@ -10,10 +10,10 @@ set -o nounset
 source ./functions.sh
 
 echo "[nvm] Download and install nvm"
-run "$(sh -c "$(wget -q -O- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh)")"
+sh -c "$(wget -q -O- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh)"
 
 # Just source the new lines nvm has added to the .bashrc file
 echo "[nvm] partially source .bashrc"
 eval "$(cat ~/.bashrc | tail -n 3)"
-echo "[nvm] nvm install v16.13.1"
-run "$(nvm install v16.13.1)"
+echo "[nvm] nvm install v16.15.0 (the one set in nvim)"
+nvm install v16.15.0
