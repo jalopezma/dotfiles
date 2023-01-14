@@ -1,10 +1,9 @@
 #!/bin/bash
-current=`setxkbmap -query | grep layout | grep -oP '[^layout: ][a-z]+'`
-if [ "$current" = "gb" ]
-then
-    notify-send -t 500 -i keyboard "Keyboard layouts: ES/Spanish"
-    setxkbmap "es"
+current=$(setxkbmap -query | grep layout | grep -oP '[^layout: ][a-z]+')
+if [ "$current" = "gb" ]; then
+  notify-send -t 500 -i keyboard "Keyboard layouts: ES/Spanish"
+  setxkbmap "es"
 else
-    notify-send -t 500 -i keyboard "Keyboard layouts: EN/UK"
-    setxkbmap "gb"
+  notify-send -t 500 -i keyboard "Keyboard layouts: EN/UK"
+  setxkbmap "gb"
 fi

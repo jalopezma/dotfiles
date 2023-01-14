@@ -51,7 +51,7 @@ function setWorkspacesForTwoScreens() {
 
   # Actual primary won't work as is a duplicate of eDP-1
   if [ $computer = "LAPTOP" ]; then
-      _primary="eDP-1"
+    _primary="eDP-1"
   fi
 
   # Select the workspace and move it to the right monitor
@@ -106,7 +106,7 @@ function setWorkspacesForOneScreen() {
 
   # Actual primary won't work as is a duplicate of eDP-1
   if [ $computer = "LAPTOP" ]; then
-      _primary="eDP-1"
+    _primary="eDP-1"
   fi
 
   # I need to move workspaces from the other screen back
@@ -125,13 +125,13 @@ function off() {
 
   # Disable all monitors that are disconnected and have a resolution (meaning they are not disabled)
   while IFS= read -r monitor; do
-      echo "[monitors.sh] - off: Disable \"$monitor\"" >> $logFile
-      $(xrandr --output "$monitor" --off)
-  done < <( xrandr | grep 'disconnected [0-9]' | awk '{print $1}' )
+    echo "[monitors.sh] - off: Disable \"$monitor\"" >> $logFile
+    $(xrandr --output "$monitor" --off)
+  done < <(xrandr | grep 'disconnected [0-9]' | awk '{print $1}')
 
   # Actual primary won't work as is a duplicate of eDP-1
   if [ $computer = "LAPTOP" ]; then
-      _primary="eDP-1"
+    _primary="eDP-1"
   fi
   setWorkspacesForOneScreen $_primary $_focused $_workspaces
 
@@ -165,7 +165,7 @@ function setMonitorsVariables() {
   else
     # If we have two monitors, we keep the primary one
     primary=$(xrandr | grep primary | awk '{ print $1 }')
-    secondary=$(xrandr | grep -v primary | grep  ' connected' | awk '{ print $1 }' | head -n 1)
+    secondary=$(xrandr | grep -v primary | grep ' connected' | awk '{ print $1 }' | head -n 1)
   fi
 
 }

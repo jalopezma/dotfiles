@@ -16,12 +16,13 @@ fi
 
 echo "Download hush and move hush to ~/.local/bin/hush"
 curl -so hush.tar.gz --location \
-  $(curl -s https://api.github.com/repos/hush-shell/hush/releases \
-    | grep -oP 'https://github.com/hush-shell/hush/releases/download/[^}]*static-x86_64.tar.gz' \
-    | head -n 1 \
-  ) \
-  && tar -x hush -f hush.tar.gz && /bin/rm hush.tar.gz \
-  && chmod +x ./hush && mv ./hush ~/.local/bin/hush
+  $(
+    curl -s https://api.github.com/repos/hush-shell/hush/releases |
+      grep -oP 'https://github.com/hush-shell/hush/releases/download/[^}]*static-x86_64.tar.gz' |
+      head -n 1
+  ) &&
+  tar -x hush -f hush.tar.gz && /bin/rm hush.tar.gz &&
+  chmod +x ./hush && mv ./hush ~/.local/bin/hush
 
 echo "Download hush installation script"
 wget -q --show-progress https://raw.githubusercontent.com/jalopezma/dotfiles/feat/move-bash-to-hush/install-hush.hsh /tmp/setup/install-hush.hsh

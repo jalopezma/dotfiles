@@ -1,5 +1,5 @@
 #!/bin/bash
-CONFIG_FILE=$(ls -CN ~/*yieldify*.ovpn 2>/dev/null)
+CONFIG_FILE=$(ls -CN ~/*yieldify*.ovpn 2> /dev/null)
 USERNAME=$(whoami)
 LOG_FILE="/tmp/yvpn-log"
 
@@ -16,8 +16,8 @@ if [ "$sessions" = "No sessions available" ]; then
   echo "[yvpn] Session started"
 else
   while IFS= read -r path; do
-      echo "> openvpn3 session-manage --disconnect --path $path 2>&1 >> $LOG_FILE"
-      $(openvpn3 session-manage --disconnect --path "$path" 2>&1 >> $LOG_FILE &)
-  done < <( openvpn3 sessions-list | grep 'Path:' | awk '{print $2}' )
+    echo "> openvpn3 session-manage --disconnect --path $path 2>&1 >> $LOG_FILE"
+    $(openvpn3 session-manage --disconnect --path "$path" 2>&1 >> $LOG_FILE &)
+  done < <(openvpn3 sessions-list | grep 'Path:' | awk '{print $2}')
   echo "[yvpn] Sessions terminated"
 fi

@@ -12,12 +12,12 @@ function getArgument() {
   argument=''
 
   case $_arg in
-  'volume')
-    argument='set-sink-volume'
-    ;;
-  'mute')
-    argument='set-sink-mute'
-    ;;
+    'volume')
+      argument='set-sink-volume'
+      ;;
+    'mute')
+      argument='set-sink-mute'
+      ;;
   esac
   echo $argument
 }

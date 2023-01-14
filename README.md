@@ -17,6 +17,15 @@ bash -c "$(wget -q -O- https://raw.githubusercontent.com/jalopezma/dotfiles/add-
 bash -c "$(wget -q -O- https://raw.githubusercontent.com/jalopezma/dotfiles/feat/move-bash-to-hush/install-2.sh)"
 ```
 
+All scripts are formatted using [https://github.com/mvdan/sh](shfmt)
+
+```bash
+# Install
+go install mvdan.cc/sh/v3/cmd/shfmt@latest
+# Use
+shfmt --find ./ | xargs shfmt -l -w -s --indent=2 -ci -sr
+```
+
 # To add
 - [pyenv](https://github.com/pyenv/pyenv#automatic-installer)
 - [gvm](https://github.com/moovweb/gvm)

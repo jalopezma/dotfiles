@@ -28,9 +28,9 @@ function install_fonts() {
 function diff_so_fancy() {
   echo "[diff_so_fancy] Download script"
   curl -o diff-so-fancy --location \
-    $(curl -s https://api.github.com/repos/so-fancy/diff-so-fancy/releases/latest \
-      | grep -Po 'https://github.com/so-fancy/diff-so-fancy/releases/download/.*/diff-so-fancy' \
-      | uniq)
+    $(curl -s https://api.github.com/repos/so-fancy/diff-so-fancy/releases/latest |
+      grep -Po 'https://github.com/so-fancy/diff-so-fancy/releases/download/.*/diff-so-fancy' |
+      uniq)
   chmod +x ./diff-so-fancy
   mv diff_so_fancy ~/.local/bin/
 }
