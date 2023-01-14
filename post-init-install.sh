@@ -32,7 +32,7 @@ function diff_so_fancy() {
       grep -Po 'https://github.com/so-fancy/diff-so-fancy/releases/download/.*/diff-so-fancy' |
       uniq)
   chmod +x ./diff-so-fancy
-  mv diff_so_fancy ~/.local/bin/
+  mv ./diff-so-fancy ~/.local/bin/
 }
 
 function wallpapers() {
