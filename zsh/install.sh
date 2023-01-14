@@ -13,11 +13,14 @@ echo "[zsh] install.sh"
 sudo apt-get install zsh -y
 
 echo "[zsh] $(zsh --version)"
-echo "[zsh] Link .zshrc"
-createSymlink ~/repos/dotfiles/zsh/.zshrc ~/.zshrc
 
 echo "[zsh] Install oh my zsh"
-sh -c "$(wget -q -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended --keep-zshrc 2>&1
+#   --unattended: sets both CHSH and RUNZSH to 'no'
+#   --keep-zshrc: sets KEEP_ZSHRC to 'yes'
+sh -c "$(wget -q -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended --keep-zshrc
+
+echo "[zsh] Link .zshrc"
+createSymlink ~/repos/dotfiles/zsh/.zshrc ~/.zshrc
 
 echo "[zsh] Install theme spaceship-prompt"
 # until we don't user zsh, the var is not set

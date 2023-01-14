@@ -37,6 +37,7 @@ function install_diff_so_fancy() {
 
 # exa https://github.com/ogham/exa modern replacement for ls
 function install_exa() {
+  echo "[exa] Download script"
   curl -o exa --location \
     $(curl -s https://api.github.com/repos/ogham/exa/releases/latest |
       grep -Po 'https://github.com/ogham/exa/releases/download/.*/exa-linux-x86_64-v.*' |
