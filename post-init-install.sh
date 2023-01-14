@@ -25,7 +25,7 @@ function install_fonts() {
   cp -v fonts/* ~/.fonts/
 }
 
-function diff_so_fancy() {
+function install_diff_so_fancy() {
   echo "[diff_so_fancy] Download script"
   curl -o diff-so-fancy --location \
     $(curl -s https://api.github.com/repos/so-fancy/diff-so-fancy/releases/latest |
@@ -33,6 +33,16 @@ function diff_so_fancy() {
       uniq)
   chmod +x ./diff-so-fancy
   mv ./diff-so-fancy ~/.local/bin/
+}
+
+# exa https://github.com/ogham/exa modern replacement for ls
+function install_exa() {
+  curl -o exa --location \
+    $(curl -s https://api.github.com/repos/ogham/exa/releases/latest |
+      grep -Po 'https://github.com/ogham/exa/releases/download/.*/exa-linux-x86_64-v.*' |
+      uniq)
+  chmod +x ./exa
+  mv ./exa ~/.local/bin/
 }
 
 function wallpapers() {
@@ -46,15 +56,17 @@ function set_scripts() {
 }
 
 function main() {
-  # exa https://github.com/ogham/exa modern replacement for ls
   echo "[install] Install firefox flameshot snapd"
-  sudo apt-get install -y firefox flameshot snapd exa
+  sudo apt-get install -y firefox flameshot snapd
 
   install_chrome
   install_fonts
   wallpapers
   set_scripts
-  diff_so_fancy
+
+  mkdir -p ~/.local/bin
+  install_diff_so_fancy
+  install_exa
 
   bash ./git/install.sh
   bash ./zsh/install.sh
