@@ -73,7 +73,7 @@ function main() {
   bash ./zsh/install.sh
   bash ./nvm/install.sh
   bash ./nvim/install.sh
-  bash ./tmux/install.sh
+  # bash ./tmux/install.sh
 
   bash ./rofi/install.sh
   bash ./monitors/install.sh

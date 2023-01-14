@@ -9,5 +9,5 @@ set -o nounset
 
 source ./functions.sh
 
-print "[rofi] Link to .config"
+echo "[rofi] Link to .config"
 createSymlink ~/repos/dotfiles/rofi ~/.config/rofi
