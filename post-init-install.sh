@@ -38,12 +38,13 @@ function install_diff_so_fancy() {
 # exa https://github.com/ogham/exa modern replacement for ls
 function install_exa() {
   echo "[exa] Download script"
-  curl -o exa --location \
+  curl -o /tmp/exa.zip --location \
     $(curl -s https://api.github.com/repos/ogham/exa/releases/latest |
-      grep -Po 'https://github.com/ogham/exa/releases/download/.*/exa-linux-x86_64-v.*' |
+      grep -Po 'https://github.com/ogham/exa/releases/download/.*/exa-linux-x86_64-v.*.zip' |
       uniq)
-  chmod +x ./exa
-  mv ./exa ~/.local/bin/
+  unzip /tmp/exa.zip -d /tmp
+  chmod +x /tmp/bin/exa
+  mv /tmp/bin/exa ~/.local/bin/
 }
 
 function wallpapers() {
