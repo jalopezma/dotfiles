@@ -1,33 +1,11 @@
 #!/bin/bash
+# Exit inmediatly if exits with a non-zero status.
+set -o errexit
+# The return value of a pipeline is the value of the last (right-most) command to exit with a non-zero status, or zero if all commands in the pipeline exit successfully.
+set -o pipefail
+# Treat unset variables and parameters other than the special parameters "@" and "*" as an error when performing parameter expansion. If expansion is attempted on an unset variable or parameter, the shell prints an error message, and, if not interactive, exits with a non-zero status.
+set -o nounset
 
-# Helps to print the output of the command if the verbose flag is set
-run() {
-  local output=$1
-  local verbose=${2:-false}
-  if $verbose; then
-    echo "$output"
-  fi
-  echo "$output" >> $logFile
-}
-
-# Prints to stdout and log file
-print() {
-  echo "$1"
-  echo "$1" >> $logFile
-}
-
-createSymlink() {
-  local from=$1
-  local to=$2
-  if [ -f $to ] || [ -d $to ]; then
-    echo "[git] File $to already exists"
-  else
-    run "$(ln -s $from $to)" $verbose
-  fi
-}
-
-logFile=$1
-verbose=$2
-
-print "[git] Link .gitconfig"
+source ./functions.sh
+echo "[git] Link .gitconfig"
 createSymlink ~/repos/dotfiles/git/.gitconfig ~/.gitconfig

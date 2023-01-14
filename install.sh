@@ -1,45 +1,10 @@
 #!/bin/bash
-verbose=false
-logFolder=/tmp/jalopezma-install
-logFile="$logFolder/install.log"
-
-setLogFile() {
-  if [ ! -d "$logFolder" ]; then
-    mkdir $logFolder
-  fi
-
-  if [ ! -f "$logFile" ]; then
-    touch $logFile
-  fi
-
-  echo "$(date)" >> $logFile
-}
-
-# Helps to print the output of the command if the verbose flag is set
-run() {
-  local output=$1
-  local verbose=${2:-false}
-  if $verbose && [ ! -z $output ]; then
-    echo "$output"
-  fi
-  echo "$output" >> $logFile
-}
-
-# Prints to stdout and log file
-print() {
-  echo "$1"
-  echo "$1" >> $logFile
-}
-
-createSymlink() {
-  local from=$1
-  local to=$2
-  if [ -f $to ] || [ -d $to ]; then
-    echo "[main] File/folder \"$to\" already exists"
-  else
-    run "$(ln -s $from $to)" $verbose
-  fi
-}
+# Exit inmediatly if exits with a non-zero status.
+set -o errexit
+# The return value of a pipeline is the value of the last (right-most) command to exit with a non-zero status, or zero if all commands in the pipeline exit successfully.
+set -o pipefail
+# Treat unset variables and parameters other than the special parameters "@" and "*" as an error when performing parameter expansion. If expansion is attempted on an unset variable or parameter, the shell prints an error message, and, if not interactive, exits with a non-zero status.
+set -o nounset
 
 showHelp() {
   # To update the link to the script
@@ -47,7 +12,6 @@ showHelp() {
 $ ./install.sh <arguments>
 $ sh -c "\$\(wget -O- https://raw.githubusercontent.com/jalopezma/dotfiles/master/install.sh\)" "" <arguments>
     -h, --help: Shows this message
-    -v, --verbose: Enables a more verbose output
     -d, --debug: Sets the xtrace and verbose mode"
 }
 
@@ -57,114 +21,69 @@ parseArguments() {
   # -l is for long options with double dash like --help
   # the comma separates different long options
   # -a is for long options with single dash like -version
-  options=$(getopt -l "help,debug,verbose" -o "hdv" -- "$@")
+  options=$(getopt -l "help,debug" -o "hd" -- "$@")
 
   # set --:
   # If no arguments follow this option, then the positional parameters are unset. Otherwise, the positional parameters are set to the arguments, even if some of them begin with a ‘-’.
   eval set -- "$options"
 
-  while true
-  do
-  case $1 in
-  -h|--help)
-      showHelp
-      exit 0
-      ;;
-  -v|--verbose)
-      export verbose=true
-      ;;
-  -d|--debug)
-      set -xv  # Set xtrace and verbose mode.
-      ;;
-  --)
-      shift
-      break;;
-  esac
-  shift
+  while true; do
+    case $1 in
+      -h | --help)
+        showHelp
+        exit 0
+        ;;
+      -d | --debug)
+        set -o xtrace
+        set -o verbose
+        ;;
+      --)
+        shift
+        break
+        ;;
+    esac
+    shift
   done
 }
 
+function install_dependencies() {
+  echo "[main] Installation script"
+  echo "[main] Update, upgrade and autoremove"
+  sudo apt-get update -y && sudo apt-get upgrade -y && sudo apt-get autoremove -y
+
+  echo "[main] Install wget curl git"
+  sudo apt-get install wget curl git -y
+
+  echo "[main] $(git --version)"
+}
+
+function clone_repository() {
+  REPOS_FOLDER=~/repos
+  if [[ -d $REPOS_FOLDER ]]; then
+    echo "[main] \"$REPOS_FOLDER\" folder already exists"
+  else
+    echo "[main] Creating \"$REPOS_FOLDER\" folder"
+    mkdir -p $REPOS_FOLDER
+  fi
+  cd "$REPOS_FOLDER"
+
+  if [[ -d ~/repos/dotfiles ]]; then
+    DOTFILES_TMP_FOLDER=/tmp/dotfiles_$(date +%s)
+    echo "[main] Move existing dotfiles repo to $DOTFILES_TMP_FOLDER"
+    mv ~/repos/dotfiles $DOTFILES_TMP_FOLDER
+  fi
+
+  echo "[main] Clone jalopezma/dotfiles.git"
+  git clone https://github.com/jalopezma/dotfiles.git 2>&1
+  cd ~/repos/dotfiles
+  echo "[main] Change directory to $(pwd)"
+}
+
+function installation() {
+  install_dependencies
+  clone_repository
+  bash ./post-init-install.sh
+}
+
 parseArguments $@
-setLogFile
-
-print "[main] install.sh"
-print "[main] update & upgrade"
-run "$(sudo apt-get update -y && sudo apt-get upgrade -y && sudo apt-get autoremove -y)" $verbose
-
-print "[main] Install wget curl git firefox flameshot snapd"
-run "$(sudo apt-get install wget curl git firefox flameshot snapd -y)" $verbose
-print "[main] $(git --version)"
-
-googleChromeVersion=$(google-chrome --version)
-if [[ $? -eq 0 ]]; then
-  print "[main] Google chrome already installed ${googleChromeVersion}"
-else
-  print "[main] Download Google chrome"
-  run "$(wget -q -P /tmp/ https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb)" $verbose
-  print "[main] Install Google chrome"
-  run "$(sudo dpkg -i /tmp/google-chrome-stable_current_amd64.deb)" $verbose
-fi
-
-reposFolder=~/repos
-if [ -d $reposFolder ]; then
-  print "[main] \"$reposFolder\" folder already exists"
-else
-  print "[main] Create \"$reposFolder\" folder"
-  mkdir -p $reposFolder
-fi
-cd "$reposFolder"
-
-if [ -d ~/repos/dotfiles ]; then
-  dotfilesTmp=/tmp/dotfiles_$(date +%s)
-  print "[main] Move existing dotfiles repo to $dotfilesTmp"
-  mv ~/repos/dotfiles $dotfilesTmp
-fi
-print "[main] Clone jalopezma/dotfiles.git"
-run "$(git clone https://github.com/jalopezma/dotfiles.git 2>&1)" $verbose
-cd ~/repos/dotfiles
-print "[main] Change directory to $(pwd)"
-
-print "[fonts] Copy Ubuntu font"
-mkdir -p ~/.fonts
-run "$(cp fonts/Ubuntu\ Mono\ Nerd\ Font\ Complete.ttf ~/.fonts/)"
-
-print "[scripts] Link scripts"
-createSymlink ~/repos/dotfiles/scripts ~/scripts
-
-print "[wallpapaers] Link wallpapers"
-createSymlink ~/repos/dotfiles/wallpapers ~/wallpapers
-
-bash ./git/install.sh "$verbose"
-bash ./zsh/install.sh "$verbose"
-bash ./nvm/install.sh "$verbose"
-bash ./nvim/install.sh "$verbose"
-bash ./tmux/install.sh "$verbose"
-
-bash ./rofi/install.sh "$verbose"
-bash ./monitors/install.sh "$verbose"
-bash ./i3/install.sh "$verbose"
-bash ./polybar/install.sh "$verbose"
-bash ./alacritty/install.sh "$verbose"
-bash ./beekeper-studio/install.sh "$verbose"
-
-# Already installed ✓
-# git
-# zsh
-# nvm
-# nvim
-# tmux
-#
-# rofi
-# monitors - script/service
-# i3
-# polybar
-# alacritty
-# beekeeperstudio
-
-# ssh: keys and agent?
-# aws credentials ?
-# programs that I use
-# - bluetooth?
-# - yvpn
-# - pyenv
-# - gvm (golang virtual manager)
+installation

@@ -17,6 +17,10 @@ bash -c "$(wget -q -O- https://raw.githubusercontent.com/jalopezma/dotfiles/add-
 bash -c "$(wget -q -O- https://raw.githubusercontent.com/jalopezma/dotfiles/feat/move-bash-to-hush/install-2.sh)"
 ```
 
+# To add
+- [pyenv](https://github.com/pyenv/pyenv#automatic-installer)
+- [gvm](https://github.com/moovweb/gvm)
+
 ## [Hush](hush/README.md)
 
 ## [NeoVim](nvim/README.md)

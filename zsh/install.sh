@@ -1,67 +1,47 @@
 #!/bin/bash
 
-# Helps to print the output of the command if the verbose flag is set
-run() {
-  local output=$1
-  local verbose=${2:-false}
-  if $verbose; then
-    echo "$output"
-  fi
-  echo "$output" >> $logFile
-}
+# Exit inmediatly if exits with a non-zero status.
+set -o errexit
+# The return value of a pipeline is the value of the last (right-most) command to exit with a non-zero status, or zero if all commands in the pipeline exit successfully.
+set -o pipefail
+# Treat unset variables and parameters other than the special parameters "@" and "*" as an error when performing parameter expansion. If expansion is attempted on an unset variable or parameter, the shell prints an error message, and, if not interactive, exits with a non-zero status.
+set -o nounset
 
-# Prints to stdout and log file
-print() {
-  echo "$1"
-  echo "$1" >> $logFile
-}
+source ./functions.sh
 
-createSymlink() {
-  local from=$1
-  local to=$2
-  if [ -f $to ] || [ -d $to ]; then
-    echo "[zsh] File $to already exists"
-  else
-    run "$(ln -s $from $to)" $verbose
-  fi
-}
+echo "[zsh] install.sh"
+sudo apt-get install zsh -y
 
-logFile=$1
-verbose=$2
-
-print "[zsh] install.sh"
-run "$(sudo apt-get install zsh -y)"
-
-print "[zsh] $(zsh --version)"
-print "[zsh] Link .zshrc"
+echo "[zsh] $(zsh --version)"
+echo "[zsh] Link .zshrc"
 createSymlink ~/repos/dotfiles/zsh/.zshrc ~/.zshrc
 
-print "[zsh] Install oh my zsh"
-run "$(sh -c "$(wget -q -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended --keep-zshrc 2>&1)"
+echo "[zsh] Install oh my zsh"
+sh -c "$(wget -q -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended --keep-zshrc 2>&1
 
-print "[zsh] Install theme spaceship-prompt"
+echo "[zsh] Install theme spaceship-prompt"
 # until we don't user zsh, the var is not set
 ZSH_CUSTOM=$HOME/.oh-my-zsh/custom
-run "$(git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" 2>&1)"
+git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" 2>&1
 createSymlink "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
 
 # Plugins
-print "[zsh] Plugin zsh-autosuggestions"
-run "$(git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions 2>&1)"
+echo "[zsh] Plugin zsh-autosuggestions"
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions 2>&1
 
-print "[zsh] Plugin history-search-multi-word"
-run "$(git clone https://github.com/zdharma/history-search-multi-word.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/history-search-multi-word 2>&1)"
+echo "[zsh] Plugin history-search-multi-word"
+git clone https://github.com/zdharma/history-search-multi-word.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/history-search-multi-word 2>&1
 
-print "[zsh] Plugin zsh-completions"
-run "$(git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-completions 2>&1)"
+echo "[zsh] Plugin zsh-completions"
+git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-completions 2>&1
 
-print "[zsh] Plugin zsh-nvm"
-run "$(git clone https://github.com/lukechilds/zsh-nvm ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-nvm 2>&1)"
+echo "[zsh] Plugin zsh-nvm"
+git clone https://github.com/lukechilds/zsh-nvm ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-nvm 2>&1
 
-print "[zsh] Plugin zsh-syntax-highlighting"
-run "$(git clone https://github.com/zsh-users/zsh-syntax-highlighting ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting 2>&1)"
+echo "[zsh] Plugin zsh-syntax-highlighting"
+git clone https://github.com/zsh-users/zsh-syntax-highlighting ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting 2>&1
 
-print "[zsh] Set zsh by default"
+echo "[zsh] Set zsh by default"
 chsh -s $(which zsh)
-print "[zsh] Shell for $(whoami): $SHELL"
+echo "[zsh] Shell for $(whoami): $SHELL"
 grep $(whoami) /etc/passwd
