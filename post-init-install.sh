@@ -22,7 +22,7 @@ function install_chrome() {
 function install_fonts() {
   echo "[fonts] Copy Ubuntu font"
   mkdir -p ~/.fonts
-  cp -v fonts/Ubuntu\ Mono\ Nerd\ Font\ Complete.ttf ~/.fonts/
+  cp -v fonts/* ~/.fonts/
 }
 
 function diff_so_fancy() {
