@@ -44,7 +44,7 @@ function install_exa() {
       uniq)
   unzip /tmp/exa.zip -d /tmp
   chmod +x /tmp/bin/exa
-  mv /tmp/bin/exa ~/.local/bin/
+  mv /tmp/bin/exa ~/.local/bin/exa
 }
 
 function wallpapers() {
@@ -89,4 +89,11 @@ source ./functions.sh
 main
 
 # To add:
-# - exa (ls tool)
+# i3 lock/suspend
+# backgrounds and wallpapers
+# allow laptop to run bl (alias for xbacklight and install xbacklight in the laptop)
+# history-msearch-multi-word not found
+# spaceceship_kubecontext_show is deprecated, use spaceship_subetl_context_show instead
+# pyenv not found
+# obsidian and obsidian vimrc
+
