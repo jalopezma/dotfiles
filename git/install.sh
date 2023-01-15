@@ -9,3 +9,7 @@ set -o nounset
 source ./functions.sh
 echo "[git] Link .gitconfig"
 createSymlink ~/repos/dotfiles/git/.gitconfig ~/.gitconfig
+
+echo "[git] Set user name and email"
+git config --global user.name "Jose Lopez"
+git config --global user.email "joseadrian.lopezmartin@gmail.com"
