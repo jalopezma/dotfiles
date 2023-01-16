@@ -87,13 +87,3 @@ function main() {
 echo "[install] Post init install. Sourcing functions"
 source ./functions.sh
 main
-
-# To add:
-# i3 lock/suspend
-# backgrounds and wallpapers
-# allow laptop to run bl (alias for xbacklight and install xbacklight in the laptop)
-# history-msearch-multi-word not found
-# spaceceship_kubecontext_show is deprecated, use spaceship_subetl_context_show instead
-# pyenv not found
-# obsidian and obsidian vimrc
-

@@ -114,4 +114,6 @@ su - <user>
 - allow laptop to run bl (alias for xbacklight and install xbacklight in the laptop, sudo apt install xbacklight)
 - history-msearch-multi-word not found
 - spaceceship_kubecontext_show is deprecated, use spaceship_subetl_context_show instead
-
+- update monitors script for the laptop to:
+  - set eDP-1 off when 3 monitors are set
+  - set eDP-1 on when less than 3 monitors

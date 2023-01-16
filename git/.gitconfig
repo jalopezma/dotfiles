@@ -11,7 +11,7 @@
 [user]
 	email = joseadrian.lopezmartin@gmail.com
 	name = Jose Lopez
-	signingkey = 9F5C2278D8B5EAD3
+	signingkey = 21E05D2241ABFE5D
 
 [diff "sopsdiffer"]
 	textconv = sops -d
