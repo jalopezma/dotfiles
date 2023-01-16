@@ -18,7 +18,7 @@ ZSH_THEME="spaceship"
 
 # Don't show tracball battery
 SPACESHIP_BATTERY_SHOW="true"
-SPACESHIP_KUBECONTEXT_SHOW="false"
+SPACESHIP_KUBECTL_CONTEXT_SHOW="false"
 SPACESHIP_DOCKER_SHOW="false"
 
 ## History command configuration
@@ -71,12 +71,7 @@ setopt share_history          # share command history data
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-
-# $ git clone https://github.com/lukechilds/zsh-nvm $ZSH/custom/plugins/zsh-nvm
-# $ git clone https://github.com/zsh-users/zsh-syntax-highlighting ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-# $ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-#plugins=(git zsh-autosuggestions history-search-multi-word z zsh-completions docker dotenv zsh-nvm zsh-syntax-highlighting)
-plugins=(zsh-autosuggestions history-search-multi-word z zsh-completions dotenv zsh-nvm)
+plugins=(zsh-autosuggestions H-S-MW z zsh-completions dotenv zsh-nvm)
 
 # https://github.com/jeffreytse/zsh-vi-mode
 # plugins+=(zsh-vi-mode)
@@ -184,6 +179,8 @@ function ke() {
 alias tag="cd ~/repos/YieldifyLabs/khaleesi-tag"
 alias builder="cd ~/repos/YieldifyLabs/khaleesi-tag-delivery"
 
+alias evalssh="eval $(ssh-agent) && ssh-add"
+
 # Yieldify aliases
 alias helm="echo 'Use helm2 (for kops) or helm3 (for eks) binaries'"
 function yi() {
@@ -235,9 +232,9 @@ alias killbluetooth="ps -aux | grep blue | grep -v 'grep' | tr -s ' ' | cut -d '
 alias gvm-init="source \"$HOME/.gvm/scripts/gvm\""
 
 # Yieldify vpn
-alias yv="yvpn"
+alias yv="yvpn.sh"
 # restart
-alias yvr="yvpn && yvpn"
+alias yvr="yv && yv"
 # status
 alias yvs="openvpn3 sessions-list"
 
@@ -311,12 +308,13 @@ autoload -U edit-command-line
 zle -N edit-command-line
 bindkey '^e' edit-command-line
 
-# Load pyenv automatically by appending
-# the following to ~/.bash_profile if it exists, otherwise ~/.profile (for login shells)
-# and ~/.bashrc (for interactive shells) :
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+# check if pyenv is present before trying to init it
+which pyenv &> /dev/null
+if [[ $? -eq 0 ]]; then
+  export PYENV_ROOT="$HOME/.pyenv"
+  command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init -)"
+fi
 
 if [[ $COMPUTER == 'LAPTOP' ]]; then
   export AWS_SDK_LOAD_CONFIG=1
@@ -325,11 +323,6 @@ if [[ $COMPUTER == 'LAPTOP' ]]; then
 
   # Load faceless (yieldify command)
   # eval $(_facelesscmd env init)
-
-  # Restart your shell for the changes to take effect.
-  # Load pyenv-virtualenv automatically by adding
-  # the following to ~/.bashrc:
-  # eval "$(pyenv virtualenv-init -)"
 
   # Golang version manager
   # [ -s "$HOME/.gvm/scripts/gvm" ] && source "$HOME/.gvm/scripts/gvm"

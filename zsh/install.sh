@@ -32,8 +32,8 @@ createSymlink "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CU
 echo "[zsh] Plugin zsh-autosuggestions"
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions 2>&1
 
-echo "[zsh] Plugin history-search-multi-word"
-git clone https://github.com/zdharma/history-search-multi-word.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/history-search-multi-word 2>&1
+echo "[zsh] Plugin H-S-MW (History Search Multi Word)"
+git clone https://github.com/z-shell/H-S-MW.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/H-S-MW 2>&1
 
 echo "[zsh] Plugin zsh-completions"
 git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-completions 2>&1
