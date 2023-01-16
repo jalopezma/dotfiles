@@ -48,6 +48,11 @@ function set_scripts() {
   createSymlink ~/repos/dotfiles/scripts ~/scripts
 }
 
+functio bluetooth() {
+  echo "[install] Install blueman"
+  sudo apt-get install -y blueman
+}
+
 function main() {
   echo "[install] Install firefox flameshot snapd"
   sudo apt-get install -y firefox flameshot snapd
@@ -58,6 +63,7 @@ function main() {
   set_scripts
 
   install_exa
+  bluetooth
 
   bash ./git/install.sh
   bash ./zsh/install.sh
