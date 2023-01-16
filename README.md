@@ -68,46 +68,12 @@ EndSection
 In the `.zshrc` file we are checking the `hostname` to detect which computer we are in.
 So far we are going to differentiate between `LAPTOP` and `DESKTOP` in the var `COMPUTER`.
 
-## Monitors
-In `monitors/99-monitors-hotplug.rules` we have defined a rule to restart service when there are changes in the monitors connected.
-It seems the `add` and `remove` actions are not triggering what I want and only the `change` does it.
-
-```bash
-sudo ln -s ~/repos/dotfiles/monitors/99-monitors-hotplug.rules /etc/udev/rules.d/99-monitors-hotplug.rules
-sudo chmod 0644 /etc/udev/rules.d/99-monitors-hotplug.rules
-touch /tmp/scripts.log && chmod 644 /tmp/scripts.log
-sudo udevadm control --reload-rules 
-```
-
-You should have already linked the `monitors.sh` script in the `~/scripts/` folder.
-```bash
-ln -s ~/repos/dotfiles/scripts/monitors.sh ~/scripts/monitors.sh
-```
-
-You will also need to set the monitor service. I had to use a service as the udev rule is executing the script as `root` and that breaks the init of polybar.
-```bash
-sudo ln -s ~/repos/dotfiles/monitors/monitors.service /etc/systemd/system/monitors.service
-systemctl daemon-reload
-```
-
 ## Bluetooth 
-The last dongle I've wasn't supported on linux.
-Running `➜ sudo dmesg | grep -i blue`
-Was giving 
-```
-[ 6799.057267] usb 5-1.3.1: Product: Bluetooth Radio
-[ 6799.339736] Bluetooth: hci0: RTL: examining hci_ver=0a hci_rev=000b lmp_ver=0a lmp_subver=8761
-[ 6799.340716] Bluetooth: hci0: RTL: rom_version status=0 version=1
-[ 6799.340723] Bluetooth: hci0: RTL: loading rtl_bt/rtl8761b_fw.bin
-[ 6799.340750] bluetooth hci0: Direct firmware load for rtl_bt/rtl8761b_fw.bin failed with error -2
-[ 6799.340756] Bluetooth: hci0: RTL: firmware file rtl_bt/rtl8761b_fw.bin not found
-```
 
-So I downloaded the firmware [https://linuxreviews.org/Realtek_RTL8761B](https://linuxreviews.org/Realtek_RTL8761B) and copied it to the right location
+Install bluetooth manager
 
 ```bash
-sudo mv rtl8761b_config /lib/firmware/rtl_bt/rtl8761b_config.bin
-sudo mv rtl8761b_fw /lib/firmware/rtl_bt/rtl8761b_fw.bin
+sudo apt install blueman
 ```
 
 ## Docker
@@ -140,6 +106,12 @@ su - <user>
 - [Obsidian](https://obsidian.md/)
 - ssh: keys and agent?
 - aws credentials?
-- bluetooth?
+- bluetooth function to install blueman
 - yvpn
 - gvm (golang virtual manager)
+- i3 lock/suspend
+- backgrounds and wallpapers
+- allow laptop to run bl (alias for xbacklight and install xbacklight in the laptop, sudo apt install xbacklight)
+- history-msearch-multi-word not found
+- spaceceship_kubecontext_show is deprecated, use spaceship_subetl_context_show instead
+
