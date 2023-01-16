@@ -25,19 +25,10 @@ function install_fonts() {
   cp -v fonts/* ~/.fonts/
 }
 
-function install_diff_so_fancy() {
-  echo "[diff_so_fancy] Download script"
-  curl -o diff-so-fancy --location \
-    $(curl -s https://api.github.com/repos/so-fancy/diff-so-fancy/releases/latest |
-      grep -Po 'https://github.com/so-fancy/diff-so-fancy/releases/download/.*/diff-so-fancy' |
-      uniq)
-  chmod +x ./diff-so-fancy
-  mv ./diff-so-fancy ~/.local/bin/
-}
-
 # exa https://github.com/ogham/exa modern replacement for ls
 function install_exa() {
   echo "[exa] Download script"
+  mkdir -p ~/.local/bin
   curl -o /tmp/exa.zip --location \
     $(curl -s https://api.github.com/repos/ogham/exa/releases/latest |
       grep -Po 'https://github.com/ogham/exa/releases/download/.*/exa-linux-x86_64-v.*.zip' |
@@ -66,8 +57,6 @@ function main() {
   wallpapers
   set_scripts
 
-  mkdir -p ~/.local/bin
-  install_diff_so_fancy
   install_exa
 
   bash ./git/install.sh
