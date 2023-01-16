@@ -146,6 +146,10 @@ alias gc.="g checkout ."
 # Using delta as default git diff https://github.com/dandavison/delta
 alias gd="g diff"
 
+# docker
+alias docker-compose="docker compose"
+alias docker-stop-all="docker stop $(docker ps -a -q)"
+
 # tmux
 alias t=tmux
 
