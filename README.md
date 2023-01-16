@@ -38,13 +38,6 @@ shfmt --find ./ | xargs shfmt -l -w -s --indent=2 -ci -sr
 
 ## [i3](i3/README.md)
 
-## scripts
-
-```bash
-mkdir ~/scripts
-ln -s ~/repos/dotfiles/scripts ~/scripts
-```
-
 ## dell touchpad
 
 `/usr/share/X11/xorg.conf.d/40-libinput.conf`
@@ -61,20 +54,9 @@ Section "InputClass"
 EndSection
 ```
 
-## Wallpapers
-`ln -s ~/repos/dotfiles/wallpapers ~/wallpapers`
-
 ## Device
 In the `.zshrc` file we are checking the `hostname` to detect which computer we are in.
 So far we are going to differentiate between `LAPTOP` and `DESKTOP` in the var `COMPUTER`.
-
-## Bluetooth 
-
-Install bluetooth manager
-
-```bash
-sudo apt install blueman
-```
 
 ## Docker
 
