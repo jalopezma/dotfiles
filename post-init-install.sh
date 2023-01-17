@@ -48,9 +48,14 @@ function set_scripts() {
   createSymlink ~/repos/dotfiles/scripts ~/scripts
 }
 
-functio bluetooth() {
+function bluetooth() {
   echo "[install] Install blueman"
   sudo apt-get install -y blueman
+}
+
+function backlight() {
+  echo "[install] Install backlight tools"
+  sudo apt-get install -y xbacklight
 }
 
 function main() {
@@ -64,6 +69,7 @@ function main() {
 
   install_exa
   bluetooth
+  backlight
 
   bash ./git/install.sh
   bash ./zsh/install.sh

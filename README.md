@@ -29,6 +29,13 @@ shfmt --find ./ | xargs shfmt -l -w -s --indent=2 -ci -sr
 # To add
 - [pyenv](https://github.com/pyenv/pyenv#automatic-installer)
 - [gvm](https://github.com/moovweb/gvm)
+- [Obsidian](https://obsidian.md/)
+- i3 lock/suspend
+- backgrounds and wallpapers
+- allow laptop to run bl (alias for xbacklight and install xbacklight in the laptop, sudo apt install xbacklight)
+- update monitors script for the laptop to:
+  - set eDP-1 off when 3 monitors are set
+  - set eDP-1 on when less than 3 monitors
 
 ## [Hush](hush/README.md)
 
@@ -82,20 +89,9 @@ sudo usermod -a -G video $LOGNAME
 su - <user>
 ```
 
-## List of things to add to auto-install
+## Yieldify
 
-- [Pyenv](https://github.com/pyenv/pyenv)
-- [Obsidian](https://obsidian.md/)
-- ssh: keys and agent?
-- aws credentials?
-- bluetooth function to install blueman
-- yvpn
-- gvm (golang virtual manager)
-- i3 lock/suspend
-- backgrounds and wallpapers
-- allow laptop to run bl (alias for xbacklight and install xbacklight in the laptop, sudo apt install xbacklight)
-- history-msearch-multi-word not found
-- spaceceship_kubecontext_show is deprecated, use spaceship_subetl_context_show instead
-- update monitors script for the laptop to:
-  - set eDP-1 off when 3 monitors are set
-  - set eDP-1 on when less than 3 monitors
+- OpenVPN
+  - [Installation](https://community.openvpn.net/openvpn/wiki/OpenVPN3Linux?_ga=2.225757343.406983588.1673944046-2138455025.1673944046) 
+- Faceless
+- Kubernetes
