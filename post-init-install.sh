@@ -89,8 +89,8 @@ function python_version_manager() {
 }
 
 function main() {
-  echo "[install] Install firefox flameshot snapd"
-  sudo apt-get install -y firefox flameshot snapd
+  echo "[install] Install firefox flameshot snapd htop"
+  sudo apt-get install -y firefox flameshot snapd htop
 
   install_chrome
   install_fonts
