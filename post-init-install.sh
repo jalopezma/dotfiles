@@ -58,6 +58,21 @@ function backlight() {
   sudo apt-get install -y xbacklight
 }
 
+function golang_version_manager() {
+  # https://github.com/moovweb/gvm
+  echo "[install] Install dependencies and Golang version manager"
+  sudo apt-get install -y bison
+  bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
+  echo "[install] We need to install go1.4 first"
+  source "$HOME/.gvm/scripts/gvm"
+  gvm install go1.4 -B
+  gvm use go1.4
+  export GOROOT_BOOTSTRAP=$GOROOT
+  echo "[install] Install go1.19 an use it"
+  gvm install go1.19
+  gvm use go1.19 --default
+}
+
 function main() {
   echo "[install] Install firefox flameshot snapd"
   sudo apt-get install -y firefox flameshot snapd
@@ -70,6 +85,7 @@ function main() {
   install_exa
   bluetooth
   backlight
+  golang_version_manager
 
   bash ./git/install.sh
   bash ./zsh/install.sh
