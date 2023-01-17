@@ -27,8 +27,6 @@ shfmt --find ./ | xargs shfmt -l -w -s --indent=2 -ci -sr
 ```
 
 # To add
-- [pyenv](https://github.com/pyenv/pyenv#automatic-installer)
-- [gvm](https://github.com/moovweb/gvm)
 - [Obsidian](https://obsidian.md/)
 - i3 lock/suspend
 - backgrounds and wallpapers

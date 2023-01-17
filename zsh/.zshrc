@@ -313,10 +313,10 @@ zle -N edit-command-line
 bindkey '^e' edit-command-line
 
 # check if pyenv is present before trying to init it
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 which pyenv &> /dev/null
 if [[ $? -eq 0 ]]; then
-  export PYENV_ROOT="$HOME/.pyenv"
-  command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
   eval "$(pyenv init -)"
 fi
 

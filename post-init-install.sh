@@ -63,14 +63,29 @@ function golang_version_manager() {
   echo "[install] Install dependencies and Golang version manager"
   sudo apt-get install -y bison
   bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
-  echo "[install] We need to install go1.4 first"
+  echo "[install] Source gvm"
   source "$HOME/.gvm/scripts/gvm"
+  echo "[install] We need to install go1.4 first"
   gvm install go1.4 -B
   gvm use go1.4
   export GOROOT_BOOTSTRAP=$GOROOT
   echo "[install] Install go1.19 an use it"
   gvm install go1.19
   gvm use go1.19 --default
+}
+
+function python_version_manager() {
+  # https://github.com/pyenv/pyenv
+  echo "[install] Install pyenv and dependencies"
+  sudo apt-get install -y build-essential zlib1g-dev libffi-dev libssl-dev libbz2-dev libreadline-dev libsqlite3-dev liblzma-dev python3-tk python-tk tk-dev
+  curl https://pyenv.run | bash
+  echo "[install] source pyenv"
+  export PYENV_ROOT="$HOME/.pyenv"
+  command -v pyenv > /dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init -)"
+  echo "[install] Python 3.11.1"
+  pyenv install 3.11.1
+  pyenv global 3.11.1
 }
 
 function main() {
