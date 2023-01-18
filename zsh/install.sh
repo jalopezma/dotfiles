@@ -25,7 +25,7 @@ createSymlink ~/repos/dotfiles/zsh/.zshrc ~/.zshrc
 echo "[zsh] Install theme spaceship-prompt"
 # until we don't user zsh, the var is not set
 ZSH_CUSTOM=$HOME/.oh-my-zsh/custom
-git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" 2>&1
+git clone https://github.com/spaceship-prompt/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" --depth=1 2>&1
 createSymlink "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
 
 # Plugins
