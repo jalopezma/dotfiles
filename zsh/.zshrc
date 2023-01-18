@@ -104,6 +104,8 @@ else
 fi
 echo $COMPUTER > /tmp/computer
 
+# For kubernetes
+export GPG_TTY=$(tty)
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -187,25 +189,26 @@ alias evalssh="eval \"$(ssh-agent)\" && ssh-add"
 
 # Yieldify aliases
 alias helm="echo 'Use helm2 (for kops) or helm3 (for eks) binaries'"
-function yi() {
-  initFacesless=$(_facelesscmd env init 2>/dev/null)
 
+# We wrap the yieldify function from faceless to load it only when called the first time
+function yieldify() {
+  which yieldify_fn &> /dev/null
   if [[ $? -ne 0 ]]; then
-    echo "Error: faceless is not installed"
-    return
+    echo "Init faceless"
+    # Rename `yieldify` by `yieldify_fn` so we can wrap it with the same name
+    initFacesless=$(_facelesscmd env init 2>/dev/null | sed -e 's/yieldify/yieldify_fn/g')
+    if [[ $? -ne 0 ]]; then
+      echo "Error: faceless is not installed"
+      return
+    fi
+    eval "$initFacesless"
   fi
-  eval "$initFacesless"
+
+  yieldify_fn "$@"
 }
 
 function ys() {
   local env=$1
-
-  yieldify &> /dev/null
-  if [[ $? -ne 0 ]]; then
-    echo "Init faceless"
-    yi
-  fi
-
   echo "> yieldify aws switch $env"
   yieldify aws switch $env
 }
@@ -335,3 +338,5 @@ if [[ $COMPUTER == 'LAPTOP' ]]; then
   export SDKMAN_DIR="$HOME/.sdkman"
   [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 fi
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
