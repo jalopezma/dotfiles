@@ -183,7 +183,7 @@ function ke() {
 alias tag="cd ~/repos/YieldifyLabs/khaleesi-tag"
 alias builder="cd ~/repos/YieldifyLabs/khaleesi-tag-delivery"
 
-alias evalssh="eval $(ssh-agent) && ssh-add"
+alias evalssh="eval \"$(ssh-agent)\" && ssh-add"
 
 # Yieldify aliases
 alias helm="echo 'Use helm2 (for kops) or helm3 (for eks) binaries'"
