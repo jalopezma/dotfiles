@@ -1,6 +1,6 @@
 {
   // I might need to update this frequently
-  "tsserver.npm": "~/.nvm/versions/node/v16.15.0/bin/npm",
+  "tsserver.npm": "$NVM_BIN/npm",
   // "eslint.filetypes": ["javascript", "typescript", "typescriptreact", "javascriptreact", "typescript.tsx"],
   "diagnostic.virtualText": true,
   "suggest.maxCompleteItemCount": 20,
