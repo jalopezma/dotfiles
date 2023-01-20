@@ -174,11 +174,10 @@ function ke() {
   if [[ -z $pod_name ]]; then
     echo "Missing pod name. Usage:"
     echo " ke <pod-name>"
-    echo " k exec -it <pod-name> bash"
+    echo " k exec -it <pod-name> -- bash"
     return
   fi
-
-  k exec -it $pod_name bash
+  k exec -it $pod_name -- bash
 }
 
 
