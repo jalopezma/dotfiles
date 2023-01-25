@@ -5,4 +5,4 @@ Description=Updates screen resolution on monitor changes
 Type=oneshot
 User=<user>
 RemainAfterExit=true
-ExecStart=/home/<user>/scripts/monitors.sh change
+ExecStart=/home/<user>/scripts/monitors.sh

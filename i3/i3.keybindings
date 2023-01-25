@@ -140,9 +140,6 @@ bindsym $mod+r mode "resize"
 # Set external monitor to the left
 bindsym $mod+Control+d exec ~/scripts/monitors.sh
 
-# Remove external monitor
-bindsym $mod+Control+Shift+d exec ~/scripts/monitors.sh off
-
 # sleep
 # do fisrt:
 # betterlockscreen -u ~/wallpapers/earth-moon-4k.jpg

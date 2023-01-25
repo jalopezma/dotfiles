@@ -1,23 +1,20 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-# debug
-# set -x
+# Exit inmediatly if exits with a non-zero status.
+set -o errexit
+# Print commands and their arguments as they are executed.
+set -o xtrace
+# The return value of a pipeline is the value of the last (right-most) command to exit with a non-zero status, or zero if all commands in the pipeline exit successfully.
+set -o pipefail
+# Treat unset variables and parameters other than the special parameters "@" and "*" as an error when performing parameter expansion. If expansion is attempted on an unset variable or parameter, the shell prints an error message, and, if not interactive, exits with a non-zero status.
+set -o nounset
 
-# The script has the following options
-# add: sets two screens
-# off: returns to one screen
-# change: (on init or udev rule change): will figure out which one to call (add or off)
-# workspaces: will relocate worskpaces to set monitors
-option=${1:-change}
 
 # Get the COMPUTER env var or "DESKTOP" if not set
-computer=$(cat /tmp/computer)
-computer=${computer:-DESKTOP}
+COMPUTER=$(cat /tmp/computer)
+COMPUTER=${COMPUTER:-DESKTOP}
 
-logFile=/tmp/scripts.log
-
-primary=""
-secondary=""
+LOG_FILE=/tmp/scripts.log
 
 # Set env vars needed for xrandr
 export XAUTHORITY=${XAUTHORITY:-/run/user/$(id -u)/gdm/Xauthority}
@@ -30,13 +27,13 @@ function moveWorkspaceToScreen() {
 
   workspaceActualOutput=$(echo $_workspaces | jq ".[\"$_workspace\"].output" | tr -d '"')
   if [ $workspaceActualOutput = "null" ]; then
-    echo "[monitors.sh] - Workspace $_workspace not in use" >> $logFile
+    echo "[monitors.sh] - Workspace $_workspace not in use" >> $LOG_FILE
   elif [ $workspaceActualOutput = $_monitor ]; then
-    echo "[monitors.sh] - workspace $_workspace already in $_monitor" >> $logFile
+    echo "[monitors.sh] - workspace $_workspace already in $_monitor" >> $LOG_FILE
   else
     i3-msg workspace "$_workspace" > /dev/null
-    output=$(i3-msg move workspace to output $_monitor) >> $logFile
-    echo "[monitors.sh] - Workspace $_workspace to monitor $_monitor: $output" >> $logFile
+    output=$(i3-msg move workspace to output $_monitor) >> $LOG_FILE
+    echo "[monitors.sh] - Workspace $_workspace to monitor $_monitor: $output" >> $LOG_FILE
   fi
 }
 
@@ -47,15 +44,9 @@ function setWorkspacesForTwoScreens() {
   local _visible1=$4
   local _visible2=$5
   local _workspaces=$6
-  local _computer=$7
-
-  # Actual primary won't work as is a duplicate of eDP-1
-  if [ $computer = "LAPTOP" ]; then
-    _primary="eDP-1"
-  fi
 
   # Select the workspace and move it to the right monitor
-  moveWorkspaceToScreen "1" $_primary "$_workspaces"
+  moveWorkspaceToScreen "1" "$_primary" "$_workspaces"
   moveWorkspaceToScreen "5" "$_primary" "$_workspaces"
 
   moveWorkspaceToScreen "2" "$_secondary" "$_workspaces"
@@ -81,7 +72,7 @@ function add() {
   local _computre=$7
 
   if [ -z "$_secondary" ]; then
-    echo "[monitors.sh] - add: No secondary monitor found" >> $logFile
+    echo "[monitors.sh] - add: No secondary monitor found" >> $LOG_FILE
     exit 1
   fi
 
@@ -90,24 +81,19 @@ function add() {
     local _tmp=$_primary
     _primary=$_secondary
     _secondary=$_tmp
-    echo "[monitors.sh] - add: \"$computer\" we switch primary (now $_primary) and secondary (now $_secondary)" >> $logFile
+    echo "[monitors.sh] - add: \"$computer\" we switch primary (now $_primary) and secondary (now $_secondary)" >> $LOG_FILE
   fi
 
   xrandr --output "$_secondary" --mode 1920x1080 --right-of "$_primary"
   setWorkspacesForTwoScreens $_primary $_secondary $_focused $_visible1 $_visible2 "$_workspaces" "$_computer"
 
-  echo "[monitors.sh] - add: Secondary monitor set" >> $logFile
+  echo "[monitors.sh] - add: Secondary monitor set" >> $LOG_FILE
 }
 
 function setWorkspacesForOneScreen() {
   local _primary=$1
   local _focused=$2
   local _workspaces=$3
-
-  # Actual primary won't work as is a duplicate of eDP-1
-  if [ $computer = "LAPTOP" ]; then
-    _primary="eDP-1"
-  fi
 
   # I need to move workspaces from the other screen back
   for i in {1..8}; do
@@ -118,42 +104,7 @@ function setWorkspacesForOneScreen() {
   i3-msg workspace "$_focused" > /dev/null
 }
 
-function off() {
-  local _primary=$1
-  local _focused=$2
-  local _workspaces=$3
-
-  # Disable all monitors that are disconnected and have a resolution (meaning they are not disabled)
-  while IFS= read -r monitor; do
-    echo "[monitors.sh] - off: Disable \"$monitor\"" >> $logFile
-    $(xrandr --output "$monitor" --off)
-  done < <(xrandr | grep 'disconnected [0-9]' | awk '{print $1}')
-
-  # Actual primary won't work as is a duplicate of eDP-1
-  if [ $computer = "LAPTOP" ]; then
-    _primary="eDP-1"
-  fi
-  setWorkspacesForOneScreen $_primary $_focused $_workspaces
-
-  echo "[monitors.sh] - off: Secondary monitor removed" >> $logFile
-}
-
-function change() {
-  local _primary=$1
-  local _secondary=$2
-  local _focused=$3
-  local _visible1=$4
-  local _visible2=$5
-  local _workspaces=$6
-  local _computre=$6
-
-  if [ -z "$_secondary" ]; then
-    off $"_primary" $_focused
-  else
-    add "$_primary" "$_secondary" $_focused "$_visible1" "$_visible2" "$_workspaces" "$_computer"
-  fi
-}
-
+# You will need to capture the output of this function and use head and tail to retrieve values
 function setMonitorsVariables() {
   local _numMonitors=$1
   if [ "$_numMonitors" -eq "3" ]; then
@@ -168,60 +119,88 @@ function setMonitorsVariables() {
     secondary=$(xrandr | grep -v primary | grep ' connected' | awk '{ print $1 }' | head -n 1)
   fi
 
+  echo $primary
+  echo $secondary
+}
+
+function set_laptop {
+  local _numMonitors=$1
+  local _primary=$2
+  local _secondary=$3
+
+  if [[ $_numMonitors -eq 3 ]]; then
+    # Switch off latop screen if we have 3 screens connected
+    xrandr --output eDP-1 --off --output "$_primary" --mode 1920x1080 --output "$_secondary" --mode 1920x1080 --right-of "$_primary"
+    echo "[monitors.sh][laptop] eDP-1 disabled as we have ${_numMonitors} monitors connected" >> $LOG_FILE
+  elif [[ $_numMonitors -eq 2 ]]; then
+    xrandr --output "$_primary" --mode 1920x1080 --output "$_secondary" --mode 1920x1080 --right-of "$_primary"
+    echo "[monitors.sh][laptop] ${_numMonitors} monitors connected. $_primary right of $_primary. Both 1920" >> $LOG_FILE
+  else
+    echo "[monitors.sh][laptop] ${_primary} to 1920" >> $LOG_FILE
+    xrandr --output "$_primary" --mode 1920x1080
+  fi
+}
+
+function set_desktop {
+  local _numMonitors=$1
+  # we have them switched
+  local _secondary=$2
+  local _primary=$3
+
+  if [[ $_numMonitors -eq 2 ]]; then
+    echo "[monitors.sh][${COMPUTER}] primary and secondary set to 1920x1080" >> $LOG_FILE
+    xrandr --output "$_primary" --mode 1920x1080 --output "$secondary" --mode 1920x1080 --right-of "$_primary"
+  else
+    echo "[monitors.sh][${COMPUTER}] primary set to 1920x1080" >> $LOG_FILE
+    xrandr --output "$_primary" --mode 1920x1080
+  fi
+}
+
+function set_workspaces() {
+  local _workspaces=$1
+  local _numMonitors=$2
+  local _primary=$3
+  local _secondary=$4
+
+  # Save which workspace is focused before setting the monitors
+  ws_focused=$(echo "$_workspaces" | jq '.[] | select(.focused==true).name')
+  ws_visible_in_primary=$(echo $_workspaces | jq '.[] | select(.visible==true).name' | head -n 1)
+  ws_visible_in_secondary=$(echo $_workspaces | jq '.[] | select(.visible==true).name' | tail -n 1)
+
+  if [[ $_numMonitors -ge 2 ]]; then
+    setWorkspacesForTwoScreens $_primary $_secondary $ws_focused $ws_visible_in_primary $ws_visible_in_secondary "$_workspaces"
+  else
+    setWorkspacesForOneScreen $primary $focused "$_workspaces"
+  fi
 }
 
 function main() {
-  local _option=$1
+  local _computer=$1
 
   numMonitors=$(xrandr | grep " connected" | wc -l)
-  echo "[monitors.sh] - number_of_monitors \"$numMonitors\"" >> $logFile
+  echo "[monitors.sh] number_of_monitors \"$numMonitors\"" >> $LOG_FILE
 
-  setMonitorsVariables $numMonitors
-  echo "[monitors.sh] - primary \"$primary\" secondary \"$secondary\"" >> $logFile
+  monitors=$(setMonitorsVariables $numMonitors)
+  primary=$(echo "$monitors" | head -1)
+  secondary=$(echo "$monitors" | tail -1)
+  echo "[monitors.sh] primary \"$primary\" secondary \"$secondary\"" >> $LOG_FILE
 
-  # Set primary to 1920x1080
-  xrandr --output "$primary" --mode 1920x1080
-  # Duplicate laptop screen to left monitor when running in the laptop and we have 3 screens
-  if [ $computer = "LAPTOP" ]; then
-    # set internal screen to 1920x1080
-    xrandr --output "eDP-1" --mode 1920x1080
-    echo "[monitors.sh] - Laptop eDP-1 set to 1920x1080" >> $logFile
-
-    if [ "$numMonitors" -eq "3" ]; then
-      echo "[monitors.sh] - Laptop and 3 monitors. Duplicate eDP-1 to $primary" >> $logFile
-      xrandr --output $primary --same-as "eDP-1"
-    fi
-  fi
-
-  # Get worskpaces, remove not wanted properties and move it to an object {"<workspace_name>": { "name": "<workspace_name>", "output": "<output>", ... }}
+  # Get worskpaces, remove not wanted properties and move it to an object
+  # {"<workspace_name>": { "name": "<workspace_name>", "output": "<output>", ... }}
   workspaces=$(i3-msg -t get_workspaces | jq '(map({"name": .name, "output": .output, "focused": .focused, "visible": .visible}) | INDEX(.name))')
 
-  # Save which workspace is focused before setting the monitors
-  focused=$(echo $workspaces | jq '.[] | select(.focused==true).name')
-  visible1=$(echo $workspaces | jq '.[] | select(.visible==true).name' | head -n 1)
-  visible2=$(echo $workspaces | jq '.[] | select(.visible==true).name' | tail -n 1)
-
-  if [ $_option = "add" ]; then
-    add "$primary" "$secondary" $focused "$visible1" "$visible2" "$workspaces" "$computer"
-  elif [ $_option = "off" ]; then
-    off "$primary" $focused "$workspaces"
-  elif [ $_option = "change" ]; then
-    change "$primary" "$secondary" $focused "$visible1" "$visible2" "$workspaces" "$computer"
-  elif [ $_option = "workspaces" ]; then
-    if [ "$numMonitors" -ge "2" ]; then
-      setWorkspacesForTwoScreens "$primary" "$secondary" $focused "$visible1" "$visible2" "$workspaces" "$computer"
-    else
-      setWorkspacesForOneScreen $primary $focused "$workspaces"
-    fi
-    return 0 # skipping the polybar restart
+  if [[ $_computer == "LAPTOP" ]]; then
+    set_laptop $numMonitors $primary $secondary
   else
-    echo "[monitors.sh] - Unknown option \"$_option\"" >> $logFile
+    set_desktop $numMonitors $primary $secondary
   fi
+
+  set_workspaces "$workspaces" $numMonitors $primary $secondary
 
   # Re-launch the status bars
   ~/.config/polybar/launch.sh
 }
 
-echo "[monitors.sh] --------------------------- $(date)" >> $logFile
-echo "[monitors.sh] - option \"$option\" computer \"$computer\" user \"$(whoami)\"" >> $logFile
-main $option
+echo "[monitors.sh] --------------------------- $(date)" >> $LOG_FILE
+echo "[monitors.sh] computer \"$COMPUTER\" user \"$(whoami)\"" >> $LOG_FILE
+main $COMPUTER
