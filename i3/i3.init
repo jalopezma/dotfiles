@@ -44,7 +44,7 @@ exec --no-startup-id /usr/lib/gnome-settings-daemon/gnome-settings-daemon
 exec --no-startup-id nm-applet
 # Bluetooth
 exec --no-startup-id blueman-applet
-exec indicator-sound-switcher
+exec --no-startup-id indicator-sound-switcher
 
 # start keyring so chrome has can remember the passwords?
 exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=secrets
