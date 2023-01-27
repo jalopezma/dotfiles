@@ -141,11 +141,11 @@ bindsym $mod+r mode "resize"
 bindsym $mod+Control+d exec ~/scripts/monitors.sh
 
 # sleep
-# do fisrt:
-# betterlockscreen -u ~/wallpapers/earth-moon-4k.jpg
-bindsym $mod+Control+s exec betterlockscreen -s blur
+# bindsym $mod+Control+s exec betterlockscreen -s blur --off 5
+bindsym $mod+Control+s exec betterlockscreen -s --off 5
 # lock
-bindsym $mod+Control+l exec betterlockscreen -l blur
+# bindsym $mod+Control+s exec betterlockscreen -l blur --off 5
+bindsym $mod+Control+l exec betterlockscreen -l --off 5
 
 # Keyboard layout
 bindsym $mod+space exec ~/scripts/keyboard-layout
