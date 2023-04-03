@@ -154,8 +154,8 @@ function set_desktop {
 
   if [[ $_numMonitors -eq 2 ]]; then
     echo "[monitors.sh][${COMPUTER}] primary and secondary set to 1920x1080" >> $LOG_FILE
-    echo "[monitors.sh] xrandr --output \"$_primary\" --mode 1920x1080 --output \"$secondary\" --mode 1920x1080 --right-of \"$_primary\""
-    xrandr --output "$_primary" --mode 1920x1080 --output "$secondary" --mode 1920x1080 --right-of "$_primary"
+    echo "[monitors.sh] xrandr --output \"$_primary\" --mode 1920x1080 --output \"$_secondary\" --mode 1920x1080 --right-of \"$_primary\""
+    xrandr --output "$_primary" --mode 1920x1080 --output "$_secondary" --mode 1920x1080 --right-of "$_primary"
   else
     echo "[monitors.sh][${COMPUTER}] primary set to 1920x1080" >> $LOG_FILE
     echo "[monitors.sh] xrandr --output \"$_primary\" --mode 1920x1080"
