@@ -122,6 +122,7 @@ function main() {
   bash ./polybar/install.sh
   bash ./alacritty/install.sh
   bash ./beekeper-studio/install.sh
+  bash ./sound-switcher/install.sh
 }
 
 echo "[install] Post init install. Sourcing functions"
