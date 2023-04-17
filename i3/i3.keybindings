@@ -132,13 +132,12 @@ bindsym $mod+r mode "resize"
 #  MONITORS
 # _____________________________________________________________________
 #
-#  To create a script that do something diff with each params
-#
 #  eDP-1   laptop
 #  DP-1    external monitor
-#
-# Set external monitor to the left
+#  DP-2    external monitor
 bindsym $mod+Control+d exec ~/scripts/monitors.sh
+# in case something happens
+bindsym $mod+Shift+d exec xrandr --auto
 
 # sleep
 # bindsym $mod+Control+s exec betterlockscreen -s blur --off 5

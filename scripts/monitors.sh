@@ -131,18 +131,18 @@ function set_laptop {
 
   if [[ $_numMonitors -eq 3 ]]; then
     # Switch off latop screen if we have 3 screens connected
-    echo "[monitors.sh] xrandr --output eDP-1 --off --output \"$_primary\" --mode 1920x1080 --output \"$_secondary\" --mode 1920x1080 --right-of \"$_primary\"" >> $LOG_FILE
-    xrandr --output eDP-1 --off --output "$_primary" --mode 1920x1080 --output "$_secondary" --mode 1920x1080 --right-of "$_primary"
+    echo "[monitors.sh] xrandr --auto --output eDP-1 --off --output \"$_primary\" --mode 1920x1080 --output \"$_secondary\" --mode 1920x1080 --right-of \"$_primary\"" >> $LOG_FILE
+    xrandr --auto --output eDP-1 --off --output "$_primary" --mode 1920x1080 --output "$_secondary" --mode 1920x1080 --right-of "$_primary"
 
     echo "[monitors.sh][laptop] eDP-1 disabled as we have ${_numMonitors} monitors connected" >> $LOG_FILE
   elif [[ $_numMonitors -eq 2 ]]; then
-    echo "[monitors.sh] xrandr --output \"$_primary\" --mode 1920x1080 --output \"$_secondary\" --mode 1920x1080 --right-of \"$_primary\""
-    xrandr --output "$_primary" --mode 1920x1080 --output "$_secondary" --mode 1920x1080 --right-of "$_primary"
+    echo "[monitors.sh] xrandr --auto --output \"$_primary\" --mode 1920x1080 --output \"$_secondary\" --mode 1920x1080 --right-of \"$_primary\""
+    xrandr --auto --output "$_primary" --mode 1920x1080 --output "$_secondary" --mode 1920x1080 --right-of "$_primary"
     echo "[monitors.sh][laptop] ${_numMonitors} monitors connected. $_primary right of $_primary. Both 1920" >> $LOG_FILE
   else
     echo "[monitors.sh][laptop] ${_primary} to 1920" >> $LOG_FILE
-    echo "[monitors.sh] xrandr --output \"$_primary\" --mode 1920x1080"
-    xrandr --output "$_primary" --mode 1920x1080
+    echo "[monitors.sh] xrandr --auto --output \"$_primary\" --mode 1920x1080"
+    xrandr --auto --output "$_primary" --mode 1920x1080
   fi
 }
 
@@ -154,12 +154,12 @@ function set_desktop {
 
   if [[ $_numMonitors -eq 2 ]]; then
     echo "[monitors.sh][${COMPUTER}] primary and secondary set to 1920x1080" >> $LOG_FILE
-    echo "[monitors.sh] xrandr --output \"$_primary\" --mode 1920x1080 --output \"$_secondary\" --mode 1920x1080 --right-of \"$_primary\""
-    xrandr --output "$_primary" --mode 1920x1080 --output "$_secondary" --mode 1920x1080 --right-of "$_primary"
+    echo "[monitors.sh] xrandr --auto --output \"$_primary\" --mode 1920x1080 --output \"$_secondary\" --mode 1920x1080 --right-of \"$_primary\""
+    xrandr --auto --output "$_primary" --mode 1920x1080 --output "$_secondary" --mode 1920x1080 --right-of "$_primary"
   else
     echo "[monitors.sh][${COMPUTER}] primary set to 1920x1080" >> $LOG_FILE
-    echo "[monitors.sh] xrandr --output \"$_primary\" --mode 1920x1080"
-    xrandr --output "$_primary" --mode 1920x1080
+    echo "[monitors.sh] xrandr --auto --output \"$_primary\" --mode 1920x1080"
+    xrandr --auto --output "$_primary" --mode 1920x1080
   fi
 }
 
