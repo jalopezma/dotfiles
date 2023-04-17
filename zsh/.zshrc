@@ -150,6 +150,9 @@ alias gd="g diff"
 
 # docker
 alias docker-compose="docker compose"
+# create a file in /bin/docker-compose and set the content to
+# docker compose --compatibility "$@"
+# sudo chmod +x /bin/docker-compose
 alias docker-stop-all="docker stop $(docker ps -a -q)"
 
 # tmux
@@ -210,6 +213,31 @@ function ys() {
   local env=$1
   echo "> yieldify aws switch $env"
   yieldify aws switch $env
+}
+
+function yclone() {
+  local repo_name=$1
+
+  if [[ -z "$repo_name" ]] ; then
+    echo "Parameter missing. Example:"
+    echo "$ yclone <repo-name>"
+    return
+  fi
+
+  if [[ -d "$HOME/repos/YieldifyLabs/${repo_name}" ]]; then
+    echo "Folder already exists. Going there"
+    cd "$HOME/repos/YieldifyLabs/${repo_name}"
+    return
+  fi
+
+  echo "Folder doesn't exists. Creating"
+
+  cd ~/repos/YieldifyLabs && \
+    g clone git@github.com:jalopezma/$repo_name.git \
+    && cd $repo_name
+
+  echo "$repo_name cloned. Adding upstream"
+  g remote add upstream git@github.com:YieldifyLabs/$repo_name.git
 }
 
 # sudo xbacklight -set $1
