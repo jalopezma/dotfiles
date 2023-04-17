@@ -88,9 +88,17 @@ function python_version_manager() {
   pyenv global 3.11.1
 }
 
+function set_ssh() {
+  mkdir -p ~/.ssh
+  chmod 0700 ~/.ssh
+  createSymlink ~/repos/dotfiles/ssh/config ~/.ssh/config
+}
+
 function main() {
   echo "[install] Install firefox flameshot snapd htop"
   sudo apt-get install -y firefox flameshot snapd htop
+
+  set_ssh
 
   install_chrome
   install_fonts
