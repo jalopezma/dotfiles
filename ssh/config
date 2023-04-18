@@ -8,7 +8,7 @@ Host github.com
 
 Host ha
 	User jose
-	Port 22
+	Port 3333
 	Hostname home-assistant.local
 	IdentityFile ~/.ssh/personal.key
 	TCPKeepAlive yes
