@@ -187,7 +187,18 @@ function ke() {
 alias tag="cd ~/repos/YieldifyLabs/khaleesi-tag"
 alias builder="cd ~/repos/YieldifyLabs/khaleesi-tag-delivery"
 
-alias evalssh="eval \"$(ssh-agent)\" && ssh-add"
+function init_ssh() {
+  if [[ -z $SSH_AGENT_PID ]]; then
+    echo "init ssh: Seting up ssh-agent"
+    eval `ssh-agent`
+  else
+    # Do something knowing the pid exists, i.e. the process with $PID is running
+    echo "init ssh: ssh-agent is already running. PID: ${SSH_AGENT_PID}"
+  fi
+}
+
+alias sshy="init_ssh && ssh-add ~/.ssh/yieldify.key"
+alias sshp="init_ssh && ssh-add ~/.ssh/personal.key"
 
 # Yieldify aliases
 alias helm="echo 'Use helm2 (for kops) or helm3 (for eks) binaries'"
