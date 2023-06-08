@@ -112,7 +112,7 @@ function main() {
 
   bash ./git/install.sh
   bash ./zsh/install.sh
-  bash ./nvm/install.sh
+  bash ./volta/install.sh
   bash ./nvim/install.sh
   # bash ./tmux/install.sh
 

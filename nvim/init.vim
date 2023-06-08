@@ -184,8 +184,8 @@ set encoding=utf8
 " If the version mentioned here is not installed the following error will be
 " visible
 " [coc.nvim] Can't find npm or yarn in your $PATH
-" TODO be updated with volta
-" let g:coc_node_path = '$NVM_BIN/node'
+let g:coc_node_path = '$VOLTA_HOME/bin/node'
+
 " Set extensions
 let g:coc_global_extensions = ['coc-css', 'coc-html', 'coc-json', 'coc-tsserver', 'coc-git', 'coc-yank', 'coc-pairs', 'coc-highlight', 'coc-eslint', 'coc-actions', 'coc-explorer', 'coc-fzf-preview', 'coc-pyright', 'coc-go', 'coc-sh']
 " coc.nvim uses jsonc as a configuration file format. It's basically json with comment support.

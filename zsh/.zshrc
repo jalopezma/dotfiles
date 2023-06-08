@@ -85,6 +85,10 @@ export PATH=$PATH:$HOME/.local/bin
 
 export XDG_CONFIG_HOME=~/.config
 
+# volta
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
+
 # We define a computer to differentiate config
 HOSTNAME=$(hostname)
 if [[ $HOSTNAME == 'Y-1123' ]]; then
