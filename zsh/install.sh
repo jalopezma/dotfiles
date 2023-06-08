@@ -38,9 +38,6 @@ git clone https://github.com/z-shell/H-S-MW.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custo
 echo "[zsh] Plugin zsh-completions"
 git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-completions 2>&1
 
-echo "[zsh] Plugin zsh-nvm"
-git clone https://github.com/lukechilds/zsh-nvm ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-nvm 2>&1
-
 echo "[zsh] Plugin zsh-syntax-highlighting"
 git clone https://github.com/zsh-users/zsh-syntax-highlighting ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting 2>&1
 

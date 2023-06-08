@@ -1,5 +1,6 @@
 {
   // I might need to update this frequently
+  // Update with volta
   "tsserver.npm": "$NVM_BIN/npm",
   // "eslint.filetypes": ["javascript", "typescript", "typescriptreact", "javascriptreact", "typescript.tsx"],
   "diagnostic.virtualText": true,

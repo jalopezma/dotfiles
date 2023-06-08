@@ -1,16 +1,6 @@
 ## Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
-# Export nvm completion settings for zsh-nvm plugin
-export NVM_COMPLETION=true
-# Lazy loading is around 70x faster (874ms down to 12ms for me), however the first time
-# you run nvm, npm, node or a global module you'll get a slight delay while nvm loads first.
-# You'll only get this delay once per session.
-export NVM_LAZY_LOAD=true
-# Loads nvm when neovim is executed
-export NVM_LAZY_LOAD_EXTRA_COMMANDS=('nvim')
-export NVM_AUTO_USE=true
-
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
@@ -71,7 +61,7 @@ setopt share_history          # share command history data
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(zsh-autosuggestions H-S-MW z zsh-completions dotenv zsh-nvm)
+plugins=(zsh-autosuggestions H-S-MW z zsh-completions dotenv)
 
 # https://github.com/jeffreytse/zsh-vi-mode
 # plugins+=(zsh-vi-mode)
