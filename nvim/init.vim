@@ -184,6 +184,10 @@ set encoding=utf8
 " If the version mentioned here is not installed the following error will be
 " visible
 " [coc.nvim] Can't find npm or yarn in your $PATH
+
+if executable('volta')
+  let g:node_host_prog = system('volta which neovim-node-host | tr -d "\n"')
+endif
 let g:coc_node_path = '$VOLTA_HOME/bin/node'
 
 " Set extensions
