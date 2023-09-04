@@ -40,8 +40,8 @@ echo "[i3] Build and install"
 echo "[i3] betterlockscreen"
 wget https://raw.githubusercontent.com/betterlockscreen/betterlockscreen/main/install.sh -O - -q | sudo bash -s system latest true
 
-WALLPAPER_LEFT_SCREEN="~/wallpapers/dani-pedrosa-motogp-honda-rc213v-honda-hrc-spanish-racer.jpg"
-WALLPAPER_RIGHT_SCREEN="~/wallpapers/jorge-lorenzo-4k-buriram-2018-bikes-motogp.jpg"
+WALLPAPER_LEFT_SCREEN="${HOME}/repos/dotfiles/wallpapers/dani-pedrosa-motogp-honda-rc213v-honda-hrc-spanish-racer.jpg"
+WALLPAPER_RIGHT_SCREEN="${HOME}/repos/dotfiles/wallpapers/jorge-lorenzo-4k-buriram-2018-bikes-motogp.jpg"
 echo "[i3] Set wallpapers for lock screen"
 betterlockscreen \
   -u $WALLPAPER_LEFT_SCREEN --display 1 \
