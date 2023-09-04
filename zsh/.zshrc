@@ -83,6 +83,10 @@ export PATH=$PATH:$HOME/scripts
 export PATH=$PATH:/usr/local/lib
 export PATH=$PATH:$HOME/.local/bin
 
+# VOLTA
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
+
 export XDG_CONFIG_HOME=~/.config
 
 # volta

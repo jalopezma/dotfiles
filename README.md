@@ -35,6 +35,7 @@ shfmt --find ./ | xargs shfmt -l -w -s --indent=2 -ci -sr
   - set eDP-1 off when 3 monitors are set
   - set eDP-1 on when less than 3 monitors
 - https://github.com/junegunn/fzf but no keybindings?
+- replace nvm by volta
 
 ## [Hush](hush/README.md)
 
