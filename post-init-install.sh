@@ -23,6 +23,7 @@ function install_fonts() {
   echo "[fonts] Copy Ubuntu font"
   mkdir -p ~/.fonts
   cp -v fonts/* ~/.fonts/
+  bash ./fonts/install.sh
 }
 
 # exa https://github.com/ogham/exa modern replacement for ls
