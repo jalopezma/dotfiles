@@ -148,9 +148,8 @@ function set_laptop {
 
 function set_desktop {
   local _numMonitors=$1
-  # we have them switched
-  local _secondary=$2
   local _primary=$3
+  local _secondary=$2
 
   if [[ $_numMonitors -eq 2 ]]; then
     echo "[monitors.sh][${COMPUTER}] primary and secondary set to 1920x1080" >> $LOG_FILE
@@ -196,7 +195,14 @@ function main() {
   # {"<workspace_name>": { "name": "<workspace_name>", "output": "<output>", ... }}
   workspaces=$(i3-msg -t get_workspaces | jq '(map({"name": .name, "output": .output, "focused": .focused, "visible": .visible}) | INDEX(.name))')
 
-  if [[ $_computer == "LAPTOP" ]]; then
+  if [[ $_computer != "LAPTOP" ]]; then
+    # For desktop the are inverted
+    tmp=$primary
+    primary=$secondary
+    secondary=$tmp
+  fi
+
+  if [[ $_computer != "LAPTOP" ]]; then
     set_laptop $numMonitors $primary $secondary
   else
     set_desktop $numMonitors $primary $secondary
