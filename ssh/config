@@ -2,7 +2,7 @@ Host github.com
 	User git
 	Port 22
 	Hostname github.com
-	IdentityFile ~/.ssh/yieldify.key
+	IdentityFile ~/.ssh/personal.key
 	TCPKeepAlive yes
 	IdentitiesOnly yes
 
