@@ -95,3 +95,9 @@ su - <user>
   - [Installation](https://community.openvpn.net/openvpn/wiki/OpenVPN3Linux?_ga=2.225757343.406983588.1673944046-2138455025.1673944046) 
 - Faceless
 - Kubernetes
+
+## To improve
+
+- a `~` folder gets created in `repos/dotfiles`
+- i nstall docker
+- install lazy.nvim instead of vimplug

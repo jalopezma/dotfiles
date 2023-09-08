@@ -1,10 +1,12 @@
 #/bin/bash
 # install UbuntuMono Nerd Font from https://www.nerdfonts.com/font-downloads
-echo "[-] Download fonts [-]"
-fontFile="UbuntuMono.zip"
-ubuntuFonts="https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/$ubuntFile"
-echo "$ubuntuFonts"
-wget $ubuntuFonts
-unzip $fontFile -d ~/.fonts
-fc-cache -fv
-echo "done!"
+
+echo "[fonts] Copy stored fonts"
+mkdir -p ~/.fonts
+cp ./fonts/*.ttf ~/.fonts/
+
+echo "[fonts] Download UbuntuMono font"
+wget -q -O /tmp/fonts.zip https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/UbuntuMono.zip
+unzip -qq -o /tmp/fonts.zip -d ~/.fonts
+fc-cache -fv &> /dev/null
+echo "[fonts] exit"

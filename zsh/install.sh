@@ -10,15 +10,17 @@ set -o nounset
 source ./functions.sh
 
 echo "[zsh] install.sh"
-sudo apt-get install zsh -y
-
-echo "[zsh] $(zsh --version)"
+sudo apt-get install zsh -y &> /dev/null
 
 echo "[zsh] Install oh my zsh"
 #   --unattended: sets both CHSH and RUNZSH to 'no'
 #   --keep-zshrc: sets KEEP_ZSHRC to 'yes'
-sh -c "$(wget -q -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended --keep-zshrc
+sh -c "$(wget -q -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended --keep-zshrc &> /dev/null
 
+if [[ -f ~/.zshrc ]]; then
+  echo "[zsh] .zshrc already exists. Moving it to ~/.zshrc.old"
+  mv ~/.zshrc ~/.zshrc.old
+fi
 echo "[zsh] Link .zshrc"
 createSymlink ~/repos/dotfiles/zsh/.zshrc ~/.zshrc
 

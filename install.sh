@@ -74,7 +74,7 @@ function clone_repository() {
   fi
 
   echo "[main] Clone jalopezma/dotfiles.git"
-  git clone https://github.com/jalopezma/dotfiles.git 2>&1
+  git clone git@github.com:jalopezma/dotfiles.git 2>&1
   cd ~/repos/dotfiles
   echo "[main] Change directory to $(pwd)"
 }

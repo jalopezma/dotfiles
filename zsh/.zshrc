@@ -159,8 +159,8 @@ alias t=tmux
 # Firefox is using snap
 alias update-all="sudo snap refresh && sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y"
 
-alias l="exa --long --git"
-alias la="exa --long --all --git"
+alias l="eza --long --git"
+alias la="eza --long --all --git"
 alias cp="cp -i"
 
 alias kx="kubectx"
