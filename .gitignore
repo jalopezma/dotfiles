@@ -8,6 +8,6 @@ nvim/.net*
 .metals
 
 # Neovim
-nvim/backup_files
-nvim/swap_files
-nvim/undo_files
+**/backup_files
+**/swap_files
+**/undo_files
