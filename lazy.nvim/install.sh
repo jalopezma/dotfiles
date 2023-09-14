@@ -19,5 +19,13 @@ echo "[nvim] Link nvim folder on .config"
 createSymlink ~/repos/dotfiles/lazy.nvim ~/.config/nvim
 
 echo "[nvim] Create ~/.config/nvim/{backup_files,swap_files,undo_files}"
+
+# Dependencies for [telescope](https://github.com/nvim-telescope/telescope.nvim#suggested-dependencies)
+echo "[nvim] install plugins dependencies"
+sudo apt-get install ripgrep fd-find -y &> /dev/null
+
+echo "[nvim] Link fdfind to be executed as fd"
+ln -s $(which fdfind) ~/.local/bin/fd
+
 # sync: Run install, clean and update
 nvim --headless "+Lazy! sync" +qa
