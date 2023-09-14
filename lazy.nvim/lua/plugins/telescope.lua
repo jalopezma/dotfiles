@@ -7,7 +7,10 @@ return {
     require('telescope').setup({
       defaults = {
         mappings = {
-          i = { ['<esc>'] = actions.close, },
+          i = {
+            ['<esc>'] = actions.close,
+            ['<C-s>'] = actions.select_horizontal,
+          },
         },
       },
     })
@@ -16,10 +19,10 @@ return {
     require('telescope').load_extension('fzf')
 
     local builtin = require('telescope.builtin')
-    vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-    vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
-    vim.keymap.set('n', '<leader>fj', builtin.grep_string, {})
-    vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
+    vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Find files' })
+    vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Search string' })
+    vim.keymap.set('n', '<leader>fj', builtin.grep_string, { desc = 'Search word under cursor' })
+    vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Find buffers' })
   end,
 }
 

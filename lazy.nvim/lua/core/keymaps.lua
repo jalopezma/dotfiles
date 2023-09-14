@@ -1,4 +1,5 @@
 local map = vim.keymap.set
+
 vim.g.mapleader = ' '
 vim.g.maplocalleader = '\\'
 
@@ -17,24 +18,8 @@ map("n", "<C-j>", "<C-w>j", { desc = "Go to lower window", remap = true })
 map("n", "<C-k>", "<C-w>k", { desc = "Go to upper window", remap = true })
 map("n", "<C-l>", "<C-w>l", { desc = "Go to right window", remap = true })
 
--- Move Lines
--- map("n", "<A-j>", "<cmd>m .+1<cr>==", { desc = "Move down" })
--- map("n", "<A-k>", "<cmd>m .-2<cr>==", { desc = "Move up" })
--- map("i", "<A-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move down" })
--- map("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move up" })
--- map("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move down" })
--- map("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
-
--- buffers
--- map("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
--- map("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
-
 -- Clear search with <backspace> in normal
 map("n", "<backspace>", "<cmd>noh<cr>", { desc = "Escape and clear hlsearch" })
-
--- Clear search, diff update and redraw
--- taken from runtime/lua/_editor.lua
--- map("n", "<leader>ur", "<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>", { desc = "Redraw / clear hlsearch / diff update" })
 
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
 map("n", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
@@ -59,15 +44,6 @@ map("n", "<leader>K", "<cmd>norm! K<cr>", { desc = "Keywordprg" })
 map("v", "<", "<gv")
 map("v", ">", ">gv")
 
--- lazy
--- map("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy" })
-
--- new file
--- map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
-
-map("n", "<leader>xl", "<cmd>lopen<cr>", { desc = "Location List" })
-map("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Quickfix List" })
-
 -- quit
 map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit all" })
 
@@ -91,8 +67,6 @@ map("n", "<leader>ww", "<C-W>p", { desc = "Other window", remap = true })
 map("n", "<leader>wd", "<C-W>c", { desc = "Delete window", remap = true })
 map("n", "<leader>w-", "<C-W>s", { desc = "Split window below", remap = true })
 map("n", "<leader>w|", "<C-W>v", { desc = "Split window right", remap = true })
-map("n", "<leader>-", "<C-W>s", { desc = "Split window below", remap = true })
-map("n", "<leader>|", "<C-W>v", { desc = "Split window right", remap = true })
 
 -- tabs
 map("n", "<leader><tab>l", "<cmd>tablast<cr>", { desc = "Last Tab" })
@@ -101,4 +75,25 @@ map("n", "<leader><tab><tab>", "<cmd>tabnew<cr>", { desc = "New Tab" })
 map("n", "<leader><tab>l", "<cmd>tabnext<cr>", { desc = "Next Tab" })
 map("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
 map("n", "<leader><tab>h", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
+
+
+-----------------------------------------------------------------------------------
+-- To rethink if I wan t to keep them                                            --
+-----------------------------------------------------------------------------------
+-- lazy
+-- map("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy" })
+
+-- new file
+-- map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
+
+-- map("n", "<leader>xl", "<cmd>lopen<cr>", { desc = "Location List" })
+-- map("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Quickfix List" })
+
+-- buffers
+-- map("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
+-- map("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
+
+-- Clear search, diff update and redraw
+-- taken from runtime/lua/_editor.lua
+-- map("n", "<leader>ur", "<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>", { desc = "Redraw / clear hlsearch / diff update" })
 
