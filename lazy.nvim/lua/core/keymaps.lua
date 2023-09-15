@@ -6,7 +6,7 @@ vim.g.maplocalleader = '\\'
 -- Open lazy.vim config
 map("n", "<leader>v", "<cmd>:tabnew ~/.config/nvim/<cr>", { desc = "Open ~/.config/nvim" })
 
-map({ "i", "v" }, "jk", "<esc>", { desc = "Go normal mode" })
+map({ "i" }, "jk", "<esc>", { desc = "Go normal mode" })
 
 -- better up/down to navigate through a line displayed in multiple lines
 map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
