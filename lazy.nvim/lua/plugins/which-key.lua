@@ -1,6 +1,6 @@
 return {
-  "folke/which-key.nvim",
-  event = "VeryLazy",
+  'folke/which-key.nvim',
+  event = 'VeryLazy',
   init = function()
     vim.o.timeout = true
     vim.o.timeoutlen = 300
@@ -11,17 +11,14 @@ return {
     -- refer to the configuration section below
   },
   config = function()
-    local wk = require("which-key")
+    local wk = require('which-key')
 
     wk.register({
       ['<leader>'] = {
-        f = {
-          name = "File",
-        },
-        w = {
-          name = 'Windows',
-        },
+        f = { name = 'File' },
+        w = { name = 'Windows' },
+        g = { name = 'Git' },
       },
-    }, { mode = "n"} )
+    }, { mode = 'n'} )
   end,
 }

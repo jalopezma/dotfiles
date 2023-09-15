@@ -217,11 +217,11 @@ ins_right {
 }
 
 return {
-  {
-    'nvim-lualine/lualine.nvim',
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
-    config = function()
-      require('lualine').setup(evilineConfig)
-    end,
-  },
+  'nvim-lualine/lualine.nvim',
+  dependencies = { 'nvim-tree/nvim-web-devicons' },
+  opts = evilineConfig,
+  -- You could also do:
+  -- config = function()
+  --   require('lualine').setup(evilineConfig)
+  -- end,
 }
