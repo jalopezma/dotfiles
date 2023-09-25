@@ -18,6 +18,7 @@ return {
         f = { name = 'File' },
         w = { name = 'Windows' },
         g = { name = 'Git' },
+        m = { name = 'cursor motion' },
       },
     }, { mode = 'n'} )
   end,

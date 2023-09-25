@@ -1,3 +1,6 @@
+-- Keymaps
+-- Plugin keymaps are kept under each plugin
+-- In which-key we are labeling groups
 local map = vim.keymap.set
 
 vim.g.mapleader = ' '
