@@ -19,6 +19,7 @@ return {
         w = { name = 'Windows' },
         g = { name = 'Git' },
         m = { name = 'cursor motion' },
+        b = { name = 'buffers' },
       },
     }, { mode = 'n'} )
   end,

@@ -79,6 +79,11 @@ map('n', '<leader><tab>l', '<cmd>tabnext<cr>', { desc = 'Next Tab' })
 map('n', '<leader><tab>d', '<cmd>tabclose<cr>', { desc = 'Close Tab' })
 map('n', '<leader><tab>h', '<cmd>tabprevious<cr>', { desc = 'Previous Tab' })
 
+-- buffers
+map('n', '<leader>bd', '<cmd>bdelete<cr>', { desc = 'Delete buffer' })
+map('n', '<leader>bp', '<cmd>bprevious<cr>', { desc = 'Previous buffer' })
+map('n', '<leader>bn', '<cmd>bnext<cr>', { desc = 'Next buffer' })
+
 -----------------------------------------------------------------------------------
 -- To rethink if I wan t to keep them                                            --
 -----------------------------------------------------------------------------------
@@ -90,10 +95,6 @@ map('n', '<leader><tab>h', '<cmd>tabprevious<cr>', { desc = 'Previous Tab' })
 
 -- map('n', '<leader>xl', '<cmd>lopen<cr>', { desc = 'Location List' })
 -- map('n', '<leader>xq', '<cmd>copen<cr>', { desc = 'Quickfix List' })
-
--- buffers
--- map('n', '<leader>bb', '<cmd>e #<cr>', { desc = 'Switch to Other Buffer' })
--- map('n', '<leader>`', '<cmd>e #<cr>', { desc = 'Switch to Other Buffer' })
 
 -- Clear search, diff update and redraw
 -- taken from runtime/lua/_editor.lua
