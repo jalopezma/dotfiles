@@ -145,6 +145,7 @@ alias gs="g status"
 alias gc.="g checkout ."
 # Using delta as default git diff https://github.com/dandavison/delta
 alias gd="g diff"
+alias gds="g diff --staged"
 
 # docker
 alias docker-compose="docker compose"
