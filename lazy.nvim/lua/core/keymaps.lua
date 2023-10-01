@@ -50,22 +50,11 @@ map('v', '>', '>gv')
 -- quit
 map('n', '<leader>qq', '<cmd>qa<cr>', { desc = 'Quit all' })
 
--- highlights under cursor
-if vim.fn.has('nvim-0.9.0') == 1 then
-  map('n', '<leader>ui', vim.show_pos, { desc = 'Inspect Pos' })
-end
-
 -- windows
 map('n', '<leader>ww', '<C-W>p', { desc = 'Other window', remap = true })
 map('n', '<leader>wd', '<C-W>c', { desc = 'Delete window', remap = true })
 map('n', '<leader>w-', '<C-W>s', { desc = 'Split window below', remap = true })
 map('n', '<leader>w|', '<C-W>v', { desc = 'Split window right', remap = true })
-
--- tabs
-map('n', '<leader><tab><tab>', '<cmd>tabnew<cr>', { desc = 'New Tab' })
-map('n', '<leader><tab>d', '<cmd>tabclose<cr>', { desc = 'Close Tab' })
-map('n', '<leader><tab>h', '<cmd>tabprevious<cr>', { desc = 'Previous Tab' })
-map('n', '<leader><tab>l', '<cmd>tabnext<cr>', { desc = 'Next Tab' })
 
 -- buffers
 map('n', 'bd', '<cmd>bdelete<cr>', { desc = 'Delete buffer' })
@@ -81,6 +70,12 @@ map('n', 'bl', '<cmd>b#<cr>', { desc = 'Last buffer' })
 
 -- new file
 -- map('n', '<leader>fn', '<cmd>enew<cr>', { desc = 'New File' })
+
+-- tabs
+-- map('n', '<leader><tab><tab>', '<cmd>tabnew<cr>', { desc = 'New Tab' })
+-- map('n', '<leader><tab>d', '<cmd>tabclose<cr>', { desc = 'Close Tab' })
+-- map('n', '<leader><tab>h', '<cmd>tabprevious<cr>', { desc = 'Previous Tab' })
+-- map('n', '<leader><tab>l', '<cmd>tabnext<cr>', { desc = 'Next Tab' })
 
 -- map('n', '<leader>xl', '<cmd>lopen<cr>', { desc = 'Location List' })
 -- map('n', '<leader>xq', '<cmd>copen<cr>', { desc = 'Quickfix List' })
