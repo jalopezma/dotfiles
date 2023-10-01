@@ -5,8 +5,36 @@ Install Neovim and python
 
 ## Lazy.nvim
 
+`:Lazy`
+
 ### which-keys
 
 `'` lists buffers
 `"` lists registers (you can do `"<register>p` to paste it)
 `z=` spelling suggestions
+
+### Mason
+
+`:Mason`
+
+Install the required lsp, linter or formatters you need. Examples:
+
+Linters:
+- eslint_d (daemon)
+
+Lsp
+- lua-language-server
+- python-lsp-server pylsp
+- typescript-language-server tsserver
+
+Formatter
+- prettierd (daemon)
+- black
+- autopep8
+
+# To do
+
+Conflicts with other keymaps to fix
+-- `gcc` - Toggles the current line using linewise comment
+-- `gbc` - Toggles the current line using blockwise comment
+

@@ -26,7 +26,7 @@ return {
     end, {remap=true})
 
     local map = vim.keymap.set
-    map("n", "<leader>mw", "<cmd>HopWord<cr>", { desc = "Hop to word" })
-    map("n", "<leader>mc", "<cmd>HopChar1<cr>", { desc = "Hop to a char" })
+    map("n", "<leader>sw", "<cmd>HopWord<cr>", { desc = "Hop to word" })
+    map("n", "<leader>sc", "<cmd>HopChar1<cr>", { desc = "Hop to a char" })
   end,
 }

@@ -55,16 +55,6 @@ if vim.fn.has('nvim-0.9.0') == 1 then
   map('n', '<leader>ui', vim.show_pos, { desc = 'Inspect Pos' })
 end
 
--- Terminal Mappings
-map('t', '<esc>', '<c-\\><c-n>', { desc = 'Enter Normal Mode' })
-map('t', 'jk', '<c-\\><c-n>', { desc = 'Enter Normal Mode' })
-map('t', '<C-h>', '<cmd>wincmd h<cr>', { desc = 'Go to left window' })
-map('t', '<C-j>', '<cmd>wincmd j<cr>', { desc = 'Go to lower window' })
-map('t', '<C-k>', '<cmd>wincmd k<cr>', { desc = 'Go to upper window' })
-map('t', '<C-l>', '<cmd>wincmd l<cr>', { desc = 'Go to right window' })
-map('t', '<C-/>', '<cmd>close<cr>', { desc = 'Hide Terminal' })
-map('t', '<c-_>', '<cmd>close<cr>', { desc = 'which_key_ignore' })
-
 -- windows
 map('n', '<leader>ww', '<C-W>p', { desc = 'Other window', remap = true })
 map('n', '<leader>wd', '<C-W>c', { desc = 'Delete window', remap = true })
@@ -72,17 +62,16 @@ map('n', '<leader>w-', '<C-W>s', { desc = 'Split window below', remap = true })
 map('n', '<leader>w|', '<C-W>v', { desc = 'Split window right', remap = true })
 
 -- tabs
-map('n', '<leader><tab>l', '<cmd>tablast<cr>', { desc = 'Last Tab' })
-map('n', '<leader><tab>f', '<cmd>tabfirst<cr>', { desc = 'First Tab' })
 map('n', '<leader><tab><tab>', '<cmd>tabnew<cr>', { desc = 'New Tab' })
-map('n', '<leader><tab>l', '<cmd>tabnext<cr>', { desc = 'Next Tab' })
 map('n', '<leader><tab>d', '<cmd>tabclose<cr>', { desc = 'Close Tab' })
 map('n', '<leader><tab>h', '<cmd>tabprevious<cr>', { desc = 'Previous Tab' })
+map('n', '<leader><tab>l', '<cmd>tabnext<cr>', { desc = 'Next Tab' })
 
 -- buffers
-map('n', '<leader>bd', '<cmd>bdelete<cr>', { desc = 'Delete buffer' })
-map('n', '<leader>bp', '<cmd>bprevious<cr>', { desc = 'Previous buffer' })
-map('n', '<leader>bn', '<cmd>bnext<cr>', { desc = 'Next buffer' })
+map('n', 'bd', '<cmd>bdelete<cr>', { desc = 'Delete buffer' })
+map('n', 'bp', '<cmd>bprevious<cr>', { desc = 'Previous buffer' })
+map('n', 'bn', '<cmd>bnext<cr>', { desc = 'Next buffer' })
+map('n', 'bl', '<cmd>b#<cr>', { desc = 'Last buffer' })
 
 -----------------------------------------------------------------------------------
 -- To rethink if I wan t to keep them                                            --
@@ -100,3 +89,12 @@ map('n', '<leader>bn', '<cmd>bnext<cr>', { desc = 'Next buffer' })
 -- taken from runtime/lua/_editor.lua
 -- map('n', '<leader>ur', '<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>', { desc = 'Redraw / clear hlsearch / diff update' })
 
+-- Terminal Mappings
+-- map('t', '<esc>', '<c-\\><c-n>', { desc = 'Enter Normal Mode' })
+-- map('t', 'jk', '<c-\\><c-n>', { desc = 'Enter Normal Mode' })
+-- map('t', '<C-h>', '<cmd>wincmd h<cr>', { desc = 'Go to left window' })
+-- map('t', '<C-j>', '<cmd>wincmd j<cr>', { desc = 'Go to lower window' })
+-- map('t', '<C-k>', '<cmd>wincmd k<cr>', { desc = 'Go to upper window' })
+-- map('t', '<C-l>', '<cmd>wincmd l<cr>', { desc = 'Go to right window' })
+-- map('t', '<C-/>', '<cmd>close<cr>', { desc = 'Hide Terminal' })
+-- map('t', '<c-_>', '<cmd>close<cr>', { desc = 'which_key_ignore' })

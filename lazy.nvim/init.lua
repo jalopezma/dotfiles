@@ -2,3 +2,5 @@ require 'core.options'
 require 'core.keymaps'
 require 'core.commands'
 require 'core.bootstrap'
+
+require 'config.lsp'

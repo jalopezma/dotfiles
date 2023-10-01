@@ -18,8 +18,14 @@ return {
         f = { name = 'File' },
         w = { name = 'Windows' },
         g = { name = 'Git' },
-        m = { name = 'cursor motion' },
+        s = { name = 'search' },
         b = { name = 'buffers' },
+      },
+      g = {
+        name = 'go to',
+        o = 'type definition',
+        d = 'definition',
+        D = 'declaration',
       },
     }, { mode = 'n'} )
   end,
