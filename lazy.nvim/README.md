@@ -34,7 +34,5 @@ Formatter
 
 # To do
 
-Conflicts with other keymaps to fix
--- `gcc` - Toggles the current line using linewise comment
--- `gbc` - Toggles the current line using blockwise comment
-
+- Test folke/noice
+- LSP for different languages

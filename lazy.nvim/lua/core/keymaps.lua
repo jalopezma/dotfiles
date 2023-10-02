@@ -57,10 +57,10 @@ map('n', '<leader>w-', '<C-W>s', { desc = 'Split window below', remap = true })
 map('n', '<leader>w|', '<C-W>v', { desc = 'Split window right', remap = true })
 
 -- buffers
-map('n', 'bd', '<cmd>bdelete<cr>', { desc = 'Delete buffer' })
-map('n', 'bp', '<cmd>bprevious<cr>', { desc = 'Previous buffer' })
-map('n', 'bn', '<cmd>bnext<cr>', { desc = 'Next buffer' })
-map('n', 'bl', '<cmd>b#<cr>', { desc = 'Last buffer' })
+map('n', '<leader>bd', '<cmd>bdelete<cr>', { desc = 'Delete buffer' })
+map('n', '<leader>bp', '<cmd>bprevious<cr>', { desc = 'Previous buffer' })
+map('n', '<leader>bn', '<cmd>bnext<cr>', { desc = 'Next buffer' })
+map('n', '<leader>bl', '<cmd>b#<cr>', { desc = 'Last buffer' })
 
 -----------------------------------------------------------------------------------
 -- To rethink if I wan t to keep them                                            --
