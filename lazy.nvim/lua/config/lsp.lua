@@ -58,7 +58,6 @@ require('mason-lspconfig').setup({
 
 -- Add some keymaps for autocompletion menu
 local cmp = require('cmp')
--- local cmp_action = require('lsp-zero').cmp_action()
 local luasnip = require('luasnip')
 local defaults = require("cmp.config.default")()
 
@@ -81,24 +80,14 @@ cmp.setup({
     ['<C-n>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
     ['<C-p>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
 
-    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    -- Navigate between snippet placeholder
-    -- ['<C-f>'] = cmp_action.luasnip_jump_forward(),
-    -- ['<C-b>'] = cmp_action.luasnip_jump_backward(),
-
     -- Ctrl+Space to trigger completion menu
     ['<C-Space>'] = cmp.mapping.complete(),
     --  Close it
     ['<esc>'] = cmp.mapping.abort(),
-    -- ['<C-e>'] = cmp.mapping.abort(),
+    ['<C-e>'] = cmp.mapping.abort(),
 
     -- `Enter` key to confirm completion
     ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-    ['<S-CR>'] = cmp.mapping.confirm({
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
-    }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 
     -- Scroll up and down in the completion documentation
     ['<C-u>'] = cmp.mapping.scroll_docs(-4),
@@ -107,9 +96,9 @@ cmp.setup({
     ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
-      -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable() 
-      -- they way you will only jump inside the snippet region
-      elseif luasnip.expand_or_jumpable() then
+        -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
+        -- they way you will only jump inside the snippet region
+      elseif luasnip.expand_or_locally_jumpable() then
         luasnip.expand_or_jump()
       elseif has_words_before() then
         cmp.complete()
@@ -165,13 +154,32 @@ cmp.setup.cmdline(':', {
   sources = cmp.config.sources({
     { name = 'path' }
   }, {
-    { name = 'cmdline' }
+    {
+      name = 'cmdline',
+      option = {
+        ignore_cmds = { 'Man', '!' }
+      }
+    }
   })
 })
 
--- Set up lspconfig.
--- local capabilities = require('cmp_nvim_lsp').default_capabilities()
--- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
--- require('lspconfig')['<YOUR_LSP_SERVER>'].setup {
---   capabilities = capabilities
--- }
+-- this part is telling Neovim to use the lsp server
+local servers = { 'pylsp', 'tsserver', 'lua_ls' }
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+for _, lsp in pairs(servers) do
+  require('lspconfig')[lsp].setup {
+    capabilities = capabilities,
+    -- on_attach = on_attach,
+    -- flags = {
+    --   debounce_text_changes = 150,
+    -- }
+  }
+end
+
+-- Adds diagnositcs signs on the line number column
+-- !important nerdfonts needs to be setup for this to work in your terminal
+local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+for type, icon in pairs(signs) do
+  local hl = "DiagnosticSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
