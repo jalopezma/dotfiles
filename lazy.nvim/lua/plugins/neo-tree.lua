@@ -6,24 +6,25 @@ return {
     'nvim-tree/nvim-web-devicons', -- not strictly required, but recommended
     'MunifTanjim/nui.nvim',
   },
-  config = function ()
+  -- enabled = false,
+  config = function()
     -- If you want icons for diagnostic errors, you'll need to define them somewhere:
     vim.fn.sign_define('DiagnosticSignError',
-      {text = ' ', texthl = 'DiagnosticSignError'})
+      { text = ' ', texthl = 'DiagnosticSignError' })
     vim.fn.sign_define('DiagnosticSignWarn',
-      {text = ' ', texthl = 'DiagnosticSignWarn'})
+      { text = ' ', texthl = 'DiagnosticSignWarn' })
     vim.fn.sign_define('DiagnosticSignInfo',
-      {text = ' ', texthl = 'DiagnosticSignInfo'})
+      { text = ' ', texthl = 'DiagnosticSignInfo' })
     vim.fn.sign_define('DiagnosticSignHint',
-      {text = '󰌵', texthl = 'DiagnosticSignHint'})
+      { text = '󰌵', texthl = 'DiagnosticSignHint' })
 
     require('neo-tree').setup({
       window = {
         width = 50,
         mappings = {
-          ['<space>'] = { 
-              'toggle_node', 
-              nowait = false, -- disable `nowait` if you have existing combos starting with this char that you want to use 
+          ['<space>'] = {
+            'toggle_node',
+            nowait = false, -- disable `nowait` if you have existing combos starting with this char that you want to use
           },
           ['<cr>'] = 'open',
           ['<esc>'] = 'cancel', -- close preview or floating neo-tree window
@@ -75,7 +76,7 @@ return {
             ['/'] = 'fuzzy_finder',
             ['f'] = 'filter_on_submit',
             ['<c-x>'] = 'clear_filter',
-            ['o'] = { 'show_help', nowait=false, config = { title = 'Order by', prefix_key = 'o' }},
+            ['o'] = { 'show_help', nowait = false, config = { title = 'Order by', prefix_key = 'o' } },
           },
         },
       },
@@ -86,12 +87,12 @@ return {
             ['bd'] = 'buffer_delete',
             ['<bs>'] = 'navigate_up',
             ['.'] = 'set_root',
-            ['o'] = { 'show_help', nowait=false, config = { title = 'Order by', prefix_key = 'o' }},
+            ['o'] = { 'show_help', nowait = false, config = { title = 'Order by', prefix_key = 'o' } },
           }
         },
       },
     })
 
-    vim.cmd([[nnoremap <C-n> :Neotree reveal<cr>]])
+    vim.keymap.set('n', '<leader>e', '<cmd>Neotree toggle<cr>', { desc = 'Toggle Neo-tree explorer' })
   end,
 }
