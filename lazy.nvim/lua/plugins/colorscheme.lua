@@ -1,8 +1,8 @@
 return {
   -- the colorscheme should be available when starting Neovim
   {
-    "folke/tokyonight.nvim",
-    lazy = false, -- make sure we load this during startup if it is your main colorscheme
+    'folke/tokyonight.nvim',
+    lazy = false,    -- make sure we load this during startup if it is your main colorscheme
     enabled = false,
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
@@ -11,9 +11,10 @@ return {
     end,
   },
   {
-    "catppuccin/nvim",
-    name = "catppuccin",
+    'catppuccin/nvim',
+    name = 'catppuccin',
     priority = 1000,
+    -- enabled = false,
     config = function()
       -- load the colorscheme here
       vim.cmd([[colorscheme catppuccin-macchiato]])

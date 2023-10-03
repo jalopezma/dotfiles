@@ -18,4 +18,5 @@ return {
       map('n', '<leader>gb', function() gs.blame_line({ full = true }) end, 'Blame Line')
     end,
   },
+  -- enabled = false,
 }

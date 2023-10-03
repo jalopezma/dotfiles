@@ -1,12 +1,13 @@
 return {
   'nvim-treesitter/nvim-treesitter',
   build = ':TSUpdate',
+  -- enabled = false,
   config = function()
     require('nvim-treesitter.configs').setup {
       ensure_installed = {
         'css', 'html', 'javascript', 'lua', 'python', 'tsx', 'typescript', 'vim',
       },
-        highlight = {
+      highlight = {
         enable = true,
       },
       context_commentstring = {

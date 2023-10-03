@@ -2,6 +2,7 @@ return {
   'nvim-telescope/telescope.nvim',
   --tag = '0.1.x',
   dependencies = { 'nvim-lua/plenary.nvim' },
+  -- enabled = false,
   config = function()
     local actions = require('telescope.actions')
     require('telescope').setup({
@@ -25,4 +26,3 @@ return {
     vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Find buffers' })
   end,
 }
-
