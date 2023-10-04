@@ -36,19 +36,8 @@ local icons = {
   Variable = ' ',
 }
 
--- Init for LSP
-local lsp_zero = require('lsp-zero')
-lsp_zero.on_attach(function(client, bufnr)
-  -- see :help lsp-zero-keybindings
-  -- to learn the available actions
-  lsp_zero.default_keymaps({
-    buffer = bufnr,
-    -- there are some keympas that are not working correctly
-    preserve_mappings = false,
-  })
-end)
-
 -- Init Mason
+local lsp_zero = require('lsp-zero')
 require('mason').setup({})
 require('mason-lspconfig').setup({
   handlers = {

@@ -24,9 +24,6 @@ return {
       },
       g = {
         name = 'go to',
-        o = 'type definition',
-        d = 'definition',
-        D = 'declaration',
       },
     }, { mode = 'n' })
   end,

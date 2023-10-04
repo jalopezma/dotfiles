@@ -34,5 +34,6 @@ Formatter
 
 # To do
 
-- Test folke/noice
 - LSP for different languages
+- Being able to select the first suggestion easily from the autocompletition tool
+- Git diff?

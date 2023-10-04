@@ -7,7 +7,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = '\\'
 
 -- Open lazy.vim config
-map('n', '<leader>v', '<cmd>:tabnew ~/.config/nvim/<cr>', { desc = 'Open ~/.config/nvim' })
+map('n', '<leader>v', '<cmd>tabnew ~/.config/nvim/<cr>', { desc = 'Open ~/.config/nvim' })
 
 map({ 'i' }, 'jk', '<esc>', { desc = 'Go normal mode' })
 
