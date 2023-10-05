@@ -57,7 +57,8 @@ map('n', '<leader>w-', '<C-W>s', { desc = 'Split window below', remap = true })
 map('n', '<leader>w|', '<C-W>v', { desc = 'Split window right', remap = true })
 
 -- buffers
-map('n', '<leader>bd', '<cmd>bdelete<cr>', { desc = 'Delete buffer' })
+-- Prevent to close the window when closing the last buffer changing to the last buffer and deleting the previous one
+map('n', '<leader>bd', '<cmd>bp | bd #<cr>', { desc = 'Delete buffer' })
 map('n', '<leader>bp', '<cmd>bprevious<cr>', { desc = 'Previous buffer' })
 map('n', '<leader>bn', '<cmd>bnext<cr>', { desc = 'Next buffer' })
 map('n', '<leader>bl', '<cmd>b#<cr>', { desc = 'Last buffer' })
