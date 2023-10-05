@@ -83,4 +83,11 @@ return {
       -- gl: Show diagnostics in a floating window. See :help vim.diagnostic.open_float().
     end,
   },
+
+  -- Makes default neovim ui a bit better. For example for code actions and renaming symbols
+  {
+    'stevearc/dressing.nvim',
+    opts = {},
+    -- enabled = false,
+  },
 }
