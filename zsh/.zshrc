@@ -268,6 +268,7 @@ function bl() {
 
   xbacklight -set $value
 }
+alias setbrightness="sudo sh -c 'echo 3000 > /sys/class/backlight/intel_backlight/brightness'"
 
 # kill bluetooth
 alias killbluetooth="ps -aux | grep blue | grep -v 'grep' | tr -s ' ' | cut -d ' ' -f 2 | xargs sudo kill -9"
@@ -281,6 +282,7 @@ alias yv="yvpn.sh"
 alias yvr="yv && yv"
 # status
 alias yvs="openvpn3 sessions-list"
+
 
 # Use trash instead of rm
 # https://github.com/andreafrancia/trash-cli
@@ -377,3 +379,4 @@ if [[ $COMPUTER == 'LAPTOP' ]]; then
 fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
