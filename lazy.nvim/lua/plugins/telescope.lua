@@ -3,6 +3,11 @@ return {
   --tag = '0.1.x',
   dependencies = {
     'nvim-lua/plenary.nvim',
+    {
+      'nvim-telescope/telescope-fzf-native.nvim',
+      build = 'make',
+      -- enabled = false,
+    },
   },
   -- enabled = false,
   config = function()
