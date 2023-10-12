@@ -19,16 +19,16 @@ return {
     {
       'gb',
       function()
-          return vim.v.count == 0
-              and '<Plug>(comment_toggle_blockwise_current)'
-              or '<Plug>(comment_toggle_blockwise_count)'
+        return vim.v.count == 0
+            and '<Plug>(comment_toggle_blockwise_current)'
+            or '<Plug>(comment_toggle_blockwise_count)'
       end,
       expr = true,
       desc = 'Comment current block',
     },
 
     -- Toggle line in VISUAL mode
-    { 'gc', '<Plug>(comment_toggle_linewise_visual)', mode = 'x', desc = 'Comment line visual' },
+    { 'gc', '<Plug>(comment_toggle_linewise_visual)',  mode = 'x', desc = 'Comment line visual' },
     -- Toggle block in VISUAL mode
     { 'gb', '<Plug>(comment_toggle_blockwise_visual)', mode = 'x', desc = 'Comment block line visual' },
   },
@@ -47,4 +47,3 @@ return {
     'JoosepAlviste/nvim-ts-context-commentstring',
   },
 }
-

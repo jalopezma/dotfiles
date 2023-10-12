@@ -10,10 +10,10 @@ return {
     },
   },
   keys = {
-    { '<leader>ff', '<cmd>Telescope find_files<cr>', desc = 'Find files' },
-    { '<leader>fg', '<cmd>Telescope live_grep<cr>', desc = 'Search string' },
+    { '<leader>ff', '<cmd>Telescope find_files<cr>',  desc = 'Find files' },
+    { '<leader>fg', '<cmd>Telescope live_grep<cr>',   desc = 'Search string' },
     { '<leader>fw', '<cmd>Telescope grep_string<cr>', desc = 'Search word under cursor' },
-    { '<leader>fb', '<cmd>Telescope buffers<cr>', desc = 'Find buffers' },
+    { '<leader>fb', '<cmd>Telescope buffers<cr>',     desc = 'Find buffers' },
   },
   -- enabled = false,
   config = function()
