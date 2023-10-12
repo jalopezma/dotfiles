@@ -7,3 +7,9 @@ vim.api.nvim_create_user_command(
   '<line1>,<line2>!python -m json.tool',
   { range = true, desc = 'Format JSON files' }
 )
+
+vim.api.nvim_create_user_command(
+  'Gdiff',
+  'Gvdiffsplit',
+  { desc = 'Git diff current file' }
+)
