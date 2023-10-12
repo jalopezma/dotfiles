@@ -31,10 +31,14 @@ Formatter
 - black
 - autopep8
 
-# To do
+# Doing
+- lsp to move keybidings for plugins to pluging definition
+  - in that way I can remove all that I dont' want
+  - I can lazy load on keympas or commands
 
+# To do
 - LSP for different languages
   - ensure defaults for mastodon: lua, docker, typescript, linters, formatters
 - Being able to select the first suggestion easily from the autocompletition tool
-- Git diff? and lazy load on git command? 'cmd = "Git"'
-- move keybidings for plugins to pluging definition? in that way I can remove all that I dont' want
+- LSP `gD` go to defintiion in a new tab
+- LSP `gds` go to defintiion in a split window
