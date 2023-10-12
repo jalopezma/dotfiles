@@ -9,6 +9,12 @@ return {
       -- enabled = false,
     },
   },
+  keys = {
+    { '<leader>ff', '<cmd>Telescope find_files<cr>', desc = 'Find files' },
+    { '<leader>fg', '<cmd>Telescope live_grep<cr>', desc = 'Search string' },
+    { '<leader>fw', '<cmd>Telescope grep_string<cr>', desc = 'Search word under cursor' },
+    { '<leader>fb', '<cmd>Telescope buffers<cr>', desc = 'Find buffers' },
+  },
   -- enabled = false,
   config = function()
     local actions = require('telescope.actions')
@@ -25,11 +31,5 @@ return {
 
     -- load fzf native
     require('telescope').load_extension('fzf')
-
-    local builtin = require('telescope.builtin')
-    vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Find files' })
-    vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Search string' })
-    vim.keymap.set('n', '<leader>fw', builtin.grep_string, { desc = 'Search word under cursor' })
-    vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Find buffers' })
   end,
 }
