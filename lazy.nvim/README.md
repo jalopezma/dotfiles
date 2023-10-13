@@ -32,13 +32,9 @@ Formatter
 - autopep8
 
 # Doing
-- lsp to move keybidings for plugins to pluging definition
-  - in that way I can remove all that I dont' want
-  - I can lazy load on keympas or commands
 
 # To do
 - LSP for different languages
   - ensure defaults for mastodon: lua, docker, typescript, linters, formatters
-- Being able to select the first suggestion easily from the autocompletition tool
 - LSP `gD` go to defintiion in a new tab
-- LSP `gds` go to defintiion in a split window
+  - not sure if I want this. I can go to the definition in a new buffer and then either close it or change back

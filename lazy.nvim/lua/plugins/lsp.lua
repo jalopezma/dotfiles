@@ -15,12 +15,19 @@ return {
     branch = 'v3.x',
     lazy = true,
     config = false,
+    init = function()
+      -- Disable automatic setup, we are doing it manually
+      vim.g.lsp_zero_extend_cmp = 0
+      vim.g.lsp_zero_extend_lspconfig = 0
+    end,
     -- enabled = false,
   },
 
   -- LSP Support
   {
     'neovim/nvim-lspconfig',
+    cmd = 'LspInfo',
+    event = { 'BufReadPre', 'BufNewFile' },
     dependencies = {
       { 'hrsh7th/cmp-nvim-lsp' },
     },
@@ -53,6 +60,7 @@ return {
     keys = {
       { 'gr',         '<cmd>Trouble lsp_references<cr>',         desc = 'reference' },
       { 'gd',         '<cmd>Trouble lsp_definitions<cr>',        desc = 'definition' },
+      { 'gs',         '<cmd>vert winc ]<cr>',                    desc = 'definition in a vertical split' },
       { 'gt',         '<cmd>Trouble lsp_type_definitions<cr>',   desc = 'type definition' },
       { 'gD',         '<cmd>Trouble document_diagnostics<cr>',   desc = 'document diagnostics' },
 
@@ -69,7 +77,6 @@ return {
       { '<leader>a',  function() vim.lsp.buf.code_action() end,  desc = 'code actions' },
       -- <F3>: Format code in current buffer. See :help vim.lsp.buf.format().
       { '<leader>fo', function() vim.lsp.buf.format() end,       desc = 'format file' },
-
     },
   },
 
@@ -77,6 +84,7 @@ return {
   {
     'stevearc/dressing.nvim',
     opts = {},
+    event = 'VeryLazy',
     -- enabled = false,
   },
 }

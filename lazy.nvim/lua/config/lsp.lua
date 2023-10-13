@@ -38,6 +38,7 @@ local icons = {
 
 -- Init Mason
 local lsp_zero = require('lsp-zero')
+lsp_zero.extend_cmp()
 require('mason').setup({})
 require('mason-lspconfig').setup({
   handlers = {
@@ -48,12 +49,12 @@ require('mason-lspconfig').setup({
 -- Add some keymaps for autocompletion menu
 local cmp = require('cmp')
 local luasnip = require('luasnip')
-local defaults = require("cmp.config.default")()
+local defaults = require('cmp.config.default')()
 
 local has_words_before = function()
   unpack = unpack or table.unpack
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
 end
 
 cmp.setup({
@@ -112,14 +113,15 @@ cmp.setup({
     { name = 'buffer' },
     { name = 'path' },
   }),
-  formatting = {
+  --[[ formatting = {
     format = function(_, item)
       if icons[item.kind] then
         item.kind = icons[item.kind] .. item.kind
       end
       return item
     end,
-  },
+  }, ]]
+  formatting = lsp_zero.cmp_format(),
   experimental = {
     ghost_text = {
       hl_group = 'CmpGhostText',
@@ -167,8 +169,8 @@ end
 
 -- Adds diagnositcs signs on the line number column
 -- !important nerdfonts needs to be setup for this to work in your terminal
-local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+local signs = { Error = ' ', Warn = ' ', Hint = ' ', Info = ' ' }
 for type, icon in pairs(signs) do
-  local hl = "DiagnosticSign" .. type
+  local hl = 'DiagnosticSign' .. type
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
