@@ -38,9 +38,14 @@ local icons = {
 
 -- Init Mason
 local lsp_zero = require('lsp-zero')
+-- Add here any LSP you want to enable
+local lsp_servers = { 'lua_ls', 'bashls', 'tsserver', 'pyright', 'dockerls', 'docker_compose_language_service' }
 lsp_zero.extend_cmp()
 require('mason').setup({})
 require('mason-lspconfig').setup({
+  -- Only LSP, no formatters nor linters
+  ensure_installed = lsp_servers,
+  automatic_installation = true,
   handlers = {
     lsp_zero.default_setup,
   },
@@ -155,9 +160,8 @@ cmp.setup.cmdline(':', {
 })
 
 -- this part is telling Neovim to use the lsp server
-local servers = { 'pylsp', 'tsserver', 'lua_ls' }
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
-for _, lsp in pairs(servers) do
+for _, lsp in pairs(lsp_servers) do
   require('lspconfig')[lsp].setup {
     capabilities = capabilities,
     -- on_attach = on_attach,
