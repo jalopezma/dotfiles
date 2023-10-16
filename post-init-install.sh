@@ -18,15 +18,15 @@ function install_eza() {
   if [[ $? -eq 0 ]]; then
     echo "[install] Exa already installed"
   else
-    echo "[eza] Not instlled. Downloading script"
+    echo "[eza] Not installed. Downloading script"
     mkdir -p ~/.local/bin
-    curl -s -o /tmp/eza --location \
-      $(curl -s https://api.github.com/repos/eza-community/eza/releases/latest |
-        grep -Po 'https://github.com/eza-community/eza/releases/download/.*/x86_64-unknown-linux-gnu-eza' |
-        uniq)
-    chmod +x /tmp/eza
+    mkdir -p /tmp/eza
+    curl -o /tmp/eza/eza.tar.gz -sL https://github.com/eza-community/eza/releases/latest/download/eza_x86_64-unknown-linux-gnu.tar.gz
+    tar -xvf /tmp/eza/eza.tar.gz
+    chmod +x /tmp/eza/eza
     echo "[eza] Move to ~/.local/bin/eza"
-    mv /tmp/eza ~/.local/bin/eza
+    mv /tmp/eza/eza ~/.local/bin/eza
+    rm -rf /tmp/eza
   fi
 }
 
