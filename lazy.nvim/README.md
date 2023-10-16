@@ -1,10 +1,39 @@
 # NeoVim
+
+## Install NeoVim
+
+The [./install.sh](./install.sh) script should take care of this for you.
+
+You might want to install the latest neovim version that is still not in the ubuntu package manager. [github releases](https://github.com/neovim/neovim/releases/)
+Follow the steps there but you will probably need to do the following (if you installed nvim from the ubuntu package manager before)
+
+How to get an appimage from releases
+
+```console
+curl -o /tmp/nvim -sLO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage &> /dev/null
+chmod u+x /tmp/nvim
+sudo mv /tmp/nvim /usr/local/bin/nvim
+```
+
 Install Neovim and python
-`sudo apt-get install neovim python-neovim python3-neovim`
+
+```console
+sudo apt-get install python-neovim python3-neovim
+```
 
 ## Lazy.nvim
 
 `:Lazy`
+
+### Uninstall
+
+Remove the data, state folders and lockfile.
+
+```
+data: ~/.local/share/nvim/lazy
+state: ~/.local/state/nvim/lazy
+lockfile: ~/.config/nvim/lazy-lock.json
+```
 
 ### which-keys
 
