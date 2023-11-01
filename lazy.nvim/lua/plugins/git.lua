@@ -28,6 +28,7 @@ return {
     cmd = {
       'Git',
       'Gvdiffsplit',
+      'Gread'
     },
     -- enabled = false,
   },
