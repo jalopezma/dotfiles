@@ -327,23 +327,6 @@ function cd() {
   builtin cd "$@"
   echo $PWD > /tmp/.last_dir_$UID
   chmod 600 /tmp/.last_dir_$UID
-
-  if [[ -z "$VIRTUAL_ENV" ]] ; then
-    ## If env folder is found then activate the vitualenv
-      if [[ -d ./.venv ]] ; then
-        echo "> Enable venv: ./.venv/bin/activate"
-        source ./.venv/bin/activate
-      fi
-  else
-    ## check the current folder belong to earlier VIRTUAL_ENV folder
-    # if yes then do nothing
-    # else deactivate
-      parentdir="$(dirname "$VIRTUAL_ENV")"
-      if [[ "$PWD"/ != "$parentdir"/* ]] ; then
-        echo "> Disable venv: deactivate"
-        deactivate
-      fi
-  fi
 }
 
 # https://github.com/zdharma/history-search-multi-word
