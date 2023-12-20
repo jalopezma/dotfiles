@@ -202,7 +202,7 @@ function main() {
     secondary=$tmp
   fi
 
-  if [[ $_computer != "LAPTOP" ]]; then
+  if [[ $_computer == "LAPTOP" ]]; then
     set_laptop $numMonitors $primary $secondary
   else
     set_desktop $numMonitors $primary $secondary
