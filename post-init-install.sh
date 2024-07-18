@@ -22,7 +22,7 @@ function install_eza() {
     mkdir -p ~/.local/bin
     mkdir -p /tmp/eza
     curl -o /tmp/eza/eza.tar.gz -sL https://github.com/eza-community/eza/releases/latest/download/eza_x86_64-unknown-linux-gnu.tar.gz
-    tar -xvf /tmp/eza/eza.tar.gz
+    tar -xvf /tmp/eza/eza.tar.gz -C /tmp/eza/
     chmod +x /tmp/eza/eza
     echo "[eza] Move to ~/.local/bin/eza"
     mv /tmp/eza/eza ~/.local/bin/eza
@@ -119,16 +119,15 @@ function main() {
 
   install_eza
   bluetooth
-  backlight
-  golang_version_manager
-  python_version_manager
+  #backlight
+  #golang_version_manager
+  #python_version_manager
 
   bash ./fonts/install.sh
   bash ./git/install.sh
   bash ./zsh/install.sh
   bash ./volta/install.sh
   bash ./lazy.nvim/install.sh
-  bash ./tmux/install.sh
 
   bash ./rofi/install.sh
   bash ./monitors/install.sh
