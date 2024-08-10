@@ -356,7 +356,13 @@ if [[ $COMPUTER == 'LAPTOP' ]]; then
   [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 fi
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
+
+# Set up brew in the PATH
+# Anything installed with fzf needs to go below this eval
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+# Set up fzf key bidnings
+eval "$(fzf --zsh)"
+

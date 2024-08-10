@@ -22,6 +22,7 @@ echo "[nvim] Create ~/.config/nvim/{backup_files,swap_files,undo_files}"
 mkdir -p ~/.config/nvim/{backup_files,swap_files,undo_files}/
 
 # Dependencies for [telescope](https://github.com/nvim-telescope/telescope.nvim#suggested-dependencies)
+# fzf is installed with brew as it has a newer version
 echo "[nvim] Install plugins dependencies"
 sudo apt-get install ripgrep fd-find -y &> /dev/null
 

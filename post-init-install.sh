@@ -123,6 +123,7 @@ function main() {
   #golang_version_manager
   #python_version_manager
 
+  bash ./brew/install.sh
   bash ./fonts/install.sh
   bash ./git/install.sh
   bash ./zsh/install.sh
