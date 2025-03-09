@@ -3,7 +3,7 @@
 source ./functions.sh
 
 echo "[brew] Install brew"
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 echo "[brew] source brew to install packages"
 eval "$(~/.linuxbrew/bin/brew shellenv)"

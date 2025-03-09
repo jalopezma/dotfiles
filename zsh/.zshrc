@@ -153,7 +153,7 @@ alias docker-stop-all="docker stop $(docker ps -a -q)"
 alias t=tmux
 
 # Firefox is using snap
-alias update-all="sudo snap refresh && sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y"
+alias update-all="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y"
 
 alias l="eza --long --git"
 alias la="eza --long --all --git"
