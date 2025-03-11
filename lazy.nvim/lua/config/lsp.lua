@@ -39,7 +39,7 @@ local icons = {
 -- Init Mason
 local lsp_zero = require('lsp-zero')
 -- Add here any LSP you want to enable
-local lsp_servers = { 'lua_ls', 'bashls', 'tsserver', 'pyright', 'dockerls', 'docker_compose_language_service', 'intelephense' }
+local lsp_servers = { 'lua_ls', 'bashls', 'ts_ls', 'pyright', 'dockerls', 'docker_compose_language_service', 'intelephense' }
 lsp_zero.extend_cmp()
 require('mason').setup({})
 require('mason-lspconfig').setup({
