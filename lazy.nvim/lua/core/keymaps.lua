@@ -62,6 +62,7 @@ map('n', '<leader>bd', '<cmd>bp | bd #<cr>', { desc = 'Delete buffer' })
 map('n', '<leader>bp', '<cmd>bprevious<cr>', { desc = 'Previous buffer' })
 map('n', '<leader>bn', '<cmd>bnext<cr>', { desc = 'Next buffer' })
 map('n', '<leader>bl', '<cmd>b#<cr>', { desc = 'Last buffer' })
+map('n', '<leader>bc', '<cmd>%bd|e#<cr>', { desc = 'Close all buffers but the open one' })
 
 -----------------------------------------------------------------------------------
 -- To rethink if I wan t to keep them                                            --
