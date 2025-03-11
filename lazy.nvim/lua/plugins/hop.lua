@@ -4,8 +4,8 @@ return {
   opts = {},
   -- enabled = false,
   keys = {
-    { '<leader>sw', '<cmd>HopWord<cr>',  desc = 'Hop to word' },
-    { '<leader>sc', '<cmd>HopChar1<cr>', desc = 'Hop to a char' },
+    -- { '<leader>sw', '<cmd>HopWord<cr>',  desc = 'Hop to word' },
+    { '<leader>s', '<cmd>HopChar1<cr>', desc = 'Hop to a char' },
   },
   -- config = function()
   --   local hop = require('hop').setup()

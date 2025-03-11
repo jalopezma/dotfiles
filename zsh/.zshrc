@@ -84,14 +84,12 @@ export PATH=$PATH:/usr/local/lib
 export PATH=$PATH:$HOME/.local/bin
 
 
-export XDG_CONFIG_HOME=~/.config
-
-# volta
-
 # We define a computer to differentiate config
 HOSTNAME=$(hostname)
 if [[ $HOSTNAME == 'Y-1123' ]]; then
   export COMPUTER='LAPTOP'
+elif [[ $HOSTNAME =~ 'publicisgroupe.net' ]]; then
+  export COMPUTER='MAC'
 else
   export COMPUTER='DESKTOP'
 fi
@@ -126,7 +124,6 @@ export GPG_TTY=$(tty)
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
 alias n="nvim"
 alias nt="nvim +terminal"
 alias vi="nvim"
@@ -138,9 +135,21 @@ alias gcms="g checkout master"
 alias gpms="g pull upstream master"
 alias gs="g status"
 alias gc.="g checkout ."
-# Using delta as default git diff https://github.com/dandavison/delta
+alias gch="g checkout"
+alias gco="g commit"
 alias gd="g diff"
 alias gds="g diff --staged"
+alias gb="g branch"
+alias gsw="g switch"
+alias gr="g rebase"
+
+alias d="databricks"
+
+#alias do="docker"
+#alias dc="docker compose"
+
+alias p="pipenv"
+
 
 # docker
 alias docker-compose="docker compose"
@@ -149,14 +158,13 @@ alias docker-compose="docker compose"
 # sudo chmod +x /bin/docker-compose
 alias docker-stop-all="docker stop $(docker ps -a -q)"
 
-# tmux
-alias t=tmux
+alias t=terraform
 
 # Firefox is using snap
 alias update-all="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y"
 
-alias l="eza --long --git"
-alias la="eza --long --all --git"
+alias l="eza --long --git --icons=always"
+alias la="eza --long --all --git --icons=always"
 alias cp="cp -i"
 
 alias kx="kubectx"
@@ -195,7 +203,7 @@ alias sshy="init_ssh && ssh-add ~/.ssh/yieldify.key"
 alias sshp="init_ssh && ssh-add ~/.ssh/personal.key"
 
 # Yieldify aliases
-alias helm="echo 'Use helm2 (for kops) or helm3 (for eks) binaries'"
+#alias helm="echo 'Use helm2 (for kops) or helm3 (for eks) binaries'"
 
 # We wrap the yieldify function from faceless to load it only when called the first time
 function yieldify() {
@@ -313,6 +321,10 @@ if [[ -f ~/.npmrc && -r ~/.npmrc ]]; then
   export NPM_TOKEN=$(cat ~/.npmrc | sed -e 's/^.*authToken=//')
 fi
 
+if [[ -f ~/.npmrc && -r ~/.npmrc ]]; then
+  export GH_PACKAGE_TOKEN=$(cat ~/.npmrc | sed -e 's/^\/\/npm.pkg.github.com\/:_authToken=\(.*\)$/\1/' -e 't' -e 'd')
+fi
+
 # Store the last directory cd'd into so that we can start new shells in the
 # same directory.
 # Also chmod's it to 600 (rw owner) for a bit of security paranoia
@@ -322,6 +334,19 @@ function cd() {
   builtin cd "$@"
   echo $PWD > /tmp/.last_dir_$UID
   chmod 600 /tmp/.last_dir_$UID
+}
+
+# In mac I couldn't make it work by the normal means so using Alex's alternative way
+helm_secrets_edit () {
+  ENV=$1 
+  if [ -z "$ENV" ]
+  then
+    echo "No environment specified."
+    return 1
+  fi
+  ys $ENV
+  cd tools/charts/${PWD##*/} || return
+  AWS_SDK_LOAD_CONFIG=1 helm secrets edit helm_vars/"$ENV"/eu-west-1/secrets.yaml
 }
 
 # https://github.com/zdharma/history-search-multi-word
@@ -340,29 +365,33 @@ if [[ $? -eq 0 ]]; then
   eval "$(pyenv init -)"
 fi
 
-if [[ $COMPUTER == 'LAPTOP' ]]; then
+# Set up fzf key bidnings
+eval "$(fzf --zsh)"
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+if [[ $COMPUTER == 'MAC' ]]; then
   export AWS_SDK_LOAD_CONFIG=1
   export AWS_SHARED_CREDENTIALS_FILE=$HOME/.aws/credentials
   export AWS_CONFIG_FILE=$HOME/.aws/config
 
-  # Load faceless (yieldify command)
-  # eval $(_facelesscmd env init)
-
   # Golang version manager
-  # [ -s "$HOME/.gvm/scripts/gvm" ] && source "$HOME/.gvm/scripts/gvm"
+  [[ -s "/Users/joslopez7/.gvm/scripts/gvm" ]] && source "/Users/joslopez7/.gvm/scripts/gvm"
 
   # Java version manager
-  export SDKMAN_DIR="$HOME/.sdkman"
-  [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+  # export SDKMAN_DIR="$HOME/.sdkman"
+  # [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+  export DBT_PROFILES_DIR=~/.dbt/
+  export PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH"
+
+  export PATH=$PATH:~/Downloads/nvim-macos/bin
+  alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
+
+  # Set up brew in the PATH
+  # Anything installed with fzf needs to go below this eval
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
-
-# Set up brew in the PATH
-# Anything installed with fzf needs to go below this eval
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-
-# Set up fzf key bidnings
-eval "$(fzf --zsh)"
 

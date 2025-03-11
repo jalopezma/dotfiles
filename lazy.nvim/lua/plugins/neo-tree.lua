@@ -58,14 +58,14 @@ return {
   -- enabled = false,
   keys = {
     {
-      '<leader>e',
+      '<leader>E',
       function()
         require('neo-tree.command').execute({ toggle = true, dir = get_root() })
       end,
       desc = 'Explorer NeoTree (root dir)',
     },
     {
-      '<leader>E',
+      '<leader>e',
       function()
         require('neo-tree.command').execute({ toggle = true, dir = vim.loop.cwd() })
       end,
