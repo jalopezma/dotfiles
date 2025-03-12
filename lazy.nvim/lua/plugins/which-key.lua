@@ -10,21 +10,19 @@ return {
     -- your configuration comes here
     -- or leave it empty to use the default settings
     -- refer to the configuration section below
+    ---@type false | "classic" | "modern" | "helix"
+    preset = "classic",
   },
   config = function()
     local wk = require('which-key')
 
-    wk.register({
-      ['<leader>'] = {
-        f = { name = 'File' },
-        w = { name = 'Windows' },
-        g = { name = 'Git' },
-        s = { name = 'search' },
-        b = { name = 'buffers' },
-      },
-      g = {
-        name = 'go to',
-      },
+    wk.add({
+      {'<leader>f', group = 'File' },
+      {'<leader>w', group = 'Windows' },
+      {'<leader>g', group = 'Git' },
+      {'<leader>s', group = 'search' },
+      {'<leader>b', group = 'buffers' },
+      { 'g', group = 'go to' },
     }, { mode = 'n' })
   end,
 }
