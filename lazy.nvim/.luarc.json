@@ -8,6 +8,16 @@
   "workspace.checkThirdParty": false,
   "workspace.library": [
     "$VIMRUNTIME",
+    "$VIMRUNTIME/lua",
     "./lua"
-  ]
+  ],
+  "workspace.ignoreDir": [
+    ".git",
+    ".github",
+    "lazy-lock.json"
+  ],
+  "diagnostics": {
+    "globals": ["vim"]
+  },
+  "runtime.neoVimVersion": "0.10.4"
 }
