@@ -83,6 +83,9 @@ export PATH=$PATH:$HOME/scripts
 export PATH=$PATH:/usr/local/lib
 export PATH=$PATH:$HOME/.local/bin
 
+# Add brew to PATH
+export PATH=$PATH:/home/linuxbrew/.linuxbrew/bin
+
 
 # We define a computer to differentiate config
 HOSTNAME=$(hostname)
@@ -367,7 +370,6 @@ fi
 
 # Set up fzf key bidnings
 eval "$(fzf --zsh)"
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 if [[ $COMPUTER == 'MAC' ]]; then
   export AWS_SDK_LOAD_CONFIG=1
