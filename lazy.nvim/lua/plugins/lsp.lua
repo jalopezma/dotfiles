@@ -69,25 +69,25 @@ return {
     -- enabled = false,
     cmd = 'Trouble',
     keys = {
-      { 'gr',         '<cmd>Trouble lsp_references<cr>',         desc = 'Reference (Trouble)' },
-      { 'gd',         '<cmd>Trouble lsp_definitions<cr>',        desc = 'Definition' },
-      { 'gs',         '<cmd>vert winc ]<cr>',                    desc = 'Definition in a vertical split' },
-      { 'gt',         '<cmd>Trouble lsp_type_definitions<cr>',   desc = 'Type definition' },
-      { 'gD',         '<cmd>Trouble diagnostics toggle focus=true<cr>',     desc = 'Document diagnostics' },
+      { 'gr',         '<cmd>Trouble lsp_references<cr>',                desc = 'Reference (Trouble)' },
+      { 'gd',         '<cmd>Trouble lsp_definitions<cr>',               desc = 'Definition' },
+      { 'gs',         '<cmd>vert winc ]<cr>',                           desc = 'Definition in a vertical split' },
+      { 'gt',         '<cmd>Trouble lsp_type_definitions<cr>',          desc = 'Type definition' },
+      { 'gD',         '<cmd>Trouble diagnostics toggle focus=true<cr>', desc = 'Document diagnostics' },
 
       -- Move to the previous diagnostic in the current buffer. See :help vim.diagnostic.goto_prev().
-      { 'gp',         function() vim.diagnostic.goto_prev() end, desc = 'Previous diagnostic' },
+      { 'gp',         function() vim.diagnostic.goto_prev() end,        desc = 'Previous diagnostic' },
       -- Move to the next diagnostic. See :help vim.diagnostic.goto_next().
-      { 'gn',         function() vim.diagnostic.goto_next() end, desc = 'Next diagnostic' },
+      { 'gn',         function() vim.diagnostic.goto_next() end,        desc = 'Next diagnostic' },
 
       -- Renames all references to the symbol under the cursor. See :help vim.lsp.buf.rename().
-      { '<leader>rn', function() vim.lsp.buf.rename() end,       desc = 'Rename' },
+      { '<leader>rn', function() vim.lsp.buf.rename() end,              desc = 'Rename' },
       -- Displays hover information about the symbol under the cursor in a floating window. See :help vim.lsp.buf.hover().
-      { '<leader>K',  function() vim.lsp.buf.hover() end,        desc = 'Information' },
+      { '<leader>K',  function() vim.lsp.buf.hover() end,               desc = 'Information' },
       -- Selects a code action available at the current cursor position. See :help vim.lsp.buf.code_action().
-      { '<leader>a',  function() vim.lsp.buf.code_action() end,  desc = 'Code actions' },
+      { '<leader>a',  function() vim.lsp.buf.code_action() end,         desc = 'Code actions' },
       -- <F3>: Format code in current buffer. See :help vim.lsp.buf.format().
-      { '<leader>fo', function() vim.lsp.buf.format() end,       desc = 'Format file' },
+      { '<leader>fo', function() vim.lsp.buf.format() end,              desc = 'Format file' },
     },
     -- Needed to register the command
     opts = {},
@@ -99,5 +99,12 @@ return {
     opts = {},
     event = 'VeryLazy',
     -- enabled = false,
+  },
+  {
+    "nvimtools/none-ls.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvimtools/none-ls-extras.nvim",
+    },
   },
 }

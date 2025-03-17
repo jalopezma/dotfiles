@@ -170,3 +170,32 @@ for type, icon in pairs(signs) do
   local hl = 'DiagnosticSign' .. type
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
+
+-- Format/linting with LSP
+local null_ls = require("null-ls")
+null_ls.setup({
+  sources = {
+    -- Formatting
+    null_ls.builtins.formatting.prettierd,
+    null_ls.builtins.formatting.shfmt.with({
+      extra_args = { "-i", "2", "-ci" },
+    }),
+    -- Linting
+    require("none-ls.diagnostics.eslint_d"),
+    require("none-ls.code_actions.eslint_d"),
+
+    -- make linter
+    null_ls.builtins.diagnostics.checkmake,
+    null_ls.builtins.diagnostics.dotenv_linter,
+    -- docker
+    null_ls.builtins.diagnostics.hadolint,
+
+    null_ls.builtins.diagnostics.markdownlint_cli2,
+    null_ls.builtins.diagnostics.sqlfluff.with({
+      extra_args = { "--dialect", "databricks" },
+    }),
+    --null_ls.builtins.hover,
+    null_ls.builtins.code_actions.gitsigns,
+    null_ls.builtins.diagnostics.write_good,
+  },
+})
