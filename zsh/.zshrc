@@ -212,7 +212,6 @@ alias sshp="init_ssh && ssh-add ~/.ssh/personal.key"
 function yieldify() {
   which yieldify_fn &> /dev/null
   if [[ $? -ne 0 ]]; then
-    echo "Init faceless"
     # Rename `yieldify` by `yieldify_fn` so we can wrap it with the same name
     initFacesless=$(_facelesscmd env init 2>/dev/null | sed -e 's/yieldify/yieldify_fn/g')
     if [[ $? -ne 0 ]]; then
@@ -223,6 +222,10 @@ function yieldify() {
   fi
 
   yieldify_fn "$@"
+}
+
+function y() {
+  yieldify "$@"
 }
 
 function ys() {
