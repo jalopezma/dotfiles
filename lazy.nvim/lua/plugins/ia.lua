@@ -1,4 +1,5 @@
 vim.g.augment_workspace_folders = { '~/repos/dotfiles' }
+-- If :Augment signin doesn't display the auth link, disable all plugins but this one and try again
 return {
   {
     'augmentcode/augment.vim',

@@ -12,9 +12,10 @@ return {
   },
   {
     'catppuccin/nvim',
+    -- enabled = false,
+    lazy = false,
     name = 'catppuccin',
     priority = 1000,
-    -- enabled = false,
     config = function()
       -- load the colorscheme here
       vim.cmd([[colorscheme catppuccin-macchiato]])

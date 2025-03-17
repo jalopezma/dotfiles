@@ -40,12 +40,14 @@ return {
     -- follow latest release.
     version = 'v2.*', -- Replace <CurrentMajor> by the latest released major (first number of latest release)
     -- install jsregexp (optional!).
-    build = 'make install_jsregexp'
+    build = 'make install_jsregexp',
+    -- enabled = false,
   },
 
   -- Autocompletion
   {
     'hrsh7th/nvim-cmp',
+    -- enabled = false,
     version = false, -- last release is way too old
     event = 'InsertEnter',
     dependencies = {
