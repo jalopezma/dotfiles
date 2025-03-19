@@ -175,27 +175,28 @@ end
 local null_ls = require("null-ls")
 null_ls.setup({
   sources = {
-    -- Formatting
+    null_ls.builtins.formatting.terraform_fmt,
     null_ls.builtins.formatting.prettierd,
     null_ls.builtins.formatting.shfmt.with({
       extra_args = { "-i", "2", "-ci" },
     }),
-    -- Linting
-    require("none-ls.diagnostics.eslint_d"),
-    require("none-ls.code_actions.eslint_d"),
 
-    -- make linter
-    null_ls.builtins.diagnostics.checkmake,
+    null_ls.builtins.diagnostics.checkmake, -- make
     null_ls.builtins.diagnostics.dotenv_linter,
-    -- docker
-    null_ls.builtins.diagnostics.hadolint,
-
+    null_ls.builtins.diagnostics.hadolint, -- docker
     null_ls.builtins.diagnostics.markdownlint_cli2,
     null_ls.builtins.diagnostics.sqlfluff.with({
       extra_args = { "--dialect", "databricks" },
     }),
-    --null_ls.builtins.hover,
-    null_ls.builtins.code_actions.gitsigns,
     null_ls.builtins.diagnostics.write_good,
+    require("none-ls.diagnostics.eslint_d"),
+
+    null_ls.builtins.code_actions.gitsigns,
+    require("none-ls.code_actions.eslint_d"),
+
+    --null_ls.builtins.hover.dictionary,
+    null_ls.builtins.hover.printenv,
+
+    null_ls.builtins.completion.spell,
   },
 })
