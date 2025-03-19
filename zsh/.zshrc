@@ -61,10 +61,12 @@ setopt share_history          # share command history data
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(zsh-autosuggestions H-S-MW z zsh-completions dotenv)
+plugins=(zsh-autosuggestions H-S-MW z dotenv)
 
 # https://github.com/jeffreytse/zsh-vi-mode
 # plugins+=(zsh-vi-mode)
+
+fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 
 source $ZSH/oh-my-zsh.sh
 
@@ -393,9 +395,13 @@ if [[ $COMPUTER == 'MAC' ]]; then
   alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
 
   # Set up brew in the PATH
+fi
+
+if [[ $COMPUTER == 'LAPTOP' ]]; then
   # Anything installed with fzf needs to go below this eval
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
+
 
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
