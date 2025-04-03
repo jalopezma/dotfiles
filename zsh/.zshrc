@@ -388,7 +388,6 @@ if [[ $COMPUTER == 'MAC' ]]; then
   # export SDKMAN_DIR="$HOME/.sdkman"
   # [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
-  export DBT_PROFILES_DIR=~/.dbt/
   export PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH"
 
   export PATH=$PATH:~/Downloads/nvim-macos/bin
